@@ -32,7 +32,7 @@
       <!-- ────────── Google OAuth ────────── -->
       <button
         type="button"
-        id="google-btn"
+        id="google-login-btn"
         class="flex w-full items-center justify-center rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-[#2e2e2e] hover:border-[#3e3e3e] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/50 cursor-pointer"
       >
         <!-- Standard Google "G" icon -->
@@ -165,7 +165,7 @@
   // ── DOM references ──────────────────────────────────────────
   const title       = document.getElementById("auth-title");
   const form        = document.getElementById("auth-form");
-  const googleBtn   = document.getElementById("google-btn");
+  const googleBtn   = document.querySelector('#google-login-btn');
   const divider     = document.getElementById("divider");
   const baseView    = document.getElementById("base-view");
   const forgotPw    = document.getElementById("forgot-pw");
@@ -234,16 +234,25 @@
   });
 
   // ── Event: Google OAuth Login ─────────────────────────────
-  googleBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: 'https://marksmind.in/tools/keyword-optimizer'
+  if (!googleBtn) {
+    console.error("CRITICAL: Could not find element with ID #google-login-btn!");
+  } else {
+    googleBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      console.log("Google button clicked! Attempting OAuth...");
+
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: 'https://marksmind.in/tools/keyword-optimizer'
+        }
+      });
+
+      if (error) {
+        alert("Google Auth Error: " + error.message);
       }
     });
-    if (error) console.error("Google Auth Error:", error.message);
-  });
+  }
 
   // ── Event: Form submit → Send OTP / Verify OTP ───────────
   form.addEventListener("submit", async (e) => {
