@@ -96,15 +96,16 @@
 
       <!-- ────────── OTP Input (hidden by default) ────────── -->
       <div id="otp-view" class="hidden space-y-2">
-        <label for="auth-otp" class="block text-sm font-medium text-gray-300">
+        <label for="otp-input" class="block text-sm font-medium text-gray-300">
           Enter the 6-digit code sent to your email
         </label>
         <input
-          id="auth-otp"
+          id="otp-input"
           type="text"
           inputmode="numeric"
           maxlength="6"
           placeholder="000000"
+          required
           class="w-full rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-center text-2xl font-mono tracking-[0.5em] text-white placeholder-gray-600 transition-all duration-200 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30"
         />
       </div>
@@ -112,7 +113,7 @@
       <!-- ────────── Submit Button ────────── -->
       <button
         type="submit"
-        id="submit-btn"
+        id="verify-btn"
         class="w-full rounded-lg bg-[#8b5cf6] px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#7c3aed] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/50 focus:ring-offset-2 focus:ring-offset-[#1c1c1c] cursor-pointer"
       >
         Login
@@ -169,9 +170,9 @@
   const baseView    = document.getElementById("base-view");
   const forgotPw    = document.getElementById("forgot-pw");
   const otpView     = document.getElementById("otp-view");
-  const otpInput    = document.getElementById("auth-otp");
-  const emailInput  = document.getElementById("auth-email");
-  const submitBtn   = document.getElementById("submit-btn");
+  const otpInput    = document.querySelector('#otp-input');
+  const emailInput  = document.querySelector('input[type="email"]');
+  const submitBtn   = document.getElementById("verify-btn");
   const backBtn     = document.getElementById("back-btn");
   const toggleFooter = document.getElementById("toggle-footer");
   const toggleBtn   = document.getElementById("toggle-btn");
@@ -270,7 +271,27 @@
 
     // 3. If already on OTP screen, verify the code
     if (showOtp) {
-      // OTP verification would happen here
+      const email = emailInput.value;
+      const otpCode = otpInput.value;
+
+      console.log("Verifying code for:", email);
+
+      // Ask Supabase to verify the 6-digit code
+      const { data, error } = await supabase.auth.verifyOtp({
+        email: email,
+        token: otpCode,
+        type: 'email'
+      });
+
+      if (error) {
+        // If they typed the wrong code, show an error
+        alert("Invalid code! " + error.message);
+        console.error("Verification failed:", error);
+      } else {
+        // SUCCESS! Redirect them to the dashboard
+        console.log("Login successful! Redirecting...");
+        window.location.href = "https://marksmind.in/tools/keyword-optimizer";
+      }
       return;
     }
 
