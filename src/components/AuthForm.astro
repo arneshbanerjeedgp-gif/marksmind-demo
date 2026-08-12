@@ -32,8 +32,7 @@
       <!-- ────────── Google OAuth ────────── -->
       <button
         type="button"
-        id="google-login-btn"
-        class="flex w-full items-center justify-center rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-[#2e2e2e] hover:border-[#3e3e3e] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/50 cursor-pointer"
+        class="google-auth-trigger relative z-10 flex w-full items-center justify-center rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-[#2e2e2e] hover:border-[#3e3e3e] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/50 cursor-pointer"
       >
         <!-- Standard Google "G" icon -->
         <svg class="w-5 h-5 mr-3 shrink-0" viewBox="0 0 48 48" aria-hidden="true">
@@ -165,7 +164,7 @@
   // ── DOM references ──────────────────────────────────────────
   const title       = document.getElementById("auth-title");
   const form        = document.getElementById("auth-form");
-  const googleBtn   = document.querySelector('#google-login-btn');
+  const googleBtns  = document.querySelectorAll('.google-auth-trigger');
   const divider     = document.getElementById("divider");
   const baseView    = document.getElementById("base-view");
   const forgotPw    = document.getElementById("forgot-pw");
@@ -197,7 +196,7 @@
     title.textContent = isLogin ? "Login" : "Sign Up";
 
     // Base view vs OTP view
-    setVisible(googleBtn, !showOtp);
+    setVisible(googleBtns[0], !showOtp);
     setVisible(divider,   !showOtp);
     setVisible(baseView,  !showOtp);
     setVisible(otpView,    showOtp);
@@ -234,23 +233,26 @@
   });
 
   // ── Event: Google OAuth Login ─────────────────────────────
-  if (!googleBtn) {
-    console.error("CRITICAL: Could not find element with ID #google-login-btn!");
+  if (googleBtns.length === 0) {
+    console.error("CRITICAL: Could not find any buttons with the class .google-auth-trigger!");
   } else {
-    googleBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      console.log("Google button clicked! Attempting OAuth...");
+    // Loop through each button and attach the click listener
+    googleBtns.forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        console.log("A Google button was clicked! Initializing OAuth...");
 
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: 'https://marksmind.in/tools/keyword-optimizer'
+        const { data, error } = await supabase.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            redirectTo: 'https://marksmind.in/tools/keyword-optimizer'
+          }
+        });
+
+        if (error) {
+          alert("Google Auth Error: " + error.message);
         }
       });
-
-      if (error) {
-        alert("Google Auth Error: " + error.message);
-      }
     });
   }
 
