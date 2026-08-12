@@ -164,7 +164,7 @@
 
   // ── DOM references ──────────────────────────────────────────
   const title       = document.getElementById("auth-title");
-  const form        = document.getElementById("auth-form");
+  const authForms   = document.querySelectorAll('form');
   const googleBtns  = document.querySelectorAll('.google-auth-trigger');
   const divider     = document.getElementById("divider");
   const baseView    = document.getElementById("base-view");
@@ -258,60 +258,75 @@
   }
 
   // ── Event: Form submit → Send OTP / Verify OTP ───────────
-  form.addEventListener("submit", async (e) => {
-    // 1. Prevent the page from reloading
-    e.preventDefault();
+  // Grab EVERY form on the page (both Login and Sign Up)
+  authForms.forEach(form => {
+    form.addEventListener('submit', async (e) => {
+      // 1. Prevent the page from reloading
+      e.preventDefault();
 
-    // 2. STRICT RULE: Check if email and password are filled out
-    if (!form.checkValidity()) {
-      // If empty, force the browser to show the "Please fill out this field" warning
-      form.reportValidity();
-      return; // Stop the rest of the code from running!
-    }
+      // 2. STRICT RULE: Check if fields are filled out
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
 
-    // 3. If already on OTP screen, verify the code
-    if (showOtp) {
-      const email = emailInput.value;
-      const otpCode = otpInput.value;
+      // 3. If already on OTP screen, verify the code
+      if (showOtp) {
+        // Find the email input specifically inside the form they just submitted
+        const formEmail = form.querySelector('input[type="email"]');
+        const email = formEmail ? formEmail.value : emailInput.value;
+        const otpCode = otpInput.value;
 
-      console.log("Verifying code for:", email);
+        console.log("Verifying code for:", email);
 
-      // Ask Supabase to verify the 6-digit code
-      const { data, error } = await supabase.auth.verifyOtp({
+        // Ask Supabase to verify the 6-digit code
+        const { data, error } = await supabase.auth.verifyOtp({
+          email: email,
+          token: otpCode,
+          type: 'email'
+        });
+
+        if (error) {
+          alert("Invalid code! " + error.message);
+          console.error("Verification failed:", error);
+        } else {
+          // SUCCESS! Redirect them to the dashboard
+          console.log("Login successful! Redirecting...");
+          window.location.href = "https://marksmind.in/tools/keyword-optimizer";
+        }
+        return;
+      }
+
+      // 4. Send OTP via Supabase
+      // Find the email input specifically inside the form they just clicked
+      const formEmail = form.querySelector('input[type="email"]');
+
+      if (!formEmail || !formEmail.value) {
+        console.error("No email entered!");
+        return;
+      }
+
+      const email = formEmail.value;
+      console.log("Attempting to send OTP to:", email);
+
+      const { data, error } = await supabase.auth.signInWithOtp({
         email: email,
-        token: otpCode,
-        type: 'email'
       });
 
       if (error) {
-        // If they typed the wrong code, show an error
-        alert("Invalid code! " + error.message);
-        console.error("Verification failed:", error);
-      } else {
-        // SUCCESS! Redirect them to the dashboard
-        console.log("Login successful! Redirecting...");
-        window.location.href = "https://marksmind.in/tools/keyword-optimizer";
+        alert("Error sending OTP: " + error.message);
+        return;
       }
-      return;
-    }
 
-    // 4. Send OTP via Supabase
-    const email = emailInput.value;
-    const { data, error } = await supabase.auth.signInWithOtp({
-      email: email,
+      // Success!
+      alert("OTP sent to your email! Check your inbox.");
+      console.log("OTP successfully sent to", email);
+
+      // 5. Transition to OTP screen
+      showOtp = true;
+      render();
+      otpInput.focus();
     });
-
-    if (error) {
-      alert("Error sending OTP: " + error.message);
-      return;
-    }
-
-    console.log("OTP sent successfully to", email);
-
-    // 5. Transition to OTP screen
-    showOtp = true;
-    render();
-    otpInput.focus();
   });
 
   // ── Event: Back from OTP ───────────────────────────────────
