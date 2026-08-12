@@ -155,6 +155,13 @@
      Vanilla JavaScript — all interactivity handled here
      ═══════════════════════════════════════════════════════════════ -->
 <script>
+  import { createClient } from '@supabase/supabase-js';
+
+  // ── Supabase client ───────────────────────────────────────────
+  const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
   // ── DOM references ──────────────────────────────────────────
   const title       = document.getElementById("auth-title");
   const form        = document.getElementById("auth-form");
@@ -164,6 +171,7 @@
   const forgotPw    = document.getElementById("forgot-pw");
   const otpView     = document.getElementById("otp-view");
   const otpInput    = document.getElementById("auth-otp");
+  const emailInput  = document.getElementById("auth-email");
   const submitBtn   = document.getElementById("submit-btn");
   const backBtn     = document.getElementById("back-btn");
   const toggleFooter = document.getElementById("toggle-footer");
@@ -225,8 +233,20 @@
     render();
   });
 
-  // ── Event: Form submit → show OTP ─────────────────────────
-  form.addEventListener("submit", (e) => {
+  // ── Event: Google OAuth Login ─────────────────────────────
+  googleBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: 'https://marksmind.in/tools/keyword-optimizer'
+      }
+    });
+    if (error) console.error("Google Auth Error:", error.message);
+  });
+
+  // ── Event: Form submit → Send OTP / Verify OTP ───────────
+  form.addEventListener("submit", async (e) => {
     // 1. Prevent the page from reloading
     e.preventDefault();
 
@@ -237,12 +257,26 @@
       return; // Stop the rest of the code from running!
     }
 
-    // 3. If everything is filled out, run your normal OTP transition code below:
+    // 3. If already on OTP screen, verify the code
     if (showOtp) {
       // OTP verification would happen here
       return;
     }
 
+    // 4. Send OTP via Supabase
+    const email = emailInput.value;
+    const { data, error } = await supabase.auth.signInWithOtp({
+      email: email,
+    });
+
+    if (error) {
+      alert("Error sending OTP: " + error.message);
+      return;
+    }
+
+    console.log("OTP sent successfully to", email);
+
+    // 5. Transition to OTP screen
     showOtp = true;
     render();
     otpInput.focus();
@@ -263,3 +297,4 @@
   // ── Initial render ─────────────────────────────────────────
   render();
 </script>
+
