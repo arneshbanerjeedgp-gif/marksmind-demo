@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <h1 class="text-3xl font-bold text-slate-200">Dashboard</h1>
+    <p class="text-slate-400 mt-2">Welcome to your Smart Revision Engine.</p>
+    
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+        <h3 class="font-bold text-lg text-slate-200">Overall Memory Health</h3>
+        <p class="text-5xl font-bold text-green-400 mt-4">88%</p>
+        <p class="text-sm text-slate-400 mt-2">+5% from last week</p>
+      </div>
+      <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+        <h3 class="font-bold text-lg text-slate-200">Subjects Mastered</h3>
+        <p class="text-5xl font-bold text-blue-400 mt-4">12</p>
+        <p class="text-sm text-slate-400 mt-2">out of 18</p>
+      </div>
+      <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+        <h3 class="font-bold text-lg text-slate-200">Next Revision</h3>
+         <p class="text-lg font-semibold text-slate-300 mt-4">Physics: Kinematics</p>
+        <p class="text-sm text-slate-400">in 2 days</p>
+      </div>
+    </div>
+</Layout>

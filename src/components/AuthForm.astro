@@ -1,0 +1,254 @@
+---
+/**
+ * AuthForm.astro
+ * ──────────────
+ * Self-contained authentication card with Login / Sign-Up toggle,
+ * Google OAuth button, email + password inputs, and a 6-digit OTP
+ * verification flow — all driven by vanilla JavaScript.
+ *
+ * Dark theme · Tailwind CSS · Zero framework dependencies.
+ */
+---
+
+<div class="min-h-screen flex items-center justify-center px-4 py-12 bg-[#121212]">
+  <div
+    id="auth-card"
+    class="w-full max-w-md rounded-2xl border border-[#2e2e2e] bg-[#1c1c1c] px-8 py-10 shadow-2xl shadow-black/40"
+  >
+    <!-- ────────── Header ────────── -->
+    <div class="mb-8 text-center">
+      <h1
+        id="auth-title"
+        class="text-3xl font-bold tracking-tight text-white"
+      >
+        Login
+      </h1>
+      <p class="mt-2 text-sm text-gray-400 leading-relaxed">
+        Create notes in minutes. Free forever. No credit card required.
+      </p>
+    </div>
+
+    <form id="auth-form" class="space-y-5" novalidate>
+      <!-- ────────── Google OAuth ────────── -->
+      <button
+        type="button"
+        id="google-btn"
+        class="flex w-full items-center justify-center rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-[#2e2e2e] hover:border-[#3e3e3e] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/50 cursor-pointer"
+      >
+        <!-- Standard Google "G" icon -->
+        <svg class="w-5 h-5 mr-3 shrink-0" viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.1 24.1 0 0 0 0 21.56l7.98-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <!-- ────────── Divider ────────── -->
+      <div id="divider" class="relative flex items-center py-1">
+        <div class="flex-grow border-t border-[#2e2e2e]"></div>
+        <span class="mx-4 shrink-0 text-xs font-medium uppercase tracking-wider text-gray-500">
+          or
+        </span>
+        <div class="flex-grow border-t border-[#2e2e2e]"></div>
+      </div>
+
+      <!-- ────────── Base-View Inputs (email + password) ────────── -->
+      <div id="base-view" class="space-y-4">
+        <!-- Email -->
+        <div>
+          <label for="auth-email" class="block mb-1.5 text-sm font-medium text-gray-300">
+            Email
+          </label>
+          <input
+            id="auth-email"
+            type="email"
+            placeholder="you@example.com"
+            class="w-full rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm text-white placeholder-gray-500 transition-all duration-200 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30"
+          />
+        </div>
+
+        <!-- Forgot password link -->
+        <div id="forgot-pw" class="flex justify-end">
+          <button
+            type="button"
+            class="text-xs text-[#8b5cf6] hover:text-[#a78bfa] transition-colors cursor-pointer"
+          >
+            Forgot password?
+          </button>
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label for="auth-password" class="block mb-1.5 text-sm font-medium text-gray-300">
+            Password
+          </label>
+          <input
+            id="auth-password"
+            type="password"
+            placeholder="••••••••"
+            class="w-full rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm text-white placeholder-gray-500 transition-all duration-200 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30"
+          />
+        </div>
+      </div>
+
+      <!-- ────────── OTP Input (hidden by default) ────────── -->
+      <div id="otp-view" class="hidden space-y-2">
+        <label for="auth-otp" class="block text-sm font-medium text-gray-300">
+          Enter the 6-digit code sent to your email
+        </label>
+        <input
+          id="auth-otp"
+          type="text"
+          inputmode="numeric"
+          maxlength="6"
+          placeholder="000000"
+          class="w-full rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-center text-2xl font-mono tracking-[0.5em] text-white placeholder-gray-600 transition-all duration-200 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30"
+        />
+      </div>
+
+      <!-- ────────── Submit Button ────────── -->
+      <button
+        type="submit"
+        id="submit-btn"
+        class="w-full rounded-lg bg-[#8b5cf6] px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#7c3aed] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/50 focus:ring-offset-2 focus:ring-offset-[#1c1c1c] cursor-pointer"
+      >
+        Login
+      </button>
+
+      <!-- ────────── Back button (OTP only) ────────── -->
+      <button
+        type="button"
+        id="back-btn"
+        class="hidden mx-auto flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
+      >
+        &larr; Back
+      </button>
+    </form>
+
+    <!-- ────────── Footer: mode toggle ────────── -->
+    <p id="toggle-footer" class="mt-8 text-center text-sm text-gray-400">
+      Don't have an account?
+      <button
+        type="button"
+        id="toggle-btn"
+        class="font-medium text-[#8b5cf6] hover:text-[#a78bfa] transition-colors cursor-pointer"
+      >
+        Sign up
+      </button>
+    </p>
+
+    <!-- ────────── Terms / Privacy ────────── -->
+    <p class="mt-6 text-center text-[11px] leading-relaxed text-gray-600">
+      By continuing you agree to our
+      <a href="#" class="underline underline-offset-2 hover:text-gray-400 transition-colors">Terms of Service</a>
+      and
+      <a href="#" class="underline underline-offset-2 hover:text-gray-400 transition-colors">Privacy Policy</a>.
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     Vanilla JavaScript — all interactivity handled here
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+  // ── DOM references ──────────────────────────────────────────
+  const title       = document.getElementById("auth-title");
+  const form        = document.getElementById("auth-form");
+  const googleBtn   = document.getElementById("google-btn");
+  const divider     = document.getElementById("divider");
+  const baseView    = document.getElementById("base-view");
+  const forgotPw    = document.getElementById("forgot-pw");
+  const otpView     = document.getElementById("otp-view");
+  const otpInput    = document.getElementById("auth-otp");
+  const submitBtn   = document.getElementById("submit-btn");
+  const backBtn     = document.getElementById("back-btn");
+  const toggleFooter = document.getElementById("toggle-footer");
+  const toggleBtn   = document.getElementById("toggle-btn");
+
+  // ── State ───────────────────────────────────────────────────
+  let isLogin = true;
+  let showOtp = false;
+
+  // ── Helpers ─────────────────────────────────────────────────
+  /** Show or hide an element by toggling the `hidden` class. */
+  function setVisible(el, visible) {
+    if (visible) {
+      el.classList.remove("hidden");
+    } else {
+      el.classList.add("hidden");
+    }
+  }
+
+  /** Render the UI to reflect the current state flags. */
+  function render() {
+    // Header
+    title.textContent = isLogin ? "Login" : "Sign Up";
+
+    // Base view vs OTP view
+    setVisible(googleBtn, !showOtp);
+    setVisible(divider,   !showOtp);
+    setVisible(baseView,  !showOtp);
+    setVisible(otpView,    showOtp);
+    setVisible(backBtn,    showOtp);
+
+    // "Forgot password?" only in Login mode (and not during OTP)
+    setVisible(forgotPw, isLogin && !showOtp);
+
+    // Footer toggle (hidden during OTP)
+    setVisible(toggleFooter, !showOtp);
+
+    // Submit button label
+    if (showOtp) {
+      submitBtn.textContent = "Verify OTP";
+    } else {
+      submitBtn.textContent = isLogin ? "Login" : "Create an account";
+    }
+
+    // Footer text
+    if (isLogin) {
+      toggleFooter.firstChild.textContent = "Don't have an account? ";
+      toggleBtn.textContent = "Sign up";
+    } else {
+      toggleFooter.firstChild.textContent = "Already have an account? ";
+      toggleBtn.textContent = "Login";
+    }
+  }
+
+  // ── Event: Login ↔ Sign Up toggle ──────────────────────────
+  toggleBtn.addEventListener("click", () => {
+    isLogin = !isLogin;
+    showOtp = false;
+    render();
+  });
+
+  // ── Event: Form submit → show OTP ─────────────────────────
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    if (showOtp) {
+      // OTP verification would happen here
+      return;
+    }
+
+    showOtp = true;
+    render();
+    otpInput.focus();
+  });
+
+  // ── Event: Back from OTP ───────────────────────────────────
+  backBtn.addEventListener("click", () => {
+    showOtp = false;
+    otpInput.value = "";
+    render();
+  });
+
+  // ── Event: OTP input — allow digits only ───────────────────
+  otpInput.addEventListener("input", () => {
+    otpInput.value = otpInput.value.replace(/\D/g, "").slice(0, 6);
+  });
+
+  // ── Initial render ─────────────────────────────────────────
+  render();
+</script>

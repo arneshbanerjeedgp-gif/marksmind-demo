@@ -1,0 +1,1608 @@
+---
+import '@fontsource/plus-jakarta-sans';
+import { BotMessageSquare, BrainCircuit, Layers, UserCircle, Sparkles, Target, Home, GitFork } from 'lucide-astro';
+
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarksMind AI | Tools</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+        html, body { height: 100%; margin: 0; padding: 0; background-color: #0b0b0c; }
+        .loader { border-top-color: #8b5cf6; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+        .sandbox-btn.active-question-card { border-color: #8b5cf6; box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
+        .tool-card { background-color: #161618; border: 1px solid #2a2a2c; transition: all 0.2s ease-in-out; }
+        .tool-card:hover { border-color: #8b5cf6; transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body class="font-['Plus_Jakarta_Sans',sans-serif] antialiased">
+    <div class="flex min-h-screen bg-[#0b0b0c] text-[#f3f3f4]">
+        
+        <aside class="w-64 border-r border-white/[0.05] bg-[#0e0e10] p-4 flex flex-col justify-between">
+            <div>
+                <div class="px-2 mb-8">
+                    <h1 class="text-base font-semibold tracking-tight">MarksMind AI</h1>
+                    <p class="text-xs text-[#9aa0a6]">Console</p>
+                </div>
+                <nav class="flex flex-col gap-2">
+                     <a href="#" id="nav-dashboard" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                        <span>Dashboard</span>
+                    </a>
+                     <a href="#" id="nav-revision" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md">
+                        <Sparkles class="w-5 h-5" />
+                        <span>Smart Revision</span>
+                    </a>
+                    <a href="#" id="nav-mistake" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md text-slate-400 hover:bg-slate-800">
+                        <Target class="w-5 h-5" />
+                        <span>Mistake Database</span>
+                    </a>
+                    <a href="#" id="nav-evaluator" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md">
+                        <BotMessageSquare class="w-5 h-5" />
+                        <span>NCERT Answer Evaluator</span>
+                    </a>
+                    <a href="#" id="nav-quiz" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md text-slate-400 hover:bg-slate-800">
+                        <BrainCircuit class="w-5 h-5" />
+                        <span>Quiz Generator</span>
+                    </a>
+                    <a href="#" id="nav-flashcard" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md text-slate-400 hover:bg-slate-800">
+                        <Layers class="w-5 h-5" />
+                        <span>Flashcard Generator</span>
+                    </a>
+                    <a href="#" id="nav-mindmap" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md text-slate-400 hover:bg-slate-800">
+                        <GitFork class="w-5 h-5" />
+                        <span>Mind Map Generator</span>
+                    </a>
+                </nav>
+            </div>
+            <div class="border-t border-white/[0.05] pt-4 mt-auto">
+                <div class="flex items-center gap-3">
+                    <UserCircle class="w-9 h-9 text-[#4e525a]" />
+                    <div>
+                        <p class="text-sm font-medium text-[#f3f3f4]">Arnesh</p>
+                        <p class="text-xs text-[#9aa0a6]">Premium Developer Plan</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-8 md:p-12 overflow-y-auto bg-[#0b0b0c]">
+             <!-- View -1: Dashboard -->
+            <div id="dashboard-view">
+                <div class="max-w-7xl mx-auto">
+                     <div class="mb-8">
+                        <h1 class="text-xl font-medium text-[#f3f3f4] tracking-tight">AI Command Center</h1>
+                        <p class="mt-1 text-base text-[#9aa0a6]">Your comprehensive academic intelligence overview.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 mt-4">
+                        <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-700">
+                            <p class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-2">Overall Accuracy</p>
+                            <p class="text-3xl font-extrabold text-emerald-400">82% <span class="text-lg">↑</span></p>
+                        </div>
+                        <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-700">
+                            <p class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-2">Syllabus Mastery</p>
+                            <p class="text-3xl font-extrabold text-purple-400">68%</p>
+                             <div class="w-full bg-slate-800 h-1.5 mt-3 rounded-full"><div class="bg-purple-500 w-[68%] h-1.5 rounded-full shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div></div>
+                        </div>
+                        <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-700">
+                            <p class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-2">Active Streak</p>
+                            <p class="text-3xl font-extrabold text-amber-400">14 Days 🔥</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+                             <h3 class="text-lg font-bold text-slate-200 mb-6">Subject Performance</h3>
+                             <div class="space-y-4">
+                                 <div>
+                                     <div class="flex justify-between items-center mb-1">
+                                         <span class="text-sm font-medium text-slate-300">Biology</span>
+                                         <span class="text-sm font-bold text-slate-400">85%</span>
+                                     </div>
+                                     <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-emerald-500 w-[85%] h-2 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.4)]"></div></div>
+                                 </div>
+                                  <div>
+                                     <div class="flex justify-between items-center mb-1">
+                                         <span class="text-sm font-medium text-slate-300">Physics</span>
+                                         <span class="text-sm font-bold text-slate-400">45%</span>
+                                     </div>
+                                     <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-amber-500 w-[45%] h-2 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.4)]"></div></div>
+                                 </div>
+                                  <div>
+                                     <div class="flex justify-between items-center mb-1">
+                                         <span class="text-sm font-medium text-slate-300">Chemistry</span>
+                                         <span class="text-sm font-bold text-slate-400">70%</span>
+                                     </div>
+                                     <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-purple-500 w-[70%] h-2 rounded-full shadow-[0_0_10px_rgba(168,85,247,0.4)]"></div></div>
+                                 </div>
+                             </div>
+                        </div>
+                         <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+                            <h3 class="text-lg font-bold text-slate-200 mb-6">AI Priority Action Feed</h3>
+                            <div class="space-y-3">
+                                <div class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4 flex items-center justify-between hover:border-slate-600 transition-colors">
+                                    <p class="text-sm font-medium text-slate-300">🔴 2 Critical mistakes require your attention in <span class="font-semibold">Physics</span>.</p>
+                                    <button id="btn-resolve-mistakes" class="text-xs font-bold tracking-wide px-4 py-1.5 rounded-lg border transition-all bg-red-500/10 text-red-400 border-red-500/20 hover:bg-red-500 hover:text-white">Resolve</button>
+                                </div>
+                                <div class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4 flex items-center justify-between hover:border-slate-600 transition-colors">
+                                    <p class="text-sm font-medium text-slate-300">🟠 <span class="font-semibold">Mitochondria</span> retention has dropped below 60%.</p>
+                                    <button id="btn-revise-retention" class="text-xs font-bold tracking-wide px-4 py-1.5 rounded-lg border transition-all bg-purple-500/10 text-purple-400 border-purple-500/20 hover:bg-purple-600 hover:text-white">Revise</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View 0: Smart Revision Engine -->
+            <div id="smart-revision-view" class="hidden">
+                <div class="max-w-7xl mx-auto">
+                    <div class="mb-8">
+                        <h1 class="text-xl font-medium text-[#f3f3f4] tracking-tight">Smart Revision Engine</h1>
+                        <p class="mt-1 text-base text-[#9aa0a6]">Track your memory decay and optimize revision time.</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Card 1: Mitochondria (Decaying Memory) -->
+                        <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-purple-500/50 hover:shadow-purple-900/20">
+                            <p class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-1">Class 9 Science: Fundamental Unit of Life</p>
+                            <div class="flex items-center">
+                                <h3 class="text-xl font-bold text-slate-200">Mitochondria</h3>
+                                <span class="ml-4 text-xs bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 rounded-full animate-pulse uppercase tracking-wider font-bold align-middle">🔴 Priority Action</span>
+                            </div>
+
+                            <div class="mt-6">
+                                <label class="text-sm font-medium text-slate-300">Memory Health: 58%</label>
+                                <div class="w-full bg-slate-800 h-2 rounded-full mt-2">
+                                    <div class="bg-amber-500 w-[58%] h-2 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 mt-6 gap-4">
+                                <div class="flex items-center gap-2 text-sm text-slate-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    Last Studied: <span class="font-semibold text-slate-300">4 Days Ago</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-sm text-slate-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    Past Score: <span class="font-semibold text-slate-300">16/20</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-sm text-slate-400">
+                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                                    Weakest Concept: <span class="font-semibold text-slate-300">ATP Generation</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-purple-900/10 border border-purple-500/20 p-4 rounded-xl mt-6">
+                                <p class="text-sm text-purple-300/90"><strong>AI Recommendation:</strong> Your memory retention is decaying. A 3-minute targeted revision will restore your memory to 95%.</p>
+                            </div>
+
+                            <button id="launch-revision-btn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg mt-6 transition-all">
+                                Launch Targeted Revision (Focus: ATP)
+                            </button>
+                        </div>
+
+                        <!-- Card 2: Acceleration (Healthy Memory) -->
+                        <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-500/50 hover:shadow-green-900/20">
+                           <p class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-1">Class 9 Physics: Kinematics</p>
+                            <div class="flex items-center">
+                                <h3 class="text-xl font-bold text-slate-200">Acceleration</h3>
+                                <span class="ml-4 text-xs bg-green-500/10 text-green-400 border border-green-500/20 px-3 py-1 rounded-full uppercase tracking-wider font-bold align-middle">🟢 Mastered</span>
+                            </div>
+
+                            <div class="mt-6">
+                                <label class="text-sm font-medium text-slate-300">Memory Health: 94%</label>
+                                <div class="w-full bg-slate-800 h-2 rounded-full mt-2">
+                                    <div class="bg-green-500 w-[94%] h-2 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 mt-6 gap-4">
+                                <div class="flex items-center gap-2 text-sm text-slate-400">
+                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    Last Studied: <span class="font-semibold text-slate-300">1 Day Ago</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-sm text-slate-400">
+                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    Past Score: <span class="font-semibold text-slate-300">19/20</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-sm text-slate-400">
+                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                                    Confidence: <span class="font-semibold text-slate-300">High</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-900/10 border border-green-500/20 p-4 rounded-xl mt-6 text-slate-300 text-sm">
+                                <p><strong>AI Recommendation:</strong> Memory is strong. No action needed right now. Focus on your weaker topics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View X: Mistake Database -->
+            <div id="mistake-database-view" class="hidden">
+                <div class="max-w-7xl mx-auto">
+                    <div class="mb-8">
+                        <h1 class="text-xl font-medium text-[#f3f3f4] tracking-tight">Personal Mistake Database</h1>
+                        <p class="mt-1 text-base text-[#9aa0a6]">AI-tracked pattern analysis of your recurring errors.</p>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="flex gap-4 mb-6 border-b border-slate-800 pb-2">
+                        <button id="tab-personal-mistakes" class="px-4 py-2 text-sm font-semibold rounded-lg bg-slate-800 text-white transition-colors">My Personal Mistakes</button>
+                        <button id="tab-common-mistakes" class="px-4 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-colors">Common Student Mistakes</button>
+                    </div>
+
+                    <!-- Personal Mistakes Content -->
+                    <div id="personal-mistakes-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 mt-4">
+                        <div class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4">
+                            <p class="text-xs text-slate-400">Total Errors Tracked</p>
+                            <p class="text-2xl text-slate-200 font-bold">142</p>
+                        </div>
+                        <div class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4">
+                            <p class="text-xs text-slate-400">Biggest Weakness</p>
+                            <p class="text-lg text-slate-200 font-bold mt-1">Class 9 Biology</p>
+                        </div>
+                        <div class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4">
+                            <p class="text-xs text-slate-400">Mistakes Resolved</p>
+                            <p class="text-2xl text-green-400 font-bold">28</p>
+                        </div>
+                    </div>
+
+                    <button id="btn-generate-remedial" class="mb-6 bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-6 rounded-xl transition-all shadow-[0_0_15px_rgba(220,38,38,0.3)]">Generate Remedial Quiz</button>
+                    
+                    <div class="flex flex-col md:flex-row gap-3 mb-6">
+                        <input type="text" placeholder="Search mistakes by keyword..." class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-purple-500 transition-colors" />
+                        <select id="subject-filter" class="bg-slate-900 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-purple-500">
+                            <option>All Subjects</option>
+                            <option>Biology</option>
+                            <option>Physics</option>
+                        </select>
+                        <select class="bg-slate-900 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-purple-500">
+                            <option>Highest Frequency</option>
+                            <option>Recent First</option>
+                        </select>
+                    </div>
+
+                    <div id="mistake-cards-container" class="space-y-4">
+                         <!-- Card 1 (Critical Priority) -->
+                        <div data-subject="Biology" class="bg-slate-900/50 border border-red-500/30 rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg hover:border-red-500/50 transition-all duration-300">
+                            <div class="flex justify-between items-center">
+                                <span class="bg-red-500/10 text-red-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-red-500/20 font-semibold">Missing Keyword</span>
+                                <span class="text-red-400 font-bold text-sm">Repeated 6 Times</span>
+                            </div>
+                            <p class="text-slate-300 mt-3 font-medium">Forgot to include 'ATP' (Adenosine Triphosphate) when explaining energy currency.</p>
+                            <p class="text-slate-500 text-xs mt-2">Topic: Class 9 Biology - Mitochondria</p>
+                            <div class="mt-4 pt-4 border-t border-slate-700/50 flex gap-4">
+                                <button class="text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg> 
+                                    View Original Question
+                                </button>
+                                <button class="text-xs font-medium text-slate-400 hover:text-green-400 transition-colors flex items-center gap-1.5">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 
+                                    Mark as Resolved
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 2 (Warning Priority) -->
+                        <div data-subject="Biology" class="bg-slate-900/50 border border-amber-500/30 rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg hover:border-amber-500/50 transition-all duration-300">
+                           <div class="flex justify-between items-center">
+                                <span class="bg-amber-500/10 text-amber-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-amber-500/20 font-semibold">Conceptual Mix-up</span>
+                                <span class="text-amber-400 font-bold text-sm">Repeated 3 Times</span>
+                            </div>
+                            <p class="text-slate-300 mt-3 font-medium">Confused the folded inner membrane (cristae) with the porous outer membrane.</p>
+                            <p class="text-slate-500 text-xs mt-2">Topic: Class 9 Biology - Mitochondria</p>
+                             <div class="mt-4 pt-4 border-t border-slate-700/50 flex gap-4">
+                                <button class="text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg> 
+                                    View Original Question
+                                </button>
+                                <button class="text-xs font-medium text-slate-400 hover:text-green-400 transition-colors flex items-center gap-1.5">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 
+                                    Mark as Resolved
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    </div> <!-- End of personal mistakes content -->
+                    
+                    <!-- Common Mistakes Content -->
+                    <div id="common-mistakes-content" class="hidden">
+                        <div class="flex flex-wrap gap-3 mb-6 mt-4">
+                            <button class="cm-filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-slate-800 text-white border border-slate-700 transition-colors" data-filter="All">All Subjects</button>
+                            <button class="cm-filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-slate-900/50 text-slate-400 hover:text-slate-200 border border-slate-800 hover:border-slate-700 transition-colors" data-filter="Biology">Biology</button>
+                            <button class="cm-filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-slate-900/50 text-slate-400 hover:text-slate-200 border border-slate-800 hover:border-slate-700 transition-colors" data-filter="Physics">Physics</button>
+                            <button class="cm-filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-slate-900/50 text-slate-400 hover:text-slate-200 border border-slate-800 hover:border-slate-700 transition-colors" data-filter="AI">AI</button>
+                            <button class="cm-filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-slate-900/50 text-slate-400 hover:text-slate-200 border border-slate-800 hover:border-slate-700 transition-colors" data-filter="IKS Sustainability">IKS Sustainability</button>
+                        </div>
+                        <div id="common-mistakes-container" class="space-y-4">
+                            <!-- Cards will be populated by JS -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- View 1: Answer Evaluator -->
+            <div id="answer-evaluator-view" class="hidden">
+                <div class="max-w-7xl mx-auto">
+                    <div class="mb-8">
+                        <h1 class="text-xl font-medium text-[#f3f3f4] tracking-tight flex items-center gap-2">NCERT Answer Evaluator <span class="bg-[#1e1f22] text-[#c4c7c5] px-2 py-0.5 rounded text-xs font-mono">BETA</span></h1>
+                        <p id="curriculum-display" class="mt-1 text-base text-[#9aa0a6]">Select a sandbox question or enter your own answer to begin.</p>
+                    </div>
+                    <div class="mb-8 flex flex-wrap items-center gap-4">
+                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 flex-grow">
+                            <button data-qid="q1" class="sandbox-btn text-left p-3 bg-[#161618] border border-white/[0.05] rounded-xl hover:bg-[#1f1f21] hover:border-purple-500/30 transition-all">
+                                <p class="font-medium text-sm text-[#f3f3f4] question-title">Q1: Cellular Powerhouse</p>
+                                <p class="text-xs text-[#9aa0a6]">Science</p>
+                            </button>
+                            <button data-qid="q2" class="sandbox-btn text-left p-3 bg-[#161618] border border-white/[0.05] rounded-xl hover:bg-[#1f1f21] hover:border-purple-500/30 transition-all">
+                                 <p class="font-medium text-sm text-[#f3f3f4] question-title">Q2: Velocity & Acceleration</p>
+                                 <p class="text-xs text-[#9aa0a6]">Class 9 Physics</p>
+                            </button>
+                            <button data-qid="q3" class="sandbox-btn text-left p-3 bg-[#161618] border border-white/[0.05] rounded-xl hover:bg-[#1f1f21] hover:border-purple-500/30 transition-all">
+                                 <p class="font-medium text-sm text-[#f3f3f4] question-title">Q3: What is RAG?</p>
+                                 <p class="text-xs text-[#9aa0a6]">AI / CS</p>
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <label for="maxMarksInput" class="text-sm font-medium text-[#9aa0a6]">Max Marks:</label>
+                            <input type="number" id="maxMarksInput" value="3" min="1" class="bg-[#1e1f22] border border-white/[0.08] text-[#c4c7c5] px-3 py-1 rounded text-sm w-16 text-center focus:outline-none focus:border-purple-500/50">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                        <div class="lg:col-span-3 bg-[#161618] border border-white/[0.05] rounded-xl p-6 space-y-4">
+                            <label for="answerInput" class="text-sm font-medium text-[#c4c7c5]">Your Answer Script</label>
+                            <textarea 
+                                id="answerInput" 
+                                rows="12" 
+                                class="w-full bg-[#0e0e10] border border-white/[0.08] rounded-lg p-4 focus:outline-none focus:border-purple-500/50 transition-colors placeholder:text-[#6a6f78] text-[15px] text-[#e3e3e4] font-normal leading-relaxed tracking-[0.01em]" 
+                                placeholder="Enter your answer here or select a sandbox question..."></textarea>
+                            <button id="evaluateButton" class="w-full flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors">
+                                <span id="button-text">Verify Answer Script</span>
+                                <div id="loader" class="w-5 h-5 rounded-full border-2 border-white/50 loader hidden"></div>
+                            </button>
+                        </div>
+                        <div class="lg:col-span-2 space-y-4">
+                            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl">
+                                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Step-Marking Score</h3>
+                                <div id="score-display" class="text-4xl font-bold text-purple-400 mt-2">-- / 3</div>
+                            </div>
+                            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl">
+                                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Required Benchmark Answer (Highlight Analysis)</h3>
+                                <p id="benchmark-display" class="text-slate-300 text-sm leading-relaxed mt-3">Click verify to perform keyword evaluation matching.</p>
+                            </div>
+                            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl">
+                                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Missing Mandatory Keywords</h3>
+                                <div id="missing-keywords-display" class="mt-2 text-slate-400 text-sm">No analysis performed yet.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View 2: Quiz Generator -->
+            <div id="quiz-generator-view" class="hidden">
+                <div id="quiz-app" class="max-w-4xl mx-auto">
+                    <div id="step-topic" class="space-y-6">
+                        <h2 class="text-2xl text-slate-100 font-bold mb-6">Quiz Generator</h2>
+                        <p class="text-slate-400">Choose a topic to start a quiz.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4">
+                        <button onclick="selectTopic('Mitochondria')" class="tool-card p-6 rounded-xl text-left group">
+                            <h3 class="text-lg text-purple-400 font-bold group-hover:text-purple-300">Mitochondria</h3>
+                            <p class="text-sm text-slate-400 mt-2">Biology · Cell Structure</p>
+                        </button>
+                        <button onclick="selectTopic('Acceleration')" class="tool-card p-6 rounded-xl text-left group">
+                            <h3 class="text-lg text-green-400 font-bold group-hover:text-green-300">Acceleration</h3>
+                            <p class="text-sm text-slate-400 mt-2">Physics · Kinematics</p>
+                        </button>
+                        <button onclick="selectTopic('RAG')" class="tool-card p-6 rounded-xl text-left group">
+                            <h3 class="text-lg text-sky-400 font-bold group-hover:text-sky-300">RAG AI</h3>
+                            <p class="text-sm text-slate-400 mt-2">Computer Science · AI</p>
+                        </button>
+                        <button onclick="selectTopic('IKS')" class="tool-card p-6 rounded-xl text-left group">
+                            <h3 class="text-lg text-amber-400 font-bold group-hover:text-amber-300">IKS Sustainability</h3>
+                            <p class="text-sm text-slate-400 mt-2">Environment · Heritage</p>
+                        </button>
+                        </div>
+                    </div>
+
+                    <div id="step-length" class="hidden space-y-6">
+                        <h2 class="text-xl text-slate-200 font-semibold mb-4">How many questions?</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <button onclick="startQuiz(5)" class="tool-card p-4 rounded-xl text-slate-200 font-bold text-xl text-center">5</button>
+                        <button onclick="startQuiz(10)" class="tool-card p-4 rounded-xl text-slate-200 font-bold text-xl text-center">10</button>
+                        <button onclick="startQuiz(15)" class="tool-card p-4 rounded-xl text-slate-200 font-bold text-xl text-center">15</button>
+                        <button onclick="startQuiz(20)" class="tool-card p-4 rounded-xl text-slate-200 font-bold text-xl text-center">20</button>
+                        </div>
+                    </div>
+
+                    <div id="step-mcq" class="hidden space-y-6">
+                        <div class="flex justify-between items-center text-sm text-slate-400 mb-4">
+                        <span id="mcq-counter">Question 1</span>
+                        <span class="bg-purple-900/30 text-purple-400 px-2 py-1 rounded text-xs font-semibold">MCQ Quiz</span>
+                        </div>
+                        <h2 id="mcq-question" class="text-2xl text-slate-200 font-bold mb-6">Question text goes here?</h2>
+                        <div id="mcq-options" class="grid grid-cols-1 gap-4">
+                        </div>
+                        <div class="mt-6 flex justify-end">
+                        <button onclick="skipQuestion()" class="text-slate-400 hover:text-slate-200 text-sm underline">Skip Question</button>
+                        </div>
+                    </div>
+
+                    <div id="step-results" class="hidden text-center space-y-6 py-10">
+                        <h2 class="text-3xl text-slate-200 font-bold">Quiz Complete!</h2>
+                        <div class="flex justify-center gap-8 mt-8">
+                        <div class="bg-slate-800 border border-slate-700 p-6 rounded-xl min-w-[120px]">
+                            <div class="text-3xl text-green-400 font-bold" id="res-correct">0</div>
+                            <div class="text-sm text-slate-400 mt-2">Correct / Got It!</div>
+                        </div>
+                        <div class="bg-slate-800 border border-slate-700 p-6 rounded-xl min-w-[120px]">
+                            <div class="text-3xl text-red-400 font-bold" id="res-wrong">0</div>
+                            <div class="text-sm text-slate-400 mt-2">Incorrect / Still Learning</div>
+                        </div>
+                        <div class="bg-slate-800 border border-slate-700 p-6 rounded-xl min-w-[120px]">
+                            <div class="text-3xl text-yellow-400 font-bold" id="res-skipped">0</div>
+                            <div class="text-sm text-slate-500 mt-2">Skipped</div>
+                        </div>
+                        </div>
+                        <button onclick="restartQuiz()" class="mt-8 bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-xl font-bold transition-colors">Retake Quiz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View 3: Standalone Flashcard Generator -->
+            <div id="flashcard-generator-view" class="hidden">
+                <div id="flashcard-app" class="max-w-4xl mx-auto">
+                    <div id="fg-step-topic" class="space-y-6">
+                        <h2 class="text-2xl text-slate-100 font-bold mb-6">Flashcard Generator</h2>
+                        <p class="text-slate-400">Select a topic to begin a self-paced review session.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4">
+                        <button onclick="fg_selectTopic('Mitochondria')" class="tool-card p-6 rounded-xl text-left group">
+                            <h3 class="text-lg text-purple-400 font-bold group-hover:text-purple-300">Mitochondria</h3>
+                            <p class="text-sm text-slate-400 mt-2">Biology · Cell Structure</p>
+                        </button>
+                        <button onclick="fg_selectTopic('Acceleration')" class="tool-card p-6 rounded-xl text-left group">
+                            <h3 class="text-lg text-green-400 font-bold group-hover:text-green-300">Acceleration</h3>
+                            <p class="text-sm text-slate-400 mt-2">Physics · Kinematics</p>
+                        </button>
+                        <button onclick="fg_selectTopic('RAG')" class="tool-card p-6 rounded-xl text-left group">
+                            <h3 class="text-lg text-sky-400 font-bold group-hover:text-sky-300">RAG AI</h3>
+                            <p class="text-sm text-slate-400 mt-2">Computer Science · AI</p>
+                        </button>
+                        <button onclick="fg_selectTopic('IKS')" class="tool-card p-6 rounded-xl text-left group">
+                            <h3 class="text-lg text-amber-400 font-bold group-hover:text-amber-300">IKS Sustainability</h3>
+                            <p class="text-sm text-slate-400 mt-2">Environment · Heritage</p>
+                        </button>
+                        </div>
+                    </div>
+
+                    <div id="fg-step-length" class="hidden space-y-6">
+                        <h2 class="text-xl text-slate-200 font-semibold mb-4">How many flashcards?</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <button onclick="fg_start(5)" class="tool-card p-4 rounded-xl text-slate-200 font-bold text-xl text-center">5</button>
+                            <button onclick="fg_start(10)" class="tool-card p-4 rounded-xl text-slate-200 font-bold text-xl text-center">10</button>
+                            <button onclick="fg_start(15)" class="tool-card p-4 rounded-xl text-slate-200 font-bold text-xl text-center">15</button>
+                            <button onclick="fg_start(20)" class="tool-card p-4 rounded-xl text-slate-200 font-bold text-xl text-center">20</button>
+                        </div>
+                    </div>
+
+                    <div id="fg-engine" class="hidden space-y-6">
+                        <p id="fg-counter" class="text-sm text-slate-400 mb-2">Card 1 of 10</p>
+                         <div class="w-full bg-slate-700 rounded-full h-2.5 mb-4">
+                            <div id="fg-progress-bar" class="bg-purple-600 h-2.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <div onclick="fg_flipCard()" class="w-full max-w-xl mx-auto min-h-[350px] [perspective:1000px] cursor-pointer my-8 font-sans">
+                            <div id="fg-flashcard-inner" class="relative w-full h-full min-h-[350px] rounded-2xl border border-slate-800 bg-slate-900/80 shadow-xl shadow-purple-950/10 transition-transform duration-500 [transform-style:preserve-3d] hover:border-purple-500/50 flex flex-col items-center justify-center p-8 text-center">
+                                <div id="fg-front" class="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 [backface-visibility:hidden]">
+                                    <h2 id="fg-question" class="text-slate-200 font-semibold text-xl md:text-2xl leading-relaxed"></h2>
+                                    <span class="mt-6 text-xs text-purple-400 bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full uppercase tracking-widest font-medium opacity-80 animate-pulse">Click Card to Flip</span>
+                                </div>
+                                <div id="fg-back" class="absolute inset-0 w-full h-full rounded-2xl bg-slate-900 flex flex-col items-center justify-center p-8 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                                    <h2 id="fg-answer" class="text-green-400 font-bold text-2xl md:text-3xl drop-shadow-[0_0_15px_rgba(34,197,94,0.15)]"></h2>
+                                </div>
+                            </div>
+                        </div>
+                         <div id="fg-grading-controls" class="mt-8 flex justify-center gap-4 hidden">
+                            <button onclick="gradeCard(false)" class="px-8 py-3 border border-red-500/50 bg-red-950/30 text-red-400 rounded-xl hover:bg-red-950/60 transition-colors font-semibold">Still Learning</button>
+                            <button onclick="gradeCard(true)" class="px-8 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors font-semibold">Got It!</button>
+                        </div>
+                    </div>
+
+                    <div id="fg-step-results" class="hidden text-center space-y-6 py-10">
+                        <h2 class="text-3xl text-slate-200 font-bold">Deck Complete!</h2>
+                        <div class="flex justify-center gap-8 mt-8">
+                            <div class="bg-slate-800 border border-slate-700 p-6 rounded-xl min-w-[150px]">
+                                <div class="text-3xl text-green-400 font-bold" id="fg-res-correct">0</div>
+                                <div class="text-sm text-slate-400 mt-2">Got It!</div>
+                            </div>
+                            <div class="bg-slate-800 border border-slate-700 p-6 rounded-xl min-w-[150px]">
+                                <div class="text-3xl text-red-400 font-bold" id="fg-res-wrong">0</div>
+                                <div class="text-sm text-slate-400 mt-2">Still Learning</div>
+                            </div>
+                        </div>
+                        <button onclick="restartFlashcards()" class="mt-8 bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-xl font-bold transition-colors">Review Again</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View 4: Mind Map Generator -->
+            <div id="mindmap-generator-view" class="hidden">
+                <div class="max-w-7xl mx-auto">
+                    <div class="mb-8">
+                        <h1 class="text-xl font-medium text-[#f3f3f4] tracking-tight">Mind Map Generator</h1>
+                        <p class="mt-1 text-base text-[#9aa0a6]">Visually map out NCERT concepts into interactive visual nodes.</p>
+                    </div>
+
+                    <!-- Sandbox Example Cards -->
+                    <div class="mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <button id="mm-card-mitochondria" data-topic="Mitochondria" onclick="mmSandbox('Mitochondria')" class="mm-sandbox-card bg-slate-900/40 border border-slate-800 rounded-xl p-5 text-left cursor-pointer hover:bg-slate-800/50 hover:border-slate-700 transition-all duration-200 group">
+                                <h3 class="text-lg font-bold text-purple-400 group-hover:text-purple-300 transition-colors">Mitochondria</h3>
+                                <p class="text-sm text-slate-400 mt-1">Biology &bull; Cell Structure</p>
+                            </button>
+                            <button id="mm-card-acceleration" data-topic="Acceleration" onclick="mmSandbox('Acceleration')" class="mm-sandbox-card bg-slate-900/40 border border-slate-800 rounded-xl p-5 text-left cursor-pointer hover:bg-slate-800/50 hover:border-slate-700 transition-all duration-200 group">
+                                <h3 class="text-lg font-bold text-emerald-400 group-hover:text-emerald-300 transition-colors">Acceleration</h3>
+                                <p class="text-sm text-slate-400 mt-1">Physics &bull; Kinematics</p>
+                            </button>
+                            <button id="mm-card-rag" data-topic="RAG AI" onclick="mmSandbox('RAG AI')" class="mm-sandbox-card bg-slate-900/40 border border-slate-800 rounded-xl p-5 text-left cursor-pointer hover:bg-slate-800/50 hover:border-slate-700 transition-all duration-200 group">
+                                <h3 class="text-lg font-bold text-sky-400 group-hover:text-sky-300 transition-colors">RAG AI</h3>
+                                <p class="text-sm text-slate-400 mt-1">Computer Science &bull; AI</p>
+                            </button>
+                            <button id="mm-card-iks" data-topic="IKS" onclick="mmSandbox('IKS')" class="mm-sandbox-card bg-slate-900/40 border border-slate-800 rounded-xl p-5 text-left cursor-pointer hover:bg-slate-800/50 hover:border-slate-700 transition-all duration-200 group">
+                                <h3 class="text-lg font-bold text-amber-400 group-hover:text-amber-300 transition-colors">IKS Sustainability</h3>
+                                <p class="text-sm text-slate-400 mt-1">Environment &bull; Heritage</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Canvas / Viewer Container -->
+                    <div id="mindmap-canvas-container" class="bg-[#0e0e10] border border-[#2a2a2c] rounded-2xl relative overflow-hidden" style="min-height: 520px;">
+                        <!-- Empty state -->
+                        <div id="mindmap-empty-state" class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+                            <svg class="w-16 h-16 text-[#2a2a2c] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="3" stroke-width="1.5" />
+                                <circle cx="4" cy="6" r="2" stroke-width="1.5" />
+                                <circle cx="20" cy="6" r="2" stroke-width="1.5" />
+                                <circle cx="4" cy="18" r="2" stroke-width="1.5" />
+                                <circle cx="20" cy="18" r="2" stroke-width="1.5" />
+                                <path d="M10 10L6 7.5M14 10l4-2.5M10 14L6 16.5M14 14l4 2.5" stroke-width="1.5" />
+                            </svg>
+                            <p class="text-[#4e525a] text-sm font-medium">Select a subject above to generate a mind map</p>
+                            <p class="text-[#3a3a3c] text-xs mt-1">Click any sandbox card to explore its concept map</p>
+                        </div>
+                        <!-- Loading state -->
+                        <div id="mindmap-loading" class="absolute inset-0 flex flex-col items-center justify-center hidden">
+                            <div class="w-10 h-10 border-4 border-[#2a2a2c] border-t-purple-500 rounded-full loader"></div>
+                            <p id="mindmap-loading-text" class="text-[#9aa0a6] text-sm mt-4 animate-pulse">Analyzing concept structure...</p>
+                        </div>
+                        <!-- SVG Canvas -->
+                        <svg id="mindmap-svg" class="w-full hidden" viewBox="0 0 1000 600" style="min-height: 520px;"></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shared Full-Screen Buffer -->
+            <div id="step-generating" class="hidden fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm">
+                <div class="relative w-48 h-48">
+                    <svg class="w-full h-full" viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="90" fill="none" stroke="#1e293b" stroke-width="10"></circle>
+                        <circle id="buffer-progress" cx="100" cy="100" r="90" fill="none" stroke="#8b5cf6" stroke-width="10" stroke-linecap="round" class="transition-all duration-300" style="stroke-dasharray: 565.48; stroke-dashoffset: 565.48; transform: rotate(-90deg); transform-origin: center;"></circle>
+                    </svg>
+                    <div id="buffer-percentage" class="absolute inset-0 flex items-center justify-center text-3xl font-bold text-purple-300 drop-shadow-[0_0_5px_rgba(139,92,246,0.5)]">0%</div>
+                </div>
+                <p id="buffer-status" class="text-slate-400 text-sm tracking-wide mt-6 animate-pulse">Initializing AI Engine...</p>
+            </div>
+
+        </main>
+    </div>
+    <script is:inline>
+        const quizDatabase = {
+          "Mitochondria": [
+            { q: "What is the primary function of mitochondria in a eukaryotic cell?", options: ["Protein synthesis", "Lipid storage", "ATP production", "Photosynthesis"], ans: 2 },
+            { q: "Which of the following processes occurs in the inner mitochondrial membrane?", options: ["Glycolysis", "Krebs cycle", "Electron Transport Chain", "Fermentation"], ans: 2 },
+            { q: "Why is the inner mitochondrial membrane highly folded into structures called cristae?", options: ["To store more DNA", "To increase surface area for chemical reactions", "To protect the cell from toxins", "To trap light energy"], ans: 1 },
+            { q: "Mitochondria are unique because they contain their own:", options: ["Ribosomes and DNA", "Nucleus", "Cell wall", "Chlorophyll"], ans: 0 },
+            { q: "Which types of cells in the human body would be expected to have the highest number of mitochondria?", options: ["Skin cells", "Muscle cells", "Bone cells", "Red blood cells"], ans: 1 },
+            { q: "What is the end product of the electron transport chain in mitochondria?", options: ["Glucose", "Water and ATP", "Carbon dioxide", "Oxygen"], ans: 1 },
+            { q: "The mitochondrial matrix is the site for which major metabolic pathway?", options: ["Glycolysis", "Citric Acid (Krebs) Cycle", "Calvin Cycle", "Lactic acid fermentation"], ans: 1 },
+            { q: "From which parent is mitochondrial DNA (mtDNA) primarily inherited in humans?", options: ["Father only", "Mother only", "Equally from both", "Randomly determined"], ans: 1 },
+            { q: "What role does oxygen play in mitochondrial function?", options: ["It is the final electron acceptor in the ETC", "It breaks down glucose directly", "It forms the mitochondrial membrane", "It acts as an enzyme"], ans: 0 },
+            { q: "If a toxin completely blocks ATP synthase in mitochondria, what is the immediate effect?", options: ["Oxygen consumption stops", "ATP production ceases", "The cell divides", "Glucose levels drop"], ans: 1 },
+            { q: "Which of the following is NOT found within a mitochondrion?", options: ["Matrix", "Cristae", "Stroma", "Circular DNA"], ans: 2 },
+            { q: "The endosymbiotic theory suggests that mitochondria evolved from:", options: ["Fungi", "Free-living aerobic bacteria", "Viruses", "Plant cells"], ans: 1 },
+            { q: "What happens to pyruvate before it enters the Citric Acid Cycle in the mitochondria?", options: ["It is converted to Acetyl-CoA", "It becomes lactic acid", "It is broken down into water", "It binds with oxygen"], ans: 0 },
+            { q: "Which space within the mitochondria has the highest concentration of protons (H+) during active respiration?", options: ["The matrix", "The intermembrane space", "The cytoplasm", "Inside the cristae"], ans: 1 },
+            { q: "Defects in mitochondrial function are most likely to affect which bodily systems?", options: ["Hair and nails", "Nervous and muscular systems", "Skeletal system", "Digestive lining"], ans: 1 },
+            { q: "Which molecule acts as the primary energy carrier transferring electrons to the ETC?", options: ["ATP", "NADH", "Oxygen", "Glucose"], ans: 1 },
+            { q: "Mitochondria can reproduce independently of the cell cycle through a process similar to:", options: ["Mitosis", "Meiosis", "Binary fission", "Budding"], ans: 2 },
+            { q: "What is the semi-fluid space enclosed by the inner mitochondrial membrane called?", options: ["Cytosol", "Matrix", "Lumen", "Vesicle"], ans: 1 },
+            { q: "In the absence of oxygen, what happens to mitochondrial respiration?", options: ["It speeds up", "It relies on carbon dioxide", "It halts, and the cell relies on glycolysis", "It produces alcohol"], ans: 2 },
+            { q: "Brown fat cells contain many mitochondria that possess a protein called thermogenin. What is its function?", options: ["To produce extra ATP", "To generate heat instead of ATP", "To store lipids", "To contract muscles"], ans: 1 }
+          ],
+          "Acceleration": [
+            { q: "What is the standard SI unit for acceleration?", options: ["m/s", "m/s²", "N/kg", "kg·m/s"], ans: 1 },
+            { q: "Acceleration is defined as the rate of change of:", options: ["Distance", "Displacement", "Speed", "Velocity"], ans: 3 },
+            { q: "If an object is moving at a constant velocity of 50 m/s in a straight line, what is its acceleration?", options: ["50 m/s²", "9.8 m/s²", "0 m/s²", "-50 m/s²"], ans: 2 },
+            { q: "Which formula correctly represents average acceleration?", options: ["a = (v - u) / t", "a = d / t", "a = m * v", "a = F * d"], ans: 0 },
+            { q: "An object is thrown straight up into the air. At its highest point, what is its acceleration? (Ignoring air resistance)", options: ["0 m/s²", "9.8 m/s² downwards", "9.8 m/s² upwards", "Depends on its mass"], ans: 1 },
+            { q: "What does a negative acceleration (deceleration) indicate?", options: ["The object is moving backward", "The object's velocity is decreasing in the direction of motion", "The object has stopped", "The mass is decreasing"], ans: 1 },
+            { q: "On a velocity-time graph, what does the slope of the line represent?", options: ["Distance", "Displacement", "Acceleration", "Speed"], ans: 2 },
+            { q: "If a car accelerates from rest to 20 m/s in 4 seconds, what is its average acceleration?", options: ["5 m/s²", "10 m/s²", "16 m/s²", "80 m/s²"], ans: 0 },
+            { q: "An object moving in a circular path at a constant speed is accelerating because:", options: ["Its mass is changing", "Its direction is constantly changing", "Gravity is increasing", "Friction is acting on it"], ans: 1 },
+            { q: "What is the acceleration of a freely falling object near the Earth's surface?", options: ["0 m/s²", "9.8 m/s²", "19.6 m/s²", "100 m/s²"], ans: 1 },
+            { q: "According to Newton's Second Law, acceleration is directly proportional to:", options: ["Mass", "Velocity", "Net force", "Time"], ans: 2 },
+            { q: "If the net force acting on an object is doubled, its acceleration will:", options: ["Halve", "Remain the same", "Double", "Quadruple"], ans: 2 },
+            { q: "A horizontal line on an acceleration-time graph indicates:", options: ["Constant velocity", "Constant acceleration", "Zero velocity", "Increasing acceleration"], ans: 1 },
+            { q: "Which of the following is a vector quantity?", options: ["Speed", "Distance", "Mass", "Acceleration"], ans: 3 },
+            { q: "A train slows down from 30 m/s to 10 m/s in 10 seconds. What is its acceleration?", options: ["2 m/s²", "-2 m/s²", "4 m/s²", "-4 m/s²"], ans: 1 },
+            { q: "If an object's acceleration and velocity vectors point in opposite directions, the object is:", options: ["Speeding up", "Slowing down", "Moving at constant speed", "Turning"], ans: 1 },
+            { q: "Centripetal acceleration always points towards:", options: ["The direction of motion", "The center of the circular path", "The outside of the curve", "The ground"], ans: 1 },
+            { q: "In the kinematic equation v² = u² + 2as, what does 's' stand for?", options: ["Speed", "Seconds", "Displacement", "Starting point"], ans: 2 },
+            { q: "Galileo proved that in a vacuum, objects of different masses dropped from the same height will:", options: ["Accelerate at different rates", "Accelerate at the same rate", "Float", "Reach terminal velocity immediately"], ans: 1 },
+            { q: "When a skydiver reaches terminal velocity, their acceleration is:", options: ["9.8 m/s²", "Increasing", "Zero", "Negative"], ans: 2 }
+          ],
+          "RAG": [
+            { q: "What does RAG stand for in the context of Artificial Intelligence?", options: ["Random Access Generation", "Retrieval-Augmented Generation", "Recursive Algorithm Grouping", "Rapid Analytic Generation"], ans: 1 },
+            { q: "What is the primary problem that RAG attempts to solve in Large Language Models (LLMs)?", options: ["Slow processing speed", "High API costs", "Hallucinations and outdated information", "Poor grammar generation"], ans: 2 },
+            { q: "In a RAG pipeline, what happens during the 'Retrieval' phase?", options: ["The model generates a response", "The system searches a database for relevant context", "The model updates its internal weights", "The user types a prompt"], ans: 1 },
+            { q: "Which technology is most commonly used to store and search documents in a RAG system?", options: ["Relational SQL Database", "Vector Database", "Spreadsheets", "File directories"], ans: 1 },
+            { q: "What is an 'embedding' in the context of RAG?", options: ["A piece of hardware", "A numerical vector representation of text meaning", "A graphical user interface", "A type of prompt engineering"], ans: 1 },
+            { q: "Why is chunking necessary when preparing documents for a RAG system?", options: ["To make the text look prettier", "To fit text into the embedding model and LLM context window limits", "To translate the text to English", "To compress file size"], ans: 1 },
+            { q: "In RAG, the retrieved documents are passed to the LLM by:", options: ["Retraining the model from scratch", "Fine-tuning the model", "Injecting them into the prompt as context", "Saving them on the user's hard drive"], ans: 2 },
+            { q: "Which mathematical concept is most commonly used to find similarity between vectors in RAG?", options: ["Pythagorean theorem", "Cosine similarity", "Calculus derivatives", "Boolean logic"], ans: 1 },
+            { q: "How does RAG differ from Fine-Tuning?", options: ["RAG alters model weights; Fine-Tuning does not", "RAG provides external context at runtime; Fine-Tuning trains the model on new data", "RAG is older than Fine-Tuning", "There is no difference"], ans: 1 },
+            { q: "What does the 'Generation' step in RAG do?", options: ["Generates embeddings", "Generates the vector database", "Uses the LLM to write an answer based on the retrieved context", "Generates user queries"], ans: 2 },
+            { q: "If a RAG system cannot find any relevant documents in the database, what should a well-designed LLM do?", options: ["Make up a plausible answer", "Crash", "State that it doesn't have the information to answer", "Search the open internet randomly"], ans: 2 },
+            { q: "What is the 'Context Window' limit?", options: ["The size of the computer monitor", "The maximum amount of text an LLM can process in one prompt", "The time it takes to retrieve data", "The size of the vector database"], ans: 1 },
+            { q: "Which tool is commonly used to build RAG pipelines?", options: ["Photoshop", "LangChain or LlamaIndex", "React", "Docker"], ans: 1 },
+            { q: "What is a 'semantic search'?", options: ["Searching by exact keyword matches", "Searching by the meaning and intent of the text", "Searching only image files", "Searching alphabetically"], ans: 1 },
+            { q: "Why might a developer choose a smaller chunk size for their documents?", options: ["To capture highly specific, precise pieces of information", "To provide broad, overarching context", "To save electricity", "To make the text easier to read for humans"], ans: 0 },
+            { q: "What role does the 'Retriever' play in the RAG architecture?", options: ["It writes the final response", "It scores and fetches the most relevant chunks from the database", "It encrypts user data", "It translates languages"], ans: 1 },
+            { q: "What is a 'Hallucination' in AI?", options: ["When the AI sees images", "When the AI generates a confident but factually incorrect answer", "When the AI runs too fast", "When the AI shuts down"], ans: 1 },
+            { q: "Which of the following would NOT typically be a data source for a RAG system?", options: ["Internal company PDFs", "A local Wiki", "Customer support logs", "The LLM's own internal training weights"], ans: 3 },
+            { q: "What does 'Top-K' mean in vector search?", options: ["The K most expensive queries", "Retrieving the K most similar results to the query", "The top performing LLMs", "The highest token count"], ans: 1 },
+            { q: "How does RAG ensure data privacy for enterprise companies?", options: ["By keeping proprietary data in a secure database rather than training it into a public model", "By deleting all user prompts", "By using shorter passwords", "By not using the internet"], ans: 0 }
+          ],
+          "IKS": [
+            { q: "Which of the following is a traditional Indian water harvesting structure?", options: ["Aqueduct", "Stepwell (Baoli)", "Desalination Plant", "Hydro-dam"], ans: 1 },
+            { q: "In traditional eco-friendly architecture, what is a courtyard primarily used for?", options: ["Natural Ventilation", "Parking", "Heavy machinery", "Electricity generation"], ans: 0 },
+            { q: "How does traditional Indian agriculture maintain soil health naturally?", options: ["Burning plastic", "Crop rotation and organic manure", "Paving soil", "Synthetic hormones"], ans: 1 },
+            { q: "Which material is used in traditional Indian households for eco-friendly, energy-free water cooling?", options: ["Plastic", "Terracotta (Matka)", "Aluminum", "Glass"], ans: 1 },
+            { q: "What is the primary agricultural use of the traditional Panchang?", options: ["Calculating taxes", "Timing planting based on lunar cycles", "Weighing crops", "Irrigation mapping"], ans: 1 },
+            { q: "Which traditional textile is hand-woven, sustainable, and leaves a minimal carbon footprint?", options: ["Nylon", "Polyester", "Khadi", "Spandex"], ans: 2 },
+            { q: "What natural extract has been used in India for centuries as a safe, biodegradable pesticide?", options: ["DDT", "Neem Oil", "Lead", "Sulfuric Acid"], ans: 1 },
+            { q: "What traditional South Indian community-managed water management system uses cascading tanks?", options: ["Eris", "Aquifers", "Borewells", "Pipelines"], ans: 0 },
+            { q: "What is 'Jeevamrutha' in the context of traditional sustainable farming?", options: ["A synthetic fertilizer", "A natural soil microbiome enhancer", "A type of tractor", "A genetically modified seed"], ans: 1 },
+            { q: "Which metal is traditionally believed to possess antimicrobial properties for storing drinking water?", options: ["Lead", "Copper", "Zinc", "Iron"], ans: 1 },
+            { q: "What is the purpose of traditional mixed cropping?", options: ["To deplete the soil faster", "To reduce biodiversity", "To balance soil nutrients naturally", "To rely heavily on chemical fertilizers"], ans: 2 },
+            { q: "Which architectural system optimizes natural light and wind flow in traditional Indian building design?", options: ["HVAC Systems", "Vastu Shastra", "Brutalism", "Gothic Architecture"], ans: 1 },
+            { q: "What everyday Indian plant is revered for its air-purifying and medicinal properties?", options: ["Poison Ivy", "Tulsi", "Venus Flytrap", "Cactus"], ans: 1 },
+            { q: "What traditional method is used to serve food at large gatherings without generating plastic waste?", options: ["Styrofoam plates", "Banana leaves (Pattal)", "Paper plates", "Foil wrappers"], ans: 1 },
+            { q: "What does Ayurveda primarily emphasize for sustainable human health?", options: ["Reactive surgery", "Preventive care and diet", "Synthetic antibiotics", "Radiation therapy"], ans: 1 },
+            { q: "What traditional farming technique is used in the Himalayas to conserve water and prevent soil erosion?", options: ["Slash and burn", "Terrace farming", "Deep tilling", "Monocropping"], ans: 1 },
+            { q: "Which sustainable building material is historically combined with mud to reinforce traditional Indian walls?", options: ["Asbestos", "Bamboo", "Fiberglass", "Steel rebar"], ans: 1 },
+            { q: "What indigenous practice ensures climate resilience by protecting local crop genetics?", options: ["Desi seed banking", "Importing synthetic seeds", "Genetic cloning", "Irradiation"], ans: 0 },
+            { q: "Which ancient physical practice fosters sustainable living by emphasizing the mind-body-environment connection?", options: ["Weightlifting", "Yoga", "Aerobics", "Pilates"], ans: 1 },
+            { q: "What traditional mixture is used as a sustainable alternative to chemical cement (mortar) in ancient Indian forts?", options: ["Portland Cement", "Surkhi and Lime", "Epoxy", "Polyurethane"], ans: 1 }
+          ]
+        };
+
+        const flashcardDatabase = {
+          "IKS": [
+            { q: "What ancient Indian system focuses on holistic health and preventive care?", a: "Ayurveda" },
+            { q: "What are Baolis and Johads traditionally used for in India?", a: "Rainwater Harvesting and Water Conservation" },
+            { q: "What natural material is traditionally used in Indian architecture for natural cooling?", a: "Terracotta (Mud)" },
+            { q: "What traditional agricultural practice uses the lunar calendar to optimize planting?", a: "Panchang Timing" },
+            { q: "What ancient physical and mental practice promotes harmony between the body and environment?", a: "Yoga" },
+            { q: "What natural, locally available leaf is traditionally used as an eco-friendly biodegradable plate?", a: "Banana Leaf / Pattal" },
+            { q: "Which traditional Indian tree is widely used as a natural biopesticide and antibacterial agent?", a: "Neem" },
+            { q: "What ancient architectural science aligns buildings with natural elements and sun paths?", a: "Vastu Shastra" },
+            { q: "What traditional earthen pot is used to naturally cool drinking water without electricity?", a: "Matka" },
+            { q: "What is the ancient South Indian system of cascading water tanks used for irrigation called?", a: "Ery / Eris System" },
+            { q: "What organic mixture made from cow dung and urine is traditionally used to enrich soil microbiology?", a: "Jeevamrutha" },
+            { q: "What sustainable, hand-spun Indian fabric promotes zero-carbon textile production?", a: "Khadi" },
+            { q: "What traditional construction technique uses mud, lime, and bamboo instead of cement?", a: "Wattle and Daub" },
+            { q: "What metal is traditionally used in Indian households to store and naturally purify water?", a: "Copper" },
+            { q: "What agricultural method involves growing two or more crops together to maintain soil fertility?", a: "Mixed Cropping" },
+            { q: "What traditional practice involves saving indigenous, climate-resilient crop variations?", a: "Desi Seed Preservation" },
+            { q: "What architectural feature is used in traditional Indian homes to maximize natural ventilation?", a: "Central Courtyard" },
+            { q: "Which medicinal plant is commonly kept in Indian courtyards for natural air purification and health?", a: "Tulsi (Holy Basil)" },
+            { q: "What traditional method prevents soil erosion and runoff in hilly Indian regions?", a: "Terrace Farming" },
+            { q: "What foundational concept in Indian philosophy views all living and non-living things as interconnected?", a: "Vasudhaiva Kutumbakam (The world is one family)" }
+          ]
+        };
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM Elements ---
+            const views = {
+                dashboard: document.getElementById('dashboard-view'),
+                revision: document.getElementById('smart-revision-view'),
+                mistake: document.getElementById('mistake-database-view'),
+                evaluator: document.getElementById('answer-evaluator-view'),
+                quiz: document.getElementById('quiz-generator-view'),
+                flashcard: document.getElementById('flashcard-generator-view'),
+                mindmap: document.getElementById('mindmap-generator-view')
+            };
+
+            const navLinks = {
+                dashboard: document.getElementById('nav-dashboard'),
+                revision: document.getElementById('nav-revision'),
+                mistake: document.getElementById('nav-mistake'),
+                evaluator: document.getElementById('nav-evaluator'),
+                quiz: document.getElementById('nav-quiz'),
+                flashcard: document.getElementById('nav-flashcard'),
+                mindmap: document.getElementById('nav-mindmap')
+            };
+
+            const launchRevisionBtn = document.getElementById('launch-revision-btn');
+            const remedialBtn = document.getElementById('btn-generate-remedial');
+            const resolveBtn = document.getElementById('btn-resolve-mistakes');
+            const reviseBtn = document.getElementById('btn-revise-retention');
+
+            // --- UNIFIED STATE ---
+            const state = {
+                topic: '',
+                mode: '', // 'quiz' or 'flashcard'
+                quizData: [],
+                currentIndex: 0,
+                correct: 0,
+                wrong: 0,
+                skipped: 0,
+                isFlipped: false // for flashcards
+            };
+
+            // --- NAVIGATION LOGIC ---
+            const setActiveNav = (selectedId) => {
+                for (const id in navLinks) {
+                    const nav = navLinks[id];
+                    if (nav) {
+                        nav.classList.remove('bg-purple-500/10', 'text-purple-300', 'border', 'border-purple-500/20');
+                        nav.classList.add('text-slate-400', 'hover:bg-slate-800');
+                    }
+                }
+                const activeNav = navLinks[selectedId];
+                if (activeNav) {
+                    activeNav.classList.add('bg-purple-500/10', 'text-purple-300', 'border', 'border-purple-500/20');
+                    activeNav.classList.remove('text-slate-400', 'hover:bg-slate-800');
+                }
+            };
+
+            const showView = (viewId) => {
+                for (const id in views) {
+                    if(views[id]) views[id].classList.add('hidden');
+                }
+                if(views[viewId]) views[viewId].classList.remove('hidden');
+                setActiveNav(viewId);
+            };
+
+            for (const id in navLinks) {
+                 if(navLinks[id]) {
+                    navLinks[id].addEventListener('click', (e) => {
+                        e.preventDefault();
+                        showView(id);
+                        if(id === 'quiz') restartQuiz();
+                        if(id === 'flashcard') {
+                             fg_hideAllSteps();
+                             document.getElementById('fg-step-topic').classList.remove('hidden');
+                        }
+                    });
+                 }
+            }
+
+            if (launchRevisionBtn) {
+                launchRevisionBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    fg_selectTopic('Mitochondria');
+                    fg_start(5);
+                });
+            }
+
+            if (remedialBtn) {
+                remedialBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    state.topic = 'Mitochondria';
+                    startQuiz(5);
+                });
+            }
+
+            if (resolveBtn) {
+                resolveBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showView('mistake');
+                });
+            }
+
+            if (reviseBtn) {
+                reviseBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showView('revision');
+                });
+            }
+            
+            // --- HIDE/SHOW LOGIC ---
+            const hideAllSteps = () => {
+                ['step-topic', 'step-length', 'step-mcq', 'step-results'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.classList.add('hidden');
+                });
+            };
+
+            const fg_hideAllSteps = () => {
+                ['fg-step-topic', 'fg-step-length', 'fg-engine', 'fg-step-results'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.classList.add('hidden');
+                });
+            };
+
+            // --- UNIFIED RESULTS ---
+            const showResults = () => {
+                hideAllSteps();
+                fg_hideAllSteps();
+
+                if (state.mode === 'quiz') {
+                    showView('quiz');
+                    const resultsStep = document.getElementById('step-results');
+                    resultsStep.classList.remove('hidden');
+                    resultsStep.querySelector('h2').innerText = `🎉 ${state.topic} Quiz Completed!`;
+                    document.getElementById('res-correct').innerText = state.correct;
+                    document.getElementById('res-wrong').innerText = state.wrong;
+                    document.getElementById('res-skipped').innerText = state.skipped;
+                } else {
+                    showView('flashcard');
+                    const resultsStep = document.getElementById('fg-step-results');
+                    resultsStep.classList.remove('hidden');
+                    resultsStep.querySelector('h2').innerText = `🎉 ${state.topic} Deck Completed!`;
+                    document.getElementById('fg-res-correct').innerText = state.correct;
+                    document.getElementById('fg-res-wrong').innerText = state.wrong;
+                }
+            };
+
+            // --- GENERATION SIMULATION ---
+            const runGenerationSimulation = (mode) => {
+                for (const id in views) { if(views[id]) views[id].classList.add('hidden'); }
+                document.getElementById('step-generating').classList.remove('hidden');
+
+                const percentageEl = document.getElementById('buffer-percentage');
+                const statusEl = document.getElementById('buffer-status');
+                const progressCircle = document.getElementById('buffer-progress');
+                const circleCircumference = 565.48;
+                let progress = 0;
+
+                const interval = setInterval(() => {
+                    progress++;
+                    const percentage = Math.floor(progress);
+                    percentageEl.textContent = `${percentage}%`;
+                    const offset = circleCircumference * (1 - progress / 100);
+                    progressCircle.style.strokeDashoffset = offset;
+
+                    if (mode === 'quiz') {
+                        if (percentage < 33) statusEl.textContent = "Analyzing curriculum standards...";
+                        else if (percentage < 66) statusEl.textContent = "Compiling distractor options...";
+                        else statusEl.textContent = "Generating adaptive MCQ quiz...";
+                    } else {
+                        if (percentage < 33) statusEl.textContent = "Parsing NCERT structural context...";
+                        else if (percentage < 66) statusEl.textContent = "Extracting mandatory CBSE terminology...";
+                        else statusEl.textContent = "Compiling adaptive NotebookLM flashcards...";
+                    }
+
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        document.getElementById('step-generating').classList.add('hidden');
+                        if (mode === 'quiz') {
+                            showView('quiz');
+                            setTimeout(renderQuestion, 300);
+                        } else {
+                            showView('flashcard');
+                            setTimeout(fg_renderCard, 300);
+                        }
+                    }
+                }, 80);
+            };
+
+            // --- QUIZ LOGIC ---
+            window.selectTopic = (topic) => {
+                state.topic = topic;
+                state.mode = 'quiz';
+                hideAllSteps();
+                document.getElementById('step-length').classList.remove('hidden');
+            };
+
+            window.startQuiz = (length) => {
+                state.quizData = [...quizDatabase[state.topic]].slice(0, length);
+                state.currentIndex = 0;
+                state.correct = 0;
+                state.wrong = 0;
+                state.skipped = 0;
+                runGenerationSimulation('quiz');
+            };
+            
+            const renderQuestion = () => {
+                hideAllSteps();
+                if (state.currentIndex >= state.quizData.length) {
+                    showResults();
+                    return;
+                }
+                
+                document.getElementById('step-mcq').classList.remove('hidden');
+                const q = state.quizData[state.currentIndex];
+                document.getElementById('mcq-counter').innerText = `Question ${state.currentIndex + 1} of ${state.quizData.length}`;
+                document.getElementById('mcq-question').innerText = q.q;
+                const optionsContainer = document.getElementById('mcq-options');
+                optionsContainer.innerHTML = '';
+                
+                q.options.forEach((opt, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = "w-full text-left bg-slate-900/60 border border-slate-800 hover:border-purple-500/50 hover:bg-slate-800/40 rounded-xl p-5 text-slate-300 transition-all duration-200 flex justify-between items-center text-base font-medium shadow-sm active:scale-[0.99]";
+                    btn.innerHTML = `<span>${opt}</span><div class="icon-container flex items-center justify-center"></div>`;
+                    btn.onclick = () => handleMCQClick(btn, idx, q.ans, optionsContainer);
+                    optionsContainer.appendChild(btn);
+                });
+            };
+
+            window.handleMCQClick = (btn, selectedIdx, correctIdx, container) => {
+                Array.from(container.children).forEach(b => { b.onclick = null; });
+
+                const correctIcon = `<svg class="w-5 h-5 text-green-500 flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>`;
+                const incorrectIcon = `<svg class="w-5 h-5 text-red-500 flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+                
+                const clickedIconContainer = btn.querySelector('.icon-container');
+
+                if (selectedIdx === correctIdx) {
+                    state.correct++;
+                    btn.classList.remove('border-slate-800');
+                    btn.classList.add('border-green-500', 'bg-green-950/20', 'text-green-400', 'font-semibold');
+                    if (clickedIconContainer) clickedIconContainer.innerHTML = correctIcon;
+                } else {
+                    state.wrong++;
+                    btn.classList.remove('border-slate-800');
+                    btn.classList.add('border-red-500', 'bg-red-950/20', 'text-red-400', 'font-semibold');
+                    if (clickedIconContainer) clickedIconContainer.innerHTML = incorrectIcon;
+
+                    const correctButton = container.children[correctIdx];
+                    if (correctButton) {
+                        const correctButtonIconContainer = correctButton.querySelector('.icon-container');
+                        correctButton.classList.remove('border-slate-800');
+                        correctButton.classList.add('border-green-500', 'text-green-400');
+                        if (correctButtonIconContainer) correctButtonIconContainer.innerHTML = correctIcon;
+                    }
+                }
+
+                setTimeout(() => {
+                    state.currentIndex++;
+                    renderQuestion();
+                }, 1500);
+            };
+
+            window.skipQuestion = () => {
+                state.skipped++;
+                state.currentIndex++;
+                renderQuestion();
+            };
+
+            window.restartQuiz = () => {
+                hideAllSteps();
+                document.getElementById('step-topic').classList.remove('hidden');
+            }
+            
+            // --- FLASHCARD LOGIC ---
+            window.fg_selectTopic = (topic) => {
+                state.topic = topic;
+                state.mode = 'flashcard';
+                fg_hideAllSteps();
+                document.getElementById('fg-step-length').classList.remove('hidden');
+            };
+
+            window.fg_start = (length) => {
+                const dataSource = (typeof flashcardDatabase !== 'undefined' && flashcardDatabase[state.topic]) 
+                                    ? flashcardDatabase[state.topic] 
+                                    : quizDatabase[state.topic];
+                if (typeof length === 'number') {
+                    state.quizData = [...dataSource].slice(0, length);
+                } else {
+                    state.quizData = [...dataSource];
+                }
+                state.currentIndex = 0;
+                state.correct = 0;
+                state.wrong = 0;
+                state.skipped = 0;
+                runGenerationSimulation('flashcard');
+            };
+
+            const fg_renderCard = () => {
+                fg_hideAllSteps();
+                document.getElementById('fg-engine').classList.remove('hidden');
+                const card = state.quizData[state.currentIndex];
+                state.isFlipped = false;
+                document.getElementById('fg-counter').innerText = `Card ${state.currentIndex + 1} of ${state.quizData.length}`;
+                document.getElementById('fg-progress-bar').style.width = `${((state.currentIndex + 1) / state.quizData.length) * 100}%`;
+                document.getElementById('fg-question').innerText = card.q;
+                document.getElementById('fg-answer').innerText = card.a !== undefined ? card.a : card.options[card.ans];
+                const innerCard = document.getElementById('fg-flashcard-inner');
+                innerCard.style.transform = '';
+                innerCard.classList.remove('border-purple-500');
+                
+                const gradingControls = document.getElementById('fg-grading-controls');
+                if (gradingControls) gradingControls.classList.add('hidden');
+            };
+
+            window.fg_flipCard = () => {
+                state.isFlipped = !state.isFlipped;
+                const innerCard = document.getElementById('fg-flashcard-inner');
+                const gradingControls = document.getElementById('fg-grading-controls');
+                if (state.isFlipped) {
+                    innerCard.style.transform = 'rotateY(180deg)';
+                    innerCard.classList.add('border-purple-500');
+                    if(gradingControls) gradingControls.classList.remove('hidden');
+                } else {
+                    innerCard.style.transform = '';
+                    innerCard.classList.remove('border-purple-500');
+                    if(gradingControls) gradingControls.classList.add('hidden');
+                }
+            };
+
+            window.restartFlashcards = () => {
+                fg_hideAllSteps();
+                document.getElementById('fg-step-topic').classList.remove('hidden');
+            };
+
+            window.gradeCard = (isCorrect) => {
+                if (isCorrect) {
+                    state.correct++;
+                } else {
+                    state.wrong++;
+                }
+                state.currentIndex++;
+
+                if (state.currentIndex >= state.quizData.length) {
+                    showResults();
+                } else {
+                    fg_renderCard();
+                }
+            };
+
+            // --- Evaluator-specific script ---
+            const evaluateButton = document.getElementById('evaluateButton');
+            const answerInput = document.getElementById('answerInput');
+            const buttonText = document.getElementById('button-text');
+            const loader = document.getElementById('loader');
+            const curriculumDisplay = document.getElementById('curriculum-display');
+            const sandboxButtons = document.querySelectorAll('.sandbox-btn');
+            let currentQuestionText = "";
+            const sandboxData = {
+                q1: { slug: 'science-cellular-powerhouse', title: 'Science: Cellular Powerhouse (Mitochondria)', answer: 'The mitochondrion is the powerhouse of the cell. It generates most of the cell\'s ATP, which is used for energy.' },
+                q2: { slug: 'physics-velocity-acceleration', title: 'Class 9 Physics: Velocity & Acceleration', answer: 'Acceleration is how velocity changes over time. It describes how fast an object is speeding up or slowing down.' },
+                q3: { slug: 'cs-what-is-rag', title: 'AI/CS: What is RAG?', answer: 'RAG stands for Retrieval-Augmented Generation. It improves LLM accuracy by fetching relevant documents from a knowledge base to help the model generate a better answer.' }
+            };
+            function handleSandboxClick(event) {
+                const qid = event.currentTarget.dataset.qid;
+                const data = sandboxData[qid];
+                const button = event.currentTarget;
+                sandboxButtons.forEach(btn => btn.classList.remove('active-question-card'));
+                button.classList.add('active-question-card');
+                if (data) {
+                    answerInput.value = data.answer;
+                    const titleEl = button.querySelector('.question-title');
+                    if (titleEl) currentQuestionText = titleEl.innerText;
+                    curriculumDisplay.innerHTML = `Evaluating against curriculum: <span class="font-medium text-purple-400">${data.title}</span>`;
+                }
+            }
+            evaluateButton.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const studentAnswer = answerInput.value || "";
+                evaluateButton.disabled = true;
+                loader.classList.remove('hidden');
+                buttonText.textContent = 'Evaluating...';
+                const benchmarkDisplay = document.getElementById('benchmark-display');
+                const scoreDisplay = document.getElementById('score-display');
+                const missingDisplay = document.getElementById('missing-keywords-display');
+                if (scoreDisplay) scoreDisplay.innerText = "-- / 3";
+                if (benchmarkDisplay) benchmarkDisplay.innerHTML = "Evaluating answer matrix...";
+                if (missingDisplay) missingDisplay.innerHTML = "Analyzing terminology...";
+                await new Promise(resolve => setTimeout(resolve, 6000));
+                let requiredAnswerHTML = "";
+                let missingKeywordsHTML = "";
+                if (currentQuestionText.includes("Velocity") || studentAnswer.toLowerCase().includes("acceleration")) {
+                    requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Acceleration</span> is defined as the <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">rate of change of velocity</span> with respect to time. It is a vector quantity, and its mathematical expression is represented by the formula <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">a = (v - u) / t</span>, where 'v' is final velocity and 'u' is initial velocity. The standard SI unit for this measurement is <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">m/s²</span>.`,
+                    missingKeywordsHTML = `<li class="text-red-400 flex items-center gap-2">❌ Mathematical Formula: a = (v - u) / t</li><li class="text-red-400 flex items-center gap-2">❌ Standard SI Unit: m/s² (meters per second squared)</li>`;
+                } else if (currentQuestionText.includes("RAG") || studentAnswer.toLowerCase().includes("rag")) {
+                     requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Retrieval-Augmented Generation (RAG)</span> is an AI framework that improves Large Language Models. It works by <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">grounding the model</span> on external data sources. Before generating a response, the system <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">retrieves relevant information</span> from a specialized <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">knowledge base</span> (like a vector database), and uses that information as context to create a more accurate and factual answer.`,
+                    missingKeywordsHTML = `<li class="text-red-400 flex items-center gap-2">❌ Information Retrieval</li><li class="text-red-400 flex items-center gap-2">❌ Knowledge Base / Vector DB</li>`;
+                } else {
+                    requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Mitochondria</span> are specialized organelles widely known as the <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">powerhouse of the cell</span>. They are responsible for cellular respiration, where glucose is oxidized to generate energy. This energy is stored inside a crucial molecule called <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">Adenosine Triphosphate (ATP)</span>, which serves as the cellular <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">energy currency</span>.`,
+                    missingKeywordsHTML = `<li class="text-red-400 flex items-center gap-2">❌ Adenosine Triphosphate (ATP)</li><li class="text-red-400 flex items-center gap-2">❌ Energy Currency</li>`;
+                }
+                if (scoreDisplay) scoreDisplay.innerText = "2 / 3";
+                if (benchmarkDisplay) benchmarkDisplay.innerHTML = requiredAnswerHTML;
+                if (missingDisplay) missingDisplay.innerHTML = `<ul class="space-y-2 text-sm mt-2">${missingKeywordsHTML}</ul>`;
+                evaluateButton.disabled = false;
+                loader.classList.add('hidden');
+                buttonText.textContent = 'Verify Answer Script';
+            });
+            sandboxButtons.forEach(btn => btn.addEventListener('click', handleSandboxClick));
+
+            // --- MISTAKE DATABASE FILTER LOGIC ---
+            const filter = document.getElementById('subject-filter');
+            const container = document.getElementById('mistake-cards-container');
+            
+            if (filter && container) {
+                filter.addEventListener('change', (e) => {
+                const selectedSubject = e.target.value;
+                const cards = container.querySelectorAll('[data-subject]');
+                
+                cards.forEach(card => {
+                    if (selectedSubject === 'All Subjects' || card.getAttribute('data-subject') === selectedSubject) {
+                    card.style.display = 'block';
+                    } else {
+                    card.style.display = 'none';
+                    }
+                });
+                });
+            }
+
+             // --- INITIALIZATION ---
+            const firstSandboxBtn = document.querySelector('#answer-evaluator-view .sandbox-btn');
+            if(firstSandboxBtn) {
+                firstSandboxBtn.click();
+            }
+            showView('dashboard'); // Set default view to dashboard
+
+            // --- MIND MAP GENERATOR LOGIC ---
+            const mindmapSvg = document.getElementById('mindmap-svg');
+            const mindmapEmpty = document.getElementById('mindmap-empty-state');
+            const mindmapLoading = document.getElementById('mindmap-loading');
+            const mindmapLoadingText = document.getElementById('mindmap-loading-text');
+            const mmSandboxCards = document.querySelectorAll('.mm-sandbox-card');
+
+            // Pan & Zoom state
+            let transformState = { x: 0, y: 0, scale: 1 };
+            let isDragging = false;
+            let startDrag = { x: 0, y: 0 };
+            let expandedBranches = {};
+
+            // Attach mouse events once
+            mindmapSvg.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startDrag = { x: e.clientX - transformState.x, y: e.clientY - transformState.y };
+                mindmapSvg.style.cursor = 'grabbing';
+            });
+            mindmapSvg.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                transformState.x = e.clientX - startDrag.x;
+                transformState.y = e.clientY - startDrag.y;
+                const g = document.getElementById('mindmap-transform-group');
+                if (g) g.setAttribute('transform', `translate(${transformState.x}, ${transformState.y}) scale(${transformState.scale})`);
+            });
+            mindmapSvg.addEventListener('mouseup', () => {
+                isDragging = false;
+                mindmapSvg.style.cursor = 'grab';
+            });
+            mindmapSvg.addEventListener('mouseleave', () => {
+                isDragging = false;
+                mindmapSvg.style.cursor = 'grab';
+            });
+            mindmapSvg.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const zoomIntensity = 0.1;
+                const wheel = e.deltaY < 0 ? 1 : -1;
+                const zoom = Math.exp(wheel * zoomIntensity);
+                
+                const rect = mindmapSvg.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                
+                transformState.x = mouseX - (mouseX - transformState.x) * zoom;
+                transformState.y = mouseY - (mouseY - transformState.y) * zoom;
+                transformState.scale *= zoom;
+                transformState.scale = Math.min(Math.max(transformState.scale, 0.3), 3);
+                
+                const g = document.getElementById('mindmap-transform-group');
+                if (g) g.setAttribute('transform', `translate(${transformState.x}, ${transformState.y}) scale(${transformState.scale})`);
+            }, { passive: false });
+            mindmapSvg.style.cursor = 'grab';
+
+            const mindmapData = {
+                'Mitochondria': {
+                    center: 'Mitochondria',
+                    branches: [
+                        { label: 'Structure', children: ['Outer Membrane', 'Inner Membrane', 'Matrix', 'Cristae', 'Porins', 'Intermembrane Space', 'Ribosomes'] },
+                        { label: 'Function', children: ['ATP Production', 'Cellular Respiration', 'Heat Production', 'Calcium Storage', 'Lipid Synthesis', 'ROS Regulation', 'Apoptosis Initiation'] },
+                        { label: 'Genetics', children: ['mtDNA (Circular)', 'Maternal Inheritance', 'Self-Replicating', 'No Histones', 'High Mutation Rate', 'Endosymbiotic Theory', '37 Human Genes'] },
+                        { label: 'Metabolism', children: ['Krebs Cycle', 'Electron Transport Chain', 'Oxidative Phosphorylation', 'Beta-Oxidation', 'Pyruvate Dehydrogenase', 'Enzyme Catalysis', 'Proton Gradient'] }
+                    ]
+                },
+                'Acceleration': {
+                    center: 'Acceleration',
+                    branches: [
+                        { label: 'Core Concepts', children: ['Rate of Velocity Change', 'Vector Quantity', 'SI Unit (m/s²)', 'Magnitude', 'Direction', 'Instantaneous Accel.', 'Average Accel.'] },
+                        { label: 'Formulas', children: ['a = (v-u)/t', 'F = ma', 'v² = u² + 2as', 's = ut + 1/2at²', 'a = dv/dt', 'Centripetal (v²/r)', 'Gravitational (g)'] },
+                        { label: 'Types of Motion', children: ['Uniform', 'Non-Uniform', 'Retardation', 'Free Fall', 'Projectile Motion', 'Circular Motion', 'Simple Harmonic'] },
+                        { label: 'Graphical Analysis', children: ['Slope of v-t graph', 'Area under a-t graph', 'Positive Slope (Speeding up)', 'Negative Slope (Slowing down)', 'Zero Slope (Constant V)', 'Tangent of s-t curve', 'Inflection Points'] }
+                    ]
+                },
+                'RAG AI': {
+                    center: 'RAG Pipeline',
+                    branches: [
+                        { label: 'Ingestion', children: ['Document Parsing', 'Chunking Strategies', 'Tokenization', 'Data Cleaning', 'PDF Extraction', 'HTML Scraping', 'OCR Integration'] },
+                        { label: 'Vector Storage', children: ['Vector Databases', 'Embeddings Generation', 'Index Management', 'Metadata Filtering', 'HNSW Algorithm', 'High Dimensionality', 'ANN Search'] },
+                        { label: 'Retrieval', children: ['Semantic Search', 'Cosine Similarity', 'Hybrid Search', 'Keyword Matching', 'Re-ranking', 'Context Window Limits', 'Cross-Encoders'] },
+                        { label: 'Generation', children: ['Prompt Augmentation', 'Hallucination Reduction', 'Few-Shot Prompting', 'Instruction Tuning', 'Response Formatting', 'Source Citation', 'Grounded Generation'] }
+                    ]
+                },
+                'IKS': {
+                    center: 'Indian Knowledge Systems',
+                    branches: [
+                        { label: 'Agriculture', children: ['Organic Farming', 'Crop Rotation', 'Panchang Timing', 'Natural Pest Control', 'Seed Preservation', 'Mixed Cropping', 'Soil Health'] },
+                        { label: 'Water Management', children: ['Rainwater Harvesting', 'Stepwells (Baolis)', 'Johads', 'Check Dams', 'Aquifer Recharge', 'Canal Irrigation', 'Terrace Farming'] },
+                        { label: 'Eco-Architecture', children: ['Terracotta Cooling', 'Courtyard Planning', 'Sun-Path Alignment', 'Mud & Bamboo Walls', 'Natural Ventilation', 'Lime Mortar', 'Vastu Principles'] },
+                        { label: 'Holistic Health', children: ['Ayurveda', 'Herbal Medicine', 'Dietary Balance', 'Yoga & Asanas', 'Seasonal Routines', 'Mind-Body Harmony', 'Immunity Boosting'] }
+                    ]
+                }
+            };
+
+            const nodeColors = [
+                { bg: '#7c3aed', border: '#8b5cf6', text: '#f3f3f4', leafBg: 'rgba(124, 58, 237, 0.15)', leafText: '#ddd6fe' },  // purple
+                { bg: '#0ea5e9', border: '#38bdf8', text: '#f3f3f4', leafBg: 'rgba(14, 165, 233, 0.15)', leafText: '#bae6fd' },  // sky
+                { bg: '#10b981', border: '#34d399', text: '#f3f3f4', leafBg: 'rgba(16, 185, 129, 0.15)', leafText: '#a7f3d0' },  // emerald
+                { bg: '#f59e0b', border: '#fbbf24', text: '#1a1a1a', leafBg: 'rgba(245, 158, 11, 0.15)', leafText: '#fde68a' }   // amber
+            ];
+
+            const renderMindMap = (topic) => {
+                const data = mindmapData[topic];
+                if (!data) return;
+                const centerLabel = data.center;
+                const branches = data.branches;
+                mindmapSvg.innerHTML = '';
+
+                const cx = 500, cy = 300;
+                const branchRadius = 260;
+                const leafRadius = 180;
+                const angleStep = (2 * Math.PI) / branches.length;
+                const startAngle = -Math.PI / 2;
+
+                const transformGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                transformGroup.id = 'mindmap-transform-group';
+                transformGroup.setAttribute('transform', `translate(${transformState.x}, ${transformState.y}) scale(${transformState.scale})`);
+
+                // Defs for glow filters
+                const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+                defs.innerHTML = `
+                    <filter id="glow-purple" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="6" result="blur"/>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <filter id="glow-soft" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3" result="blur"/>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                `;
+                transformGroup.appendChild(defs);
+
+                let animDelay = 0;
+
+                // Draw branches
+                branches.forEach((branch, i) => {
+                    const angle = startAngle + i * angleStep;
+                    const bx = cx + branchRadius * Math.cos(angle);
+                    const by = cy + branchRadius * Math.sin(angle);
+                    const color = nodeColors[i % nodeColors.length];
+
+                    // Line: center -> branch
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+                    line.setAttribute('x2', bx); line.setAttribute('y2', by);
+                    line.setAttribute('stroke', color.border);
+                    line.setAttribute('stroke-width', '2.5');
+                    line.setAttribute('stroke-opacity', '0.35');
+                    line.style.opacity = '0';
+                    line.style.animation = `mmFadeIn 0.4s ease ${animDelay}s forwards`;
+                    transformGroup.appendChild(line);
+
+                    // Branch node
+                    const branchGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                    branchGroup.style.opacity = '0';
+                    branchGroup.style.animation = `mmFadeIn 0.4s ease ${animDelay + 0.15}s forwards`;
+                    branchGroup.style.cursor = 'default';
+
+                    const branchTextLen = branch.label.length * 8 + 36;
+                    const branchRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    branchRect.setAttribute('x', bx - branchTextLen / 2);
+                    branchRect.setAttribute('y', by - 18);
+                    branchRect.setAttribute('width', branchTextLen);
+                    branchRect.setAttribute('height', 36);
+                    branchRect.setAttribute('rx', 18);
+                    branchRect.setAttribute('fill', color.bg);
+                    branchRect.setAttribute('stroke', color.border);
+                    branchRect.setAttribute('stroke-width', '1.5');
+                    branchRect.setAttribute('filter', 'url(#glow-soft)');
+                    branchGroup.appendChild(branchRect);
+
+                    const branchText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    branchText.setAttribute('x', bx);
+                    branchText.setAttribute('y', by + 5);
+                    branchText.setAttribute('text-anchor', 'middle');
+                    branchText.setAttribute('fill', color.text);
+                    branchText.setAttribute('font-size', '13');
+                    branchText.setAttribute('font-weight', '600');
+                    branchText.setAttribute('font-family', 'Plus Jakarta Sans, sans-serif');
+                    branchText.textContent = branch.label;
+                    branchGroup.appendChild(branchText);
+
+                    transformGroup.appendChild(branchGroup);
+
+                    // Always Render Sub-branches
+                    const leaves = branch.children;
+                    const arcSpread = Math.PI * 0.9; // 162 degrees spread
+                    const baseLeafAngle = angle - (arcSpread / 2);
+                    const leafAngleSpread = leaves.length > 1 ? arcSpread / (leaves.length - 1) : 0;
+
+                    leaves.forEach((leaf, j) => {
+                        const la = baseLeafAngle + j * leafAngleSpread;
+                        const lx = bx + leafRadius * Math.cos(la);
+                        const ly = by + leafRadius * Math.sin(la);
+
+                        // Line: branch -> leaf
+                        const leafLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        leafLine.setAttribute('x1', bx); leafLine.setAttribute('y1', by);
+                        leafLine.setAttribute('x2', lx); leafLine.setAttribute('y2', ly);
+                        leafLine.setAttribute('stroke', color.border);
+                        leafLine.setAttribute('stroke-width', '1.5');
+                        leafLine.setAttribute('stroke-opacity', '0.4');
+                        leafLine.setAttribute('stroke-dasharray', '4 3');
+                        leafLine.style.opacity = '0';
+                        leafLine.style.animation = `mmFadeIn 0.2s ease ${j * 0.04}s forwards`;
+                        transformGroup.appendChild(leafLine);
+
+                        // Leaf node
+                        const leafGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                        leafGroup.style.opacity = '0';
+                        leafGroup.style.animation = `mmFadeIn 0.2s ease ${0.1 + j * 0.04}s forwards`;
+                        leafGroup.style.cursor = 'default';
+
+                        const leafTextLen = leaf.length * 7 + 28;
+                        const leafRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                        leafRect.setAttribute('x', lx - leafTextLen / 2);
+                        leafRect.setAttribute('y', ly - 14);
+                        leafRect.setAttribute('width', leafTextLen);
+                        leafRect.setAttribute('height', 28);
+                        leafRect.setAttribute('rx', 14);
+                        leafRect.setAttribute('fill', color.leafBg);
+                        leafRect.setAttribute('stroke', color.border);
+                        leafRect.setAttribute('stroke-width', '1');
+                        leafGroup.appendChild(leafRect);
+
+                        const leafText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                        leafText.setAttribute('x', lx);
+                        leafText.setAttribute('y', ly + 4);
+                        leafText.setAttribute('text-anchor', 'middle');
+                        leafText.setAttribute('fill', color.leafText);
+                        leafText.setAttribute('font-size', '11');
+                        leafText.setAttribute('font-weight', '500');
+                        leafText.setAttribute('font-family', 'Plus Jakarta Sans, sans-serif');
+                        leafText.textContent = leaf;
+                        leafGroup.appendChild(leafText);
+
+                        // Hover interaction
+                        leafGroup.addEventListener('mouseenter', () => {
+                            leafRect.setAttribute('stroke-width', '2');
+                            leafRect.setAttribute('fill', color.bg);
+                            leafText.setAttribute('fill', color.text);
+                        });
+                        leafGroup.addEventListener('mouseleave', () => {
+                            leafRect.setAttribute('stroke-width', '1');
+                            leafRect.setAttribute('fill', color.leafBg);
+                            leafText.setAttribute('fill', color.leafText);
+                        });
+
+                        transformGroup.appendChild(leafGroup);
+                    });
+
+                    animDelay += 0.25;
+                });
+
+                // Center node (rendered last so it's on top)
+                const centerGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                centerGroup.style.opacity = '0';
+                centerGroup.style.animation = 'mmFadeIn 0.5s ease 0s forwards';
+
+                const centerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                centerCircle.setAttribute('cx', cx);
+                centerCircle.setAttribute('cy', cy);
+                centerCircle.setAttribute('r', 56);
+                centerCircle.setAttribute('fill', '#7c3aed');
+                centerCircle.setAttribute('stroke', '#a78bfa');
+                centerCircle.setAttribute('stroke-width', '2.5');
+                centerCircle.setAttribute('filter', 'url(#glow-purple)');
+                centerGroup.appendChild(centerCircle);
+
+                // Multi-line center label for long text
+                const words = centerLabel.split(' ');
+                let lines = [];
+                let currentLine = '';
+                words.forEach(w => {
+                    if ((currentLine + ' ' + w).trim().length > 16) {
+                        if (currentLine) lines.push(currentLine.trim());
+                        currentLine = w;
+                    } else {
+                        currentLine = (currentLine + ' ' + w).trim();
+                    }
+                });
+                if (currentLine) lines.push(currentLine.trim());
+
+                const lineHeight = 17;
+                const startY = cy - ((lines.length - 1) * lineHeight) / 2 + 5;
+                lines.forEach((ln, idx) => {
+                    const centerText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    centerText.setAttribute('x', cx);
+                    centerText.setAttribute('y', startY + idx * lineHeight);
+                    centerText.setAttribute('text-anchor', 'middle');
+                    centerText.setAttribute('fill', '#f3f3f4');
+                    centerText.setAttribute('font-size', '13');
+                    centerText.setAttribute('font-weight', '700');
+                    centerText.setAttribute('font-family', 'Plus Jakarta Sans, sans-serif');
+                    centerText.textContent = ln;
+                    centerGroup.appendChild(centerText);
+                });
+
+                transformGroup.appendChild(centerGroup);
+                mindmapSvg.appendChild(transformGroup);
+            };
+
+            // Shared generation trigger
+            const triggerMindMap = (topic) => {
+                mindmapEmpty.classList.add('hidden');
+                mindmapSvg.classList.add('hidden');
+                mindmapLoading.classList.remove('hidden');
+
+                // reset pan/zoom state and expanded branches on new topic
+                transformState = { x: 0, y: 0, scale: 1 };
+                expandedBranches = {};
+
+                const loadingSteps = [
+                    'Analyzing concept structure...',
+                    'Extracting NCERT relationships...',
+                    'Building node hierarchy...',
+                    'Rendering interactive map...'
+                ];
+                let step = 0;
+                const loadingInterval = setInterval(() => {
+                    step++;
+                    if (step < loadingSteps.length) {
+                        mindmapLoadingText.textContent = loadingSteps[step];
+                    }
+                }, 500);
+
+                setTimeout(() => {
+                    clearInterval(loadingInterval);
+                    mindmapLoading.classList.add('hidden');
+                    mindmapSvg.classList.remove('hidden');
+                    renderMindMap(topic);
+                }, 2200);
+            };
+
+            // Set active card styling
+            const setActiveCard = (activeTopic) => {
+                mmSandboxCards.forEach(card => {
+                    if (card.getAttribute('data-topic') === activeTopic) {
+                        card.classList.remove('bg-slate-900/40', 'border-slate-800');
+                        card.classList.add('bg-purple-500/10', 'border-purple-500/40', 'shadow-lg', 'shadow-purple-900/20');
+                    } else {
+                        card.classList.remove('bg-purple-500/10', 'border-purple-500/40', 'shadow-lg', 'shadow-purple-900/20');
+                        card.classList.add('bg-slate-900/40', 'border-slate-800');
+                    }
+                });
+            };
+
+            // Sandbox card click handler
+            window.mmSandbox = (topic) => {
+                setActiveCard(topic);
+                triggerMindMap(topic);
+            };
+
+            // --- Mistake Database JS Logic ---
+            const tabPersonal = document.getElementById('tab-personal-mistakes');
+            const tabCommon = document.getElementById('tab-common-mistakes');
+            const contentPersonal = document.getElementById('personal-mistakes-content');
+            const contentCommon = document.getElementById('common-mistakes-content');
+
+            if (tabPersonal && tabCommon) {
+                tabPersonal.addEventListener('click', () => {
+                    tabPersonal.className = "px-4 py-2 text-sm font-semibold rounded-lg bg-slate-800 text-white transition-colors";
+                    tabCommon.className = "px-4 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-colors";
+                    contentPersonal.classList.remove('hidden');
+                    contentCommon.classList.add('hidden');
+                });
+                tabCommon.addEventListener('click', () => {
+                    tabCommon.className = "px-4 py-2 text-sm font-semibold rounded-lg bg-slate-800 text-white transition-colors";
+                    tabPersonal.className = "px-4 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-colors";
+                    contentCommon.classList.remove('hidden');
+                    contentPersonal.classList.add('hidden');
+                });
+            }
+
+            const commonMistakesData = [
+                { subject: "Biology", topic: "Mitochondria", issue: "Confusing the inner membrane (cristae) with the outer membrane.", freq: "High (68% of students)" },
+                { subject: "Physics", topic: "Acceleration", issue: "Forgetting that acceleration is a vector quantity and requires a direction.", freq: "Very High (75% of students)" },
+                { subject: "AI", topic: "RAG AI", issue: "Misunderstanding the difference between Context Retrieval and Document Generation.", freq: "Medium (45% of students)" },
+                { subject: "IKS Sustainability", topic: "Traditional Water Management", issue: "Confusing the purpose of ancient Stepwells (Baolis) with modern hydro-dams.", freq: "High (62% of students)" }
+            ];
+
+            const cmContainer = document.getElementById('common-mistakes-container');
+            const renderCommonMistakes = (filterSubject = 'All') => {
+                if(!cmContainer) return;
+                cmContainer.innerHTML = '';
+                const filtered = commonMistakesData.filter(m => filterSubject === 'All' || m.subject === filterSubject || filterSubject === 'All Subjects');
+                
+                filtered.forEach(m => {
+                    const card = document.createElement('div');
+                    card.className = "bg-slate-900/50 border border-amber-500/30 rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg hover:border-amber-500/50 transition-all duration-300";
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="bg-amber-500/10 text-amber-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-amber-500/20 font-semibold">${m.subject} - ${m.topic}</span>
+                                <p class="text-slate-300 mt-3 font-medium">${m.issue}</p>
+                            </div>
+                            <span class="text-amber-400 font-bold text-sm bg-amber-500/10 px-3 py-1 rounded-full whitespace-nowrap">Freq: ${m.freq}</span>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-700/50 flex gap-4">
+                            <button onclick="takeRemedialQuiz('${m.topic}')" class="text-sm font-bold text-white bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-colors flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Take Quiz
+                            </button>
+                        </div>
+                    `;
+                    cmContainer.appendChild(card);
+                });
+            };
+
+            const cmFilters = document.querySelectorAll('.cm-filter-btn');
+            cmFilters.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    cmFilters.forEach(b => {
+                        b.className = "cm-filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-slate-900/50 text-slate-400 hover:text-slate-200 border border-slate-800 hover:border-slate-700 transition-colors";
+                    });
+                    e.currentTarget.className = "cm-filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-slate-800 text-white border border-slate-700 transition-colors";
+                    renderCommonMistakes(e.currentTarget.dataset.filter);
+                });
+            });
+
+            if(cmContainer) {
+                renderCommonMistakes();
+            }
+
+            window.takeRemedialQuiz = (topic) => {
+                let mappedTopic = topic;
+                if (topic === "RAG AI") mappedTopic = "RAG";
+                if (topic === "Traditional Water Management") mappedTopic = "IKS";
+
+                state.topic = mappedTopic;
+                state.mode = 'quiz';
+                
+                showView('quiz');
+                
+                startQuiz(5);
+            };
+        });
+
+    </script>
+    <style>
+        @keyframes mmFadeIn {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</body>
+</html>
