@@ -2,11 +2,9 @@
 /**
  * AuthForm.astro
  * ──────────────
- * Self-contained authentication card with Login / Sign-Up toggle,
- * Google OAuth button, email + password inputs, and a 6-digit OTP
- * verification flow — all driven by vanilla JavaScript.
+ * Dual-view authentication card with Sign-Up (default) and Login.
  *
- * Dark theme · Tailwind CSS · Zero framework dependencies.
+ * Dark theme · Tailwind CSS
  */
 ---
 
@@ -15,131 +13,115 @@
     id="auth-card"
     class="w-full max-w-md rounded-2xl border border-[#2e2e2e] bg-[#1c1c1c] px-8 py-10 shadow-2xl shadow-black/40"
   >
-    <!-- ────────── Header ────────── -->
-    <div class="mb-8 text-center">
-      <h1
-        id="auth-title"
-        class="text-3xl font-bold tracking-tight text-white"
-      >
-        Login
-      </h1>
-      <p class="mt-2 text-sm text-gray-400 leading-relaxed">
-        Create notes in minutes. Free forever. No credit card required.
+
+    <!-- SIGN UP VIEW (Default) -->
+    <div id="signup-view" class="flex flex-col">
+      <div class="mb-8 text-center">
+        <h1 class="text-3xl font-bold tracking-tight text-white">Sign Up</h1>
+        <p class="mt-2 text-sm text-gray-400 leading-relaxed">
+          Create notes in minutes. Free forever. No credit card required.
+        </p>
+      </div>
+
+      <form id="signup-form" class="space-y-5" novalidate>
+        <!-- Google OAuth -->
+        <button
+          type="button"
+          class="google-auth-trigger relative z-10 flex w-full items-center justify-center rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-[#2e2e2e] hover:border-[#3e3e3e] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/50 cursor-pointer"
+        >
+          <!-- Standard Google "G" icon -->
+          <svg class="w-5 h-5 mr-3 shrink-0" viewBox="0 0 48 48" aria-hidden="true">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.1 24.1 0 0 0 0 21.56l7.98-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <!-- Divider -->
+        <div class="relative flex items-center py-1">
+          <div class="flex-grow border-t border-[#2e2e2e]"></div>
+          <span class="mx-4 shrink-0 text-xs font-medium uppercase tracking-wider text-gray-500">or</span>
+          <div class="flex-grow border-t border-[#2e2e2e]"></div>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block mb-1.5 text-sm font-medium text-gray-300">Email</label>
+            <input type="email" placeholder="you@example.com" required class="w-full rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm text-white placeholder-gray-500 transition-all duration-200 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30" />
+          </div>
+          <div>
+            <label class="block mb-1.5 text-sm font-medium text-gray-300">Password</label>
+            <input type="password" placeholder="••••••••" required class="w-full rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm text-white placeholder-gray-500 transition-all duration-200 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30" />
+          </div>
+        </div>
+        <button type="submit" class="w-full rounded-lg bg-[#8b5cf6] px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#7c3aed] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/50 focus:ring-offset-2 focus:ring-offset-[#1c1c1c] cursor-pointer">
+          Create an account
+        </button>
+      </form>
+      
+      <p class="mt-8 text-center text-sm text-gray-400">
+        Already have an account?
+        <button type="button" class="toggle-to-login font-medium text-[#8b5cf6] hover:text-[#a78bfa] transition-colors cursor-pointer">Login</button>
       </p>
     </div>
 
-    <form id="auth-form" class="space-y-5" novalidate>
-      <!-- ────────── Google OAuth ────────── -->
-      <button
-        type="button"
-        class="google-auth-trigger relative z-10 flex w-full items-center justify-center rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-[#2e2e2e] hover:border-[#3e3e3e] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/50 cursor-pointer"
-      >
-        <!-- Standard Google "G" icon -->
-        <svg class="w-5 h-5 mr-3 shrink-0" viewBox="0 0 48 48" aria-hidden="true">
-          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-          <path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.1 24.1 0 0 0 0 21.56l7.98-6.19z"/>
-          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-        </svg>
-        Continue with Google
-      </button>
-
-      <!-- ────────── Divider ────────── -->
-      <div id="divider" class="relative flex items-center py-1">
-        <div class="flex-grow border-t border-[#2e2e2e]"></div>
-        <span class="mx-4 shrink-0 text-xs font-medium uppercase tracking-wider text-gray-500">
-          or
-        </span>
-        <div class="flex-grow border-t border-[#2e2e2e]"></div>
+    <!-- LOGIN VIEW (Hidden) -->
+    <div id="login-view" class="hidden flex flex-col">
+      <div class="mb-8 text-center">
+        <h1 class="text-3xl font-bold tracking-tight text-white">Login</h1>
+        <p class="mt-2 text-sm text-gray-400 leading-relaxed">
+          Welcome back.
+        </p>
       </div>
 
-      <!-- ────────── Base-View Inputs (email + password) ────────── -->
-      <div id="base-view" class="space-y-4">
-        <!-- Email -->
-        <div>
-          <label for="auth-email" class="block mb-1.5 text-sm font-medium text-gray-300">
-            Email
-          </label>
-          <input
-            id="auth-email"
-            type="email"
-            placeholder="you@example.com"
-            required
-            class="w-full rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm text-white placeholder-gray-500 transition-all duration-200 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30"
-          />
+      <form id="login-form" class="space-y-5" novalidate>
+        <!-- Google OAuth -->
+        <button
+          type="button"
+          class="google-auth-trigger relative z-10 flex w-full items-center justify-center rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-[#2e2e2e] hover:border-[#3e3e3e] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/50 cursor-pointer"
+        >
+          <!-- Standard Google "G" icon -->
+          <svg class="w-5 h-5 mr-3 shrink-0" viewBox="0 0 48 48" aria-hidden="true">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.1 24.1 0 0 0 0 21.56l7.98-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <!-- Divider -->
+        <div class="relative flex items-center py-1">
+          <div class="flex-grow border-t border-[#2e2e2e]"></div>
+          <span class="mx-4 shrink-0 text-xs font-medium uppercase tracking-wider text-gray-500">or</span>
+          <div class="flex-grow border-t border-[#2e2e2e]"></div>
         </div>
 
-        <!-- Forgot password link -->
-        <div id="forgot-pw" class="flex justify-end">
-          <button
-            type="button"
-            class="text-xs text-[#8b5cf6] hover:text-[#a78bfa] transition-colors cursor-pointer"
-          >
-            Forgot password?
-          </button>
+        <div class="space-y-4">
+          <div>
+            <label class="block mb-1.5 text-sm font-medium text-gray-300">Email</label>
+            <input type="email" placeholder="you@example.com" required class="w-full rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm text-white placeholder-gray-500 transition-all duration-200 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30" />
+          </div>
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <label class="block text-sm font-medium text-gray-300">Password</label>
+              <button type="button" class="text-xs text-[#8b5cf6] hover:text-[#a78bfa] transition-colors cursor-pointer">Forgot password?</button>
+            </div>
+            <input type="password" placeholder="••••••••" required class="w-full rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm text-white placeholder-gray-500 transition-all duration-200 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30" />
+          </div>
         </div>
+        <button type="submit" class="w-full rounded-lg bg-[#8b5cf6] px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#7c3aed] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/50 focus:ring-offset-2 focus:ring-offset-[#1c1c1c] cursor-pointer">
+          Login
+        </button>
+      </form>
 
-        <!-- Password -->
-        <div>
-          <label for="auth-password" class="block mb-1.5 text-sm font-medium text-gray-300">
-            Password
-          </label>
-          <input
-            id="auth-password"
-            type="password"
-            placeholder="••••••••"
-            required
-            class="w-full rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-sm text-white placeholder-gray-500 transition-all duration-200 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30"
-          />
-        </div>
-      </div>
-
-      <!-- ────────── OTP Input (hidden by default) ────────── -->
-      <div id="otp-view" class="hidden space-y-2">
-        <label for="otp-input" class="block text-sm font-medium text-gray-300">
-          Enter the 6-digit code sent to your email
-        </label>
-        <input
-          id="otp-input"
-          type="text"
-          inputmode="numeric"
-          maxlength="6"
-          placeholder="000000"
-          required
-          class="w-full rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-center text-2xl font-mono tracking-[0.5em] text-white placeholder-gray-600 transition-all duration-200 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30"
-        />
-      </div>
-
-      <!-- ────────── Submit Button ────────── -->
-      <button
-        type="submit"
-        id="verify-btn"
-        class="w-full rounded-lg bg-[#8b5cf6] px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#7c3aed] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/50 focus:ring-offset-2 focus:ring-offset-[#1c1c1c] cursor-pointer"
-      >
-        Login
-      </button>
-
-      <!-- ────────── Back button (OTP only) ────────── -->
-      <button
-        type="button"
-        id="back-btn"
-        class="hidden mx-auto flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-      >
-        &larr; Back
-      </button>
-    </form>
-
-    <!-- ────────── Footer: mode toggle ────────── -->
-    <p id="toggle-footer" class="mt-8 text-center text-sm text-gray-400">
-      Don't have an account?
-      <button
-        type="button"
-        id="toggle-btn"
-        class="font-medium text-[#8b5cf6] hover:text-[#a78bfa] transition-colors cursor-pointer"
-      >
-        Sign up
-      </button>
-    </p>
+      <p class="mt-8 text-center text-sm text-gray-400">
+        Don't have an account?
+        <button type="button" class="toggle-to-signup font-medium text-[#8b5cf6] hover:text-[#a78bfa] transition-colors cursor-pointer">Sign up</button>
+      </p>
+    </div>
 
     <!-- ────────── Terms / Privacy ────────── -->
     <p class="mt-6 text-center text-[11px] leading-relaxed text-gray-600">
@@ -151,197 +133,93 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     Vanilla JavaScript — all interactivity handled here
-     ═══════════════════════════════════════════════════════════════ -->
 <script>
   import { createClient } from '@supabase/supabase-js';
 
-  // ── Supabase client ───────────────────────────────────────────
   const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-  // ── DOM references ──────────────────────────────────────────
-  const title       = document.getElementById("auth-title");
-  const authForms   = document.querySelectorAll('form');
-  const googleBtns  = document.querySelectorAll('.google-auth-trigger');
-  const divider     = document.getElementById("divider");
-  const baseView    = document.getElementById("base-view");
-  const forgotPw    = document.getElementById("forgot-pw");
-  const otpView     = document.getElementById("otp-view");
-  const otpInput    = document.querySelector('#otp-input');
-  const emailInput  = document.querySelector('input[type="email"]');
-  const submitBtn   = document.getElementById("verify-btn");
-  const backBtn     = document.getElementById("back-btn");
-  const toggleFooter = document.getElementById("toggle-footer");
-  const toggleBtn   = document.getElementById("toggle-btn");
-
-  // ── State ───────────────────────────────────────────────────
-  let isLogin = true;
-  let showOtp = false;
-
-  // ── Helpers ─────────────────────────────────────────────────
-  /** Show or hide an element by toggling the `hidden` class. */
-  function setVisible(el, visible) {
-    if (visible) {
-      el.classList.remove("hidden");
-    } else {
-      el.classList.add("hidden");
-    }
-  }
-
-  /** Render the UI to reflect the current state flags. */
-  function render() {
-    // Header
-    title.textContent = isLogin ? "Login" : "Sign Up";
-
-    // Base view vs OTP view
-    setVisible(googleBtns[0], !showOtp);
-    setVisible(divider,   !showOtp);
-    setVisible(baseView,  !showOtp);
-    setVisible(otpView,    showOtp);
-    setVisible(backBtn,    showOtp);
-
-    // "Forgot password?" only in Login mode (and not during OTP)
-    setVisible(forgotPw, isLogin && !showOtp);
-
-    // Footer toggle (hidden during OTP)
-    setVisible(toggleFooter, !showOtp);
-
-    // Submit button label
-    if (showOtp) {
-      submitBtn.textContent = "Verify OTP";
-    } else {
-      submitBtn.textContent = isLogin ? "Login" : "Create an account";
-    }
-
-    // Footer text
-    if (isLogin) {
-      toggleFooter.firstChild.textContent = "Don't have an account? ";
-      toggleBtn.textContent = "Sign up";
-    } else {
-      toggleFooter.firstChild.textContent = "Already have an account? ";
-      toggleBtn.textContent = "Login";
-    }
-  }
-
-  // ── Event: Login ↔ Sign Up toggle ──────────────────────────
-  toggleBtn.addEventListener("click", () => {
-    isLogin = !isLogin;
-    showOtp = false;
-    render();
+  // --- TOGGLE LOGIC ---
+  const signupView = document.getElementById('signup-view');
+  const loginView = document.getElementById('login-view');
+  
+  document.querySelectorAll('.toggle-to-login').forEach(btn => {
+    btn.addEventListener('click', () => {
+      signupView.classList.add('hidden');
+      loginView.classList.remove('hidden');
+    });
   });
 
-  // ── Event: Google OAuth Login ─────────────────────────────
-  if (googleBtns.length === 0) {
-    console.error("CRITICAL: Could not find any buttons with the class .google-auth-trigger!");
-  } else {
-    // Loop through each button and attach the click listener
-    googleBtns.forEach(btn => {
-      btn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        console.log("A Google button was clicked! Initializing OAuth...");
-
-        const { data, error } = await supabase.auth.signInWithOAuth({
-          provider: 'google',
-          options: {
-            redirectTo: 'https://marksmind.in/tools/keyword-optimizer'
-          }
-        });
-
-        if (error) {
-          alert("Google Auth Error: " + error.message);
-        }
-      });
+  document.querySelectorAll('.toggle-to-signup').forEach(btn => {
+    btn.addEventListener('click', () => {
+      loginView.classList.add('hidden');
+      signupView.classList.remove('hidden');
     });
-  }
+  });
 
-  // ── Event: Form submit → Send OTP / Verify OTP ───────────
-  // Grab EVERY form on the page (both Login and Sign Up)
-  authForms.forEach(form => {
-    form.addEventListener('submit', async (e) => {
-      // 1. Prevent the page from reloading
+  // --- GOOGLE OAUTH ---
+  const googleBtns = document.querySelectorAll('.google-auth-trigger');
+  googleBtns.forEach(btn => {
+    btn.addEventListener('click', async (e) => {
       e.preventDefault();
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: 'https://marksmind.in/tools/keyword-optimizer' }
+      });
+      if (error) alert("Google Auth Error: " + error.message);
+    });
+  });
 
-      // 2. STRICT RULE: Check if fields are filled out
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
+  // --- SIGN UP LOGIC (Email & Password) ---
+  const signupForm = document.querySelector('#signup-form');
+  if (signupForm) {
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = signupForm.querySelector('input[type="email"]').value;
+      const password = signupForm.querySelector('input[type="password"]').value;
 
-      // 3. If already on OTP screen, verify the code
-      if (showOtp) {
-        // Find the email input specifically inside the form they just submitted
-        const formEmail = form.querySelector('input[type="email"]');
-        const email = formEmail ? formEmail.value : emailInput.value;
-        const otpCode = otpInput.value;
+      console.log("Attempting sign up for:", email);
 
-        console.log("Verifying code for:", email);
-
-        // Ask Supabase to verify the 6-digit code
-        const { data, error } = await supabase.auth.verifyOtp({
-          email: email,
-          token: otpCode,
-          type: 'email'
-        });
-
-        if (error) {
-          alert("Invalid code! " + error.message);
-          console.error("Verification failed:", error);
-        } else {
-          // SUCCESS! Redirect them to the dashboard
-          console.log("Login successful! Redirecting...");
-          window.location.href = "https://marksmind.in/tools/keyword-optimizer";
-        }
-        return;
-      }
-
-      // 4. Send OTP via Supabase
-      // Find the email input specifically inside the form they just clicked
-      const formEmail = form.querySelector('input[type="email"]');
-
-      if (!formEmail || !formEmail.value) {
-        console.error("No email entered!");
-        return;
-      }
-
-      const email = formEmail.value;
-      console.log("Attempting to send OTP to:", email);
-
-      const { data, error } = await supabase.auth.signInWithOtp({
+      const { data, error } = await supabase.auth.signUp({
         email: email,
+        password: password,
       });
 
       if (error) {
-        alert("Error sending OTP: " + error.message);
-        return;
+        alert("Sign Up Error: " + error.message);
+      } else {
+        alert("Account created successfully! You can now log in.");
+        // Automatically switch to the Login view
+        signupView.classList.add('hidden');
+        loginView.classList.remove('hidden');
       }
-
-      // Success!
-      alert("OTP sent to your email! Check your inbox.");
-      console.log("OTP successfully sent to", email);
-
-      // 5. Transition to OTP screen
-      showOtp = true;
-      render();
-      otpInput.focus();
     });
-  });
+  }
 
-  // ── Event: Back from OTP ───────────────────────────────────
-  backBtn.addEventListener("click", () => {
-    showOtp = false;
-    otpInput.value = "";
-    render();
-  });
+  // --- LOGIN LOGIC (Email & Password) ---
+  const loginForm = document.querySelector('#login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = loginForm.querySelector('input[type="email"]').value;
+      const password = loginForm.querySelector('input[type="password"]').value;
 
-  // ── Event: OTP input — allow digits only ───────────────────
-  otpInput.addEventListener("input", () => {
-    otpInput.value = otpInput.value.replace(/\D/g, "").slice(0, 6);
-  });
+      console.log("Attempting login for:", email);
 
-  // ── Initial render ─────────────────────────────────────────
-  render();
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        alert("Login Error: " + error.message);
+      } else {
+        console.log("Login successful! Redirecting...");
+        window.location.href = "https://marksmind.in/tools/keyword-optimizer";
+      }
+    });
+  }
 </script>
-
