@@ -1,0 +1,40 @@
+---
+// Placeholder Dashboard Page
+import { createClient } from '@supabase/supabase-js';
+
+// You might want to do server-side auth checking here eventually, 
+// but for now we'll just render a placeholder page.
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | MarksMind AI</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0b0b0c;
+            color: #f3f3f4;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="text-4xl font-bold mb-4">Welcome to your Dashboard</h1>
+        <p class="text-gray-400 mb-8">Your profile has been saved successfully.</p>
+        <a href="/tools/keyword-optimizer" class="rounded-lg bg-[#8b5cf6] px-6 py-3 font-semibold text-white hover:bg-[#7c3aed] transition-colors">
+            Go to Keyword Optimizer
+        </a>
+    </div>
+</body>
+</html>

@@ -181,7 +181,7 @@
       e.preventDefault();
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: 'https://marksmind.in/tools/keyword-optimizer' }
+        options: { redirectTo: window.location.origin + '/tools/keyword-optimizer' }
       });
       if (error) alert("Google Auth Error: " + error.message);
     });
@@ -254,7 +254,7 @@
         alert("Login Error: " + error.message);
       } else {
         console.log("Login successful! Redirecting...");
-        window.location.href = "https://marksmind.in/tools/keyword-optimizer";
+        window.location.href = "/tools/keyword-optimizer";
       }
     });
   }

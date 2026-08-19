@@ -1,0 +1,86 @@
+---
+import OnboardingFlow from '../components/OnboardingFlow.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding | MarksMind AI</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0b0b0c;
+            color: #f3f3f4;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+        }
+        
+        /* Optional loading screen style to hide content while checking auth */
+        #page-loader {
+            position: fixed;
+            inset: 0;
+            background-color: #0b0b0c;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50%;
+            border-top-color: #8b5cf6;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Onboarding Flow Component -->
+    <div id="onboarding-container" style="display: none;">
+        <OnboardingFlow />
+    </div>
+
+    <script>
+        import { createClient } from '@supabase/supabase-js';
+
+        const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+        const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+        const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            
+            if (!session) {
+                // If not authenticated, redirect to login
+                window.location.href = '/login';
+            } else {
+                // Remove loader and show onboarding
+                const loader = document.getElementById('page-loader');
+                const container = document.getElementById('onboarding-container');
+                
+                if (loader) loader.style.opacity = '0';
+                if (container) container.style.display = 'block';
+                
+                setTimeout(() => {
+                    if (loader) loader.style.display = 'none';
+                }, 300);
+            }
+        });
+    </script>
+</body>
+</html>

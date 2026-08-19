@@ -1,0 +1,441 @@
+---
+/**
+ * OnboardingFlow.astro
+ * ──────────────
+ * Interactive multi-step onboarding component.
+ */
+import { Sparkles, BrainCircuit } from 'lucide-astro';
+---
+
+<div id="onboarding-root" class="min-h-[80vh] flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto">
+    <!-- Steps Container -->
+    <div id="step-container" class="w-full bg-[#161618] border border-[#2a2a2c] rounded-2xl p-8 shadow-2xl relative overflow-hidden transition-all duration-300">
+        
+        <!-- Step 1: Class Level -->
+        <div class="onboarding-step" data-step="1">
+            <h2 class="text-2xl font-bold mb-6 text-center">Which class are you in?</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <button class="ob-btn" data-field="class_level" data-val="Class 8">Class 8</button>
+                <button class="ob-btn" data-field="class_level" data-val="Class 9">Class 9</button>
+                <button class="ob-btn" data-field="class_level" data-val="Class 10">Class 10</button>
+                <button class="ob-btn" data-field="class_level" data-val="Class 11">Class 11</button>
+                <button class="ob-btn" data-field="class_level" data-val="Class 12">Class 12</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Full Name -->
+        <div class="onboarding-step hidden" data-step="2">
+            <h2 class="text-2xl font-bold mb-6 text-center">What's your full name?</h2>
+            <div class="space-y-4 max-w-md mx-auto">
+                <input type="text" id="ob-fullname" placeholder="Enter your full name" class="w-full rounded-lg border border-[#2e2e2e] bg-[#252525] px-4 py-3 text-white placeholder-gray-500 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30" />
+                <button id="ob-name-next" class="w-full rounded-lg bg-[#8b5cf6] px-4 py-3 font-semibold text-white transition-all hover:bg-[#7c3aed]">Continue</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Code Mix Language -->
+        <div class="onboarding-step hidden" data-step="3">
+            <h2 class="text-2xl font-bold mb-2 text-center">Language Preferences</h2>
+            <p class="text-center text-gray-400 mb-6 text-sm">What language do you mix when writing answers?</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <button class="ob-btn" data-field="code_mix_lang" data-val="English Only">English Only</button>
+                <button class="ob-btn" data-field="code_mix_lang" data-val="English + Bengali">English + Bengali</button>
+                <button class="ob-btn" data-field="code_mix_lang" data-val="English + Hindi">English + Hindi</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Tuition Type -->
+        <div class="onboarding-step hidden" data-step="4">
+            <h2 class="text-2xl font-bold mb-6 text-center">How do you study?</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button class="ob-btn" data-field="tuition_type" data-val="School Only">School Only</button>
+                <button class="ob-btn" data-field="tuition_type" data-val="Local Tutor">Local Tutor</button>
+                <button class="ob-btn" data-field="tuition_type" data-val="Coaching + School">Coaching + School</button>
+                <button class="ob-btn" data-field="tuition_type" data-val="No Classes">No Classes (Self Study)</button>
+            </div>
+        </div>
+
+        <!-- Step 5: Acquisition Channel -->
+        <div class="onboarding-step hidden" data-step="5">
+            <h2 class="text-2xl font-bold mb-6 text-center">How did you hear about us?</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <button class="ob-btn" data-field="acquisition_channel" data-val="Google">Google</button>
+                <button class="ob-btn" data-field="acquisition_channel" data-val="YouTube">YouTube</button>
+                <button class="ob-btn" data-field="acquisition_channel" data-val="Friend">Friend</button>
+                <button class="ob-btn" data-field="acquisition_channel" data-val="X">X (Twitter)</button>
+                <button class="ob-btn" data-field="acquisition_channel" data-val="Other">Other</button>
+            </div>
+        </div>
+
+        <!-- Step 6: Exam Timeline -->
+        <div class="onboarding-step hidden" data-step="6">
+            <h2 class="text-2xl font-bold mb-6 text-center">When is your next big exam?</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button class="ob-btn" data-field="exam_timeline" data-val="This Week">This Week</button>
+                <button class="ob-btn" data-field="exam_timeline" data-val="This Month">This Month</button>
+                <button class="ob-btn" data-field="exam_timeline" data-val="In a Few Months">In a Few Months</button>
+                <button class="ob-btn" data-field="exam_timeline" data-val="Next Year">Next Year</button>
+            </div>
+        </div>
+
+        <!-- Step 7: Weak Subject -->
+        <div class="onboarding-step hidden" data-step="7">
+            <h2 class="text-2xl font-bold mb-6 text-center">Which subject needs the most work?</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <button class="ob-btn" data-field="weak_subject" data-val="English">English</button>
+                <button class="ob-btn" data-field="weak_subject" data-val="Maths">Maths</button>
+                <button class="ob-btn" data-field="weak_subject" data-val="Science">Science</button>
+                <button class="ob-btn" data-field="weak_subject" data-val="Social Science">Social Science</button>
+            </div>
+        </div>
+
+        <!-- Step 8: Target Score -->
+        <div class="onboarding-step hidden" data-step="8">
+            <h2 class="text-2xl font-bold mb-6 text-center">What's your target score?</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <button class="ob-btn" data-field="target_score" data-val="70%">70%</button>
+                <button class="ob-btn" data-field="target_score" data-val="80%">80%</button>
+                <button class="ob-btn" data-field="target_score" data-val="90%">90%</button>
+                <button class="ob-btn" data-field="target_score" data-val="Above 95%">Above 95%</button>
+            </div>
+        </div>
+
+        <!-- Emotional Transition Screens -->
+        <div class="onboarding-step hidden" data-step="9">
+            <div class="h-64 flex items-center justify-center text-center">
+                <h2 id="emo-text" class="text-3xl md:text-4xl font-bold leading-tight transition-opacity duration-1000 opacity-0 text-white"></h2>
+            </div>
+        </div>
+
+        <!-- Mock Diagnostic Input -->
+        <div class="onboarding-step hidden" data-step="10">
+            <div class="mb-6 text-center">
+                <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-900/30 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-3">
+                    <Sparkles class="w-3 h-3 mr-1" /> Diagnostic Phase
+                </span>
+                <h2 class="text-2xl font-bold mb-2">Let's find out why.</h2>
+                <p class="text-gray-400">Answer this question based on your <span id="diag-subject" class="font-semibold text-white"></span> knowledge.</p>
+            </div>
+            
+            <div class="bg-[#202022] rounded-xl p-6 border border-[#2e2e2e] mb-6">
+                <h3 id="diag-question" class="text-lg font-semibold text-white mb-4"></h3>
+                <textarea id="diag-answer" rows="4" placeholder="Type your answer here..." class="w-full rounded-lg border border-[#2e2e2e] bg-[#161618] px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-[#8b5cf6] focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30 resize-none"></textarea>
+            </div>
+            
+            <button id="btn-analyze" class="w-full flex items-center justify-center rounded-lg bg-[#8b5cf6] px-4 py-4 font-semibold text-white transition-all hover:bg-[#7c3aed]">
+                <BrainCircuit class="w-5 h-5 mr-2" /> Analyze My Answer
+            </button>
+        </div>
+
+        <!-- Mock Diagnostic Loading -->
+        <div class="onboarding-step hidden" data-step="11">
+            <div class="flex flex-col items-center justify-center h-64">
+                <div class="spinner w-12 h-12 border-4 mb-6"></div>
+                <h3 class="text-xl font-semibold text-white mb-2">Analyzing your answer...</h3>
+                <p class="text-sm text-gray-400">Checking NCERT alignment and conceptual gaps.</p>
+            </div>
+        </div>
+
+        <!-- Mock Diagnostic Results -->
+        <div class="onboarding-step hidden" data-step="12">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-white">Analysis Complete</h2>
+                <p class="text-gray-400">Here's a breakdown of your answer.</p>
+            </div>
+            
+            <div class="space-y-4 mb-8">
+                <div class="flex justify-between items-center p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+                    <span class="text-gray-400">Score</span>
+                    <span class="text-xl font-bold text-amber-400">2/5</span>
+                </div>
+                
+                <div class="p-4 rounded-xl bg-emerald-900/10 border border-emerald-900/30">
+                    <h4 class="text-emerald-400 font-semibold mb-1 text-sm uppercase tracking-wider">Strengths</h4>
+                    <p class="text-sm text-white">✔ Correct basic concept</p>
+                </div>
+                
+                <div class="p-4 rounded-xl bg-red-900/10 border border-red-900/30">
+                    <h4 class="text-red-400 font-semibold mb-1 text-sm uppercase tracking-wider">Improvements</h4>
+                    <p class="text-sm text-white">Missing ATP explanation</p>
+                </div>
+                
+                <div class="p-4 rounded-xl bg-blue-900/10 border border-blue-900/30">
+                    <h4 class="text-blue-400 font-semibold mb-1 text-sm uppercase tracking-wider">Missing NCERT Concepts</h4>
+                    <p class="text-sm text-white">"ATP", "Cellular Respiration"</p>
+                </div>
+                
+                <div class="p-4 rounded-xl bg-[#202022] border border-[#2e2e2e]">
+                    <p class="text-sm text-gray-400 mb-2">Highlight: Language Bias Penalty: 0 (CEDA Insulated)</p>
+                    <div class="w-full bg-gray-800 rounded-full h-2 mt-3">
+                        <div class="bg-gradient-to-r from-red-500 to-amber-500 h-2 rounded-full" style="width: 60%"></div>
+                    </div>
+                    <p id="marks-lost-gap" class="text-xs text-right mt-2 text-gray-400"></p>
+                </div>
+            </div>
+            
+            <button id="btn-see-solution" class="w-full rounded-lg bg-[#8b5cf6] px-4 py-3 font-semibold text-white transition-all hover:bg-[#7c3aed]">
+                Continue
+            </button>
+        </div>
+
+        <!-- Paywall & Final Step -->
+        <div class="onboarding-step hidden" data-step="13">
+            <div class="text-center mb-8">
+                <div class="mx-auto w-16 h-16 bg-purple-900/30 rounded-full flex items-center justify-center mb-4">
+                    <Sparkles class="w-8 h-8 text-purple-400" />
+                </div>
+                <h2 class="text-3xl font-bold text-white mb-3">Unlock Premium</h2>
+                <p class="text-gray-400 max-w-sm mx-auto">Unlimited evaluations, model answers, and AI tutor.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4 mb-8">
+                <div class="p-4 rounded-xl border border-purple-500/50 bg-purple-900/10 text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-purple-500 text-[10px] font-bold px-2 py-0.5 rounded-bl-lg">POPULAR</div>
+                    <p class="text-gray-400 text-sm mb-1">Monthly</p>
+                    <p class="text-2xl font-bold text-white">₹99<span class="text-sm text-gray-500 font-normal">/mo</span></p>
+                </div>
+                <div class="p-4 rounded-xl border border-[#2e2e2e] bg-[#202022] text-center">
+                    <p class="text-gray-400 text-sm mb-1">Yearly</p>
+                    <p class="text-2xl font-bold text-white">₹799<span class="text-sm text-gray-500 font-normal">/yr</span></p>
+                </div>
+            </div>
+            
+            <div class="space-y-3">
+                <button class="w-full rounded-lg bg-gradient-to-r from-[#8b5cf6] to-[#6d28d9] px-4 py-4 font-bold text-white transition-all hover:opacity-90 shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+                    Upgrade Now
+                </button>
+                <button id="btn-continue-free" class="w-full rounded-lg border border-[#2e2e2e] bg-transparent px-4 py-3 font-medium text-gray-300 transition-all hover:bg-[#252525]">
+                    Continue with Free Plan
+                </button>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<style>
+    .ob-btn {
+        @apply flex items-center justify-center rounded-xl border border-[#2e2e2e] bg-[#252525] px-4 py-4 text-sm font-medium text-white transition-all duration-200 hover:border-[#5a5a5e] hover:bg-[#2a2a2c] cursor-pointer;
+    }
+    .ob-btn.selected {
+        @apply border-[#8b5cf6] bg-[#8b5cf6]/10 shadow-[0_0_15px_rgba(139,92,246,0.15)];
+    }
+    .spinner {
+        border-top-color: #8b5cf6;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+</style>
+
+<script>
+    import { createClient } from '@supabase/supabase-js';
+
+    // Loop Breaker Logic
+    const ATTEMPTS_KEY = 'onboarding_attempts';
+    let attempts = parseInt(localStorage.getItem(ATTEMPTS_KEY) || '0', 10);
+    attempts++;
+    localStorage.setItem(ATTEMPTS_KEY, attempts.toString());
+
+    if (attempts >= 6) {
+        window.location.href = '/tools/keyword-optimizer';
+    }
+
+    // State
+    const state = {
+        class_level: '',
+        full_name: '',
+        code_mix_lang: '',
+        tuition_type: '',
+        acquisition_channel: '',
+        exam_timeline: '',
+        weak_subject: '',
+        target_score: ''
+    };
+
+    let currentStep = 1;
+
+    // Elements
+    const steps = document.querySelectorAll('.onboarding-step');
+
+    function goToStep(stepNum) {
+        steps.forEach(el => el.classList.add('hidden'));
+        const nextStep = document.querySelector(`.onboarding-step[data-step="${stepNum}"]`);
+        if (nextStep) {
+            nextStep.classList.remove('hidden');
+        }
+        currentStep = stepNum;
+
+        if (stepNum === 9) {
+            startEmotionalTransition();
+        } else if (stepNum === 10) {
+            setupDiagnosticInput();
+        } else if (stepNum === 11) {
+            startAnalysis();
+        } else if (stepNum === 12) {
+            setupDiagnosticResults();
+        }
+    }
+
+    // Event Listeners for standard buttons
+    document.querySelectorAll('.ob-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const currentBtn = e.currentTarget;
+            const field = currentBtn.getAttribute('data-field');
+            const val = currentBtn.getAttribute('data-val');
+            
+            // Visual selection
+            const siblings = currentBtn.parentElement.querySelectorAll('.ob-btn');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            currentBtn.classList.add('selected');
+            
+            state[field] = val;
+            
+            setTimeout(() => {
+                goToStep(currentStep + 1);
+            }, 300);
+        });
+    });
+
+    // Full Name submit
+    const nameInput = document.getElementById('ob-fullname');
+    const nameNext = document.getElementById('ob-name-next');
+    if (nameNext && nameInput) {
+        nameNext.addEventListener('click', () => {
+            const val = nameInput.value.trim();
+            if (val) {
+                state.full_name = val;
+                goToStep(currentStep + 1);
+            } else {
+                nameInput.classList.add('border-red-500');
+                setTimeout(() => nameInput.classList.remove('border-red-500'), 1000);
+            }
+        });
+    }
+
+    // Emotional Transition (Step 9)
+    function startEmotionalTransition() {
+        const emoText = document.getElementById('emo-text');
+        
+        const messages = [
+            `${state.full_name}, your goal is ${state.target_score}.`,
+            "Most students don't lose marks because they don't study.",
+            "They lose marks because their answers miss what examiners expect.",
+            "Let's find where your marks are going."
+        ];
+
+        let msgIndex = 0;
+
+        const showNextMessage = () => {
+            if (msgIndex >= messages.length) {
+                goToStep(10);
+                return;
+            }
+
+            emoText.textContent = messages[msgIndex];
+            emoText.classList.remove('opacity-0');
+            
+            setTimeout(() => {
+                emoText.classList.add('opacity-0');
+                msgIndex++;
+                setTimeout(showNextMessage, 1000); // Wait for fade out
+            }, 2000); // Wait 2s for reading
+        };
+
+        // Start cycle
+        setTimeout(showNextMessage, 500);
+    }
+
+    // Mock Diagnostic Input (Step 10)
+    function setupDiagnosticInput() {
+        const subjectEl = document.getElementById('diag-subject');
+        const questionEl = document.getElementById('diag-question');
+        
+        const subj = state.weak_subject || 'Science';
+        subjectEl.textContent = subj;
+
+        const questions = {
+            'Science': 'What is Photosynthesis?',
+            'Maths': 'Explain the Pythagorean theorem.',
+            'English': 'What are the main themes in Robert Frost\'s poetry?',
+            'Social Science': 'Discuss the causes of the French Revolution.'
+        };
+
+        questionEl.textContent = questions[subj] || questions['Science'];
+
+        document.getElementById('btn-analyze').addEventListener('click', () => {
+            goToStep(11);
+        }, { once: true });
+    }
+
+    // Mock Diagnostic Loading (Step 11)
+    function startAnalysis() {
+        setTimeout(() => {
+            goToStep(12);
+        }, 3000); // 3 second spinner
+    }
+
+    // Mock Diagnostic Results (Step 12)
+    function setupDiagnosticResults() {
+        const gapEl = document.getElementById('marks-lost-gap');
+        const targetNumber = parseInt(state.target_score.replace('%', '').replace('Above ', '')) || 90;
+        const gap = Math.max(0, targetNumber - 60);
+        
+        gapEl.textContent = `Current Quality: 60% | Target: ${state.target_score} | Gap: ${gap}%`;
+
+        document.getElementById('btn-see-solution').addEventListener('click', () => {
+            goToStep(13);
+        }, { once: true });
+    }
+
+    // Paywall and Submit (Step 13)
+    document.getElementById('btn-continue-free')?.addEventListener('click', async () => {
+        const btn = document.getElementById('btn-continue-free');
+        const originalText = btn.textContent;
+        btn.textContent = 'Saving...';
+        btn.disabled = true;
+
+        const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+        const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+        const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+        try {
+            // Get user id
+            const { data: { session } } = await supabase.auth.getSession();
+            
+            if (session?.user) {
+                // Upsert into profiles
+                // Assuming profiles table uses 'id' as primary key which matches auth.users.id
+                const { error } = await supabase.from('profiles').upsert({
+                    id: session.user.id,
+                    ...state,
+                    updated_at: new Date().toISOString()
+                });
+
+                if (error) {
+                    console.error('Supabase insert error:', error);
+                    alert('Error saving profile. Please try again.');
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    return;
+                }
+            } else {
+                console.warn('No session found. Profile not linked to user.');
+            }
+
+            // Reset loop breaker
+            localStorage.removeItem(ATTEMPTS_KEY);
+
+            // Redirect to dashboard
+            window.location.href = '/dashboard';
+            
+        } catch (err) {
+            console.error('Error during finalization:', err);
+            alert('An unexpected error occurred.');
+            btn.textContent = originalText;
+            btn.disabled = false;
+        }
+    });
+
+</script>
