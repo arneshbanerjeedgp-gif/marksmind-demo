@@ -2,251 +2,302 @@
 /**
  * OnboardingFlow.astro
  * ──────────────────────────────────────────────────
- * Premium PLG onboarding — iOS-native aesthetic.
- * Pure Vanilla JS state machine + typewriter engine.
- * No framework dependencies. No auth guard.
+ * Premium PLG onboarding — MarksMind brand-native.
+ *
+ * Design tokens pulled directly from the existing
+ * dashboard & AuthForm components:
+ *   bg-body     #0b0b0c
+ *   bg-surface  #161618
+ *   bg-card     #1c1c1c
+ *   bg-input    #252525
+ *   border      #2a2a2c  /  #2e2e2e
+ *   text-1      #f3f3f4
+ *   text-2      #9aa0a6
+ *   accent      #8b5cf6
+ *   accent-hov  #7c3aed
+ *   accent-lt   #a78bfa
+ *   font        Plus Jakarta Sans
  */
+import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, FlaskConical, Target, Sparkles, BrainCircuit } from 'lucide-astro';
 ---
 
 <!-- ═══════════════════════  MARKUP  ═══════════════════════ -->
 <div id="ob-root">
 
-    <!-- Progress bar -->
+    <!-- ── Progress Bar ── -->
     <div id="ob-progress-wrap">
         <div id="ob-progress-bar"></div>
     </div>
 
-    <!-- ─── Step 1 : Class Level ─── -->
+    <!-- ─── Step 1 : Class Level  ·  GRID ─── -->
     <section class="ob-step active" data-step="1">
-        <p class="ob-eyebrow">Step 1 of 8</p>
+        <div class="ob-icon-wrap"><GraduationCap class="ob-icon" /></div>
         <h1 class="ob-title">Which class are you in?</h1>
+        <p class="ob-subtitle">We'll tailor your experience to your syllabus.</p>
         <div class="ob-grid ob-grid--3">
-            <button class="ob-option" data-field="class_level" data-val="Class 8">Class 8</button>
-            <button class="ob-option" data-field="class_level" data-val="Class 9">Class 9</button>
-            <button class="ob-option" data-field="class_level" data-val="Class 10">Class 10</button>
-            <button class="ob-option" data-field="class_level" data-val="Class 11">Class 11</button>
-            <button class="ob-option" data-field="class_level" data-val="Class 12">Class 12</button>
+            <button class="ob-pill" data-field="class_level" data-val="Class 8">Class 8</button>
+            <button class="ob-pill" data-field="class_level" data-val="Class 9">Class 9</button>
+            <button class="ob-pill" data-field="class_level" data-val="Class 10">Class 10</button>
+            <button class="ob-pill" data-field="class_level" data-val="Class 11">Class 11</button>
+            <button class="ob-pill" data-field="class_level" data-val="Class 12">Class 12</button>
         </div>
     </section>
 
-    <!-- ─── Step 2 : Full Name ─── -->
+    <!-- ─── Step 2 : Full Name  ·  INPUT ─── -->
     <section class="ob-step" data-step="2">
-        <p class="ob-eyebrow">Step 2 of 8</p>
+        <div class="ob-icon-wrap"><User class="ob-icon" /></div>
         <h1 class="ob-title">What's your name?</h1>
         <p class="ob-subtitle">We'll use this to personalize your experience.</p>
         <div class="ob-input-wrap">
             <input type="text" id="ob-name" class="ob-input" placeholder="Enter your full name" autocomplete="off" spellcheck="false" />
         </div>
-        <button id="ob-name-next" class="ob-cta">Continue</button>
+        <button id="ob-name-next" class="ob-bottom-link">Continue →</button>
     </section>
 
-    <!-- ─── Step 3 : Code-mix Language ─── -->
+    <!-- ─── Step 3 : Code-mix Language  ·  LIST ─── -->
     <section class="ob-step" data-step="3">
-        <p class="ob-eyebrow">Step 3 of 8</p>
+        <div class="ob-icon-wrap"><Languages class="ob-icon" /></div>
         <h1 class="ob-title">Answer Language</h1>
         <p class="ob-subtitle">What language do you mix when writing answers?</p>
-        <div class="ob-grid ob-grid--1">
-            <button class="ob-option" data-field="code_mix_lang" data-val="English Only">English Only</button>
-            <button class="ob-option" data-field="code_mix_lang" data-val="English + Bengali">English + Bengali</button>
-            <button class="ob-option" data-field="code_mix_lang" data-val="English + Hindi">English + Hindi</button>
+        <div class="ob-list">
+            <button class="ob-list-card" data-field="code_mix_lang" data-val="English Only">
+                <span class="ob-list-title">English Only</span>
+                <span class="ob-list-sub">Standard school English</span>
+            </button>
+            <button class="ob-list-card" data-field="code_mix_lang" data-val="English + Bengali">
+                <span class="ob-list-title">English + Bengali</span>
+                <span class="ob-list-sub">I mix Bangla when I write</span>
+            </button>
+            <button class="ob-list-card" data-field="code_mix_lang" data-val="English + Hindi">
+                <span class="ob-list-title">English + Hindi</span>
+                <span class="ob-list-sub">Hinglish style answers</span>
+            </button>
         </div>
     </section>
 
-    <!-- ─── Step 4 : Tuition Type ─── -->
+    <!-- ─── Step 4 : Tuition Type  ·  GRID ─── -->
     <section class="ob-step" data-step="4">
-        <p class="ob-eyebrow">Step 4 of 8</p>
+        <div class="ob-icon-wrap"><BookOpen class="ob-icon" /></div>
         <h1 class="ob-title">How do you study?</h1>
+        <p class="ob-subtitle">This helps us calibrate our recommendations.</p>
         <div class="ob-grid ob-grid--2">
-            <button class="ob-option" data-field="tuition_type" data-val="School Only">🏫  School Only</button>
-            <button class="ob-option" data-field="tuition_type" data-val="Local Tutor">👨‍🏫  Local Tutor</button>
-            <button class="ob-option" data-field="tuition_type" data-val="Coaching + School">🎓  Coaching + School</button>
-            <button class="ob-option" data-field="tuition_type" data-val="No Classes">📚  No Classes (Self)</button>
+            <button class="ob-pill" data-field="tuition_type" data-val="School Only">School Only</button>
+            <button class="ob-pill" data-field="tuition_type" data-val="Local Tutor">Local Tutor</button>
+            <button class="ob-pill" data-field="tuition_type" data-val="Coaching + School">Coaching + School</button>
+            <button class="ob-pill" data-field="tuition_type" data-val="No Classes">No Classes</button>
         </div>
     </section>
 
-    <!-- ─── Step 5 : Acquisition Channel ─── -->
+    <!-- ─── Step 5 : Acquisition Channel  ·  GRID ─── -->
     <section class="ob-step" data-step="5">
-        <p class="ob-eyebrow">Step 5 of 8</p>
+        <div class="ob-icon-wrap"><Megaphone class="ob-icon" /></div>
         <h1 class="ob-title">How did you find us?</h1>
+        <p class="ob-subtitle">Helps us improve how we reach students.</p>
         <div class="ob-grid ob-grid--3">
-            <button class="ob-option" data-field="acquisition_channel" data-val="Google">Google</button>
-            <button class="ob-option" data-field="acquisition_channel" data-val="YouTube">YouTube</button>
-            <button class="ob-option" data-field="acquisition_channel" data-val="Friend">Friend</button>
-            <button class="ob-option" data-field="acquisition_channel" data-val="X">X (Twitter)</button>
-            <button class="ob-option" data-field="acquisition_channel" data-val="Other">Other</button>
+            <button class="ob-pill" data-field="acquisition_channel" data-val="Google">Google</button>
+            <button class="ob-pill" data-field="acquisition_channel" data-val="YouTube">YouTube</button>
+            <button class="ob-pill" data-field="acquisition_channel" data-val="Friend">Friend</button>
+            <button class="ob-pill" data-field="acquisition_channel" data-val="X">X (Twitter)</button>
+            <button class="ob-pill" data-field="acquisition_channel" data-val="Other">Other</button>
         </div>
     </section>
 
-    <!-- ─── Step 6 : Exam Timeline ─── -->
+    <!-- ─── Step 6 : Exam Timeline  ·  LIST ─── -->
     <section class="ob-step" data-step="6">
-        <p class="ob-eyebrow">Step 6 of 8</p>
+        <div class="ob-icon-wrap"><CalendarClock class="ob-icon" /></div>
         <h1 class="ob-title">When's your next big exam?</h1>
-        <div class="ob-grid ob-grid--2">
-            <button class="ob-option" data-field="exam_timeline" data-val="This Week">This Week</button>
-            <button class="ob-option" data-field="exam_timeline" data-val="This Month">This Month</button>
-            <button class="ob-option" data-field="exam_timeline" data-val="In a Few Months">In a Few Months</button>
-            <button class="ob-option" data-field="exam_timeline" data-val="Next Year">Next Year</button>
+        <p class="ob-subtitle">We'll adjust urgency accordingly.</p>
+        <div class="ob-list">
+            <button class="ob-list-card" data-field="exam_timeline" data-val="Tomorrow">
+                <span class="ob-list-title">Tomorrow</span>
+                <span class="ob-list-sub">Heads down today</span>
+            </button>
+            <button class="ob-list-card" data-field="exam_timeline" data-val="This Week">
+                <span class="ob-list-title">This Week</span>
+                <span class="ob-list-sub">Within 7 days</span>
+            </button>
+            <button class="ob-list-card" data-field="exam_timeline" data-val="Next Week">
+                <span class="ob-list-title">Next Week</span>
+                <span class="ob-list-sub">About a week out</span>
+            </button>
+            <button class="ob-list-card" data-field="exam_timeline" data-val="Later / Not Sure">
+                <span class="ob-list-title">Later / Not Sure</span>
+                <span class="ob-list-sub">Just studying for now</span>
+            </button>
         </div>
     </section>
 
-    <!-- ─── Step 7 : Weak Subject ─── -->
+    <!-- ─── Step 7 : Weak Subject  ·  GRID ─── -->
     <section class="ob-step" data-step="7">
-        <p class="ob-eyebrow">Step 7 of 8</p>
+        <div class="ob-icon-wrap"><FlaskConical class="ob-icon" /></div>
         <h1 class="ob-title">Which subject needs the most work?</h1>
+        <p class="ob-subtitle">We'll start your diagnostic here.</p>
         <div class="ob-grid ob-grid--2">
-            <button class="ob-option" data-field="weak_subject" data-val="English">📖  English</button>
-            <button class="ob-option" data-field="weak_subject" data-val="Maths">📐  Maths</button>
-            <button class="ob-option" data-field="weak_subject" data-val="Science">🔬  Science</button>
-            <button class="ob-option" data-field="weak_subject" data-val="Social Science">🌍  Social Science</button>
+            <button class="ob-pill" data-field="weak_subject" data-val="English">English</button>
+            <button class="ob-pill" data-field="weak_subject" data-val="Maths">Maths</button>
+            <button class="ob-pill" data-field="weak_subject" data-val="Science">Science</button>
+            <button class="ob-pill" data-field="weak_subject" data-val="Social Science">Social Science</button>
         </div>
     </section>
 
-    <!-- ─── Step 8 : Target Score ─── -->
+    <!-- ─── Step 8 : Target Score  ·  GRID ─── -->
     <section class="ob-step" data-step="8">
-        <p class="ob-eyebrow">Step 8 of 8</p>
+        <div class="ob-icon-wrap"><Target class="ob-icon" /></div>
         <h1 class="ob-title">What's your target score?</h1>
+        <p class="ob-subtitle">Be ambitious — we'll build your path there.</p>
         <div class="ob-grid ob-grid--2">
-            <button class="ob-option" data-field="target_score" data-val="70%">70%</button>
-            <button class="ob-option" data-field="target_score" data-val="80%">80%</button>
-            <button class="ob-option" data-field="target_score" data-val="90%">90%</button>
-            <button class="ob-option" data-field="target_score" data-val="Above 95%">Above 95%</button>
+            <button class="ob-pill" data-field="target_score" data-val="70%">70%</button>
+            <button class="ob-pill" data-field="target_score" data-val="80%">80%</button>
+            <button class="ob-pill" data-field="target_score" data-val="90%">90%</button>
+            <button class="ob-pill" data-field="target_score" data-val="Above 95%">Above 95%</button>
         </div>
     </section>
 
     <!-- ─── Step 9 : Typewriter Cinematic ─── -->
     <section class="ob-step ob-step--cinema" data-step="9">
         <div id="typewriter-container">
-            <span id="typewriter-text"></span>
-            <span id="typewriter-cursor">|</span>
+            <span id="typewriter-text"></span><span id="typewriter-cursor">|</span>
         </div>
     </section>
 
     <!-- ─── Step 10 : Diagnostic Input ─── -->
     <section class="ob-step" data-step="10">
-        <div class="ob-diag-badge">🧠 AI Diagnostic</div>
+        <div class="ob-diag-badge"><BrainCircuit class="w-3.5 h-3.5 mr-1.5" /> AI Diagnostic</div>
         <h1 class="ob-title">Let's test your knowledge.</h1>
         <p class="ob-subtitle" id="diag-prompt"></p>
-        <textarea id="diag-textarea" class="ob-textarea" placeholder="Write your answer here..." rows="4"></textarea>
-        <button id="btn-analyze" class="ob-cta ob-cta--gradient">Analyze My Answer</button>
+        <textarea id="diag-textarea" class="ob-textarea" placeholder="Write your answer here…" rows="4"></textarea>
+        <button id="btn-analyze" class="ob-cta-primary">
+            <Sparkles class="w-4 h-4 mr-2" /> Analyze My Answer
+        </button>
     </section>
 
     <!-- ─── Step 11 : Loading ─── -->
     <section class="ob-step ob-step--cinema" data-step="11">
         <div class="ob-loader-wrap">
             <div class="ob-pulse-ring"></div>
-            <div class="ob-pulse-ring ob-pulse-ring--2"></div>
+            <div class="ob-pulse-ring ob-pulse-ring--delay"></div>
             <div class="ob-pulse-dot"></div>
         </div>
-        <p class="ob-loader-text">Analyzing your answer<span class="ob-dots"></span></p>
+        <p class="ob-loader-label">Analyzing your answer<span class="ob-dots"></span></p>
     </section>
 
     <!-- ─── Step 12 : Mock Results ─── -->
     <section class="ob-step" data-step="12">
-        <h1 class="ob-title" style="margin-bottom: 8px;">Analysis Complete</h1>
-        <p class="ob-subtitle" style="margin-bottom: 32px;">Here's where your marks are going.</p>
+        <h1 class="ob-title">Analysis Complete</h1>
+        <p class="ob-subtitle" style="margin-bottom:28px;">Here's where your marks are going.</p>
 
         <div class="ob-results">
-            <!-- Score Card -->
-            <div class="ob-result-card ob-result-card--score">
-                <span class="ob-result-label">Score</span>
-                <span class="ob-result-value ob-result-value--amber">2 / 5</span>
+            <div class="ob-res-card ob-res-card--score">
+                <span class="ob-res-label">Score</span>
+                <span class="ob-res-score">2 / 5</span>
             </div>
-
-            <!-- Strengths -->
-            <div class="ob-result-card ob-result-card--green">
-                <span class="ob-result-tag ob-result-tag--green">STRENGTHS</span>
-                <p class="ob-result-body">✔ Correct basic concept identified</p>
+            <div class="ob-res-card ob-res-card--green">
+                <span class="ob-res-tag ob-res-tag--green">STRENGTHS</span>
+                <p class="ob-res-body">✔ Correct basic concept identified</p>
             </div>
-
-            <!-- Improvements -->
-            <div class="ob-result-card ob-result-card--red">
-                <span class="ob-result-tag ob-result-tag--red">IMPROVEMENTS</span>
-                <p class="ob-result-body">Missing ATP explanation and metabolic context</p>
+            <div class="ob-res-card ob-res-card--red">
+                <span class="ob-res-tag ob-res-tag--red">IMPROVEMENTS</span>
+                <p class="ob-res-body">Missing ATP explanation and metabolic context</p>
             </div>
-
-            <!-- Missing Concepts -->
-            <div class="ob-result-card">
-                <span class="ob-result-tag">MISSING NCERT CONCEPTS</span>
-                <div class="ob-chip-row">
+            <div class="ob-res-card">
+                <span class="ob-res-tag">MISSING NCERT CONCEPTS</span>
+                <div class="ob-chips">
                     <span class="ob-chip">ATP</span>
                     <span class="ob-chip">Cellular Respiration</span>
                     <span class="ob-chip">Chloroplast</span>
                 </div>
             </div>
-
-            <!-- CEDA Badge -->
-            <div class="ob-result-card ob-result-card--ceda">
-                <div class="ob-ceda-badge">
+            <div class="ob-res-card ob-res-card--ceda">
+                <div class="ob-ceda-row">
                     <span class="ob-ceda-label">Language Bias Penalty</span>
                     <span class="ob-ceda-value">0</span>
                 </div>
                 <p class="ob-ceda-sub">CEDA Insulated — No marks lost due to language mixing.</p>
             </div>
-
-            <!-- Gap Comparison -->
-            <div class="ob-result-card">
+            <div class="ob-res-card">
                 <div class="ob-gap-row">
                     <div class="ob-gap-item">
                         <span class="ob-gap-label">Current</span>
-                        <span class="ob-gap-value ob-gap-value--current">60%</span>
+                        <span class="ob-gap-val ob-gap-val--amber">60%</span>
                     </div>
-                    <div class="ob-gap-divider">→</div>
+                    <div class="ob-gap-arrow">→</div>
                     <div class="ob-gap-item">
                         <span class="ob-gap-label">Target</span>
-                        <span id="result-target" class="ob-gap-value ob-gap-value--target">90%</span>
+                        <span id="result-target" class="ob-gap-val ob-gap-val--green">90%</span>
                     </div>
-                    <div class="ob-gap-divider">⚡</div>
+                    <div class="ob-gap-arrow">⚡</div>
                     <div class="ob-gap-item">
                         <span class="ob-gap-label">Gap</span>
-                        <span id="result-gap" class="ob-gap-value ob-gap-value--gap">30%</span>
+                        <span id="result-gap" class="ob-gap-val ob-gap-val--red">30%</span>
                     </div>
                 </div>
                 <div class="ob-bar-track">
                     <div class="ob-bar-fill" style="width:60%"></div>
-                    <div id="result-bar-target" class="ob-bar-marker" style="left:90%"></div>
+                    <div id="result-bar-marker" class="ob-bar-marker" style="left:90%"></div>
                 </div>
             </div>
         </div>
-
-        <button id="btn-results-next" class="ob-cta" style="margin-top:32px;">Continue</button>
+        <button id="btn-results-next" class="ob-bottom-link" style="margin-top:32px;">Continue →</button>
     </section>
 
     <!-- ─── Step 13 : Paywall ─── -->
     <section class="ob-step" data-step="13">
-        <div class="ob-paywall-icon">✦</div>
+        <div class="ob-icon-wrap"><Sparkles class="ob-icon" /></div>
         <h1 class="ob-title">Unlock Premium</h1>
         <p class="ob-subtitle">Unlimited evaluations, model answers, and your AI tutor.</p>
 
         <div class="ob-pricing-row">
-            <div class="ob-pricing-card ob-pricing-card--popular">
-                <span class="ob-pricing-badge">POPULAR</span>
-                <p class="ob-pricing-period">Monthly</p>
+            <!-- Annual -->
+            <div class="ob-pricing-card ob-pricing-card--annual">
+                <span class="ob-pricing-badge">24% off</span>
+                <p class="ob-pricing-period">Annual</p>
                 <p class="ob-pricing-amount">₹99<span class="ob-pricing-unit">/mo</span></p>
+                <p class="ob-pricing-note">Billed yearly</p>
             </div>
+            <!-- Monthly -->
             <div class="ob-pricing-card">
-                <p class="ob-pricing-period">Yearly</p>
-                <p class="ob-pricing-amount">₹799<span class="ob-pricing-unit">/yr</span></p>
-                <p class="ob-pricing-save">Save 33%</p>
+                <p class="ob-pricing-period">Monthly</p>
+                <p class="ob-pricing-amount">₹339<span class="ob-pricing-unit">/mo</span></p>
+                <p class="ob-pricing-note">Billed monthly</p>
             </div>
         </div>
 
-        <button class="ob-cta ob-cta--gradient" style="margin-top:32px;">Upgrade Now</button>
-        <button id="btn-free" class="ob-cta ob-cta--ghost">Continue with Free Plan</button>
+        <button class="ob-cta-primary" style="margin-top:28px;">✨ Upgrade Now</button>
+        <button id="btn-free" class="ob-bottom-link ob-bottom-link--muted" style="margin-top:16px;">Continue with Free Plan</button>
     </section>
 
 </div>
 
 <!-- ═══════════════════════  STYLES  ═══════════════════════ -->
 <style is:global>
-    /* ──── Reset & Base ──── */
+    /* ────────────────────────────────────────────────
+       DESIGN TOKENS  (from MarksMind platform)
+       ──────────────────────────────────────────────── */
+    :root {
+        --mm-bg:        #0b0b0c;
+        --mm-surface:   #161618;
+        --mm-card:      #1c1c1c;
+        --mm-input:     #252525;
+        --mm-border:    #2a2a2c;
+        --mm-border-lt: #2e2e2e;
+        --mm-text-1:    #f3f3f4;
+        --mm-text-2:    #9aa0a6;
+        --mm-text-3:    rgba(255,255,255,0.35);
+        --mm-accent:    #8b5cf6;
+        --mm-accent-hv: #7c3aed;
+        --mm-accent-lt: #a78bfa;
+        --mm-green:     #22c55e;
+        --mm-red:       #ef4444;
+        --mm-amber:     #fbbf24;
+        --mm-ease:      cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ──── Reset ──── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
     body {
-        background: #0A0A0A;
-        color: #F5F5F7;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        background: var(--mm-bg);
+        color: var(--mm-text-1);
         overflow-x: hidden;
     }
 
@@ -258,7 +309,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 24px 20px;
+        padding: 32px 20px 48px;
     }
 
     /* ──── Progress Bar ──── */
@@ -266,15 +317,15 @@
         position: fixed;
         top: 0; left: 0; right: 0;
         height: 3px;
-        background: rgba(255,255,255,0.05);
+        background: var(--mm-border);
         z-index: 100;
     }
     #ob-progress-bar {
         height: 100%;
         width: 0%;
-        background: linear-gradient(90deg, #8B5CF6, #A78BFA);
+        background: var(--mm-accent);
         border-radius: 0 2px 2px 0;
-        transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: width 0.5s var(--mm-ease);
     }
 
     /* ──── Step Containers ──── */
@@ -282,158 +333,201 @@
         display: none;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         text-align: center;
         width: 100%;
-        max-width: 480px;
+        max-width: 440px;
         opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        transform: translateY(20px);
+        transition: opacity 0.45s var(--mm-ease),
+                    transform 0.45s var(--mm-ease);
     }
-    .ob-step.active {
-        display: flex;
+    .ob-step.active  { display: flex; }
+    .ob-step.visible { opacity: 1; transform: translateY(0); }
+    .ob-step--cinema { max-width: 580px; }
+
+    /* ──── Icon ──── */
+    .ob-icon-wrap {
+        width: 48px; height: 48px;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 14px;
+        background: var(--mm-surface);
+        border: 1px solid var(--mm-border);
+        margin-bottom: 20px;
     }
-    .ob-step.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    .ob-step--cinema {
-        max-width: 640px;
-    }
+    .ob-icon { width: 22px; height: 22px; color: var(--mm-accent-lt); }
 
     /* ──── Typography ──── */
-    .ob-eyebrow {
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        color: rgba(255,255,255,0.25);
-        margin-bottom: 16px;
-    }
     .ob-title {
-        font-size: 32px;
+        font-size: 26px;
         font-weight: 700;
-        letter-spacing: -0.5px;
-        line-height: 1.2;
-        margin-bottom: 12px;
-        color: #F5F5F7;
+        letter-spacing: -0.3px;
+        line-height: 1.25;
+        color: var(--mm-text-1);
+        margin-bottom: 8px;
     }
     .ob-subtitle {
-        font-size: 15px;
-        color: rgba(255,255,255,0.45);
+        font-size: 14px;
+        color: var(--mm-text-2);
         line-height: 1.5;
-        margin-bottom: 32px;
-        max-width: 400px;
+        margin-bottom: 28px;
+        max-width: 360px;
     }
 
-    /* ──── Option Grids ──── */
-    .ob-grid { display: grid; gap: 12px; width: 100%; margin-top: 8px; }
-    .ob-grid--1 { grid-template-columns: 1fr; }
+    /* ──── VARIATION A : Pill Grid ──── */
+    .ob-grid { display: grid; gap: 10px; width: 100%; }
     .ob-grid--2 { grid-template-columns: 1fr 1fr; }
     .ob-grid--3 { grid-template-columns: 1fr 1fr 1fr; }
+    @media (max-width: 420px) { .ob-grid--3 { grid-template-columns: 1fr 1fr; } }
 
-    @media (max-width: 480px) {
-        .ob-grid--3 { grid-template-columns: 1fr 1fr; }
-    }
-
-    /* ──── Option Buttons ──── */
-    .ob-option {
+    .ob-pill {
         appearance: none;
-        border: 1px solid rgba(255,255,255,0.08);
-        background: #1A1A1A;
-        color: #E5E5EA;
-        font-family: 'Inter', sans-serif;
+        border: 1px solid var(--mm-border);
+        background: var(--mm-surface);
+        color: var(--mm-text-1);
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 14px;
         font-weight: 500;
-        padding: 16px 12px;
-        border-radius: 16px;
+        padding: 14px 10px;
+        border-radius: 9999px;
         cursor: pointer;
-        transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: all 0.2s ease-in-out;
         user-select: none;
         -webkit-tap-highlight-color: transparent;
     }
-    .ob-option:hover {
-        background: #222222;
-        border-color: rgba(255,255,255,0.15);
-        transform: scale(1.03);
+    .ob-pill:hover {
+        background: var(--mm-card);
+        border-color: var(--mm-border-lt);
     }
-    .ob-option:active {
-        transform: scale(0.97);
+    .ob-pill:active { transform: scale(0.96); }
+    .ob-pill.selected {
+        background: var(--mm-accent);
+        border-color: var(--mm-accent);
+        color: #fff;
+        box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
     }
-    .ob-option.selected {
-        border-color: #8B5CF6;
-        background: rgba(139, 92, 246, 0.12);
-        color: #C4B5FD;
-        box-shadow: 0 0 0 1px #8B5CF6, 0 0 24px rgba(139, 92, 246, 0.15);
+
+    /* ──── VARIATION B : List Cards ──── */
+    .ob-list { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+
+    .ob-list-card {
+        appearance: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        width: 100%;
+        border: 1px solid var(--mm-border);
+        background: var(--mm-surface);
+        border-radius: 16px;
+        padding: 16px 20px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .ob-list-card:hover {
+        background: var(--mm-card);
+        border-color: var(--mm-border-lt);
+    }
+    .ob-list-card:active { transform: scale(0.98); }
+    .ob-list-card.selected {
+        background: var(--mm-accent);
+        border-color: var(--mm-accent);
+        box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+    }
+    .ob-list-card.selected .ob-list-title { color: #fff; }
+    .ob-list-card.selected .ob-list-sub   { color: rgba(255,255,255,0.7); }
+
+    .ob-list-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--mm-text-1);
+        line-height: 1.3;
+    }
+    .ob-list-sub {
+        font-size: 12px;
+        color: var(--mm-text-2);
+        margin-top: 2px;
     }
 
     /* ──── Text Input ──── */
-    .ob-input-wrap { width: 100%; margin-bottom: 24px; }
+    .ob-input-wrap { width: 100%; margin-bottom: 20px; }
     .ob-input {
         width: 100%;
         appearance: none;
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 16px;
-        background: #1A1A1A;
-        color: #F5F5F7;
-        font-family: 'Inter', sans-serif;
-        font-size: 18px;
+        border: 1px solid var(--mm-border-lt);
+        border-radius: 12px;
+        background: var(--mm-input);
+        color: var(--mm-text-1);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 16px;
         font-weight: 500;
-        padding: 18px 20px;
+        padding: 16px 18px;
         outline: none;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
     }
     .ob-input::placeholder { color: rgba(255,255,255,0.2); }
     .ob-input:focus {
-        border-color: #8B5CF6;
-        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2), 0 0 40px rgba(139, 92, 246, 0.08);
+        border-color: var(--mm-accent);
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
     }
     .ob-input.shake {
         animation: shake 0.4s ease;
-        border-color: #EF4444;
+        border-color: var(--mm-red);
         box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
     }
-
     @keyframes shake {
         0%, 100% { transform: translateX(0); }
         20%, 60% { transform: translateX(-6px); }
         40%, 80% { transform: translateX(6px); }
     }
 
-    /* ──── CTA Buttons ──── */
-    .ob-cta {
+    /* ──── Bottom Navigation Link ──── */
+    .ob-bottom-link {
         appearance: none;
-        width: 100%;
+        background: none;
         border: none;
-        border-radius: 16px;
-        background: #F5F5F7;
-        color: #0A0A0A;
-        font-family: 'Inter', sans-serif;
-        font-size: 16px;
+        color: var(--mm-accent-lt);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 15px;
         font-weight: 600;
-        padding: 16px 24px;
         cursor: pointer;
-        transition: all 0.25s ease;
+        padding: 12px 0;
+        transition: color 0.2s ease;
         -webkit-tap-highlight-color: transparent;
     }
-    .ob-cta:hover { opacity: 0.9; transform: scale(1.01); }
-    .ob-cta:active { transform: scale(0.98); }
+    .ob-bottom-link:hover { color: var(--mm-text-1); }
+    .ob-bottom-link--muted {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--mm-text-2);
+    }
+    .ob-bottom-link--muted:hover { color: var(--mm-text-1); }
 
-    .ob-cta--gradient {
-        background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+    /* ──── Primary CTA (Dashboard-matching) ──── */
+    .ob-cta-primary {
+        appearance: none;
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 12px;
+        background: var(--mm-accent);
         color: #fff;
-        box-shadow: 0 4px 24px rgba(139, 92, 246, 0.3);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 15px 24px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        -webkit-tap-highlight-color: transparent;
     }
-    .ob-cta--gradient:hover { box-shadow: 0 6px 32px rgba(139, 92, 246, 0.45); }
-
-    .ob-cta--ghost {
-        background: transparent;
-        border: 1px solid rgba(255,255,255,0.1);
-        color: rgba(255,255,255,0.5);
-        margin-top: 12px;
+    .ob-cta-primary:hover {
+        background: var(--mm-accent-hv);
+        box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
     }
-    .ob-cta--ghost:hover { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.7); }
+    .ob-cta-primary:active { transform: scale(0.98); }
 
     /* ──── Typewriter ──── */
     #typewriter-container {
@@ -444,280 +538,212 @@
         padding: 0 8px;
     }
     #typewriter-text {
-        font-size: 28px;
+        font-size: 26px;
         font-weight: 600;
         letter-spacing: -0.3px;
         line-height: 1.4;
-        color: #F5F5F7;
+        color: var(--mm-text-1);
         text-align: center;
     }
     #typewriter-cursor {
         display: inline-block;
-        font-size: 28px;
+        font-size: 26px;
         font-weight: 300;
-        color: #8B5CF6;
+        color: var(--mm-accent);
         animation: blink 0.8s step-end infinite;
         margin-left: 2px;
     }
-    @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0; }
-    }
-
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
     @media (max-width: 480px) {
-        #typewriter-text, #typewriter-cursor { font-size: 22px; }
+        #typewriter-text, #typewriter-cursor { font-size: 21px; }
     }
 
     /* ──── Diagnostic ──── */
     .ob-diag-badge {
         display: inline-flex;
         align-items: center;
-        padding: 6px 14px;
-        border-radius: 100px;
-        background: rgba(139, 92, 246, 0.1);
-        border: 1px solid rgba(139, 92, 246, 0.2);
-        color: #A78BFA;
+        padding: 5px 12px;
+        border-radius: 9999px;
+        background: rgba(139, 92, 246, 0.08);
+        border: 1px solid rgba(139, 92, 246, 0.15);
+        color: var(--mm-accent-lt);
         font-size: 12px;
         font-weight: 600;
-        letter-spacing: 0.5px;
-        margin-bottom: 20px;
+        letter-spacing: 0.3px;
+        margin-bottom: 16px;
     }
     .ob-textarea {
         width: 100%;
         appearance: none;
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 16px;
-        background: #111111;
-        color: #F5F5F7;
-        font-family: 'Inter', sans-serif;
-        font-size: 15px;
+        border: 1px solid var(--mm-border);
+        border-radius: 12px;
+        background: var(--mm-surface);
+        color: var(--mm-text-1);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 14px;
         line-height: 1.6;
-        padding: 18px 20px;
+        padding: 16px 18px;
         outline: none;
         resize: none;
-        min-height: 120px;
-        transition: all 0.3s ease;
-        margin-bottom: 20px;
+        min-height: 110px;
+        transition: all 0.2s ease;
+        margin-bottom: 16px;
     }
     .ob-textarea::placeholder { color: rgba(255,255,255,0.18); }
     .ob-textarea:focus {
-        border-color: rgba(139, 92, 246, 0.4);
-        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+        border-color: var(--mm-accent);
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
     }
 
     /* ──── Loader ──── */
     .ob-loader-wrap {
         position: relative;
-        width: 80px;
-        height: 80px;
-        margin-bottom: 32px;
+        width: 72px; height: 72px;
+        margin-bottom: 28px;
     }
     .ob-pulse-ring {
-        position: absolute;
-        inset: 0;
-        border: 2px solid rgba(139, 92, 246, 0.3);
+        position: absolute; inset: 0;
+        border: 2px solid rgba(139, 92, 246, 0.25);
         border-radius: 50%;
-        animation: pulse-ring 1.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+        animation: pulse-ring 1.8s var(--mm-ease) infinite;
     }
-    .ob-pulse-ring--2 { animation-delay: 0.6s; }
+    .ob-pulse-ring--delay { animation-delay: 0.6s; }
     .ob-pulse-dot {
         position: absolute;
         top: 50%; left: 50%;
-        width: 12px; height: 12px;
-        margin: -6px 0 0 -6px;
-        background: #8B5CF6;
+        width: 10px; height: 10px;
+        margin: -5px 0 0 -5px;
+        background: var(--mm-accent);
         border-radius: 50%;
-        box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        box-shadow: 0 0 16px rgba(139, 92, 246, 0.4);
     }
     @keyframes pulse-ring {
-        0% { transform: scale(0.5); opacity: 0.8; }
+        0%   { transform: scale(0.5); opacity: 0.8; }
         100% { transform: scale(1.8); opacity: 0; }
     }
-    .ob-loader-text {
-        font-size: 15px;
-        color: rgba(255,255,255,0.4);
-        font-weight: 500;
-    }
-    .ob-dots::after {
-        content: '';
-        animation: dots 1.5s steps(4, end) infinite;
-    }
+    .ob-loader-label { font-size: 14px; color: var(--mm-text-2); font-weight: 500; }
+    .ob-dots::after { content: ''; animation: dots 1.5s steps(4, end) infinite; }
     @keyframes dots {
-        0% { content: ''; }
-        25% { content: '.'; }
-        50% { content: '..'; }
-        75% { content: '...'; }
+        0%{content:''} 25%{content:'.'} 50%{content:'..'} 75%{content:'...'}
     }
 
     /* ──── Results Dashboard ──── */
-    .ob-results {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-    .ob-result-card {
-        background: #141414;
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 16px;
-        padding: 18px 20px;
+    .ob-results { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+    .ob-res-card {
+        background: var(--mm-surface);
+        border: 1px solid var(--mm-border);
+        border-radius: 14px;
+        padding: 16px 18px;
         text-align: left;
     }
-    .ob-result-card--score {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    .ob-res-card--score { display: flex; justify-content: space-between; align-items: center; }
+    .ob-res-card--green { border-left: 3px solid var(--mm-green); }
+    .ob-res-card--red   { border-left: 3px solid var(--mm-red); }
+    .ob-res-card--ceda  {
+        background: rgba(139, 92, 246, 0.05);
+        border-color: rgba(139, 92, 246, 0.12);
     }
-    .ob-result-card--green { border-left: 3px solid #22C55E; }
-    .ob-result-card--red { border-left: 3px solid #EF4444; }
-    .ob-result-card--ceda {
-        background: linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(59,130,246,0.06) 100%);
-        border-color: rgba(139,92,246,0.15);
+    .ob-res-label { font-size: 13px; color: var(--mm-text-2); font-weight: 500; }
+    .ob-res-score { font-size: 22px; font-weight: 700; color: var(--mm-amber); }
+    .ob-res-tag {
+        font-size: 10px; font-weight: 700; letter-spacing: 1px;
+        text-transform: uppercase; color: var(--mm-text-3);
+        margin-bottom: 6px; display: block;
     }
+    .ob-res-tag--green { color: #4ade80; }
+    .ob-res-tag--red   { color: #f87171; }
+    .ob-res-body { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5; }
 
-    .ob-result-label {
-        font-size: 14px;
-        color: rgba(255,255,255,0.4);
-        font-weight: 500;
-    }
-    .ob-result-value {
-        font-size: 24px;
-        font-weight: 700;
-    }
-    .ob-result-value--amber { color: #FBBF24; }
-
-    .ob-result-tag {
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 1.2px;
-        text-transform: uppercase;
-        color: rgba(255,255,255,0.3);
-        margin-bottom: 8px;
-        display: block;
-    }
-    .ob-result-tag--green { color: #4ADE80; }
-    .ob-result-tag--red { color: #F87171; }
-
-    .ob-result-body {
-        font-size: 14px;
-        color: rgba(255,255,255,0.7);
-        line-height: 1.5;
-    }
-
-    .ob-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .ob-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
     .ob-chip {
         display: inline-block;
-        padding: 4px 12px;
-        border-radius: 100px;
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.08);
-        font-size: 12px;
+        padding: 3px 10px;
+        border-radius: 9999px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--mm-border);
+        font-size: 11px;
         font-weight: 500;
-        color: rgba(255,255,255,0.6);
+        color: rgba(255,255,255,0.55);
     }
 
-    /* CEDA */
-    .ob-ceda-badge {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 8px;
-    }
-    .ob-ceda-label { font-size: 13px; font-weight: 600; color: #A78BFA; }
+    .ob-ceda-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .ob-ceda-label { font-size: 13px; font-weight: 600; color: var(--mm-accent-lt); }
     .ob-ceda-value {
-        font-size: 28px;
-        font-weight: 800;
-        color: #22C55E;
-        text-shadow: 0 0 16px rgba(34, 197, 94, 0.4);
+        font-size: 26px; font-weight: 800; color: var(--mm-green);
+        text-shadow: 0 0 12px rgba(34, 197, 94, 0.35);
     }
-    .ob-ceda-sub { font-size: 12px; color: rgba(255,255,255,0.3); }
+    .ob-ceda-sub { font-size: 11px; color: var(--mm-text-3); }
 
-    /* Gap Row */
     .ob-gap-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
+        display: flex; justify-content: space-between;
+        align-items: center; margin-bottom: 14px;
     }
     .ob-gap-item { text-align: center; }
-    .ob-gap-label { display: block; font-size: 11px; color: rgba(255,255,255,0.3); margin-bottom: 4px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
-    .ob-gap-value { font-size: 22px; font-weight: 700; }
-    .ob-gap-value--current { color: #FBBF24; }
-    .ob-gap-value--target { color: #22C55E; }
-    .ob-gap-value--gap { color: #EF4444; }
-    .ob-gap-divider { color: rgba(255,255,255,0.15); font-size: 18px; }
+    .ob-gap-label {
+        display: block; font-size: 10px; color: var(--mm-text-3);
+        margin-bottom: 3px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;
+    }
+    .ob-gap-val { font-size: 20px; font-weight: 700; }
+    .ob-gap-val--amber { color: var(--mm-amber); }
+    .ob-gap-val--green { color: var(--mm-green); }
+    .ob-gap-val--red   { color: var(--mm-red); }
+    .ob-gap-arrow { color: var(--mm-text-3); font-size: 16px; }
 
     .ob-bar-track {
-        width: 100%;
-        height: 6px;
-        background: rgba(255,255,255,0.06);
-        border-radius: 100px;
-        position: relative;
-        overflow: visible;
+        width: 100%; height: 5px;
+        background: var(--mm-border);
+        border-radius: 9999px;
+        position: relative; overflow: visible;
     }
     .ob-bar-fill {
-        height: 100%;
-        border-radius: 100px;
-        background: linear-gradient(90deg, #FBBF24, #F59E0B);
+        height: 100%; border-radius: 9999px;
+        background: linear-gradient(90deg, var(--mm-amber), #f59e0b);
         transition: width 1s ease;
     }
     .ob-bar-marker {
-        position: absolute;
-        top: -5px;
-        width: 3px;
-        height: 16px;
-        background: #22C55E;
+        position: absolute; top: -4px;
+        width: 3px; height: 13px;
+        background: var(--mm-green);
         border-radius: 2px;
-        box-shadow: 0 0 8px rgba(34,197,94,0.5);
+        box-shadow: 0 0 6px rgba(34,197,94,0.4);
     }
 
     /* ──── Paywall ──── */
-    .ob-paywall-icon {
-        font-size: 48px;
-        margin-bottom: 20px;
-        background: linear-gradient(135deg, #8B5CF6, #C084FC);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 24px rgba(139,92,246,0.3));
-    }
     .ob-pricing-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        gap: 10px;
         width: 100%;
-        margin-top: 24px;
     }
     .ob-pricing-card {
-        background: #141414;
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 20px;
-        padding: 24px 16px;
+        background: var(--mm-surface);
+        border: 1px solid var(--mm-border);
+        border-radius: 18px;
+        padding: 22px 14px;
         text-align: center;
         position: relative;
         overflow: hidden;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
     }
-    .ob-pricing-card--popular {
-        border-color: rgba(139,92,246,0.3);
-        background: rgba(139,92,246,0.06);
-        box-shadow: 0 0 30px rgba(139,92,246,0.08);
+    .ob-pricing-card--annual {
+        border-color: rgba(139, 92, 246, 0.25);
+        background: rgba(139, 92, 246, 0.04);
     }
     .ob-pricing-badge {
         position: absolute;
         top: 0; right: 0;
-        background: #8B5CF6;
+        background: var(--mm-accent);
         color: #fff;
         font-size: 9px;
-        font-weight: 800;
-        letter-spacing: 1px;
-        padding: 4px 10px;
-        border-radius: 0 18px 0 10px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        padding: 3px 8px;
+        border-radius: 0 16px 0 8px;
     }
-    .ob-pricing-period { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
-    .ob-pricing-amount { font-size: 32px; font-weight: 800; color: #F5F5F7; }
-    .ob-pricing-unit { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.3); }
-    .ob-pricing-save { font-size: 11px; color: #22C55E; font-weight: 600; margin-top: 4px; }
+    .ob-pricing-period { font-size: 12px; color: var(--mm-text-2); margin-bottom: 4px; }
+    .ob-pricing-amount { font-size: 28px; font-weight: 700; color: var(--mm-text-1); }
+    .ob-pricing-unit { font-size: 13px; font-weight: 500; color: var(--mm-text-2); }
+    .ob-pricing-note { font-size: 11px; color: var(--mm-text-3); margin-top: 4px; }
 </style>
 
 <!-- ═══════════════════════  SCRIPT  ═══════════════════════ -->
@@ -727,9 +753,7 @@
     let attempts = parseInt(localStorage.getItem(ATTEMPTS_KEY) || '0', 10);
     attempts++;
     localStorage.setItem(ATTEMPTS_KEY, String(attempts));
-    if (attempts >= 6) {
-        window.location.href = '/tools/keyword-optimizer';
-    }
+    if (attempts >= 6) { window.location.href = '/tools/keyword-optimizer'; }
 
     // ── State ──
     const state = {
@@ -737,74 +761,74 @@
         tuition_type: '', acquisition_channel: '', exam_timeline: '',
         weak_subject: '', target_score: ''
     };
-
     let currentStep = 1;
-    const totalQuestionSteps = 8;
+    const TOTAL_Q = 8;
 
-    // ── DOM Refs ──
-    const allSteps   = document.querySelectorAll('.ob-step');
+    // ── DOM ──
     const progressBar = document.getElementById('ob-progress-bar');
 
     // ── Transition Engine ──
     function goToStep(n) {
-        const current = document.querySelector('.ob-step.active');
-        if (current) {
-            current.classList.remove('visible');
+        const cur = document.querySelector('.ob-step.active');
+        if (cur) {
+            cur.classList.remove('visible');
             setTimeout(() => {
-                current.classList.remove('active');
-                showStep(n);
-            }, 400);
+                cur.classList.remove('active');
+                mount(n);
+            }, 380);
         } else {
-            showStep(n);
+            mount(n);
         }
     }
 
-    function showStep(n) {
+    function mount(n) {
         currentStep = n;
-        const next = document.querySelector(`.ob-step[data-step="${n}"]`);
-        if (!next) return;
-        next.classList.add('active');
-        // Force reflow
-        void next.offsetWidth;
-        requestAnimationFrame(() => next.classList.add('visible'));
+        const el = document.querySelector(`.ob-step[data-step="${n}"]`);
+        if (!el) return;
+        el.classList.add('active');
+        void el.offsetWidth;            // force reflow
+        requestAnimationFrame(() => el.classList.add('visible'));
 
-        // Update progress
-        if (n <= totalQuestionSteps) {
-            progressBar.style.width = `${(n / totalQuestionSteps) * 100}%`;
-        } else {
-            progressBar.style.width = '100%';
-        }
+        // Progress
+        progressBar.style.width = n <= TOTAL_Q
+            ? `${(n / TOTAL_Q) * 100}%`
+            : '100%';
 
-        // Step-specific hooks
-        if (n === 9) startTypewriter();
+        // Hooks
+        if (n === 9)  startTypewriter();
         if (n === 10) setupDiagnostic();
-        if (n === 11) startMockAnalysis();
+        if (n === 11) runMockAnalysis();
         if (n === 12) setupResults();
     }
 
-    // ── Initial mount ──
+    // ── Boot ──
     requestAnimationFrame(() => {
         const first = document.querySelector('.ob-step[data-step="1"]');
-        if (first) {
-            void first.offsetWidth;
-            first.classList.add('visible');
-        }
-        progressBar.style.width = `${(1 / totalQuestionSteps) * 100}%`;
+        if (first) { void first.offsetWidth; first.classList.add('visible'); }
+        progressBar.style.width = `${(1 / TOTAL_Q) * 100}%`;
     });
 
-    // ── Option Buttons ──
-    document.querySelectorAll('.ob-option').forEach(btn => {
+    // ── Pill Buttons (Variation A) ──
+    document.querySelectorAll('.ob-pill').forEach(btn => {
         btn.addEventListener('click', () => {
             const field = btn.getAttribute('data-field');
             const val   = btn.getAttribute('data-val');
-
-            // Visual
-            btn.parentElement.querySelectorAll('.ob-option').forEach(s => s.classList.remove('selected'));
+            btn.parentElement.querySelectorAll('.ob-pill').forEach(s => s.classList.remove('selected'));
             btn.classList.add('selected');
-
             state[field] = val;
+            setTimeout(() => goToStep(currentStep + 1), 320);
+        });
+    });
 
-            setTimeout(() => goToStep(currentStep + 1), 350);
+    // ── List Cards (Variation B) ──
+    document.querySelectorAll('.ob-list-card').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const field = btn.getAttribute('data-field');
+            const val   = btn.getAttribute('data-val');
+            btn.parentElement.querySelectorAll('.ob-list-card').forEach(s => s.classList.remove('selected'));
+            btn.classList.add('selected');
+            state[field] = val;
+            setTimeout(() => goToStep(currentStep + 1), 320);
         });
     });
 
@@ -822,7 +846,6 @@
         state.full_name = val;
         goToStep(currentStep + 1);
     });
-
     nameInput?.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') nameBtn?.click();
     });
@@ -838,60 +861,53 @@
             "They lose marks because their answers miss what examiners expect.",
             "Let's find where your marks are going."
         ];
-
-        let lineIndex = 0;
+        let lineIdx = 0;
 
         function typeLine() {
-            if (lineIndex >= lines.length) {
+            if (lineIdx >= lines.length) {
                 cursorEl.style.display = 'none';
-                setTimeout(() => goToStep(10), 600);
+                setTimeout(() => goToStep(10), 500);
                 return;
             }
-
-            const line = lines[lineIndex];
-            let charIndex = 0;
+            const line = lines[lineIdx];
+            let ci = 0;
             textEl.textContent = '';
             textEl.style.opacity = '1';
             cursorEl.style.display = 'inline-block';
 
             function typeChar() {
-                if (charIndex < line.length) {
-                    textEl.textContent += line[charIndex];
-                    charIndex++;
+                if (ci < line.length) {
+                    textEl.textContent += line[ci];
+                    ci++;
                     setTimeout(typeChar, 35);
                 } else {
-                    // Pause, then fade out
                     setTimeout(() => {
-                        textEl.style.transition = 'opacity 0.8s ease';
+                        textEl.style.transition = 'opacity 0.7s ease';
                         textEl.style.opacity = '0';
                         setTimeout(() => {
                             textEl.style.transition = 'none';
-                            lineIndex++;
+                            lineIdx++;
                             typeLine();
-                        }, 900);
-                    }, 1600);
+                        }, 800);
+                    }, 1500);
                 }
             }
             typeChar();
         }
-
-        // Small pause before starting
-        setTimeout(typeLine, 800);
+        setTimeout(typeLine, 700);
     }
 
-    // ── Diagnostic Input ──
+    // ── Diagnostic ──
     function setupDiagnostic() {
         const prompt = document.getElementById('diag-prompt');
-        const questions = {
+        const qmap = {
             'Science': 'Explain the process of Photosynthesis.',
             'Maths': 'Explain the Pythagorean theorem and its applications.',
             'English': "Discuss the main themes in Robert Frost's poetry.",
             'Social Science': 'Discuss the causes and effects of the French Revolution.'
         };
-        const subj = state.weak_subject || 'Science';
-        prompt.textContent = questions[subj] || questions['Science'];
+        prompt.textContent = qmap[state.weak_subject] || qmap['Science'];
 
-        // Auto-expand textarea
         const ta = document.getElementById('diag-textarea');
         ta?.addEventListener('input', () => {
             ta.style.height = 'auto';
@@ -899,25 +915,18 @@
         });
     }
 
-    document.getElementById('btn-analyze')?.addEventListener('click', () => {
-        goToStep(11);
-    });
+    document.getElementById('btn-analyze')?.addEventListener('click', () => goToStep(11));
 
-    // ── Mock Analysis (3s spinner) ──
-    function startMockAnalysis() {
-        setTimeout(() => goToStep(12), 3000);
-    }
+    function runMockAnalysis() { setTimeout(() => goToStep(12), 3000); }
 
     // ── Results ──
     function setupResults() {
-        const targetNum = parseInt(state.target_score?.replace('%','').replace('Above ','')) || 90;
-        const gap = Math.max(0, targetNum - 60);
-
+        const tNum = parseInt(state.target_score?.replace('%','').replace('Above ','')) || 90;
+        const gap = Math.max(0, tNum - 60);
         document.getElementById('result-target').textContent = state.target_score || '90%';
         document.getElementById('result-gap').textContent = gap + '%';
-
-        const marker = document.getElementById('result-bar-target');
-        if (marker) marker.style.left = Math.min(targetNum, 100) + '%';
+        const marker = document.getElementById('result-bar-marker');
+        if (marker) marker.style.left = Math.min(tNum, 100) + '%';
     }
 
     document.getElementById('btn-results-next')?.addEventListener('click', () => goToStep(13));
