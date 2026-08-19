@@ -24,11 +24,13 @@ import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, Fla
 <!-- ═══════════════════════  MARKUP  ═══════════════════════ -->
 <div id="ob-root">
 
-    <!-- ── Progress Bar ── -->
-    <div id="ob-progress-wrap">
-        <div id="ob-progress-bar"></div>
+    <!-- ── Progress Header ── -->
+    <div id="ob-header">
+        <div id="ob-step-counter">1 of 8</div>
+        <div id="ob-progress-wrap">
+            <div id="ob-progress-bar"></div>
+        </div>
     </div>
-    <div id="ob-step-counter">1 of 8</div>
 
     <!-- ─── Step 1 : Class Level  ·  GRID ─── -->
     <section class="ob-step active" data-step="1">
@@ -313,19 +315,37 @@ import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, Fla
         padding: 32px 20px 48px;
     }
 
-    /* ──── Progress Bar ──── */
-    #ob-progress-wrap {
+    /* ──── Progress Header ──── */
+    #ob-header {
         position: fixed;
         top: 0; left: 0; right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 24px 0;
+        z-index: 100;
+    }
+    #ob-step-counter {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--mm-text-2);
+        letter-spacing: 0.3px;
+        margin-bottom: 10px;
+        transition: opacity 0.3s ease;
+    }
+    #ob-step-counter.hidden { opacity: 0; pointer-events: none; }
+    #ob-progress-wrap {
+        width: 100%;
+        max-width: 400px;
         height: 3px;
         background: var(--mm-border);
-        z-index: 100;
+        border-radius: 2px;
     }
     #ob-progress-bar {
         height: 100%;
         width: 0%;
         background: var(--mm-accent);
-        border-radius: 0 2px 2px 0;
+        border-radius: 2px;
         transition: width 0.5s var(--mm-ease);
     }
 
@@ -530,19 +550,7 @@ import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, Fla
     }
     .ob-cta-primary:active { transform: scale(0.98); }
 
-    /* ──── Step Counter ──── */
-    #ob-step-counter {
-        position: fixed;
-        top: 12px;
-        right: 20px;
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--mm-text-2);
-        letter-spacing: 0.3px;
-        z-index: 101;
-        transition: opacity 0.3s ease;
-    }
-    #ob-step-counter.hidden { opacity: 0; pointer-events: none; }
+    /* Step counter styles are now in #ob-header above */
 
     /* ──── Typewriter ──── */
     #typewriter-container {
