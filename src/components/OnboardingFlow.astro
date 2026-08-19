@@ -324,6 +324,7 @@ import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, Fla
         align-items: center;
         padding: 20px 24px 0;
         z-index: 100;
+        transition: opacity 0.5s ease;
     }
     #ob-step-counter {
         font-size: 13px;
@@ -811,18 +812,17 @@ import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, Fla
         void el.offsetWidth;            // force reflow
         requestAnimationFrame(() => el.classList.add('visible'));
 
-        // Progress
-        progressBar.style.width = n <= TOTAL_Q
-            ? `${(n / TOTAL_Q) * 100}%`
-            : '100%';
-
-        // Step counter
-        const counter = document.getElementById('ob-step-counter');
+        // Progress header — hide entirely after Q8 for cinematic effect
+        const header = document.getElementById('ob-header');
         if (n <= TOTAL_Q) {
+            header.style.opacity = '1';
+            header.style.pointerEvents = 'auto';
+            progressBar.style.width = `${(n / TOTAL_Q) * 100}%`;
+            const counter = document.getElementById('ob-step-counter');
             counter.textContent = `${n} of ${TOTAL_Q}`;
-            counter.classList.remove('hidden');
         } else {
-            counter.classList.add('hidden');
+            header.style.opacity = '0';
+            header.style.pointerEvents = 'none';
         }
 
         // Hooks
