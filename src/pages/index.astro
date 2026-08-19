@@ -1,17 +1,14 @@
 ---
-import '@fontsource/plus-jakarta-sans';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { Sparkles, BrainCircuit, Languages, Target, BookOpen } from 'lucide-astro';
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarksMind AI — Grade the Science, Not the Grammar</title>
-    <meta name="description" content="The first AI answer evaluator built for Indian students. Write in Bengali, Hindi, or Hinglish. We extract the concepts, ignore the typos, and bridge you to perfect board-level English.">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<BaseLayout 
+    title="MarksMind AI — Grade the Science, Not the Grammar"
+    description="The first AI answer evaluator built for Indian students. Write in Bengali, Hindi, or Hinglish. We extract the concepts, ignore the typos, and bridge you to perfect board-level English."
+>
     <style>
+        /* ── Design Tokens ── */
         /* ── Design Tokens ── */
         :root {
             --mm-bg:        #0b0b0c;
@@ -30,14 +27,7 @@ import { Sparkles, BrainCircuit, Languages, Target, BookOpen } from 'lucide-astr
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body {
-            background: var(--mm-bg);
-            color: var(--mm-text-1);
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
+        
         /* ── Scroll Reveal ── */
         .reveal {
             opacity: 0;
@@ -377,9 +367,6 @@ import { Sparkles, BrainCircuit, Languages, Target, BookOpen } from 'lucide-astr
             color: var(--mm-text-3);
         }
     </style>
-</head>
-<body>
-
     <!-- ════════════  HEADER  ════════════ -->
     <header class="lp-header">
         <a href="/" class="lp-logo">Marks<span>Mind</span> AI</a>
@@ -498,6 +485,4 @@ import { Sparkles, BrainCircuit, Languages, Target, BookOpen } from 'lucide-astr
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
-
-</body>
-</html>
+</BaseLayout>

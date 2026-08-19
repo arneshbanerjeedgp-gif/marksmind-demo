@@ -1,0 +1,52 @@
+---
+import '@fontsource/plus-jakarta-sans';
+
+interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+    url?: string;
+}
+
+const { 
+    title, 
+    description = "The first AI evaluator built for Indian students. Grade the science, not the grammar.",
+    image = "/og-image.png",
+    url = "https://marksmind.in"
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO & Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title}>
+    <meta name="description" content={description}>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={url}>
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content={new URL(image, Astro.url)}>
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content={url}>
+    <meta property="twitter:title" content={title}>
+    <meta property="twitter:description" content={description}>
+    <meta property="twitter:image" content={new URL(image, Astro.url)}>
+
+    <!-- Icons & Manifest -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+</head>
+<body class="font-['Plus_Jakarta_Sans',sans-serif] antialiased bg-[#0b0b0c] text-[#f3f3f4]">
+    <slot />
+</body>
+</html>

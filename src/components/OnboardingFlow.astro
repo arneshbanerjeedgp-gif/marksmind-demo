@@ -19,10 +19,13 @@
  *   font        Plus Jakarta Sans
  */
 import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, FlaskConical, Target, Sparkles, BrainCircuit } from 'lucide-astro';
+import { ONBOARDING_QUESTIONS } from '../config/constants';
+
+const getQ = (id: string) => ONBOARDING_QUESTIONS.find(q => q.id === id);
 ---
 
 <!-- ═══════════════════════  MARKUP  ═══════════════════════ -->
-<div id="ob-root">
+<div id="ob-root" data-prompts={JSON.stringify(DIAGNOSTIC_PROMPTS)}>
 
     <!-- ── Progress Header ── -->
     <div id="ob-header">
@@ -35,14 +38,12 @@ import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, Fla
     <!-- ─── Step 1 : Class Level  ·  GRID ─── -->
     <section class="ob-step active" data-step="1">
         <div class="ob-icon-wrap"><GraduationCap class="ob-icon" /></div>
-        <h1 class="ob-title">Which class are you in?</h1>
-        <p class="ob-subtitle">We'll tailor your experience to your syllabus.</p>
+        <h1 class="ob-title">{getQ('1')?.title}</h1>
+        <p class="ob-subtitle">{getQ('1')?.subtitle}</p>
         <div class="ob-grid ob-grid--3">
-            <button class="ob-pill" data-field="class_level" data-val="Class 8">Class 8</button>
-            <button class="ob-pill" data-field="class_level" data-val="Class 9">Class 9</button>
-            <button class="ob-pill" data-field="class_level" data-val="Class 10">Class 10</button>
-            <button class="ob-pill" data-field="class_level" data-val="Class 11">Class 11</button>
-            <button class="ob-pill" data-field="class_level" data-val="Class 12">Class 12</button>
+            {getQ('1')?.options.map(opt => (
+                <button class="ob-pill" data-field={getQ('1')?.field} data-val={opt.value} tabindex="0" aria-label={opt.label}>{opt.label}</button>
+            ))}
         </div>
     </section>
 
@@ -60,99 +61,78 @@ import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, Fla
     <!-- ─── Step 3 : Code-mix Language  ·  LIST ─── -->
     <section class="ob-step" data-step="3">
         <div class="ob-icon-wrap"><Languages class="ob-icon" /></div>
-        <h1 class="ob-title">Answer Language</h1>
-        <p class="ob-subtitle">What language do you mix when writing answers?</p>
+        <h1 class="ob-title">{getQ('3')?.title}</h1>
+        <p class="ob-subtitle">{getQ('3')?.subtitle}</p>
         <div class="ob-list">
-            <button class="ob-list-card" data-field="code_mix_lang" data-val="English Only">
-                <span class="ob-list-title">English Only</span>
-                <span class="ob-list-sub">Standard school English</span>
-            </button>
-            <button class="ob-list-card" data-field="code_mix_lang" data-val="English + Bengali">
-                <span class="ob-list-title">English + Bengali</span>
-                <span class="ob-list-sub">I mix Bangla when I write</span>
-            </button>
-            <button class="ob-list-card" data-field="code_mix_lang" data-val="English + Hindi">
-                <span class="ob-list-title">English + Hindi</span>
-                <span class="ob-list-sub">Hinglish style answers</span>
-            </button>
+            {getQ('3')?.options.map(opt => (
+                <button class="ob-list-card" data-field={getQ('3')?.field} data-val={opt.value} tabindex="0" aria-label={opt.label}>
+                    <span class="ob-list-title">{opt.label}</span>
+                    <span class="ob-list-sub">{opt.sublabel}</span>
+                </button>
+            ))}
         </div>
     </section>
 
     <!-- ─── Step 4 : Tuition Type  ·  GRID ─── -->
     <section class="ob-step" data-step="4">
         <div class="ob-icon-wrap"><BookOpen class="ob-icon" /></div>
-        <h1 class="ob-title">How do you study?</h1>
-        <p class="ob-subtitle">This helps us calibrate our recommendations.</p>
+        <h1 class="ob-title">{getQ('4')?.title}</h1>
+        <p class="ob-subtitle">{getQ('4')?.subtitle}</p>
         <div class="ob-grid ob-grid--2">
-            <button class="ob-pill" data-field="tuition_type" data-val="School Only">School Only</button>
-            <button class="ob-pill" data-field="tuition_type" data-val="Local Tutor">Local Tutor</button>
-            <button class="ob-pill" data-field="tuition_type" data-val="Coaching + School">Coaching + School</button>
-            <button class="ob-pill" data-field="tuition_type" data-val="No Classes">No Classes</button>
+            {getQ('4')?.options.map(opt => (
+                <button class="ob-pill" data-field={getQ('4')?.field} data-val={opt.value} tabindex="0" aria-label={opt.label}>{opt.label}</button>
+            ))}
         </div>
     </section>
 
     <!-- ─── Step 5 : Acquisition Channel  ·  GRID ─── -->
     <section class="ob-step" data-step="5">
         <div class="ob-icon-wrap"><Megaphone class="ob-icon" /></div>
-        <h1 class="ob-title">How did you find us?</h1>
-        <p class="ob-subtitle">Helps us improve how we reach students.</p>
+        <h1 class="ob-title">{getQ('5')?.title}</h1>
+        <p class="ob-subtitle">{getQ('5')?.subtitle}</p>
         <div class="ob-grid ob-grid--3">
-            <button class="ob-pill" data-field="acquisition_channel" data-val="Google">Google</button>
-            <button class="ob-pill" data-field="acquisition_channel" data-val="YouTube">YouTube</button>
-            <button class="ob-pill" data-field="acquisition_channel" data-val="Friend">Friend</button>
-            <button class="ob-pill" data-field="acquisition_channel" data-val="X">X (Twitter)</button>
-            <button class="ob-pill" data-field="acquisition_channel" data-val="Other">Other</button>
+            {getQ('5')?.options.map(opt => (
+                <button class="ob-pill" data-field={getQ('5')?.field} data-val={opt.value} tabindex="0" aria-label={opt.label}>{opt.label}</button>
+            ))}
         </div>
     </section>
 
     <!-- ─── Step 6 : Exam Timeline  ·  LIST ─── -->
     <section class="ob-step" data-step="6">
         <div class="ob-icon-wrap"><CalendarClock class="ob-icon" /></div>
-        <h1 class="ob-title">When's your next big exam?</h1>
-        <p class="ob-subtitle">We'll adjust urgency accordingly.</p>
+        <h1 class="ob-title">{getQ('6')?.title}</h1>
+        <p class="ob-subtitle">{getQ('6')?.subtitle}</p>
         <div class="ob-list">
-            <button class="ob-list-card" data-field="exam_timeline" data-val="Tomorrow">
-                <span class="ob-list-title">Tomorrow</span>
-                <span class="ob-list-sub">Heads down today</span>
-            </button>
-            <button class="ob-list-card" data-field="exam_timeline" data-val="This Week">
-                <span class="ob-list-title">This Week</span>
-                <span class="ob-list-sub">Within 7 days</span>
-            </button>
-            <button class="ob-list-card" data-field="exam_timeline" data-val="Next Week">
-                <span class="ob-list-title">Next Week</span>
-                <span class="ob-list-sub">About a week out</span>
-            </button>
-            <button class="ob-list-card" data-field="exam_timeline" data-val="Later / Not Sure">
-                <span class="ob-list-title">Later / Not Sure</span>
-                <span class="ob-list-sub">Just studying for now</span>
-            </button>
+            {getQ('6')?.options.map(opt => (
+                <button class="ob-list-card" data-field={getQ('6')?.field} data-val={opt.value} tabindex="0" aria-label={opt.label}>
+                    <span class="ob-list-title">{opt.label}</span>
+                    <span class="ob-list-sub">{opt.sublabel}</span>
+                </button>
+            ))}
         </div>
     </section>
 
     <!-- ─── Step 7 : Weak Subject  ·  GRID ─── -->
     <section class="ob-step" data-step="7">
         <div class="ob-icon-wrap"><FlaskConical class="ob-icon" /></div>
-        <h1 class="ob-title">Which subject needs the most work?</h1>
-        <p class="ob-subtitle">We'll start your diagnostic here.</p>
+        <h1 class="ob-title">{getQ('7')?.title}</h1>
+        <p class="ob-subtitle">{getQ('7')?.subtitle}</p>
         <div class="ob-grid ob-grid--2">
-            <button class="ob-pill" data-field="weak_subject" data-val="English">English</button>
-            <button class="ob-pill" data-field="weak_subject" data-val="Maths">Maths</button>
-            <button class="ob-pill" data-field="weak_subject" data-val="Science">Science</button>
-            <button class="ob-pill" data-field="weak_subject" data-val="Social Science">Social Science</button>
+            {getQ('7')?.options.map(opt => (
+                <button class="ob-pill" data-field={getQ('7')?.field} data-val={opt.value} tabindex="0" aria-label={opt.label}>{opt.label}</button>
+            ))}
         </div>
     </section>
 
     <!-- ─── Step 8 : Target Score  ·  GRID ─── -->
     <section class="ob-step" data-step="8">
         <div class="ob-icon-wrap"><Target class="ob-icon" /></div>
-        <h1 class="ob-title">What's your target score?</h1>
-        <p class="ob-subtitle">Be ambitious — we'll build your path there.</p>
+        <h1 class="ob-title">{getQ('8')?.title}</h1>
+        <p class="ob-subtitle">{getQ('8')?.subtitle}</p>
         <div class="ob-grid ob-grid--2">
-            <button class="ob-pill" data-field="target_score" data-val="70%">70%</button>
-            <button class="ob-pill" data-field="target_score" data-val="80%">80%</button>
-            <button class="ob-pill" data-field="target_score" data-val="90%">90%</button>
-            <button class="ob-pill" data-field="target_score" data-val="Above 95%">Above 95%</button>
+            {getQ('8')?.options.map(opt => (
+                <button class="ob-pill" data-field={getQ('8')?.field} data-val={opt.value} tabindex="0" aria-label={opt.label}>{opt.label}</button>
+            ))}
         </div>
     </section>
 
@@ -778,7 +758,20 @@ import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, Fla
     localStorage.setItem(ATTEMPTS_KEY, String(attempts));
     if (attempts >= 6) { window.location.href = '/tools/keyword-optimizer'; }
 
+    /** 
+     * @typedef {Object} OnboardingState 
+     * @property {string} class_level
+     * @property {string} full_name
+     * @property {string} code_mix_lang
+     * @property {string} tuition_type
+     * @property {string} acquisition_channel
+     * @property {string} exam_timeline
+     * @property {string} weak_subject
+     * @property {string} target_score
+     */
+
     // ── State ──
+    /** @type {OnboardingState} */
     const state = {
         class_level: '', full_name: '', code_mix_lang: '',
         tuition_type: '', acquisition_channel: '', exam_timeline: '',
@@ -786,6 +779,8 @@ import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, Fla
     };
     let currentStep = 1;
     const TOTAL_Q = 8;
+    const root = document.getElementById('ob-root');
+    const DIAGNOSTIC_PROMPTS = JSON.parse(root?.getAttribute('data-prompts') || '{}');
 
     // ── DOM ──
     const progressBar = document.getElementById('ob-progress-bar');
@@ -932,13 +927,9 @@ import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, Fla
     // ── Diagnostic ──
     function setupDiagnostic() {
         const prompt = document.getElementById('diag-prompt');
-        const qmap = {
-            'Science': 'Explain the process of Photosynthesis.',
-            'Maths': 'Explain the Pythagorean theorem and its applications.',
-            'English': "Discuss the main themes in Robert Frost's poetry.",
-            'Social Science': 'Discuss the causes and effects of the French Revolution.'
-        };
-        prompt.textContent = qmap[state.weak_subject] || qmap['Science'];
+        if (prompt) {
+            prompt.textContent = DIAGNOSTIC_PROMPTS[state.weak_subject] || DIAGNOSTIC_PROMPTS['Science'] || 'Explain the process of Photosynthesis.';
+        }
 
         const ta = document.getElementById('diag-textarea');
         ta?.addEventListener('input', () => {
@@ -949,7 +940,26 @@ import { GraduationCap, User, Languages, BookOpen, Megaphone, CalendarClock, Fla
 
     document.getElementById('btn-analyze')?.addEventListener('click', () => goToStep(11));
 
-    function runMockAnalysis() { setTimeout(() => goToStep(12), 3000); }
+    async function runMockAnalysis() { 
+        try {
+            // Simulate API Call delay
+            await new Promise((resolve) => setTimeout(resolve, 3000));
+            
+            // For production, actual fetch logic goes here.
+            // if (!response.ok) throw new Error('API Error');
+
+            goToStep(12);
+        } catch (error) {
+            console.error("Analysis API failed:", error);
+            // Graceful Fallback UI
+            const label = document.querySelector('.ob-loader-label');
+            if (label) {
+                label.textContent = "Something went wrong. Please try again.";
+                label.classList.add('shake');
+            }
+            setTimeout(() => goToStep(10), 3000); // Send back to retry
+        }
+    }
 
     // ── Results ──
     function setupResults() {

@@ -1,18 +1,11 @@
 ---
-import '@fontsource/plus-jakarta-sans';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import OnboardingFlow from '../components/OnboardingFlow.astro';
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Get Started | MarksMind AI</title>
-    <meta name="description" content="Set up your MarksMind AI profile and discover where your marks are going.">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-</head>
-<body class="font-['Plus_Jakarta_Sans',sans-serif] antialiased">
+<BaseLayout 
+    title="Get Started | MarksMind AI"
+    description="Set up your MarksMind AI profile and discover where your marks are going."
+>
     <OnboardingFlow />
-</body>
-</html>
+</BaseLayout>
