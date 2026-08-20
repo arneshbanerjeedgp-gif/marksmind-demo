@@ -96,6 +96,7 @@ export const ONBOARDING_QUESTIONS: QuestionProps[] = [
             { value: 'Maths', label: 'Maths' },
             { value: 'Science', label: 'Science' },
             { value: 'Social Science', label: 'Social Science' },
+            { value: 'Chemistry', label: 'Chemistry' },
         ]
     },
     {
@@ -118,5 +119,6 @@ export const DIAGNOSTIC_PROMPTS: Record<string, string> = {
     'Science': 'Explain the process of Photosynthesis.',
     'Maths': 'Explain the Pythagorean theorem and its applications.',
     'English': "Discuss the main themes in Robert Frost's poetry.",
-    'Social Science': 'Discuss the causes and effects of the French Revolution.'
+    'Social Science': 'Discuss the causes and effects of the French Revolution.',
+    'Chemistry': 'What is fractional distillation?'
 };
