@@ -2,23 +2,26 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/landing/Navbar';
 import Hero from '../components/landing/Hero';
-import StatsTicker from '../components/landing/StatsTicker';
-import GradingReality from '../components/landing/GradingReality';
-import Philosophy from '../components/landing/Philosophy';
-import FeatureGrid from '../components/landing/FeatureGrid';
-import HowItWorks from '../components/landing/HowItWorks';
+import TrustTicker from '../components/landing/TrustTicker';
+import TheProblem from '../components/landing/TheProblem';
+import TheSolution from '../components/landing/TheSolution';
+import FeatureCeda from '../components/landing/FeatureCeda';
+import FeatureMemory from '../components/landing/FeatureMemory';
+import FeatureMistakes from '../components/landing/FeatureMistakes';
 import SubjectSandbox from '../components/landing/SubjectSandbox';
+import Manifesto from '../components/landing/Manifesto';
 import Personas from '../components/landing/Personas';
-import CTA from '../components/landing/CTA';
+import BottomCTA from '../components/landing/BottomCTA';
+import Footer from '../components/landing/Footer';
 ---
 
 <BaseLayout 
     title="MarksMind AI | Precision Diagnostics"
-    description="End the grading black box. We ignore bad grammar to evaluate your pure scientific concepts against NCERT standards."
+    description="End the grading black box. We parse English, ignore bad grammar, and extract pure science."
 >
     <style>
         :root {
-            --bg-base: #121212;
+            --bg-base: #0a0a0a;
         }
         body {
             background-color: var(--bg-base);
@@ -26,20 +29,27 @@ import CTA from '../components/landing/CTA';
             font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
         }
+        ::selection {
+            background-color: rgba(168, 85, 247, 0.3);
+            color: white;
+        }
     </style>
 
     <Navbar client:load />
     
     <main>
         <Hero client:load />
-        <StatsTicker client:load />
-        <GradingReality client:visible />
-        <Philosophy client:visible />
-        <FeatureGrid client:visible />
-        <HowItWorks client:visible />
+        <TrustTicker client:load />
+        <TheProblem client:visible />
+        <TheSolution client:visible />
+        <FeatureCeda client:visible />
+        <FeatureMemory client:visible />
+        <FeatureMistakes client:visible />
         <SubjectSandbox client:load />
+        <Manifesto client:visible />
         <Personas client:visible />
     </main>
     
-    <CTA client:visible />
+    <BottomCTA client:visible />
+    <Footer client:visible />
 </BaseLayout>
