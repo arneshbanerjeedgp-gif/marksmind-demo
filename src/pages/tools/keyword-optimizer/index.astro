@@ -347,21 +347,21 @@ import { BotMessageSquare, BrainCircuit, Layers, UserCircle, Sparkles, Target, H
                     </div>
                     <div class="mb-8 flex flex-wrap items-center gap-4">
                          <div class="flex flex-row items-center gap-2.5 overflow-x-auto no-scrollbar py-1 w-full">
-                            <button data-qid="q1" class="sandbox-btn px-3.5 py-2 rounded-xl text-left border shrink-0 transition-all text-xs sm:text-sm bg-[#141414] border-white/10 text-neutral-300 hover:bg-[#1a1a1a] hover:border-white/20">
-                                <p class="font-bold question-title">Q1: Cellular Powerhouse</p>
-                                <p class="text-[11px] text-neutral-400 mt-0.5">Science</p>
+                            <button data-qid="q1" class="sandbox-btn px-6 py-4 rounded-xl border min-w-[220px] text-left transition-all bg-[#161618] border-white/10 text-white hover:border-white/20">
+                                <div class="text-base font-bold question-title">Q1: Cellular Powerhouse</div>
+                                <div class="text-xs text-neutral-400 mt-1">Science</div>
                             </button>
-                            <button data-qid="q2" class="sandbox-btn px-3.5 py-2 rounded-xl text-left border shrink-0 transition-all text-xs sm:text-sm bg-[#141414] border-white/10 text-neutral-300 hover:bg-[#1a1a1a] hover:border-white/20">
-                                 <p class="font-bold question-title">Q2: Velocity & Acceleration</p>
-                                 <p class="text-[11px] text-neutral-400 mt-0.5">Class 9 Physics</p>
+                            <button data-qid="q2" class="sandbox-btn px-6 py-4 rounded-xl border min-w-[220px] text-left transition-all bg-[#161618] border-white/10 text-white hover:border-white/20">
+                                 <div class="text-base font-bold question-title">Q2: Velocity & Acceleration</div>
+                                 <div class="text-xs text-neutral-400 mt-1">Class 9 Physics</div>
                             </button>
-                            <button data-qid="q3" class="sandbox-btn px-3.5 py-2 rounded-xl text-left border shrink-0 transition-all text-xs sm:text-sm bg-[#141414] border-white/10 text-neutral-300 hover:bg-[#1a1a1a] hover:border-white/20">
-                                 <p class="font-bold question-title">Q3: What is RAG?</p>
-                                 <p class="text-[11px] text-neutral-400 mt-0.5">AI / CS</p>
+                            <button data-qid="q3" class="sandbox-btn px-6 py-4 rounded-xl border min-w-[220px] text-left transition-all bg-[#161618] border-white/10 text-white hover:border-white/20">
+                                 <div class="text-base font-bold question-title">Q3: What is RAG?</div>
+                                 <div class="text-xs text-neutral-400 mt-1">AI / CS</div>
                             </button>
-                            <button data-qid="q4" class="sandbox-btn px-3.5 py-2 rounded-xl text-left border shrink-0 transition-all text-xs sm:text-sm bg-[#141414] border-white/10 text-neutral-300 hover:bg-[#1a1a1a] hover:border-white/20">
-                                 <p class="font-bold question-title">Q4: Fractional Distillation</p>
-                                 <p class="text-[11px] text-neutral-400 mt-0.5">Chemistry</p>
+                            <button data-qid="q4" class="sandbox-btn px-6 py-4 rounded-xl border min-w-[220px] text-left transition-all bg-[#161618] border-white/10 text-white hover:border-white/20">
+                                 <div class="text-base font-bold question-title">Q4: Fractional Distillation</div>
+                                 <div class="text-xs text-neutral-400 mt-1">Chemistry</div>
                             </button>
                         </div>
                         <div class="flex items-center gap-2">
@@ -402,40 +402,75 @@ import { BotMessageSquare, BrainCircuit, Layers, UserCircle, Sparkles, Target, H
 
             <!-- View 2: Quiz Generator -->
             <div id="quiz-generator-view" class="hidden">
-                <div id="quiz-app" class="max-w-4xl mx-auto">
+                <div id="quiz-app" class="max-w-7xl mx-auto">
                     <div id="step-topic" class="space-y-6">
                         <h2 class="text-2xl text-slate-100 font-bold mb-6">Quiz Generator</h2>
                         <p class="text-slate-400">Choose a topic to start a quiz.</p>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 w-full max-w-5xl pt-4">
-                        <button onclick="selectTopic('Mitochondria')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                            <div>
-                                <h3 class="text-sm sm:text-base font-semibold tracking-tight text-purple-400 group-hover:text-purple-300">Mitochondria</h3>
-                                <p class="text-xs text-neutral-400 mt-1 leading-snug">Biology · Cell Structure</p>
-                            </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 w-full pt-4">
+                        <button
+                          onclick="selectTopic('Mitochondria')"
+                          class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                        >
+                          <div>
+                            <h3 class="text-xl font-bold tracking-tight text-purple-400 group-hover:text-purple-300">
+                              Mitochondria
+                            </h3>
+                            <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                              Biology · Cell Structure
+                            </p>
+                          </div>
                         </button>
-                        <button onclick="selectTopic('Acceleration')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                            <div>
-                                <h3 class="text-sm sm:text-base font-semibold tracking-tight text-green-400 group-hover:text-green-300">Acceleration</h3>
-                                <p class="text-xs text-neutral-400 mt-1 leading-snug">Physics · Kinematics</p>
-                            </div>
+                        <button
+                          onclick="selectTopic('Acceleration')"
+                          class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                        >
+                          <div>
+                            <h3 class="text-xl font-bold tracking-tight text-green-400 group-hover:text-green-300">
+                              Acceleration
+                            </h3>
+                            <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                              Physics · Kinematics
+                            </p>
+                          </div>
                         </button>
-                        <button onclick="selectTopic('RAG')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                            <div>
-                                <h3 class="text-sm sm:text-base font-semibold tracking-tight text-sky-400 group-hover:text-sky-300">RAG AI</h3>
-                                <p class="text-xs text-neutral-400 mt-1 leading-snug">Computer Science · AI</p>
-                            </div>
+                        <button
+                          onclick="selectTopic('RAG')"
+                          class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                        >
+                          <div>
+                            <h3 class="text-xl font-bold tracking-tight text-sky-400 group-hover:text-sky-300">
+                              RAG AI
+                            </h3>
+                            <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                              Computer Science · AI
+                            </p>
+                          </div>
                         </button>
-                        <button onclick="selectTopic('IKS')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                            <div>
-                                <h3 class="text-sm sm:text-base font-semibold tracking-tight text-amber-400 group-hover:text-amber-300">IKS Sustainability</h3>
-                                <p class="text-xs text-neutral-400 mt-1 leading-snug">Environment · Heritage</p>
-                            </div>
+                        <button
+                          onclick="selectTopic('IKS')"
+                          class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                        >
+                          <div>
+                            <h3 class="text-xl font-bold tracking-tight text-amber-400 group-hover:text-amber-300">
+                              IKS Sustainability
+                            </h3>
+                            <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                              Environment · Heritage
+                            </p>
+                          </div>
                         </button>
-                        <button onclick="selectTopic('FractionalDistillation')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                            <div>
-                                <h3 class="text-sm sm:text-base font-semibold tracking-tight text-rose-400 group-hover:text-rose-300">Fractional Distillation</h3>
-                                <p class="text-xs text-neutral-400 mt-1 leading-snug">Chemistry · Separation</p>
-                            </div>
+                        <button
+                          onclick="selectTopic('FractionalDistillation')"
+                          class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                        >
+                          <div>
+                            <h3 class="text-xl font-bold tracking-tight text-rose-400 group-hover:text-rose-300">
+                              Fractional Distillation
+                            </h3>
+                            <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                              Chemistry · Separation
+                            </p>
+                          </div>
                         </button>
                         </div>
                     </div>
@@ -486,40 +521,75 @@ import { BotMessageSquare, BrainCircuit, Layers, UserCircle, Sparkles, Target, H
 
             <!-- View 3: Standalone Flashcard Generator -->
             <div id="flashcard-generator-view" class="hidden">
-                <div id="flashcard-app" class="max-w-4xl mx-auto">
+                <div id="flashcard-app" class="max-w-7xl mx-auto">
                     <div id="fg-step-topic" class="space-y-6">
                         <h2 class="text-2xl text-slate-100 font-bold mb-6">Flashcard Generator</h2>
                         <p class="text-slate-400">Select a topic to begin a self-paced review session.</p>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 w-full max-w-5xl pt-4">
-                        <button onclick="fg_selectTopic('Mitochondria')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                            <div>
-                                <h3 class="text-sm sm:text-base font-semibold tracking-tight text-purple-400 group-hover:text-purple-300">Mitochondria</h3>
-                                <p class="text-xs text-neutral-400 mt-1 leading-snug">Biology · Cell Structure</p>
-                            </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 w-full pt-4">
+                        <button
+                          onclick="fg_selectTopic('Mitochondria')"
+                          class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                        >
+                          <div>
+                            <h3 class="text-xl font-bold tracking-tight text-purple-400 group-hover:text-purple-300">
+                              Mitochondria
+                            </h3>
+                            <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                              Biology · Cell Structure
+                            </p>
+                          </div>
                         </button>
-                        <button onclick="fg_selectTopic('Acceleration')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                            <div>
-                                <h3 class="text-sm sm:text-base font-semibold tracking-tight text-green-400 group-hover:text-green-300">Acceleration</h3>
-                                <p class="text-xs text-neutral-400 mt-1 leading-snug">Physics · Kinematics</p>
-                            </div>
+                        <button
+                          onclick="fg_selectTopic('Acceleration')"
+                          class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                        >
+                          <div>
+                            <h3 class="text-xl font-bold tracking-tight text-green-400 group-hover:text-green-300">
+                              Acceleration
+                            </h3>
+                            <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                              Physics · Kinematics
+                            </p>
+                          </div>
                         </button>
-                        <button onclick="fg_selectTopic('RAG')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                            <div>
-                                <h3 class="text-sm sm:text-base font-semibold tracking-tight text-sky-400 group-hover:text-sky-300">RAG AI</h3>
-                                <p class="text-xs text-neutral-400 mt-1 leading-snug">Computer Science · AI</p>
-                            </div>
+                        <button
+                          onclick="fg_selectTopic('RAG')"
+                          class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                        >
+                          <div>
+                            <h3 class="text-xl font-bold tracking-tight text-sky-400 group-hover:text-sky-300">
+                              RAG AI
+                            </h3>
+                            <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                              Computer Science · AI
+                            </p>
+                          </div>
                         </button>
-                        <button onclick="fg_selectTopic('IKS')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                            <div>
-                                <h3 class="text-sm sm:text-base font-semibold tracking-tight text-amber-400 group-hover:text-amber-300">IKS Sustainability</h3>
-                                <p class="text-xs text-neutral-400 mt-1 leading-snug">Environment · Heritage</p>
-                            </div>
+                        <button
+                          onclick="fg_selectTopic('IKS')"
+                          class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                        >
+                          <div>
+                            <h3 class="text-xl font-bold tracking-tight text-amber-400 group-hover:text-amber-300">
+                              IKS Sustainability
+                            </h3>
+                            <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                              Environment · Heritage
+                            </p>
+                          </div>
                         </button>
-                        <button onclick="fg_selectTopic('FractionalDistillation')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                            <div>
-                                <h3 class="text-sm sm:text-base font-semibold tracking-tight text-rose-400 group-hover:text-rose-300">Fractional Distillation</h3>
-                                <p class="text-xs text-neutral-400 mt-1 leading-snug">Chemistry · Separation</p>
-                            </div>
+                        <button
+                          onclick="fg_selectTopic('FractionalDistillation')"
+                          class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                        >
+                          <div>
+                            <h3 class="text-xl font-bold tracking-tight text-rose-400 group-hover:text-rose-300">
+                              Fractional Distillation
+                            </h3>
+                            <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                              Chemistry · Separation
+                            </p>
+                          </div>
                         </button>
                         </div>
                     </div>
@@ -583,36 +653,81 @@ import { BotMessageSquare, BrainCircuit, Layers, UserCircle, Sparkles, Target, H
 
                     <!-- Sandbox Example Cards -->
                     <div class="mb-6">
-                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 w-full max-w-5xl">
-                            <button id="mm-card-mitochondria" data-topic="Mitochondria" onclick="mmSandbox('Mitochondria')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                                <div>
-                                    <h3 class="text-sm sm:text-base font-semibold tracking-tight text-purple-400 group-hover:text-purple-300 transition-colors">Mitochondria</h3>
-                                    <p class="text-xs text-neutral-400 mt-1 leading-snug">Biology &bull; Cell Structure</p>
-                                </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 w-full pt-4">
+                            <button
+                              id="mm-card-mitochondria"
+                              data-topic="Mitochondria"
+                              onclick="mmSandbox('Mitochondria')"
+                              class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                            >
+                              <div>
+                                <h3 class="text-xl font-bold tracking-tight text-purple-400 group-hover:text-purple-300">
+                                  Mitochondria
+                                </h3>
+                                <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                                  Biology · Cell Structure
+                                </p>
+                              </div>
                             </button>
-                            <button id="mm-card-acceleration" data-topic="Acceleration" onclick="mmSandbox('Acceleration')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                                <div>
-                                    <h3 class="text-sm sm:text-base font-semibold tracking-tight text-emerald-400 group-hover:text-emerald-300 transition-colors">Acceleration</h3>
-                                    <p class="text-xs text-neutral-400 mt-1 leading-snug">Physics &bull; Kinematics</p>
-                                </div>
+                            <button
+                              id="mm-card-acceleration"
+                              data-topic="Acceleration"
+                              onclick="mmSandbox('Acceleration')"
+                              class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                            >
+                              <div>
+                                <h3 class="text-xl font-bold tracking-tight text-emerald-400 group-hover:text-emerald-300">
+                                  Acceleration
+                                </h3>
+                                <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                                  Physics · Kinematics
+                                </p>
+                              </div>
                             </button>
-                            <button id="mm-card-rag" data-topic="RAG AI" onclick="mmSandbox('RAG AI')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                                <div>
-                                    <h3 class="text-sm sm:text-base font-semibold tracking-tight text-sky-400 group-hover:text-sky-300 transition-colors">RAG AI</h3>
-                                    <p class="text-xs text-neutral-400 mt-1 leading-snug">Computer Science &bull; AI</p>
-                                </div>
+                            <button
+                              id="mm-card-rag"
+                              data-topic="RAG AI"
+                              onclick="mmSandbox('RAG AI')"
+                              class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                            >
+                              <div>
+                                <h3 class="text-xl font-bold tracking-tight text-sky-400 group-hover:text-sky-300">
+                                  RAG AI
+                                </h3>
+                                <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                                  Computer Science · AI
+                                </p>
+                              </div>
                             </button>
-                            <button id="mm-card-iks" data-topic="IKS" onclick="mmSandbox('IKS')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                                <div>
-                                    <h3 class="text-sm sm:text-base font-semibold tracking-tight text-amber-400 group-hover:text-amber-300 transition-colors">IKS Sustainability</h3>
-                                    <p class="text-xs text-neutral-400 mt-1 leading-snug">Environment &bull; Heritage</p>
-                                </div>
+                            <button
+                              id="mm-card-iks"
+                              data-topic="IKS"
+                              onclick="mmSandbox('IKS')"
+                              class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                            >
+                              <div>
+                                <h3 class="text-xl font-bold tracking-tight text-amber-400 group-hover:text-amber-300">
+                                  IKS Sustainability
+                                </h3>
+                                <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                                  Environment · Heritage
+                                </p>
+                              </div>
                             </button>
-                            <button id="mm-card-chemistry" data-topic="Fractional Distillation" onclick="mmSandbox('Fractional Distillation')" class="p-4 rounded-xl min-h-[105px] flex flex-col justify-between bg-[#161616] border border-white/10 hover:border-purple-500/50 hover:bg-[#1c1c1c] transition-all duration-200 cursor-pointer text-left group">
-                                <div>
-                                    <h3 class="text-sm sm:text-base font-semibold tracking-tight text-rose-400 group-hover:text-rose-300 transition-colors">Fractional Distillation</h3>
-                                    <p class="text-xs text-neutral-400 mt-1 leading-snug">Chemistry &bull; Separation</p>
-                                </div>
+                            <button
+                              id="mm-card-chemistry"
+                              data-topic="Fractional Distillation"
+                              onclick="mmSandbox('Fractional Distillation')"
+                              class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                            >
+                              <div>
+                                <h3 class="text-xl font-bold tracking-tight text-rose-400 group-hover:text-rose-300">
+                                  Fractional Distillation
+                                </h3>
+                                <p class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
+                                  Chemistry · Separation
+                                </p>
+                              </div>
                             </button>
                         </div>
                     </div>
@@ -1179,7 +1294,7 @@ import { BotMessageSquare, BrainCircuit, Layers, UserCircle, Sparkles, Target, H
                 q1: { slug: 'science-cellular-powerhouse', title: 'Science: Cellular Powerhouse (Mitochondria)', answer: 'The mitochondrion is the powerhouse of the cell. It generates most of the cell\'s ATP, which is used for energy.' },
                 q2: { slug: 'physics-velocity-acceleration', title: 'Class 9 Physics: Velocity & Acceleration', answer: 'Acceleration is how velocity changes over time. It describes how fast an object is speeding up or slowing down.' },
                 q3: { slug: 'cs-what-is-rag', title: 'AI/CS: What is RAG?', answer: 'RAG stands for Retrieval-Augmented Generation. It improves LLM accuracy by fetching relevant documents from a knowledge base to help the model generate a better answer.' },
-                q4: { slug: 'chemistry-fractional-distillation', title: 'Chemistry: Fractional Distillation', answer: 'It is a process to separate two liquids by boiling them.' }
+                q4: { slug: 'chemistry-fractional-distillation', title: 'Chemistry: Fractional Distillation', answer: 'Fractional distillation is a method used to separate two miscible liquids by boiling them in a flask. The vapours pass through a fractionating column to cool down and get collected separately in a condenser.' }
             };
             function handleSandboxClick(event) {
                 const qid = event.currentTarget.dataset.qid;
