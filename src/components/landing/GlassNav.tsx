@@ -5,9 +5,10 @@ export default function GlassNav() {
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#0a0a0a]/60 backdrop-blur-3xl border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center font-black text-white text-xl">M</div>
-          <span className="text-2xl font-black tracking-tighter text-white">MarksMind<span className="text-purple-500">.AI</span></span>
+        <div className="flex items-center gap-1.5">
+          <span className="text-xl font-extrabold tracking-tight text-white">MarksMind</span>
+          <span className="text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">AI</span>
+          <span className="text-xl ml-0.5">✨</span>
         </div>
         <div className="flex items-center gap-8">
           <a href="/login?mode=signin" className="text-sm font-semibold text-neutral-400 hover:text-white transition-colors">Sign In</a>
