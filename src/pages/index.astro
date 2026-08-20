@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/landing/Navbar';
-import Hero from '../components/landing/Hero';
-import TrustTicker from '../components/landing/TrustTicker';
+import GlassNav from '../components/landing/GlassNav';
+import GodModeHero from '../components/landing/GodModeHero';
+import TrustMarquee from '../components/landing/TrustMarquee';
 import TheProblem from '../components/landing/TheProblem';
 import TheSolution from '../components/landing/TheSolution';
 import FeatureCeda from '../components/landing/FeatureCeda';
@@ -10,9 +10,9 @@ import FeatureMemory from '../components/landing/FeatureMemory';
 import FeatureMistakes from '../components/landing/FeatureMistakes';
 import SubjectSandbox from '../components/landing/SubjectSandbox';
 import Manifesto from '../components/landing/Manifesto';
-import Personas from '../components/landing/Personas';
+import PersonaSplit from '../components/landing/PersonaSplit';
 import BottomCTA from '../components/landing/BottomCTA';
-import Footer from '../components/landing/Footer';
+import Footer from '../components/landing/Footer.astro';
 ---
 
 <BaseLayout 
@@ -35,11 +35,11 @@ import Footer from '../components/landing/Footer';
         }
     </style>
 
-    <Navbar client:load />
+    <GlassNav client:load />
     
     <main>
-        <Hero client:load />
-        <TrustTicker client:load />
+        <GodModeHero client:load />
+        <TrustMarquee client:load />
         <TheProblem client:visible />
         <TheSolution client:visible />
         <FeatureCeda client:visible />
@@ -47,9 +47,9 @@ import Footer from '../components/landing/Footer';
         <FeatureMistakes client:visible />
         <SubjectSandbox client:load />
         <Manifesto client:visible />
-        <Personas client:visible />
+        <PersonaSplit client:visible />
     </main>
     
     <BottomCTA client:visible />
-    <Footer client:visible />
+    <Footer />
 </BaseLayout>
