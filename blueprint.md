@@ -234,3 +234,61 @@ Ensure full credibility and transparency in the AI Command Center dashboard. Bec
 * **Misleading AI Language Removed:** Subtitle updated to `"Learning performance dashboard — demonstration data."`, added note `"Example insight: Physics has the lowest progress score in this demo profile."`, and priority action feed relabeled to `"Demo Priority Action Feed"` with sample alerts.
 * **Preservation of Design & Functionality:** Dark theme palette, layout, purple accents, and DOM IDs (`btn-resolve-mistakes`, `btn-revise-retention`) fully preserved.
 * **Build Verification:** Clean Astro production build (`cmd /c "npm run build"`) succeeded with exit code 0 and zero template/syntax errors.
+
+
+---
+
+## 8. Priority 3: Improve CEDA — Concept Extraction & Defect Analysis
+
+### Objective
+Transform the Answer Evaluator's concept analysis from a mix of structured (Q1) and static/hardcoded (Q2–Q4) evaluation outputs into a consistent, structured CEDA system across all 4 sandbox questions. Each question now receives per-concept breakdown with status badges, evidence quotes, rubric reasoning, NCERT references, and an aggregated gap summary.
+
+### What Changed
+1. **CEDA Branding:**
+   * UI section header updated from "Concept Analysis & Step-Marking Breakdown" to `"CEDA · Concept Extraction & Defect Analysis"`.
+   * All 4 question evaluations now set the breakdown title to `"CEDA · Concept Extraction & Defect Analysis"`.
+
+2. **Q2 — Velocity & Acceleration (Class 9 Physics):**
+   * New `evaluateAccelerationAnswer()` function with 3 concept rubrics:
+     * Definition of Acceleration (rate of change of velocity)
+     * Mathematical Formula (a = (v − u) / t)
+     * SI Unit (m/s²)
+   * Context-aware regex matching with partial credit for related-but-incomplete answers.
+   * NCERT references: Ch. 8 — Motion, Sections 8.1–8.3.
+
+3. **Q3 — What is RAG? (AI/CS):**
+   * New `evaluateRAGAnswer()` function with 3 concept rubrics:
+     * RAG Definition & Acronym
+     * Information Retrieval & Knowledge Base
+     * Improves LLM Accuracy / Grounding
+   * Partial credit for mentioning RAG without full expansion, or describing retrieval without naming vector DB.
+
+4. **Q4 — Fractional Distillation (Chemistry):**
+   * New `evaluateFractionalDistillationAnswer()` function with 3 concept rubrics:
+     * Separation of Miscible Liquids
+     * Boiling Point Difference Criterion (< 25 K)
+     * Fractionating Column Apparatus
+   * Misconception detection: flags confusion with simple distillation.
+   * NCERT references: Ch. 2 — Is Matter Around Us Pure, Section 2.3.4.
+
+5. **Q1 — Mitochondria (Existing, enhanced):**
+   * Added NCERT reference tags (Class 9 Science, Ch. 5 — The Fundamental Unit of Life, Section 5.3).
+   * Standardized gap summary header to match Q2–Q4 format.
+
+6. **Consistent CEDA Output Format (all questions):**
+   * Per-concept cards with: Status Badge (Covered / Partially Covered / Missing / Misconception), Score Badge (+1.0 / +0.5 / 0.0), Evidence quote, Rubric reasoning, NCERT Reference.
+   * Aggregated gap summary listing genuinely missing concepts with correction guidance.
+   * Full-marks congratulation message when all rubric criteria are met.
+
+### How Analysis Is Generated
+All analysis is performed by **local rule-based evaluation functions** using context-aware regular expression matching with negation detection, synonym recognition, and partial-credit logic. There is **no connected AI API or live backend**. The evaluation is deterministic and reproducible.
+
+### What Still Requires a Real Backend/API
+* Dynamic evaluation of arbitrary student answers beyond the 4 predefined topic rubrics.
+* Semantic understanding of paraphrased or creative student responses.
+* Personalized learning recommendations based on historical performance.
+* Cross-question concept graph analysis.
+
+### Implementation & Verification Status: PENDING BUILD VERIFICATION
+* **File Modified:** `src/pages/tools/keyword-optimizer/index.astro`
+* Build verification in progress.
