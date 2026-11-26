@@ -159,9 +159,9 @@ import {
                 <div class="flex items-center gap-3">
                     <UserCircle class="w-9 h-9 text-[#4e525a]" />
                     <div>
-                        <p class="text-sm font-medium text-[#f3f3f4]">Arnesh</p>
+                        <p class="text-sm font-medium text-[#f3f3f4]">Arnesh (Demo)</p>
                         <p class="text-xs text-[#9aa0a6]">
-                            Premium Developer Plan
+                            Demo Profile · Illustrative Account
                         </p>
                     </div>
                 </div>
@@ -172,14 +172,32 @@ import {
             <!-- View -1: Dashboard -->
             <div id="dashboard-view">
                 <div class="max-w-7xl mx-auto">
+                    <!-- Professional Demo Data Transparency Indicator -->
+                    <div class="mb-6 p-4 rounded-2xl border border-purple-500/20 bg-purple-950/20 backdrop-blur-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg shadow-purple-950/10">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-purple-500/15 text-purple-300 border border-purple-500/30 shrink-0">
+                                <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+                                DEMO STUDENT PROFILE · ILLUSTRATIVE DATA
+                            </span>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                These statistics are sample data created to demonstrate the MARKSMIND AI dashboard. They do not represent actual student performance or live analytics.
+                            </p>
+                        </div>
+                    </div>
+
                     <div class="mb-8">
-                        <h1
-                            class="text-xl font-medium text-[#f3f3f4] tracking-tight"
-                        >
-                            AI Command Center
-                        </h1>
+                        <div class="flex items-center gap-3">
+                            <h1
+                                class="text-xl font-medium text-[#f3f3f4] tracking-tight"
+                            >
+                                AI Command Center
+                            </h1>
+                            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                                Demo Mode
+                            </span>
+                        </div>
                         <p class="mt-1 text-base text-[#9aa0a6]">
-                            Your comprehensive academic intelligence overview.
+                            Learning performance dashboard — demonstration data.
                         </p>
                     </div>
                     <div
@@ -191,11 +209,12 @@ import {
                             <p
                                 class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-2"
                             >
-                                Overall Accuracy
+                                Demo Accuracy
                             </p>
                             <p class="text-3xl font-extrabold text-emerald-400">
                                 82% <span class="text-lg">↑</span>
                             </p>
+                            <p class="text-[11px] text-slate-500 mt-2 font-medium">Illustrative cohort baseline</p>
                         </div>
                         <div
                             class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-700"
@@ -203,7 +222,7 @@ import {
                             <p
                                 class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-2"
                             >
-                                Syllabus Mastery
+                                Demo Syllabus Progress
                             </p>
                             <p class="text-3xl font-extrabold text-purple-400">
                                 68%
@@ -216,6 +235,7 @@ import {
                                 >
                                 </div>
                             </div>
+                            <p class="text-[11px] text-slate-500 mt-2 font-medium">Sample curriculum coverage</p>
                         </div>
                         <div
                             class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-700"
@@ -223,11 +243,12 @@ import {
                             <p
                                 class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-2"
                             >
-                                Active Streak
+                                Demo Study Streak
                             </p>
                             <p class="text-3xl font-extrabold text-amber-400">
                                 14 Days 🔥
                             </p>
+                            <p class="text-[11px] text-slate-500 mt-2 font-medium">Demonstration activity streak</p>
                         </div>
                     </div>
 
@@ -235,9 +256,14 @@ import {
                         <div
                             class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6"
                         >
-                            <h3 class="text-lg font-bold text-slate-200 mb-6">
-                                Subject Performance
-                            </h3>
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-lg font-bold text-slate-200">
+                                    Demo Subject Performance
+                                </h3>
+                                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700/60 uppercase tracking-wider">
+                                    Illustrative Data
+                                </span>
+                            </div>
                             <div class="space-y-4">
                                 <div>
                                     <div
@@ -245,7 +271,7 @@ import {
                                     >
                                         <span
                                             class="text-sm font-medium text-slate-300"
-                                            >Biology</span
+                                            >Demo Biology Progress</span
                                         >
                                         <span
                                             class="text-sm font-bold text-slate-400"
@@ -267,7 +293,7 @@ import {
                                     >
                                         <span
                                             class="text-sm font-medium text-slate-300"
-                                            >Physics</span
+                                            >Demo Physics Progress</span
                                         >
                                         <span
                                             class="text-sm font-bold text-slate-400"
@@ -289,7 +315,7 @@ import {
                                     >
                                         <span
                                             class="text-sm font-medium text-slate-300"
-                                            >Chemistry</span
+                                            >Demo Chemistry Progress</span
                                         >
                                         <span
                                             class="text-sm font-bold text-slate-400"
@@ -306,13 +332,21 @@ import {
                                     </div>
                                 </div>
                             </div>
+                            <p class="text-xs text-slate-500 mt-5 pt-3 border-t border-slate-800/80">
+                                Example insight: Physics has the lowest progress score in this demo profile.
+                            </p>
                         </div>
                         <div
                             class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6"
                         >
-                            <h3 class="text-lg font-bold text-slate-200 mb-6">
-                                AI Priority Action Feed
-                            </h3>
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-lg font-bold text-slate-200">
+                                    Demo Priority Action Feed
+                                </h3>
+                                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700/60 uppercase tracking-wider">
+                                    Sample Actions
+                                </span>
+                            </div>
                             <div class="space-y-3">
                                 <div
                                     class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4 flex items-center justify-between hover:border-slate-600 transition-colors"
@@ -320,8 +354,7 @@ import {
                                     <p
                                         class="text-sm font-medium text-slate-300"
                                     >
-                                        🔴 2 Critical mistakes require your
-                                        attention in <span class="font-semibold"
+                                        🔴 Demo Insight: 2 sample critical mistakes flagged in <span class="font-semibold"
                                             >Physics</span
                                         >.
                                     </p>
@@ -337,9 +370,9 @@ import {
                                     <p
                                         class="text-sm font-medium text-slate-300"
                                     >
-                                        🟠 <span class="font-semibold"
+                                        🟠 Demo Alert: Sample retention dropped below 60% in <span class="font-semibold"
                                             >Mitochondria</span
-                                        > retention has dropped below 60%.
+                                        >.
                                     </p>
                                     <button
                                         id="btn-revise-retention"
@@ -1023,9 +1056,10 @@ import {
                                 class="bg-slate-900 border border-slate-800 p-6 rounded-xl"
                             >
                                 <h3
+                                    id="evaluator-breakdown-title"
                                     class="text-xs font-semibold uppercase tracking-wider text-slate-400"
                                 >
-                                    Missing Scientific Parameters
+                                    Concept Analysis & Step-Marking Breakdown
                                 </h3>
                                 <div
                                     id="missing-keywords-display"
@@ -3268,7 +3302,8 @@ import {
             const curriculumDisplay =
                 document.getElementById("curriculum-display");
             const sandboxButtons = document.querySelectorAll(".sandbox-btn");
-            let currentQuestionText = "";
+            let currentQid = "q1";
+            let currentQuestionText = "Q1: Cellular Powerhouse";
             const sandboxData = {
                 q1: {
                     slug: "science-cellular-powerhouse",
@@ -3291,8 +3326,261 @@ import {
                     answer: "Fractional distillation is a method used to separate two liquids by boiling them in a flask. The vapours pass through a long tube to cool down and get collected separately in a condenser.",
                 },
             };
+
+            // Helper: Extract relevant clause/sentence evidence from student answer
+            function extractEvidence(text, regex) {
+                if (!text || !regex.test(text)) return "None found in answer";
+                const sentences = text.split(/(?<=[.?!])\s+/);
+                for (const s of sentences) {
+                    if (regex.test(s)) {
+                        const clauses = s.split(/[,;]\s*/);
+                        for (const c of clauses) {
+                            if (regex.test(c)) return c.trim();
+                        }
+                        return s.trim();
+                    }
+                }
+                return text.trim();
+            }
+
+            // Context-aware evaluation engine for Mitochondria based on NCERT Class 9 criteria
+            function evaluateMitochondriaAnswer(rawAnswer, maxMarks = 3) {
+                const text = (rawAnswer || "").trim();
+                const lower = text.toLowerCase();
+
+                // 1. Concept: Powerhouse of the cell
+                const powerhouseRegex = /(power\s*house|powerhouse|power-house)/i;
+                const hasPowerhouse = powerhouseRegex.test(lower);
+                let powerhouseStatus = "missing";
+                let powerhouseScore = 0;
+                let powerhouseEvidence = "None found in answer";
+                let powerhouseReason = "";
+
+                if (hasPowerhouse) {
+                    powerhouseStatus = "covered";
+                    powerhouseScore = 1.0;
+                    powerhouseEvidence = extractEvidence(text, powerhouseRegex);
+                    powerhouseReason = "Correctly identifies the mitochondrion as the powerhouse of the cell.";
+                } else {
+                    powerhouseStatus = "missing";
+                    powerhouseScore = 0.0;
+                    powerhouseReason = "Did not state that mitochondria are known as the powerhouse of the cell.";
+                }
+
+                // 2. Concept: ATP Generation / Production
+                // Synonyms: "atp", "adenosine triphosphate", "adenosine-triphosphate"
+                const atpRegex = /\b(atp|adenosine\s+triphosphate|adenosine-triphosphate)\b/i;
+                const hasATP = atpRegex.test(lower);
+
+                // Detect scientific error: claiming DNA is the source of cellular energy
+                const dnaEnergyMisconception = /\b(dna|deoxyribonucleic)\b.*\b(energy|power)\b|\b(energy|power)\b.*\b(dna|deoxyribonucleic)\b/i.test(lower) && !hasATP;
+
+                let atpStatus = "missing";
+                let atpScore = 0;
+                let atpEvidence = "None found in answer";
+                let atpReason = "";
+
+                if (dnaEnergyMisconception) {
+                    atpStatus = "misconception";
+                    atpScore = 0.0;
+                    atpEvidence = extractEvidence(text, /\bdna\b/i);
+                    atpReason = "Scientific error: Mitochondria synthesize ATP as cellular energy, not DNA. DNA contains genetic material, not cellular energy.";
+                } else if (hasATP) {
+                    const prodVerbRegex = /\b(generat|produc|synthesiz|releas|yield|form|mak|creat|build)/i;
+                    const atpEvidenceMatch = extractEvidence(text, atpRegex);
+                    const negatedATP = /\b(not|never|doesn'?t|cannot|can't|without)\b.*\b(atp|adenosine\s+triphosphate)\b/i.test(atpEvidenceMatch || lower);
+
+                    if (negatedATP) {
+                        atpStatus = "missing";
+                        atpScore = 0.0;
+                        atpEvidence = atpEvidenceMatch;
+                        atpReason = "ATP production is mentioned in a negated or non-affirmative context.";
+                    } else if (prodVerbRegex.test(atpEvidenceMatch || lower)) {
+                        atpStatus = "covered";
+                        atpScore = 1.0;
+                        atpEvidence = atpEvidenceMatch;
+                        atpReason = "Explicitly states that mitochondria produce/generate ATP (Adenosine Triphosphate).";
+                    } else {
+                        atpStatus = "partial";
+                        atpScore = 0.5;
+                        atpEvidence = atpEvidenceMatch;
+                        atpReason = "Mentions ATP, but does not clearly explain that mitochondria synthesize/generate it.";
+                    }
+                } else {
+                    atpStatus = "missing";
+                    atpScore = 0.0;
+                    atpReason = "Did not mention ATP (Adenosine Triphosphate) or its production.";
+                }
+
+                // 3. Concept: ATP's Role in Cellular Energy / Energy Currency
+                const energyCurrencyRegex = /\b(energy\s+currency|cellular\s+activities|chemical\s+activities|mechanical\s+work|metabolic\s+work|cellular\s+work)\b/i;
+                const genericEnergyRegex = /\b(used\s+for\s+energy|provides?\s+(usable\s+)?energy|suppl(ies|y)\s+(usable\s+)?energy|source\s+of\s+energy|store\s+energy|stores\s+energy|energy\s+for\s+the\s+cell|release\s+energy)\b/i;
+
+                let energyStatus = "missing";
+                let energyScore = 0;
+                let energyEvidence = "None found in answer";
+                let energyReason = "";
+
+                if (dnaEnergyMisconception) {
+                    energyStatus = "missing";
+                    energyScore = 0.0;
+                    energyEvidence = "Invalid claim";
+                    energyReason = "Energy provision claim was attributed to DNA rather than ATP.";
+                } else if (energyCurrencyRegex.test(lower) && (hasATP || genericEnergyRegex.test(lower))) {
+                    energyStatus = "covered";
+                    energyScore = 1.0;
+                    energyEvidence = extractEvidence(text, energyCurrencyRegex);
+                    energyReason = "Accurately articulates ATP's role in providing energy for cellular activities / acting as energy currency.";
+                } else if (genericEnergyRegex.test(lower)) {
+                    energyStatus = "partial";
+                    energyScore = 0.5;
+                    energyEvidence = extractEvidence(text, genericEnergyRegex);
+                    energyReason = "Recognizes ATP's role in providing cellular energy (+0.5). To secure full marks under NCERT marking schemes, also specify its role as the 'energy currency of the cell' used for chemical/mechanical work.";
+                } else {
+                    energyStatus = "missing";
+                    energyScore = 0.0;
+                    energyReason = "Did not explain the role of ATP in powering cellular activities or its designation as the energy currency of the cell.";
+                }
+
+                // Check for cellular respiration keyword in student text
+                const hasCellularRespiration = /\b(cellular\s+respiration|respiration|aerobic)\b/i.test(lower);
+
+                // Calculate step-marking score (scaled to maxMarks, default 3)
+                const rawTotal = powerhouseScore + atpScore + energyScore;
+                const scaledScore = (rawTotal / 3.0) * maxMarks;
+                const formattedScore = Number.isInteger(scaledScore) ? scaledScore.toString() : scaledScore.toFixed(1);
+                const scoreText = `${formattedScore} / ${maxMarks}`;
+
+                // Dynamic Highlight Analysis for Benchmark Answer
+                const mitoHighlight = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Mitochondria</span>`;
+                const powerhouseHighlight = hasPowerhouse
+                    ? `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">powerhouse of the cell</span>`
+                    : `<span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">powerhouse of the cell</span>`;
+
+                const respirationHighlight = hasCellularRespiration
+                    ? `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">cellular respiration</span>`
+                    : `<span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">cellular respiration</span>`;
+
+                let atpHighlight = "";
+                if (atpStatus === "covered") {
+                    atpHighlight = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Adenosine Triphosphate (ATP)</span>`;
+                } else if (atpStatus === "partial") {
+                    atpHighlight = `<span class="text-amber-400 bg-amber-500/10 px-1 rounded font-medium">Adenosine Triphosphate (ATP)</span>`;
+                } else {
+                    atpHighlight = `<span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">Adenosine Triphosphate (ATP)</span>`;
+                }
+
+                let currencyHighlight = "";
+                if (energyStatus === "covered") {
+                    currencyHighlight = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">energy currency</span>`;
+                } else if (energyStatus === "partial") {
+                    currencyHighlight = `<span class="text-amber-400 bg-amber-500/10 px-1 rounded font-medium">energy currency</span>`;
+                } else {
+                    currencyHighlight = `<span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">energy currency</span>`;
+                }
+
+                const benchmarkHTML = `${mitoHighlight} are specialized organelles widely known as the ${powerhouseHighlight}. They are responsible for ${respirationHighlight}, where glucose is oxidized to generate energy. This energy is stored inside a crucial molecule called ${atpHighlight}, which serves as the cellular ${currencyHighlight}.`;
+
+                // Collect missing criteria
+                const missingGaps = [];
+                if (!hasPowerhouse) {
+                    missingGaps.push(`Designation: Did not state that mitochondria are known as the <strong>"powerhouse of the cell"</strong>.`);
+                }
+                if (atpStatus === "missing") {
+                    missingGaps.push(`Chemical Molecule: Missing mention of <strong>Adenosine Triphosphate (ATP)</strong> as the energy carrier.`);
+                } else if (atpStatus === "misconception") {
+                    missingGaps.push(`Conceptual Misconception: DNA contains genetic instructions, whereas <strong>ATP</strong> is the molecule that stores and releases cellular energy.`);
+                }
+                if (energyStatus === "partial") {
+                    missingGaps.push(`Specific Terminology: Student noted energy use, but omitted the standard NCERT board designation <strong>"energy currency of the cell"</strong> for cellular work.`);
+                } else if (energyStatus === "missing") {
+                    missingGaps.push(`Function: Missing explanation of ATP's role as the <strong>"energy currency"</strong> powering cellular activities.`);
+                }
+                if (!hasCellularRespiration) {
+                    missingGaps.push(`Physiological Pathway: Did not mention <strong>cellular respiration</strong> as the process generating ATP.`);
+                }
+
+                const getBadge = (status) => {
+                    if (status === "covered") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-green-500/10 text-green-400 border border-green-500/20">Covered</span>`;
+                    if (status === "partial") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">Partially Covered</span>`;
+                    if (status === "misconception") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20">Misconception</span>`;
+                    return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20">Missing</span>`;
+                };
+
+                const getScoreBadge = (score) => {
+                    if (score === 1.0) return `<span class="text-xs font-bold text-green-400">+1.0 Mark</span>`;
+                    if (score === 0.5) return `<span class="text-xs font-bold text-amber-400">+0.5 Mark</span>`;
+                    return `<span class="text-xs font-bold text-red-400">0.0 Marks</span>`;
+                };
+
+                let breakdownHTML = `
+                    <div class="space-y-3">
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${powerhouseStatus === 'covered' ? 'border-green-500/30' : 'border-red-500/30'}">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-semibold text-slate-200">1. Powerhouse Designation</span>
+                                <div class="flex items-center gap-2">
+                                    ${getBadge(powerhouseStatus)}
+                                    ${getScoreBadge(powerhouseScore)}
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${powerhouseEvidence}"</p>
+                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric Analysis:</span> ${powerhouseReason}</p>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${atpStatus === 'covered' ? 'border-green-500/30' : (atpStatus === 'partial' ? 'border-amber-500/30' : 'border-red-500/30')}">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-semibold text-slate-200">2. ATP Production</span>
+                                <div class="flex items-center gap-2">
+                                    ${getBadge(atpStatus)}
+                                    ${getScoreBadge(atpScore)}
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${atpEvidence}"</p>
+                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric Analysis:</span> ${atpReason}</p>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${energyStatus === 'covered' ? 'border-green-500/30' : (energyStatus === 'partial' ? 'border-amber-500/30' : 'border-red-500/30')}">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-semibold text-slate-200">3. Energy Currency / Cellular Energy</span>
+                                <div class="flex items-center gap-2">
+                                    ${getBadge(energyStatus)}
+                                    ${getScoreBadge(energyScore)}
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${energyEvidence}"</p>
+                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric Analysis:</span> ${energyReason}</p>
+                        </div>
+                `;
+
+                if (missingGaps.length > 0) {
+                    breakdownHTML += `
+                        <div class="p-3 rounded-xl bg-red-950/20 border border-red-500/20 text-xs">
+                            <span class="font-bold text-red-400 uppercase tracking-wide text-[11px]">Genuinely Missing for Full Marks (3/3):</span>
+                            <ul class="list-disc list-inside mt-1.5 space-y-1 text-slate-300">
+                                ${missingGaps.map(gap => `<li>${gap}</li>`).join("")}
+                            </ul>
+                        </div>
+                    `;
+                } else {
+                    breakdownHTML += `
+                        <div class="p-3 rounded-xl bg-green-950/20 border border-green-500/20 text-xs text-green-300">
+                            <span class="font-bold text-green-400">✨ Exceptional Answer:</span> All core NCERT parameters satisfied!
+                        </div>
+                    `;
+                }
+
+                breakdownHTML += `</div>`;
+
+                return {
+                    scoreText,
+                    benchmarkHTML,
+                    breakdownHTML
+                };
+            }
+
             function handleSandboxClick(event) {
                 const qid = event.currentTarget.dataset.qid;
+                currentQid = qid;
                 const data = sandboxData[qid];
                 const button = event.currentTarget;
                 sandboxButtons.forEach((btn) => {
@@ -3306,6 +3594,19 @@ import {
                     curriculumDisplay.innerHTML = `Evaluating against curriculum: <span class="font-medium text-purple-400">${data.title}</span>`;
                 }
             }
+
+            // Sync score denominator with maxMarks input
+            const maxMarksInput = document.getElementById("maxMarksInput");
+            if (maxMarksInput) {
+                maxMarksInput.addEventListener("input", () => {
+                    const currentScore = document.getElementById("score-display");
+                    if (currentScore && currentScore.innerText.includes("--")) {
+                        const val = parseInt(maxMarksInput.value || "3", 10) || 3;
+                        currentScore.innerText = `-- / ${val}`;
+                    }
+                });
+            }
+
             evaluateButton.addEventListener("click", async (e) => {
                 e.preventDefault();
                 const studentAnswer = answerInput.value || "";
@@ -3318,45 +3619,70 @@ import {
                 const missingDisplay = document.getElementById(
                     "missing-keywords-display",
                 );
-                if (scoreDisplay) scoreDisplay.innerText = "-- / 3";
+                const breakdownTitle = document.getElementById(
+                    "evaluator-breakdown-title",
+                );
+                const maxMarks =
+                    parseInt(
+                        document.getElementById("maxMarksInput")?.value || "3",
+                        10,
+                    ) || 3;
+
+                if (scoreDisplay) scoreDisplay.innerText = `-- / ${maxMarks}`;
                 if (benchmarkDisplay)
                     benchmarkDisplay.innerHTML = "Evaluating answer matrix...";
                 if (missingDisplay)
                     missingDisplay.innerHTML = "Analyzing terminology...";
-                await new Promise((resolve) => setTimeout(resolve, 6000));
+
+                // Brief UI transition simulation
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+
                 let requiredAnswerHTML = "";
                 let missingKeywordsHTML = "";
-                let scoreText = "2 / 3";
-                if (
+                let scoreText = `2 / ${maxMarks}`;
+
+                const lowerAns = studentAnswer.toLowerCase();
+                const isVelocity =
                     currentQuestionText.includes("Velocity") ||
-                    studentAnswer.toLowerCase().includes("acceleration")
-                ) {
-                    requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Acceleration</span> is defined as the <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">rate of change of velocity</span> with respect to time. It is a vector quantity, and its mathematical expression is represented by the formula <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">a = (v - u) / t</span>, where 'v' is final velocity and 'u' is initial velocity. The standard SI unit for this measurement is <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">m/s²</span>.`;
-                    missingKeywordsHTML = `<li class="text-red-400 flex items-center gap-2">❌ Mathematical Formula: a = (v - u) / t</li><li class="text-red-400 flex items-center gap-2">❌ Standard SI Unit: m/s² (meters per second squared)</li>`;
-                } else if (
+                    (currentQid === "q2" && !lowerAns.includes("mitochondri")) ||
+                    lowerAns.includes("acceleration");
+                const isFractional =
                     currentQuestionText.includes("Fractional") ||
-                    studentAnswer
-                        .toLowerCase()
-                        .includes("fractional distillation")
-                ) {
-                    scoreText = "1.5 / 3";
-                    requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Fractional distillation</span> is a process used to <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">separate</span> a mixture of two or more <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">miscible liquids</span> for which the <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">difference in their boiling points is less than 25 K</span>. It uses a <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">fractionating column</span> fitted between the distillation flask and the condenser, often packed with <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">glass beads</span> to provide surface for vapors to cool and condense repeatedly.`;
-                    missingKeywordsHTML = `<li class="text-red-400 flex items-center gap-2">❌ Miscible liquids</li><li class="text-red-400 flex items-center gap-2">❌ Difference in boiling points less than 25 K</li><li class="text-red-400 flex items-center gap-2">❌ Fractionating column (Apparatus mechanism)</li>`;
-                } else if (
+                    currentQid === "q4" ||
+                    lowerAns.includes("fractional distillation");
+                const isRAG =
                     currentQuestionText.includes("RAG") ||
-                    studentAnswer.toLowerCase().includes("rag")
-                ) {
+                    currentQid === "q3" ||
+                    lowerAns.includes("rag");
+
+                if (isVelocity) {
+                    if (breakdownTitle) breakdownTitle.textContent = "Missing Scientific Parameters";
+                    requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Acceleration</span> is defined as the <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">rate of change of velocity</span> with respect to time. It is a vector quantity, and its mathematical expression is represented by the formula <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">a = (v - u) / t</span>, where 'v' is final velocity and 'u' is initial velocity. The standard SI unit for this measurement is <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">m/s²</span>.`;
+                    missingKeywordsHTML = `<ul class="space-y-2 text-sm mt-2"><li class="text-red-400 flex items-center gap-2">❌ Mathematical Formula: a = (v - u) / t</li><li class="text-red-400 flex items-center gap-2">❌ Standard SI Unit: m/s² (meters per second squared)</li></ul>`;
+                    scoreText = `2 / ${maxMarks}`;
+                } else if (isFractional) {
+                    if (breakdownTitle) breakdownTitle.textContent = "Missing Scientific Parameters";
+                    scoreText = `${(1.5 / 3 * maxMarks).toFixed(1).replace(/\.0$/, "")} / ${maxMarks}`;
+                    requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Fractional distillation</span> is a process used to <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">separate</span> a mixture of two or more <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">miscible liquids</span> for which the <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">difference in their boiling points is less than 25 K</span>. It uses a <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">fractionating column</span> fitted between the distillation flask and the condenser, often packed with <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">glass beads</span> to provide surface for vapors to cool and condense repeatedly.`;
+                    missingKeywordsHTML = `<ul class="space-y-2 text-sm mt-2"><li class="text-red-400 flex items-center gap-2">❌ Miscible liquids</li><li class="text-red-400 flex items-center gap-2">❌ Difference in boiling points less than 25 K</li><li class="text-red-400 flex items-center gap-2">❌ Fractionating column (Apparatus mechanism)</li></ul>`;
+                } else if (isRAG) {
+                    if (breakdownTitle) breakdownTitle.textContent = "Missing Scientific Parameters";
                     requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Retrieval-Augmented Generation (RAG)</span> is an AI framework that improves Large Language Models. It works by <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">grounding the model</span> on external data sources. Before generating a response, the system <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">retrieves relevant information</span> from a specialized <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">knowledge base</span> (like a vector database), and uses that information as context to create a more accurate and factual answer.`;
-                    missingKeywordsHTML = `<li class="text-red-400 flex items-center gap-2">❌ Information Retrieval</li><li class="text-red-400 flex items-center gap-2">❌ Knowledge Base / Vector DB</li>`;
+                    missingKeywordsHTML = `<ul class="space-y-2 text-sm mt-2"><li class="text-red-400 flex items-center gap-2">❌ Information Retrieval</li><li class="text-red-400 flex items-center gap-2">❌ Knowledge Base / Vector DB</li></ul>`;
+                    scoreText = `2 / ${maxMarks}`;
                 } else {
-                    requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Mitochondria</span> are specialized organelles widely known as the <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">powerhouse of the cell</span>. They are responsible for cellular respiration, where glucose is oxidized to generate energy. This energy is stored inside a crucial molecule called <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">Adenosine Triphosphate (ATP)</span>, which serves as the cellular <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">energy currency</span>.`;
-                    missingKeywordsHTML = `<li class="text-red-400 flex items-center gap-2">❌ Adenosine Triphosphate (ATP)</li><li class="text-red-400 flex items-center gap-2">❌ Energy Currency</li>`;
+                    // Mitochondria / Cellular Powerhouse evaluation
+                    if (breakdownTitle) breakdownTitle.textContent = "Concept Analysis & Marking Breakdown";
+                    const mitoResult = evaluateMitochondriaAnswer(studentAnswer, maxMarks);
+                    requiredAnswerHTML = mitoResult.benchmarkHTML;
+                    missingKeywordsHTML = mitoResult.breakdownHTML;
+                    scoreText = mitoResult.scoreText;
                 }
+
                 if (scoreDisplay) scoreDisplay.innerText = scoreText;
-                if (benchmarkDisplay)
-                    benchmarkDisplay.innerHTML = requiredAnswerHTML;
-                if (missingDisplay)
-                    missingDisplay.innerHTML = `<ul class="space-y-2 text-sm mt-2">${missingKeywordsHTML}</ul>`;
+                if (benchmarkDisplay) benchmarkDisplay.innerHTML = requiredAnswerHTML;
+                if (missingDisplay) missingDisplay.innerHTML = missingKeywordsHTML;
+
                 evaluateButton.disabled = false;
                 loader.classList.add("hidden");
                 buttonText.textContent = "Verify Answer Script";
