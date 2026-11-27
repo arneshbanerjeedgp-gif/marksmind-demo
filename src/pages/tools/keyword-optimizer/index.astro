@@ -74,9 +74,9 @@ import {
             scrollbar-width: none;
         }
     </style>
-    <div class="flex flex-col md:flex-row min-h-screen bg-[#0b0b0c] text-[#f3f3f4]">
+    <div class="flex min-h-screen bg-[#0b0b0c] text-[#f3f3f4]">
         <aside
-            class="w-full md:w-64 border-b md:border-b-0 md:border-r border-white/[0.05] bg-[#0e0e10] p-4 flex flex-col justify-between shrink-0"
+            class="w-64 border-r border-white/[0.05] bg-[#0e0e10] p-4 flex flex-col justify-between"
         >
             <div>
                 <div class="px-2 mb-8">
@@ -159,9 +159,9 @@ import {
                 <div class="flex items-center gap-3">
                     <UserCircle class="w-9 h-9 text-[#4e525a]" />
                     <div>
-                        <p class="text-sm font-medium text-[#f3f3f4]">Demo Student Account</p>
+                        <p class="text-sm font-medium text-[#f3f3f4]">Arnesh</p>
                         <p class="text-xs text-[#9aa0a6]">
-                            Illustrative Profile · Class 9 CBSE
+                            Premium Developer Plan
                         </p>
                     </div>
                 </div>
@@ -172,32 +172,14 @@ import {
             <!-- View -1: Dashboard -->
             <div id="dashboard-view">
                 <div class="max-w-7xl mx-auto">
-                    <!-- Professional Demo Data Transparency Indicator -->
-                    <div class="mb-6 p-4 rounded-2xl border border-purple-500/20 bg-purple-950/20 backdrop-blur-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg shadow-purple-950/10">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-purple-500/15 text-purple-300 border border-purple-500/30 shrink-0">
-                                <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
-                                DEMO STUDENT PROFILE · ILLUSTRATIVE DATA
-                            </span>
-                            <p class="text-xs text-slate-400 leading-relaxed">
-                                These statistics are sample data created to demonstrate the MARKSMIND AI dashboard. They do not represent actual student performance or live analytics.
-                            </p>
-                        </div>
-                    </div>
-
                     <div class="mb-8">
-                        <div class="flex items-center gap-3">
-                            <h1
-                                class="text-xl font-medium text-[#f3f3f4] tracking-tight"
-                            >
-                                AI Command Center
-                            </h1>
-                            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
-                                Demo Mode
-                            </span>
-                        </div>
+                        <h1
+                            class="text-xl font-medium text-[#f3f3f4] tracking-tight"
+                        >
+                            AI Command Center
+                        </h1>
                         <p class="mt-1 text-base text-[#9aa0a6]">
-                            Learning performance dashboard — demonstration data.
+                            Your comprehensive academic intelligence overview.
                         </p>
                     </div>
                     <div
@@ -209,12 +191,11 @@ import {
                             <p
                                 class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-2"
                             >
-                                Demo Accuracy
+                                Overall Accuracy
                             </p>
                             <p class="text-3xl font-extrabold text-emerald-400">
                                 82% <span class="text-lg">↑</span>
                             </p>
-                            <p class="text-[11px] text-slate-500 mt-2 font-medium">Illustrative cohort baseline</p>
                         </div>
                         <div
                             class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-700"
@@ -222,7 +203,7 @@ import {
                             <p
                                 class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-2"
                             >
-                                Demo Syllabus Progress
+                                Syllabus Mastery
                             </p>
                             <p class="text-3xl font-extrabold text-purple-400">
                                 68%
@@ -235,7 +216,6 @@ import {
                                 >
                                 </div>
                             </div>
-                            <p class="text-[11px] text-slate-500 mt-2 font-medium">Sample curriculum coverage</p>
                         </div>
                         <div
                             class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-700"
@@ -243,12 +223,11 @@ import {
                             <p
                                 class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-2"
                             >
-                                Demo Study Streak
+                                Active Streak
                             </p>
                             <p class="text-3xl font-extrabold text-amber-400">
                                 14 Days 🔥
                             </p>
-                            <p class="text-[11px] text-slate-500 mt-2 font-medium">Demonstration activity streak</p>
                         </div>
                     </div>
 
@@ -256,14 +235,9 @@ import {
                         <div
                             class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6"
                         >
-                            <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-lg font-bold text-slate-200">
-                                    Demo Subject Performance
-                                </h3>
-                                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700/60 uppercase tracking-wider">
-                                    Illustrative Data
-                                </span>
-                            </div>
+                            <h3 class="text-lg font-bold text-slate-200 mb-6">
+                                Subject Performance
+                            </h3>
                             <div class="space-y-4">
                                 <div>
                                     <div
@@ -271,7 +245,7 @@ import {
                                     >
                                         <span
                                             class="text-sm font-medium text-slate-300"
-                                            >Demo Biology Progress</span
+                                            >Biology</span
                                         >
                                         <span
                                             class="text-sm font-bold text-slate-400"
@@ -293,7 +267,7 @@ import {
                                     >
                                         <span
                                             class="text-sm font-medium text-slate-300"
-                                            >Demo Physics Progress</span
+                                            >Physics</span
                                         >
                                         <span
                                             class="text-sm font-bold text-slate-400"
@@ -315,7 +289,7 @@ import {
                                     >
                                         <span
                                             class="text-sm font-medium text-slate-300"
-                                            >Demo Chemistry Progress</span
+                                            >Chemistry</span
                                         >
                                         <span
                                             class="text-sm font-bold text-slate-400"
@@ -332,21 +306,13 @@ import {
                                     </div>
                                 </div>
                             </div>
-                            <p class="text-xs text-slate-500 mt-5 pt-3 border-t border-slate-800/80">
-                                Example insight: Physics has the lowest progress score in this demo profile.
-                            </p>
                         </div>
                         <div
                             class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6"
                         >
-                            <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-lg font-bold text-slate-200">
-                                    Demo Priority Action Feed
-                                </h3>
-                                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700/60 uppercase tracking-wider">
-                                    Sample Actions
-                                </span>
-                            </div>
+                            <h3 class="text-lg font-bold text-slate-200 mb-6">
+                                AI Priority Action Feed
+                            </h3>
                             <div class="space-y-3">
                                 <div
                                     class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4 flex items-center justify-between hover:border-slate-600 transition-colors"
@@ -354,7 +320,8 @@ import {
                                     <p
                                         class="text-sm font-medium text-slate-300"
                                     >
-                                        🔴 Demo Insight: 2 sample critical mistakes flagged in <span class="font-semibold"
+                                        🔴 2 Critical mistakes require your
+                                        attention in <span class="font-semibold"
                                             >Physics</span
                                         >.
                                     </p>
@@ -370,9 +337,9 @@ import {
                                     <p
                                         class="text-sm font-medium text-slate-300"
                                     >
-                                        🟠 Demo Alert: Suggested revision priority for <span class="font-semibold"
+                                        🟠 <span class="font-semibold"
                                             >Mitochondria</span
-                                        > — revisit ATP's role as energy currency.
+                                        > retention has dropped below 60%.
                                     </p>
                                     <button
                                         id="btn-revise-retention"
@@ -389,60 +356,54 @@ import {
             <!-- View 0: Smart Revision Engine -->
             <div id="smart-revision-view" class="hidden">
                 <div class="max-w-7xl mx-auto">
-                    <div class="mb-6 p-4 rounded-2xl border border-purple-500/20 bg-purple-950/20 flex flex-col sm:flex-row sm:items-center gap-3">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-purple-500/15 text-purple-300 border border-purple-500/30 shrink-0">
-                            DEMO REVISION PLANNER · ILLUSTRATIVE SCHEDULE
-                        </span>
-                        <p class="text-xs text-slate-400 leading-relaxed">
-                            Suggested practice priorities connected to the prototype demonstration profile. Actual memory retention is not measured in this prototype.
-                        </p>
-                    </div>
-
                     <div class="mb-8">
-                        <div class="flex items-center gap-3">
-                            <h1
-                                class="text-xl font-medium text-[#f3f3f4] tracking-tight"
-                            >
-                                Smart Revision
-                            </h1>
-                            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
-                                Demo Mode
-                            </span>
-                        </div>
+                        <h1
+                            class="text-xl font-medium text-[#f3f3f4] tracking-tight"
+                        >
+                            Smart Revision Engine
+                        </h1>
                         <p class="mt-1 text-base text-[#9aa0a6]">
-                            Suggested revision priorities and concepts to revisit in demo mode.
+                            Track your memory decay and optimize revision time.
                         </p>
                     </div>
 
                     <div class="space-y-6">
-                        <!-- Card 1: Mitochondria (Priority Revision) -->
+                        <!-- Card 1: Mitochondria (Decaying Memory) -->
                         <div
                             class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-purple-500/50 hover:shadow-purple-900/20"
                         >
                             <p
                                 class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-1"
                             >
-                                Class 9 Science: The Fundamental Unit of Life
+                                Class 9 Science: Fundamental Unit of Life
                             </p>
-                            <div class="flex flex-wrap items-center gap-3">
+                            <div class="flex items-center">
                                 <h3 class="text-xl font-bold text-slate-200">
-                                    Mitochondria — Cellular Powerhouse
+                                    Mitochondria
                                 </h3>
                                 <span
-                                    class="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full uppercase tracking-wider font-bold"
-                                    >Suggested Revision · Priority: High</span
+                                    class="ml-4 text-xs bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 rounded-full animate-pulse uppercase tracking-wider font-bold align-middle"
+                                    >🔴 Priority Action</span
                                 >
                             </div>
 
-                            <div class="mt-5 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
-                                <span class="text-sm font-medium text-slate-300">Revision Status</span>
-                                <span class="text-xs font-semibold px-2.5 py-1 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">
-                                    Concepts to Revisit (Demo Profile)
-                                </span>
+                            <div class="mt-6">
+                                <label
+                                    class="text-sm font-medium text-slate-300"
+                                    >Memory Health: 58%</label
+                                >
+                                <div
+                                    class="w-full bg-slate-800 h-2 rounded-full mt-2"
+                                >
+                                    <div
+                                        class="bg-amber-500 w-[58%] h-2 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]"
+                                    >
+                                    </div>
+                                </div>
                             </div>
 
                             <div
-                                class="grid grid-cols-1 md:grid-cols-3 mt-5 gap-4"
+                                class="grid grid-cols-1 md:grid-cols-3 mt-6 gap-4"
                             >
                                 <div
                                     class="flex items-center gap-2 text-sm text-slate-400"
@@ -460,9 +421,9 @@ import {
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                                         ></path></svg
                                     >
-                                    Demo Context: <span
+                                    Last Studied: <span
                                         class="font-semibold text-slate-300"
-                                        >Linked to Evaluator Q1</span
+                                        >4 Days Ago</span
                                     >
                                 </div>
                                 <div
@@ -481,9 +442,9 @@ import {
                                             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                                         ></path></svg
                                     >
-                                    Sample Evaluator Score: <span
+                                    Past Score: <span
                                         class="font-semibold text-slate-300"
-                                        >2.5 / 3</span
+                                        >16/20</span
                                     >
                                 </div>
                                 <div
@@ -502,9 +463,9 @@ import {
                                             d="M13 10V3L4 14h7v7l9-11h-7z"
                                         ></path></svg
                                     >
-                                    Concepts to Revisit: <span
+                                    Weakest Concept: <span
                                         class="font-semibold text-slate-300"
-                                        >Energy Currency &amp; Respiration</span
+                                        >ATP Generation</span
                                     >
                                 </div>
                             </div>
@@ -513,7 +474,9 @@ import {
                                 class="bg-purple-900/10 border border-purple-500/20 p-4 rounded-xl mt-6"
                             >
                                 <p class="text-sm text-purple-300/90">
-                                    <strong>Revision Status:</strong> Suggested action: Complete a short targeted revision on ATP generation, cellular respiration, and ATP's role as the energy currency of the cell.
+                                    <strong>AI Recommendation:</strong> Your memory
+                                    retention is decaying. A 3-minute targeted revision
+                                    will restore your memory to 95%.
                                 </p>
                             </div>
 
@@ -521,38 +484,46 @@ import {
                                 id="launch-revision-btn"
                                 class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg mt-6 transition-all"
                             >
-                                Launch Targeted Revision (Focus: Mitochondria &amp; ATP)
+                                Launch Targeted Revision (Focus: ATP)
                             </button>
                         </div>
 
-                        <!-- Card 2: Acceleration (Practiced in Demo) -->
+                        <!-- Card 2: Acceleration (Healthy Memory) -->
                         <div
                             class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-500/50 hover:shadow-green-900/20"
                         >
                             <p
                                 class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-1"
                             >
-                                Class 9 Physics: Motion &amp; Kinematics
+                                Class 9 Physics: Kinematics
                             </p>
-                            <div class="flex flex-wrap items-center gap-3">
+                            <div class="flex items-center">
                                 <h3 class="text-xl font-bold text-slate-200">
-                                    Velocity &amp; Acceleration
+                                    Acceleration
                                 </h3>
                                 <span
-                                    class="text-xs bg-green-500/10 text-green-400 border border-green-500/20 px-3 py-1 rounded-full uppercase tracking-wider font-bold"
-                                    >Demo Progress · Lower Priority</span
+                                    class="ml-4 text-xs bg-green-500/10 text-green-400 border border-green-500/20 px-3 py-1 rounded-full uppercase tracking-wider font-bold align-middle"
+                                    >🟢 Mastered</span
                                 >
                             </div>
 
-                            <div class="mt-5 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
-                                <span class="text-sm font-medium text-slate-300">Revision Status</span>
-                                <span class="text-xs font-semibold px-2.5 py-1 rounded bg-green-500/10 text-green-400 border border-green-500/20">
-                                    Sample Concept Practiced
-                                </span>
+                            <div class="mt-6">
+                                <label
+                                    class="text-sm font-medium text-slate-300"
+                                    >Memory Health: 94%</label
+                                >
+                                <div
+                                    class="w-full bg-slate-800 h-2 rounded-full mt-2"
+                                >
+                                    <div
+                                        class="bg-green-500 w-[94%] h-2 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.5)]"
+                                    >
+                                    </div>
+                                </div>
                             </div>
 
                             <div
-                                class="grid grid-cols-1 md:grid-cols-3 mt-5 gap-4"
+                                class="grid grid-cols-1 md:grid-cols-3 mt-6 gap-4"
                             >
                                 <div
                                     class="flex items-center gap-2 text-sm text-slate-400"
@@ -570,9 +541,9 @@ import {
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                                         ></path></svg
                                     >
-                                    Revision Priority: <span
+                                    Last Studied: <span
                                         class="font-semibold text-slate-300"
-                                        >Standard Review</span
+                                        >1 Day Ago</span
                                     >
                                 </div>
                                 <div
@@ -591,9 +562,9 @@ import {
                                             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                                         ></path></svg
                                     >
-                                    Key Formula to Retain: <span
+                                    Past Score: <span
                                         class="font-semibold text-slate-300"
-                                        >a = (v − u) / t</span
+                                        >19/20</span
                                     >
                                 </div>
                                 <div
@@ -612,9 +583,9 @@ import {
                                             d="M13 10V3L4 14h7v7l9-11h-7z"
                                         ></path></svg
                                     >
-                                    Concepts to Revisit: <span
+                                    Confidence: <span
                                         class="font-semibold text-slate-300"
-                                        >Formula &amp; SI Unit (m/s²)</span
+                                        >High</span
                                     >
                                 </div>
                             </div>
@@ -623,7 +594,9 @@ import {
                                 class="bg-green-900/10 border border-green-500/20 p-4 rounded-xl mt-6 text-slate-300 text-sm"
                             >
                                 <p>
-                                    <strong>Recommended Practice:</strong> Focus first on incomplete Biology concepts above, then revisit formula derivations and SI unit (m/s²) in Q2.
+                                    <strong>AI Recommendation:</strong> Memory is
+                                    strong. No action needed right now. Focus on your
+                                    weaker topics.
                                 </p>
                             </div>
                         </div>
@@ -634,28 +607,15 @@ import {
             <!-- View X: Mistake Database -->
             <div id="mistake-database-view" class="hidden">
                 <div class="max-w-7xl mx-auto">
-                    <div class="mb-6 p-4 rounded-2xl border border-purple-500/20 bg-purple-950/20 flex flex-col sm:flex-row sm:items-center gap-3">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-purple-500/15 text-purple-300 border border-purple-500/30 shrink-0">
-                            ILLUSTRATIVE MISTAKE DATABASE · SAMPLE DATA
-                        </span>
-                        <p class="text-xs text-slate-400 leading-relaxed">
-                            These sample records demonstrate how the future MARKSMIND AI system is intended to log and group recurring conceptual errors. They do not represent actual student history or live error telemetry.
-                        </p>
-                    </div>
-
                     <div class="mb-8">
-                        <div class="flex items-center gap-3">
-                            <h1
-                                class="text-xl font-medium text-[#f3f3f4] tracking-tight"
-                            >
-                                Personal Mistake Database
-                            </h1>
-                            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
-                                Sample Data
-                            </span>
-                        </div>
+                        <h1
+                            class="text-xl font-medium text-[#f3f3f4] tracking-tight"
+                        >
+                            Personal Mistake Database
+                        </h1>
                         <p class="mt-1 text-base text-[#9aa0a6]">
-                            Illustrative error-pattern tracking prototype showing how recurring concept gaps can be reviewed.
+                            AI-tracked pattern analysis of your recurring
+                            errors.
                         </p>
                     </div>
 
@@ -664,12 +624,12 @@ import {
                         <button
                             id="tab-personal-mistakes"
                             class="px-4 py-2 text-sm font-semibold rounded-lg bg-slate-800 text-white transition-colors"
-                            >Sample Personal Mistakes</button
+                            >My Personal Mistakes</button
                         >
                         <button
                             id="tab-common-mistakes"
                             class="px-4 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-colors"
-                            >Common NCERT Pitfalls (Demo)</button
+                            >Common Student Mistakes</button
                         >
                     </div>
 
@@ -682,41 +642,32 @@ import {
                                 class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4"
                             >
                                 <p class="text-xs text-slate-400">
-                                    Sample Errors Logged (Demo)
+                                    Total Errors Tracked
                                 </p>
                                 <p class="text-2xl text-slate-200 font-bold">
                                     142
-                                </p>
-                                <p class="text-[11px] text-slate-500 mt-1">
-                                    Illustrative count — not live tracking
                                 </p>
                             </div>
                             <div
                                 class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4"
                             >
                                 <p class="text-xs text-slate-400">
-                                    Demo Focus Area
+                                    Biggest Weakness
                                 </p>
                                 <p
                                     class="text-lg text-slate-200 font-bold mt-1"
                                 >
                                     Class 9 Biology
                                 </p>
-                                <p class="text-[11px] text-slate-500 mt-1">
-                                    Example subject concentration
-                                </p>
                             </div>
                             <div
                                 class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4"
                             >
                                 <p class="text-xs text-slate-400">
-                                    Sample Mistakes Resolved
+                                    Mistakes Resolved
                                 </p>
                                 <p class="text-2xl text-green-400 font-bold">
                                     28
-                                </p>
-                                <p class="text-[11px] text-slate-500 mt-1">
-                                    Illustrative resolved records
                                 </p>
                             </div>
                         </div>
@@ -724,14 +675,13 @@ import {
                         <button
                             id="btn-generate-remedial"
                             class="mb-6 bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-6 rounded-xl transition-all shadow-[0_0_15px_rgba(220,38,38,0.3)]"
-                            >Practice Mitochondria Quiz (Sample)</button
+                            >Generate Remedial Quiz</button
                         >
 
                         <div class="flex flex-col md:flex-row gap-3 mb-6">
                             <input
-                                id="mistake-search-input"
                                 type="text"
-                                placeholder="Search sample records by keyword..."
+                                placeholder="Search mistakes by keyword..."
                                 class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-purple-500 transition-colors"
                             />
                             <select
@@ -745,46 +695,39 @@ import {
                             <select
                                 class="bg-slate-900 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-purple-500"
                             >
-                                <option>Sample Priority Order</option>
-                                <option>Topic Grouped</option>
+                                <option>Highest Frequency</option>
+                                <option>Recent First</option>
                             </select>
                         </div>
 
                         <div id="mistake-cards-container" class="space-y-4">
-                            <!-- Card 1 (Aligned with Evaluator Q1 / CEDA gap) -->
+                            <!-- Card 1 (Critical Priority) -->
                             <div
                                 data-subject="Biology"
                                 class="bg-slate-900/50 border border-red-500/30 rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg hover:border-red-500/50 transition-all duration-300"
                             >
-                                <div class="flex flex-wrap justify-between items-center gap-2">
-                                    <div class="flex items-center gap-2">
-                                        <span
-                                            class="bg-red-500/10 text-red-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-red-500/20 font-semibold"
-                                            >Missing NCERT Terminology</span
-                                        >
-                                        <span
-                                            class="bg-slate-800 text-slate-400 px-2 py-0.5 rounded text-[11px] font-medium border border-slate-700"
-                                            >Sample Record</span
-                                        >
-                                    </div>
-                                    <span class="text-red-400 font-bold text-xs bg-red-500/10 px-2.5 py-1 rounded-full border border-red-500/20"
-                                        >Demo Pattern · Linked to Q1</span
+                                <div class="flex justify-between items-center">
+                                    <span
+                                        class="bg-red-500/10 text-red-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-red-500/20 font-semibold"
+                                        >Missing Keyword</span
+                                    >
+                                    <span class="text-red-400 font-bold text-sm"
+                                        >Repeated 6 Times</span
                                     >
                                 </div>
                                 <p class="text-slate-300 mt-3 font-medium">
-                                    Explained ATP generation for energy, but omitted the NCERT terms 'energy currency of the cell' and 'cellular respiration'.
+                                    Forgot to include 'ATP' (Adenosine
+                                    Triphosphate) when explaining energy
+                                    currency.
                                 </p>
                                 <p class="text-slate-500 text-xs mt-2">
-                                    Topic: Class 9 Biology — Mitochondria (Matches NCERT Evaluator Demo Answer)
+                                    Topic: Class 9 Biology - Mitochondria
                                 </p>
                                 <div
-                                    class="mt-4 pt-4 border-t border-slate-700/50 flex flex-wrap gap-4"
+                                    class="mt-4 pt-4 border-t border-slate-700/50 flex gap-4"
                                 >
                                     <button
-                                        type="button"
-                                        data-action="open-question"
-                                        data-qid="q1"
-                                        class="mistake-view-question-btn text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5"
+                                        class="text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5"
                                     >
                                         <svg
                                             class="w-4 h-4"
@@ -803,11 +746,10 @@ import {
                                                 d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                                             ></path></svg
                                         >
-                                        Open in Evaluator
+                                        View Original Question
                                     </button>
                                     <button
-                                        type="button"
-                                        class="mistake-resolve-btn text-xs font-medium text-slate-400 hover:text-green-400 transition-colors flex items-center gap-1.5"
+                                        class="text-xs font-medium text-slate-400 hover:text-green-400 transition-colors flex items-center gap-1.5"
                                     >
                                         <svg
                                             class="w-4 h-4"
@@ -820,7 +762,7 @@ import {
                                                 stroke-width="2"
                                                 d="M5 13l4 4L19 7"></path></svg
                                         >
-                                        Mark as Resolved (Demo)
+                                        Mark as Resolved
                                     </button>
                                 </div>
                             </div>
@@ -829,36 +771,28 @@ import {
                                 data-subject="Biology"
                                 class="bg-slate-900/50 border border-amber-500/30 rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg hover:border-amber-500/50 transition-all duration-300"
                             >
-                                <div class="flex flex-wrap justify-between items-center gap-2">
-                                    <div class="flex items-center gap-2">
-                                        <span
-                                            class="bg-amber-500/10 text-amber-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-amber-500/20 font-semibold"
-                                            >Conceptual Mix-up</span
-                                        >
-                                        <span
-                                            class="bg-slate-800 text-slate-400 px-2 py-0.5 rounded text-[11px] font-medium border border-slate-700"
-                                            >Sample Record</span
-                                        >
-                                    </div>
+                                <div class="flex justify-between items-center">
                                     <span
-                                        class="text-amber-400 font-bold text-xs bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20"
-                                        >Illustrative Example</span
+                                        class="bg-amber-500/10 text-amber-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-amber-500/20 font-semibold"
+                                        >Conceptual Mix-up</span
+                                    >
+                                    <span
+                                        class="text-amber-400 font-bold text-sm"
+                                        >Repeated 3 Times</span
                                     >
                                 </div>
                                 <p class="text-slate-300 mt-3 font-medium">
-                                    Confused the folded inner membrane (cristae) with the porous outer membrane of mitochondria.
+                                    Confused the folded inner membrane (cristae)
+                                    with the porous outer membrane.
                                 </p>
                                 <p class="text-slate-500 text-xs mt-2">
-                                    Topic: Class 9 Biology — Mitochondria Structure (NCERT Ch. 5)
+                                    Topic: Class 9 Biology - Mitochondria
                                 </p>
                                 <div
-                                    class="mt-4 pt-4 border-t border-slate-700/50 flex flex-wrap gap-4"
+                                    class="mt-4 pt-4 border-t border-slate-700/50 flex gap-4"
                                 >
                                     <button
-                                        type="button"
-                                        data-action="open-question"
-                                        data-qid="q1"
-                                        class="mistake-view-question-btn text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5"
+                                        class="text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5"
                                     >
                                         <svg
                                             class="w-4 h-4"
@@ -877,11 +811,10 @@ import {
                                                 d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                                             ></path></svg
                                         >
-                                        Open in Evaluator
+                                        View Original Question
                                     </button>
                                     <button
-                                        type="button"
-                                        class="mistake-resolve-btn text-xs font-medium text-slate-400 hover:text-green-400 transition-colors flex items-center gap-1.5"
+                                        class="text-xs font-medium text-slate-400 hover:text-green-400 transition-colors flex items-center gap-1.5"
                                     >
                                         <svg
                                             class="w-4 h-4"
@@ -894,81 +827,7 @@ import {
                                                 stroke-width="2"
                                                 d="M5 13l4 4L19 7"></path></svg
                                         >
-                                        Mark as Resolved (Demo)
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Card 3 (Physics Sample Record so Physics filter works!) -->
-                            <div
-                                data-subject="Physics"
-                                class="bg-slate-900/50 border border-amber-500/30 rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg hover:border-amber-500/50 transition-all duration-300"
-                            >
-                                <div class="flex flex-wrap justify-between items-center gap-2">
-                                    <div class="flex items-center gap-2">
-                                        <span
-                                            class="bg-amber-500/10 text-amber-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-amber-500/20 font-semibold"
-                                            >Incomplete Formula &amp; SI Unit</span
-                                        >
-                                        <span
-                                            class="bg-slate-800 text-slate-400 px-2 py-0.5 rounded text-[11px] font-medium border border-slate-700"
-                                            >Sample Record</span
-                                        >
-                                    </div>
-                                    <span
-                                        class="text-amber-400 font-bold text-xs bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20"
-                                        >Demo Pattern · Linked to Q2</span
-                                    >
-                                </div>
-                                <p class="text-slate-300 mt-3 font-medium">
-                                    Described acceleration qualitatively but omitted the formula a = (v − u) / t and SI unit m/s².
-                                </p>
-                                <p class="text-slate-500 text-xs mt-2">
-                                    Topic: Class 9 Physics — Velocity &amp; Acceleration (NCERT Ch. 8)
-                                </p>
-                                <div
-                                    class="mt-4 pt-4 border-t border-slate-700/50 flex flex-wrap gap-4"
-                                >
-                                    <button
-                                        type="button"
-                                        data-action="open-question"
-                                        data-qid="q2"
-                                        class="mistake-view-question-btn text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5"
-                                    >
-                                        <svg
-                                            class="w-4 h-4"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            ><path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                            ></path><path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                                            ></path></svg
-                                        >
-                                        Open in Evaluator
-                                    </button>
-                                    <button
-                                        type="button"
-                                        class="mistake-resolve-btn text-xs font-medium text-slate-400 hover:text-green-400 transition-colors flex items-center gap-1.5"
-                                    >
-                                        <svg
-                                            class="w-4 h-4"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            ><path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path></svg
-                                        >
-                                        Mark as Resolved (Demo)
+                                        Mark as Resolved
                                     </button>
                                 </div>
                             </div>
@@ -978,9 +837,6 @@ import {
 
                     <!-- Common Mistakes Content -->
                     <div id="common-mistakes-content" class="hidden">
-                        <p class="text-xs text-slate-400 bg-slate-900/60 border border-slate-800 rounded-xl px-4 py-2.5 mt-3 mb-4">
-                            Illustrative NCERT error patterns curated for student revision (demonstration data — not derived from live cohort analytics).
-                        </p>
                         <div class="flex flex-wrap gap-3 mb-6 mt-4">
                             <button
                                 class="cm-filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-slate-800 text-white border border-slate-700 transition-colors"
@@ -1018,23 +874,24 @@ import {
             <!-- View 1: Answer Evaluator -->
             <div id="answer-evaluator-view" class="hidden">
                 <div class="max-w-7xl mx-auto">
-                    <div class="mb-6">
+                    <div class="mb-8">
                         <h1
-                            class="text-xl font-medium text-[#f3f3f4] tracking-tight flex flex-wrap items-center gap-2"
+                            class="text-xl font-medium text-[#f3f3f4] tracking-tight flex items-center gap-2"
                         >
                             NCERT Answer Evaluator <span
                                 class="bg-[#1e1f22] text-[#c4c7c5] px-2 py-0.5 rounded text-xs font-mono"
-                                >PROTOTYPE · RULE-BASED</span
+                                >BETA</span
                             >
                         </h1>
                         <p
                             id="curriculum-display"
                             class="mt-1 text-base text-[#9aa0a6]"
                         >
-                            Select a sandbox question or test your own wording against predefined NCERT rubrics.
+                            Select a sandbox question or enter your own answer
+                            to begin.
                         </p>
                     </div>
-                    <div class="mb-6 flex flex-wrap items-center gap-4">
+                    <div class="mb-8 flex flex-wrap items-center gap-4">
                         <div
                             class="flex flex-row items-center gap-2.5 overflow-x-auto no-scrollbar py-1 w-full"
                         >
@@ -1046,7 +903,7 @@ import {
                                     Q1: Cellular Powerhouse
                                 </div>
                                 <div class="text-xs text-neutral-400 mt-1">
-                                    Class 9 Biology
+                                    Science
                                 </div>
                             </button>
                             <button
@@ -1079,7 +936,7 @@ import {
                                     Q4: Fractional Distillation
                                 </div>
                                 <div class="text-xs text-neutral-400 mt-1">
-                                    Class 9 Chemistry
+                                    Chemistry
                                 </div>
                             </button>
                         </div>
@@ -1104,30 +961,14 @@ import {
                         <div
                             class="lg:col-span-3 bg-[#161618] border border-white/[0.05] rounded-xl p-6 space-y-4"
                         >
-                            <div id="evaluator-question-box" class="bg-[#0e0e10] border border-white/[0.08] rounded-lg p-4 space-y-2">
-                                <div class="flex flex-wrap items-center justify-between gap-2">
-                                    <span id="evaluator-ncert-scope" class="text-[11px] font-bold uppercase tracking-wider text-purple-400">
-                                        Class 9 Science · Ch. 5: The Fundamental Unit of Life
-                                    </span>
-                                    <span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                                        3-Concept Rubric
-                                    </span>
-                                </div>
-                                <p id="evaluator-question-prompt" class="text-sm font-semibold text-white leading-snug">
-                                    Question: Why are mitochondria called the powerhouse of the cell?
-                                </p>
-                                <p id="evaluator-rubric-summary" class="text-xs text-slate-400 leading-relaxed">
-                                    Marking Criteria: (1) Powerhouse designation [1 mark], (2) ATP / Adenosine Triphosphate production [1 mark], (3) Role in cellular energy / energy currency [1 mark].
-                                </p>
-                            </div>
                             <label
                                 for="answerInput"
-                                class="block text-sm font-medium text-[#c4c7c5]"
-                                >Sample / Student Answer Script</label
+                                class="text-sm font-medium text-[#c4c7c5]"
+                                >Your Answer Script</label
                             >
                             <textarea
                                 id="answerInput"
-                                rows="10"
+                                rows="12"
                                 class="w-full bg-[#0e0e10] border border-white/[0.08] rounded-lg p-4 focus:outline-none focus:border-purple-500/50 transition-colors placeholder:text-[#6a6f78] text-[15px] text-[#e3e3e4] font-normal leading-relaxed tracking-[0.01em]"
                                 placeholder="Enter your answer here or select a sandbox question..."
                             ></textarea>
@@ -1149,14 +990,11 @@ import {
                             <div
                                 class="bg-slate-900 border border-slate-800 p-6 rounded-xl"
                             >
-                                <div class="flex items-center justify-between gap-2">
-                                    <h3
-                                        class="text-xs font-semibold uppercase tracking-wider text-slate-400"
-                                    >
-                                        Step-Marking Score
-                                    </h3>
-                                    <span class="text-[11px] text-slate-500 font-medium">Rubric Prototype</span>
-                                </div>
+                                <h3
+                                    class="text-xs font-semibold uppercase tracking-wider text-slate-400"
+                                >
+                                    Step-Marking Score
+                                </h3>
                                 <div
                                     id="score-display"
                                     class="text-4xl font-bold text-purple-400 mt-2"
@@ -1170,35 +1008,31 @@ import {
                                 <h3
                                     class="text-xs font-semibold uppercase tracking-wider text-slate-400"
                                 >
-                                    Reference Answer &amp; Concept Analysis
+                                    Required Benchmark Answer (Highlight
+                                    Analysis)
                                 </h3>
                                 <p
                                     id="benchmark-display"
                                     class="text-slate-300 text-sm leading-relaxed mt-3"
                                 >
-                                    Click 'Verify Answer Script' to compare the answer against the selected question's reference criteria.
+                                    Click verify to perform keyword evaluation
+                                    matching.
                                 </p>
                             </div>
                             <div
                                 class="bg-slate-900 border border-slate-800 p-6 rounded-xl"
                             >
-                                <div class="flex flex-wrap items-center justify-between gap-2">
-                                    <h3
-                                        id="evaluator-breakdown-title"
-                                        class="text-xs font-semibold uppercase tracking-wider text-slate-400"
-                                    >
-                                        CEDA · Concept Extraction &amp; Defect Analysis
-                                    </h3>
-                                </div>
+                                <h3
+                                    class="text-xs font-semibold uppercase tracking-wider text-slate-400"
+                                >
+                                    Missing Scientific Parameters
+                                </h3>
                                 <div
                                     id="missing-keywords-display"
-                                    class="mt-3 text-slate-400 text-sm"
+                                    class="mt-2 text-slate-400 text-sm"
                                 >
                                     No analysis performed yet.
                                 </div>
-                                <p class="text-[11px] text-slate-500 mt-4 pt-3 border-t border-slate-800">
-                                    Rule-based CEDA prototype using local NCERT concept rubrics (no external AI API connected).
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -1209,16 +1043,11 @@ import {
             <div id="quiz-generator-view" class="hidden">
                 <div id="quiz-app" class="max-w-7xl mx-auto">
                     <div id="step-topic" class="space-y-6">
-                        <div class="flex flex-wrap items-center gap-3">
-                            <h2 class="text-2xl text-slate-100 font-bold">
-                                Quiz Generator
-                            </h2>
-                            <span class="text-xs font-semibold px-2.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
-                                Curated NCERT Practice Decks
-                            </span>
-                        </div>
+                        <h2 class="text-2xl text-slate-100 font-bold mb-6">
+                            Quiz Generator
+                        </h2>
                         <p class="text-slate-400">
-                            Choose a topic to practice predefined NCERT review questions (demo set).
+                            Choose a topic to start a quiz.
                         </p>
                         <div
                             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 w-full pt-4"
@@ -1427,16 +1256,11 @@ import {
             <div id="flashcard-generator-view" class="hidden">
                 <div id="flashcard-app" class="max-w-7xl mx-auto">
                     <div id="fg-step-topic" class="space-y-6">
-                        <div class="flex flex-wrap items-center gap-3">
-                            <h2 class="text-2xl text-slate-100 font-bold">
-                                Flashcard Generator
-                            </h2>
-                            <span class="text-xs font-semibold px-2.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
-                                Curated NCERT Flashcard Decks
-                            </span>
-                        </div>
+                        <h2 class="text-2xl text-slate-100 font-bold mb-6">
+                            Flashcard Generator
+                        </h2>
                         <p class="text-slate-400">
-                            Select a topic to begin a self-paced review session using curated study cards.
+                            Select a topic to begin a self-paced review session.
                         </p>
                         <div
                             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 w-full pt-4"
@@ -1669,43 +1493,39 @@ import {
             <!-- View 4: Mind Map Generator -->
             <div id="mindmap-generator-view" class="hidden">
                 <div class="max-w-7xl mx-auto">
-                    <div class="mb-6">
-                        <div class="flex flex-wrap items-center gap-3">
-                            <h1
-                                class="text-xl font-medium text-[#f3f3f4] tracking-tight"
-                            >
-                                Mind Map Generator
-                            </h1>
-                            <span class="text-xs font-semibold px-2.5 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
-                                Illustrative NCERT Structure · Predefined Concept Maps
-                            </span>
-                        </div>
+                    <div class="mb-8">
+                        <h1
+                            class="text-xl font-medium text-[#f3f3f4] tracking-tight"
+                        >
+                            Mind Map Generator
+                        </h1>
                         <p class="mt-1 text-base text-[#9aa0a6]">
-                            Explore structured, predefined NCERT concept hierarchies (static demonstration maps — not generated by a live RAG model).
+                            Visually map out NCERT concepts into interactive
+                            visual nodes.
                         </p>
                     </div>
 
                     <!-- Sandbox Example Cards -->
                     <div class="mb-6">
                         <div
-                            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 w-full pt-2"
+                            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 w-full pt-4"
                         >
                             <button
                                 id="mm-card-mitochondria"
                                 data-topic="Mitochondria"
                                 onclick="mmSandbox('Mitochondria')"
-                                class="mm-sandbox-card w-full p-5 min-h-[120px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                                class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
                             >
                                 <div>
                                     <h3
-                                        class="text-lg font-bold tracking-tight text-purple-400 group-hover:text-purple-300"
+                                        class="text-xl font-bold tracking-tight text-purple-400 group-hover:text-purple-300"
                                     >
                                         Mitochondria
                                     </h3>
                                     <p
-                                        class="text-xs text-neutral-400 font-medium mt-1.5 leading-relaxed"
+                                        class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed"
                                     >
-                                        Class 9 Biology · Connected Demo Topic
+                                        Biology · Cell Structure
                                     </p>
                                 </div>
                             </button>
@@ -1713,18 +1533,18 @@ import {
                                 id="mm-card-acceleration"
                                 data-topic="Acceleration"
                                 onclick="mmSandbox('Acceleration')"
-                                class="mm-sandbox-card w-full p-5 min-h-[120px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                                class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
                             >
                                 <div>
                                     <h3
-                                        class="text-lg font-bold tracking-tight text-emerald-400 group-hover:text-emerald-300"
+                                        class="text-xl font-bold tracking-tight text-emerald-400 group-hover:text-emerald-300"
                                     >
                                         Acceleration
                                     </h3>
                                     <p
-                                        class="text-xs text-neutral-400 font-medium mt-1.5 leading-relaxed"
+                                        class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed"
                                     >
-                                        Class 9 Physics · Kinematics
+                                        Physics · Kinematics
                                     </p>
                                 </div>
                             </button>
@@ -1732,18 +1552,18 @@ import {
                                 id="mm-card-rag"
                                 data-topic="RAG AI"
                                 onclick="mmSandbox('RAG AI')"
-                                class="mm-sandbox-card w-full p-5 min-h-[120px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                                class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
                             >
                                 <div>
                                     <h3
-                                        class="text-lg font-bold tracking-tight text-sky-400 group-hover:text-sky-300"
+                                        class="text-xl font-bold tracking-tight text-sky-400 group-hover:text-sky-300"
                                     >
-                                        RAG Pipeline
+                                        RAG AI
                                     </h3>
                                     <p
-                                        class="text-xs text-neutral-400 font-medium mt-1.5 leading-relaxed"
+                                        class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed"
                                     >
-                                        Computer Science · Predefined Example
+                                        Computer Science · AI
                                     </p>
                                 </div>
                             </button>
@@ -1751,16 +1571,16 @@ import {
                                 id="mm-card-iks"
                                 data-topic="IKS"
                                 onclick="mmSandbox('IKS')"
-                                class="mm-sandbox-card w-full p-5 min-h-[120px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                                class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
                             >
                                 <div>
                                     <h3
-                                        class="text-lg font-bold tracking-tight text-amber-400 group-hover:text-amber-300"
+                                        class="text-xl font-bold tracking-tight text-amber-400 group-hover:text-amber-300"
                                     >
                                         IKS Sustainability
                                     </h3>
                                     <p
-                                        class="text-xs text-neutral-400 font-medium mt-1.5 leading-relaxed"
+                                        class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed"
                                     >
                                         Environment · Heritage
                                     </p>
@@ -1770,34 +1590,21 @@ import {
                                 id="mm-card-chemistry"
                                 data-topic="Fractional Distillation"
                                 onclick="mmSandbox('Fractional Distillation')"
-                                class="mm-sandbox-card w-full p-5 min-h-[120px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                                class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
                             >
                                 <div>
                                     <h3
-                                        class="text-lg font-bold tracking-tight text-rose-400 group-hover:text-rose-300"
+                                        class="text-xl font-bold tracking-tight text-rose-400 group-hover:text-rose-300"
                                     >
                                         Fractional Distillation
                                     </h3>
                                     <p
-                                        class="text-xs text-neutral-400 font-medium mt-1.5 leading-relaxed"
+                                        class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed"
                                     >
-                                        Class 9 Chemistry · Separation
+                                        Chemistry · Separation
                                     </p>
                                 </div>
                             </button>
-                        </div>
-                    </div>
-
-                    <!-- Mind Map Controls Bar -->
-                    <div class="mb-3 flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
-                        <div class="flex items-center gap-2 text-slate-300">
-                            <span class="font-semibold text-purple-300" id="mm-active-label">Selected Map: Mitochondria (NCERT Class 9)</span>
-                            <span class="text-slate-500 hidden sm:inline">· Drag to pan · Scroll or use buttons to zoom</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <button type="button" id="mm-zoom-out" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold">−</button>
-                            <button type="button" id="mm-zoom-reset" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium">Reset View</button>
-                            <button type="button" id="mm-zoom-in" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold">+</button>
                         </div>
                     </div>
 
@@ -1805,7 +1612,7 @@ import {
                     <div
                         id="mindmap-canvas-container"
                         class="bg-[#0e0e10] border border-[#2a2a2c] rounded-2xl relative overflow-hidden"
-                        style="min-height: 580px;"
+                        style="min-height: 520px;"
                     >
                         <!-- Empty state -->
                         <div
@@ -1833,10 +1640,11 @@ import {
                                     stroke-width="1.5"></path>
                             </svg>
                             <p class="text-[#4e525a] text-sm font-medium">
-                                Select a subject above to display its predefined concept map
+                                Select a subject above to generate a mind map
                             </p>
                             <p class="text-[#3a3a3c] text-xs mt-1">
-                                Click any topic card to inspect its concept hierarchy
+                                Click any sandbox card to explore its concept
+                                map
                             </p>
                         </div>
                         <!-- Loading state -->
@@ -1852,16 +1660,15 @@ import {
                                 id="mindmap-loading-text"
                                 class="text-[#9aa0a6] text-sm mt-4 animate-pulse"
                             >
-                                Loading structured concept map...
+                                Analyzing concept structure...
                             </p>
                         </div>
                         <!-- SVG Canvas -->
                         <svg
                             id="mindmap-svg"
-                            class="w-full h-auto hidden"
-                            viewBox="0 0 1280 780"
-                            preserveAspectRatio="xMidYMid meet"
-                            style="min-height: 580px;"></svg>
+                            class="w-full hidden"
+                            viewBox="0 0 1000 600"
+                            style="min-height: 520px;"></svg>
                     </div>
                 </div>
             </div>
@@ -1904,7 +1711,7 @@ import {
                     id="buffer-status"
                     class="text-slate-400 text-sm tracking-wide mt-6 animate-pulse"
                 >
-                    Preparing Practice Session...
+                    Initializing AI Engine...
                 </p>
             </div>
         </main>
@@ -3223,7 +3030,7 @@ import {
                                 "Extracting mandatory CBSE terminology...";
                         else
                             statusEl.textContent =
-                                "Compiling NCERT flashcard deck...";
+                                "Compiling adaptive NotebookLM flashcards...";
                     }
 
                     if (progress >= 100) {
@@ -3461,8 +3268,7 @@ import {
             const curriculumDisplay =
                 document.getElementById("curriculum-display");
             const sandboxButtons = document.querySelectorAll(".sandbox-btn");
-            let currentQid = "q1";
-            let currentQuestionText = "Q1: Cellular Powerhouse";
+            let currentQuestionText = "";
             const sandboxData = {
                 q1: {
                     slug: "science-cellular-powerhouse",
@@ -3485,740 +3291,8 @@ import {
                     answer: "Fractional distillation is a method used to separate two liquids by boiling them in a flask. The vapours pass through a long tube to cool down and get collected separately in a condenser.",
                 },
             };
-
-            // Helper: Extract relevant clause/sentence evidence from student answer
-            function extractEvidence(text, regex) {
-                if (!text || !regex.test(text)) return "None found in answer";
-                const sentences = text.split(/(?<=[.?!])\s+/);
-                for (const s of sentences) {
-                    if (regex.test(s)) {
-                        const clauses = s.split(/[,;]\s*/);
-                        for (const c of clauses) {
-                            if (regex.test(c)) return c.trim();
-                        }
-                        return s.trim();
-                    }
-                }
-                return text.trim();
-            }
-
-            // Context-aware evaluation engine for Mitochondria based on NCERT Class 9 criteria
-            function evaluateMitochondriaAnswer(rawAnswer, maxMarks = 3) {
-                const text = (rawAnswer || "").trim();
-                const lower = text.toLowerCase();
-
-                // 1. Concept: Powerhouse of the cell
-                const powerhouseRegex = /(power\s*house|powerhouse|power-house)/i;
-                const hasPowerhouse = powerhouseRegex.test(lower);
-                let powerhouseStatus = "missing";
-                let powerhouseScore = 0;
-                let powerhouseEvidence = "None found in answer";
-                let powerhouseReason = "";
-
-                if (hasPowerhouse) {
-                    powerhouseStatus = "covered";
-                    powerhouseScore = 1.0;
-                    powerhouseEvidence = extractEvidence(text, powerhouseRegex);
-                    powerhouseReason = "Correctly identifies the mitochondrion as the powerhouse of the cell.";
-                } else {
-                    powerhouseStatus = "missing";
-                    powerhouseScore = 0.0;
-                    powerhouseReason = "Did not state that mitochondria are known as the powerhouse of the cell.";
-                }
-
-                // 2. Concept: ATP Generation / Production
-                // Synonyms: "atp", "adenosine triphosphate", "adenosine-triphosphate"
-                const atpRegex = /\b(atp|adenosine\s+triphosphate|adenosine-triphosphate)\b/i;
-                const hasATP = atpRegex.test(lower);
-
-                // Detect scientific error: claiming DNA is the source of cellular energy
-                const dnaEnergyMisconception = /\b(dna|deoxyribonucleic)\b.*\b(energy|power)\b|\b(energy|power)\b.*\b(dna|deoxyribonucleic)\b/i.test(lower) && !hasATP;
-
-                let atpStatus = "missing";
-                let atpScore = 0;
-                let atpEvidence = "None found in answer";
-                let atpReason = "";
-
-                if (dnaEnergyMisconception) {
-                    atpStatus = "misconception";
-                    atpScore = 0.0;
-                    atpEvidence = extractEvidence(text, /\bdna\b/i);
-                    atpReason = "Scientific error: Mitochondria synthesize ATP as cellular energy, not DNA. DNA contains genetic material, not cellular energy.";
-                } else if (hasATP) {
-                    const prodVerbRegex = /\b(generat|produc|synthesiz|releas|yield|form|mak|creat|build)/i;
-                    const atpEvidenceMatch = extractEvidence(text, atpRegex);
-                    const negatedATP = /\b(not|never|doesn'?t|cannot|can't|without)\b.*\b(atp|adenosine\s+triphosphate)\b/i.test(atpEvidenceMatch || lower);
-
-                    if (negatedATP) {
-                        atpStatus = "missing";
-                        atpScore = 0.0;
-                        atpEvidence = atpEvidenceMatch;
-                        atpReason = "ATP production is mentioned in a negated or non-affirmative context.";
-                    } else if (prodVerbRegex.test(atpEvidenceMatch || lower)) {
-                        atpStatus = "covered";
-                        atpScore = 1.0;
-                        atpEvidence = atpEvidenceMatch;
-                        atpReason = "Explicitly states that mitochondria produce/generate ATP (Adenosine Triphosphate).";
-                    } else {
-                        atpStatus = "partial";
-                        atpScore = 0.5;
-                        atpEvidence = atpEvidenceMatch;
-                        atpReason = "Mentions ATP, but does not clearly explain that mitochondria synthesize/generate it.";
-                    }
-                } else {
-                    atpStatus = "missing";
-                    atpScore = 0.0;
-                    atpReason = "Did not mention ATP (Adenosine Triphosphate) or its production.";
-                }
-
-                // 3. Concept: ATP's Role in Cellular Energy / Energy Currency
-                const energyCurrencyRegex = /\b(energy\s+currency|cellular\s+activities|chemical\s+activities|mechanical\s+work|metabolic\s+work|cellular\s+work)\b/i;
-                const genericEnergyRegex = /\b(used\s+for\s+energy|provides?\s+(usable\s+)?energy|suppl(ies|y)\s+(usable\s+)?energy|source\s+of\s+energy|store\s+energy|stores\s+energy|energy\s+for\s+the\s+cell|release\s+energy)\b/i;
-
-                let energyStatus = "missing";
-                let energyScore = 0;
-                let energyEvidence = "None found in answer";
-                let energyReason = "";
-
-                if (dnaEnergyMisconception) {
-                    energyStatus = "missing";
-                    energyScore = 0.0;
-                    energyEvidence = "Invalid claim";
-                    energyReason = "Energy provision claim was attributed to DNA rather than ATP.";
-                } else if (energyCurrencyRegex.test(lower) && (hasATP || genericEnergyRegex.test(lower))) {
-                    energyStatus = "covered";
-                    energyScore = 1.0;
-                    energyEvidence = extractEvidence(text, energyCurrencyRegex);
-                    energyReason = "Accurately articulates ATP's role in providing energy for cellular activities / acting as energy currency.";
-                } else if (genericEnergyRegex.test(lower)) {
-                    energyStatus = "partial";
-                    energyScore = 0.5;
-                    energyEvidence = extractEvidence(text, genericEnergyRegex);
-                    energyReason = "Recognizes ATP's role in providing cellular energy (+0.5). To secure full marks under NCERT marking schemes, also specify its role as the 'energy currency of the cell' used for chemical/mechanical work.";
-                } else {
-                    energyStatus = "missing";
-                    energyScore = 0.0;
-                    energyReason = "Did not explain the role of ATP in powering cellular activities or its designation as the energy currency of the cell.";
-                }
-
-                // Check for cellular respiration keyword in student text
-                const hasCellularRespiration = /\b(cellular\s+respiration|respiration|aerobic)\b/i.test(lower);
-
-                // Calculate step-marking score (scaled to maxMarks, default 3)
-                const rawTotal = powerhouseScore + atpScore + energyScore;
-                const scaledScore = (rawTotal / 3.0) * maxMarks;
-                const formattedScore = Number.isInteger(scaledScore) ? scaledScore.toString() : scaledScore.toFixed(1);
-                const scoreText = `${formattedScore} / ${maxMarks}`;
-
-                // Dynamic Highlight Analysis for Benchmark Answer
-                const mitoHighlight = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Mitochondria</span>`;
-                const powerhouseHighlight = hasPowerhouse
-                    ? `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">powerhouse of the cell</span>`
-                    : `<span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">powerhouse of the cell</span>`;
-
-                const respirationHighlight = hasCellularRespiration
-                    ? `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">cellular respiration</span>`
-                    : `<span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">cellular respiration</span>`;
-
-                let atpHighlight = "";
-                if (atpStatus === "covered") {
-                    atpHighlight = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Adenosine Triphosphate (ATP)</span>`;
-                } else if (atpStatus === "partial") {
-                    atpHighlight = `<span class="text-amber-400 bg-amber-500/10 px-1 rounded font-medium">Adenosine Triphosphate (ATP)</span>`;
-                } else {
-                    atpHighlight = `<span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">Adenosine Triphosphate (ATP)</span>`;
-                }
-
-                let currencyHighlight = "";
-                if (energyStatus === "covered") {
-                    currencyHighlight = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">energy currency</span>`;
-                } else if (energyStatus === "partial") {
-                    currencyHighlight = `<span class="text-amber-400 bg-amber-500/10 px-1 rounded font-medium">energy currency</span>`;
-                } else {
-                    currencyHighlight = `<span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">energy currency</span>`;
-                }
-
-                const benchmarkHTML = `${mitoHighlight} are specialized organelles widely known as the ${powerhouseHighlight}. They are responsible for ${respirationHighlight}, where glucose is oxidized to generate energy. This energy is stored inside a crucial molecule called ${atpHighlight}, which serves as the cellular ${currencyHighlight}.`;
-
-                // Collect missing criteria
-                const missingGaps = [];
-                if (!hasPowerhouse) {
-                    missingGaps.push(`Designation: Did not state that mitochondria are known as the <strong>"powerhouse of the cell"</strong>.`);
-                }
-                if (atpStatus === "missing") {
-                    missingGaps.push(`Chemical Molecule: Missing mention of <strong>Adenosine Triphosphate (ATP)</strong> as the energy carrier.`);
-                } else if (atpStatus === "misconception") {
-                    missingGaps.push(`Conceptual Misconception: DNA contains genetic instructions, whereas <strong>ATP</strong> is the molecule that stores and releases cellular energy.`);
-                }
-                if (energyStatus === "partial") {
-                    missingGaps.push(`Specific Terminology: Student noted energy use, but omitted the standard NCERT board designation <strong>"energy currency of the cell"</strong> for cellular work.`);
-                } else if (energyStatus === "missing") {
-                    missingGaps.push(`Function: Missing explanation of ATP's role as the <strong>"energy currency"</strong> powering cellular activities.`);
-                }
-                if (!hasCellularRespiration) {
-                    missingGaps.push(`Physiological Pathway: Did not mention <strong>cellular respiration</strong> as the process generating ATP.`);
-                }
-
-                const getBadge = (status) => {
-                    if (status === "covered") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-green-500/10 text-green-400 border border-green-500/20">Covered</span>`;
-                    if (status === "partial") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">Partially Covered</span>`;
-                    if (status === "misconception") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20">Misconception</span>`;
-                    return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20">Missing</span>`;
-                };
-
-                const getScoreBadge = (score) => {
-                    if (score === 1.0) return `<span class="text-xs font-bold text-green-400">+1.0 Mark</span>`;
-                    if (score === 0.5) return `<span class="text-xs font-bold text-amber-400">+0.5 Mark</span>`;
-                    return `<span class="text-xs font-bold text-red-400">0.0 Marks</span>`;
-                };
-
-                let breakdownHTML = `
-                    <div class="space-y-3">
-                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${powerhouseStatus === 'covered' ? 'border-green-500/30' : 'border-red-500/30'}">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold text-slate-200">1. Powerhouse Designation</span>
-                                <div class="flex items-center gap-2">
-                                    ${getBadge(powerhouseStatus)}
-                                    ${getScoreBadge(powerhouseScore)}
-                                </div>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${powerhouseEvidence}"</p>
-                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric Analysis:</span> ${powerhouseReason}</p>
-                            <p class="text-xs text-purple-400/70 mt-1"><span class="text-slate-500 font-medium">NCERT Ref:</span> Class 9 Science, Ch. 5 — The Fundamental Unit of Life, Section 5.3</p>
-                        </div>
-
-                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${atpStatus === 'covered' ? 'border-green-500/30' : (atpStatus === 'partial' ? 'border-amber-500/30' : 'border-red-500/30')}">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold text-slate-200">2. ATP Production</span>
-                                <div class="flex items-center gap-2">
-                                    ${getBadge(atpStatus)}
-                                    ${getScoreBadge(atpScore)}
-                                </div>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${atpEvidence}"</p>
-                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric Analysis:</span> ${atpReason}</p>
-                            <p class="text-xs text-purple-400/70 mt-1"><span class="text-slate-500 font-medium">NCERT Ref:</span> Class 9 Science, Ch. 5 — The Fundamental Unit of Life, Section 5.3</p>
-                        </div>
-
-                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${energyStatus === 'covered' ? 'border-green-500/30' : (energyStatus === 'partial' ? 'border-amber-500/30' : 'border-red-500/30')}">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold text-slate-200">3. Energy Currency / Cellular Energy</span>
-                                <div class="flex items-center gap-2">
-                                    ${getBadge(energyStatus)}
-                                    ${getScoreBadge(energyScore)}
-                                </div>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${energyEvidence}"</p>
-                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric Analysis:</span> ${energyReason}</p>
-                            <p class="text-xs text-purple-400/70 mt-1"><span class="text-slate-500 font-medium">NCERT Ref:</span> Class 9 Science, Ch. 5 — The Fundamental Unit of Life, Section 5.3</p>
-                        </div>
-                `;
-
-                if (missingGaps.length > 0) {
-                    breakdownHTML += `
-                        <div class="p-3 rounded-xl bg-red-950/20 border border-red-500/20 text-xs">
-                            <span class="font-bold text-red-400 uppercase tracking-wide text-[11px]">Concepts Required for Full Marks:</span>
-                            <ul class="list-disc list-inside mt-1.5 space-y-1 text-slate-300">
-                                ${missingGaps.map(gap => `<li>${gap}</li>`).join("")}
-                            </ul>
-                        </div>
-                    `;
-                } else {
-                    breakdownHTML += `
-                        <div class="p-3 rounded-xl bg-green-950/20 border border-green-500/20 text-xs text-green-300">
-                            <span class="font-bold text-green-400">✨ Exceptional Answer:</span> All core NCERT parameters satisfied!
-                        </div>
-                    `;
-                }
-
-                breakdownHTML += `</div>`;
-
-                return {
-                    scoreText,
-                    benchmarkHTML,
-                    breakdownHTML
-                };
-            }
-
-            // ========== CEDA Evaluation Engine: Q2 — Velocity & Acceleration (Class 9 Physics) ==========
-            function evaluateAccelerationAnswer(rawAnswer, maxMarks = 3) {
-                const text = (rawAnswer || "").trim();
-                const lower = text.toLowerCase();
-
-                // 1. Concept: Definition — Rate of change of velocity
-                const defRegex = /(rate\s+(of\s+)?change\s+(of\s+)?velocity|change\s+in\s+velocity\s*(per|over|with\s+respect\s+to)\s*time|how\s+(fast|quickly)\s+(velocity|speed)\s+change)/i;
-                const hasDef = defRegex.test(lower);
-                let defStatus = "missing", defScore = 0, defEvidence = "None found in answer", defReason = "";
-                if (hasDef) {
-                    defStatus = "covered"; defScore = 1.0;
-                    defEvidence = extractEvidence(text, defRegex);
-                    defReason = "Correctly defines acceleration as the rate of change of velocity with respect to time.";
-                } else {
-                    // Partial: mentions velocity and time together
-                    const partialDef = /\b(velocity|speed)\b.*\b(time|second|per)\b|\b(speed(ing|s)?\s+up|slow(ing|s)?\s+down)\b/i;
-                    if (partialDef.test(lower)) {
-                        defStatus = "partial"; defScore = 0.5;
-                        defEvidence = extractEvidence(text, partialDef);
-                        defReason = "Relates acceleration to velocity and time, but does not state it as 'rate of change of velocity'. NCERT Class 9 expects the precise definition.";
-                    } else {
-                        defReason = "Did not define acceleration as the rate of change of velocity with respect to time.";
-                    }
-                }
-
-                // 2. Concept: Formula — a = (v - u) / t
-                const formulaRegex = /a\s*=\s*\(?\s*v\s*[-−–]\s*u\s*\)?\s*\/\s*t|a\s*=\s*Δv\s*\/\s*t|a\s*=\s*dv\s*\/\s*dt|\(v\s*[-−–]\s*u\)\s*\/\s*t/i;
-                const hasFormula = formulaRegex.test(text); // Case-sensitive for formula variables
-                let formulaStatus = "missing", formulaScore = 0, formulaEvidence = "None found in answer", formulaReason = "";
-                if (hasFormula) {
-                    formulaStatus = "covered"; formulaScore = 1.0;
-                    formulaEvidence = extractEvidence(text, formulaRegex);
-                    formulaReason = "Correctly provides the mathematical formula a = (v − u) / t.";
-                } else {
-                    formulaReason = "Did not provide the mathematical expression a = (v − u) / t. This is a standard NCERT requirement for a complete answer.";
-                }
-
-                // 3. Concept: SI Unit — m/s²
-                const unitRegex = /m\s*\/\s*s\s*²|m\/s²|meters?\s+per\s+second\s+squared|metre(s)?\s+per\s+second\s+squared|ms\s*[-−–]?\s*2/i;
-                const hasUnit = unitRegex.test(text);
-                let unitStatus = "missing", unitScore = 0, unitEvidence = "None found in answer", unitReason = "";
-                if (hasUnit) {
-                    unitStatus = "covered"; unitScore = 1.0;
-                    unitEvidence = extractEvidence(text, unitRegex);
-                    unitReason = "Correctly identifies the SI unit of acceleration as m/s² (metres per second squared).";
-                } else {
-                    unitReason = "Did not state the SI unit of acceleration: m/s² (metres per second squared).";
-                }
-
-                // Check for vector quantity mention (bonus context, not scored)
-                const hasVector = /\bvector\s+(quantity|nature)\b/i.test(lower);
-
-                // Calculate score
-                const rawTotal = defScore + formulaScore + unitScore;
-                const scaledScore = (rawTotal / 3.0) * maxMarks;
-                const formattedScore = Number.isInteger(scaledScore) ? scaledScore.toString() : scaledScore.toFixed(1);
-                const scoreText = `${formattedScore} / ${maxMarks}`;
-
-                // Benchmark highlight HTML
-                const defHL = hasDef
-                    ? `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">rate of change of velocity</span>`
-                    : (defStatus === "partial" ? `<span class="text-amber-400 bg-amber-500/10 px-1 rounded font-medium">rate of change of velocity</span>` : `<span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">rate of change of velocity</span>`);
-                const formulaHL = hasFormula
-                    ? `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">a = (v − u) / t</span>`
-                    : `<span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">a = (v − u) / t</span>`;
-                const unitHL = hasUnit
-                    ? `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">m/s²</span>`
-                    : `<span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">m/s²</span>`;
-                const vectorHL = hasVector
-                    ? `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">vector quantity</span>`
-                    : `<span class="text-slate-500 bg-slate-500/10 px-1 rounded font-medium">vector quantity</span>`;
-
-                const benchmarkHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Acceleration</span> is defined as the ${defHL} with respect to time. It is a ${vectorHL}, and its mathematical expression is ${formulaHL}, where 'v' is final velocity and 'u' is initial velocity. The SI unit is ${unitHL}.`;
-
-                // Build CEDA breakdown
-                const getBadge = (status) => {
-                    if (status === "covered") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-green-500/10 text-green-400 border border-green-500/20">Covered</span>`;
-                    if (status === "partial") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">Partially Covered</span>`;
-                    return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20">Missing</span>`;
-                };
-                const getScoreBadge = (score) => {
-                    if (score === 1.0) return `<span class="text-xs font-bold text-green-400">+1.0 Mark</span>`;
-                    if (score === 0.5) return `<span class="text-xs font-bold text-amber-400">+0.5 Mark</span>`;
-                    return `<span class="text-xs font-bold text-red-400">0.0 Marks</span>`;
-                };
-
-                const missingGaps = [];
-                if (defStatus !== "covered") {
-                    if (defStatus === "partial") missingGaps.push(`Definition: Student relates acceleration to velocity changes but does not use the NCERT phrase <strong>"rate of change of velocity"</strong>.`);
-                    else missingGaps.push(`Definition: Missing the core NCERT definition — <strong>"rate of change of velocity with respect to time"</strong>.`);
-                }
-                if (!hasFormula) missingGaps.push(`Formula: Did not provide the standard expression <strong>a = (v − u) / t</strong>.`);
-                if (!hasUnit) missingGaps.push(`SI Unit: Did not state the unit <strong>m/s²</strong> (metres per second squared).`);
-
-                let breakdownHTML = `
-                    <div class="space-y-3">
-                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${defStatus === 'covered' ? 'border-green-500/30' : (defStatus === 'partial' ? 'border-amber-500/30' : 'border-red-500/30')}">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold text-slate-200">1. Definition of Acceleration</span>
-                                <div class="flex items-center gap-2">${getBadge(defStatus)} ${getScoreBadge(defScore)}</div>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${defEvidence}"</p>
-                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric:</span> ${defReason}</p>
-                            <p class="text-xs text-purple-400/70 mt-1"><span class="text-slate-500 font-medium">NCERT Ref:</span> Class 9 Science, Ch. 8 — Motion, Section 8.3</p>
-                        </div>
-
-                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${formulaStatus === 'covered' ? 'border-green-500/30' : 'border-red-500/30'}">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold text-slate-200">2. Mathematical Formula</span>
-                                <div class="flex items-center gap-2">${getBadge(formulaStatus)} ${getScoreBadge(formulaScore)}</div>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${formulaEvidence}"</p>
-                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric:</span> ${formulaReason}</p>
-                            <p class="text-xs text-purple-400/70 mt-1"><span class="text-slate-500 font-medium">NCERT Ref:</span> Class 9 Science, Ch. 8 — Motion, Equation 8.1</p>
-                        </div>
-
-                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${unitStatus === 'covered' ? 'border-green-500/30' : 'border-red-500/30'}">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold text-slate-200">3. SI Unit of Acceleration</span>
-                                <div class="flex items-center gap-2">${getBadge(unitStatus)} ${getScoreBadge(unitScore)}</div>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${unitEvidence}"</p>
-                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric:</span> ${unitReason}</p>
-                            <p class="text-xs text-purple-400/70 mt-1"><span class="text-slate-500 font-medium">NCERT Ref:</span> Class 9 Science, Ch. 8 — Motion, Table 8.2</p>
-                        </div>
-                `;
-
-                if (missingGaps.length > 0) {
-                    breakdownHTML += `
-                        <div class="p-3 rounded-xl bg-red-950/20 border border-red-500/20 text-xs">
-                            <span class="font-bold text-red-400 uppercase tracking-wide text-[11px]">Concepts Required for Full Marks:</span>
-                            <ul class="list-disc list-inside mt-1.5 space-y-1 text-slate-300">
-                                ${missingGaps.map(gap => `<li>${gap}</li>`).join("")}
-                            </ul>
-                        </div>
-                    `;
-                } else {
-                    breakdownHTML += `
-                        <div class="p-3 rounded-xl bg-green-950/20 border border-green-500/20 text-xs text-green-300">
-                            <span class="font-bold text-green-400">✨ Excellent Answer:</span> All core NCERT parameters for acceleration are satisfied!
-                        </div>
-                    `;
-                }
-                breakdownHTML += `</div>`;
-
-                return { scoreText, benchmarkHTML, breakdownHTML };
-            }
-
-            // ========== CEDA Evaluation Engine: Q3 — What is RAG? (AI/CS) ==========
-            function evaluateRAGAnswer(rawAnswer, maxMarks = 3) {
-                const text = (rawAnswer || "").trim();
-                const lower = text.toLowerCase();
-
-                // 1. Concept: RAG acronym and meaning
-                const ragDefRegex = /\b(retrieval[\s-]+augmented[\s-]+generation|rag\b.*\b(retrieval|augment))/i;
-                const hasRAGDef = ragDefRegex.test(lower) || (/\brag\b/i.test(lower) && /\b(retriev|augment|generat)/i.test(lower));
-                let ragDefStatus = "missing", ragDefScore = 0, ragDefEvidence = "None found in answer", ragDefReason = "";
-                if (hasRAGDef) {
-                    ragDefStatus = "covered"; ragDefScore = 1.0;
-                    ragDefEvidence = extractEvidence(text, /\b(retrieval[\s-]+augmented[\s-]+generation|rag)\b/i);
-                    ragDefReason = "Correctly identifies RAG as Retrieval-Augmented Generation — an AI framework.";
-                } else if (/\brag\b/i.test(lower)) {
-                    ragDefStatus = "partial"; ragDefScore = 0.5;
-                    ragDefEvidence = extractEvidence(text, /\brag\b/i);
-                    ragDefReason = "Mentions RAG but does not expand the acronym or explain the full Retrieval-Augmented Generation concept.";
-                } else {
-                    ragDefReason = "Did not identify or define RAG (Retrieval-Augmented Generation).";
-                }
-
-                // 2. Concept: Information Retrieval / External Knowledge
-                const retrievalRegex = /\b(retriev|fetch|search|query|look\s*up)\b.*\b(document|information|knowledge|data|context|source)/i;
-                const hasRetrieval = retrievalRegex.test(lower) || /\b(knowledge\s+base|vector\s+database|vector\s+db|external\s+(data|source|document))\b/i.test(lower);
-                let retrievalStatus = "missing", retrievalScore = 0, retrievalEvidence = "None found in answer", retrievalReason = "";
-                if (hasRetrieval) {
-                    const hasKB = /\b(knowledge\s+base|vector\s+(database|db)|document\s+store)\b/i.test(lower);
-                    if (hasKB) {
-                        retrievalStatus = "covered"; retrievalScore = 1.0;
-                        retrievalEvidence = extractEvidence(text, /\b(knowledge\s+base|vector|retriev|fetch)\b/i);
-                        retrievalReason = "Explains the retrieval step and identifies a knowledge base or vector database as the source.";
-                    } else {
-                        retrievalStatus = "partial"; retrievalScore = 0.5;
-                        retrievalEvidence = extractEvidence(text, retrievalRegex);
-                        retrievalReason = "Describes information retrieval but does not specify the type of knowledge base (e.g., vector database). Full marks require naming the external data source.";
-                    }
-                } else {
-                    retrievalReason = "Did not explain how RAG retrieves relevant information from external sources before generating a response.";
-                }
-
-                // 3. Concept: Improves LLM accuracy / Reduces hallucination
-                const improvesRegex = /\b(improv|enhanc|augment|better|more\s+accurat|reduc.*hallucin|ground|factual)\b.*\b(llm|language\s+model|model|answer|response|generation|accuracy)/i;
-                const hasImproves = improvesRegex.test(lower) || /\b(hallucin|grounded|factual\s+accuracy)\b/i.test(lower);
-                let improvesStatus = "missing", improvesScore = 0, improvesEvidence = "None found in answer", improvesReason = "";
-                if (hasImproves) {
-                    improvesStatus = "covered"; improvesScore = 1.0;
-                    improvesEvidence = extractEvidence(text, /\b(improv|enhanc|augment|accurat|hallucin|ground|factual)\b/i);
-                    improvesReason = "Explains that RAG improves the accuracy, factual grounding, or reliability of language model outputs.";
-                } else {
-                    improvesReason = "Did not explain how RAG improves LLM accuracy, reduces hallucination, or grounds responses in factual data.";
-                }
-
-                // Calculate score
-                const rawTotal = ragDefScore + retrievalScore + improvesScore;
-                const scaledScore = (rawTotal / 3.0) * maxMarks;
-                const formattedScore = Number.isInteger(scaledScore) ? scaledScore.toString() : scaledScore.toFixed(1);
-                const scoreText = `${formattedScore} / ${maxMarks}`;
-
-                // Benchmark HTML
-                const ragHL = ragDefStatus === "covered" ? "green" : (ragDefStatus === "partial" ? "amber" : "red");
-                const retHL = retrievalStatus === "covered" ? "green" : (retrievalStatus === "partial" ? "amber" : "red");
-                const impHL = improvesStatus === "covered" ? "green" : "red";
-
-                const benchmarkHTML = `<span class="text-${ragHL}-400 bg-${ragHL}-500/10 px-1 rounded font-medium">Retrieval-Augmented Generation (RAG)</span> is an AI framework that improves Large Language Models. It works by <span class="text-${impHL}-400 bg-${impHL}-500/10 px-1 rounded font-medium">grounding the model</span> on external data sources. Before generating a response, the system <span class="text-${retHL}-400 bg-${retHL}-500/10 px-1 rounded font-medium">retrieves relevant information</span> from a specialized <span class="text-${retHL}-400 bg-${retHL}-500/10 px-1 rounded font-medium">knowledge base</span> (like a vector database), and uses that information as context to create a more accurate and factual answer.`;
-
-                // CEDA Breakdown
-                const getBadge = (status) => {
-                    if (status === "covered") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-green-500/10 text-green-400 border border-green-500/20">Covered</span>`;
-                    if (status === "partial") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">Partially Covered</span>`;
-                    return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20">Missing</span>`;
-                };
-                const getScoreBadge = (score) => {
-                    if (score === 1.0) return `<span class="text-xs font-bold text-green-400">+1.0 Mark</span>`;
-                    if (score === 0.5) return `<span class="text-xs font-bold text-amber-400">+0.5 Mark</span>`;
-                    return `<span class="text-xs font-bold text-red-400">0.0 Marks</span>`;
-                };
-
-                const missingGaps = [];
-                if (ragDefStatus !== "covered") {
-                    if (ragDefStatus === "partial") missingGaps.push(`Acronym: Mentions RAG but does not expand it to <strong>"Retrieval-Augmented Generation"</strong>.`);
-                    else missingGaps.push(`Definition: Missing the full definition of <strong>Retrieval-Augmented Generation (RAG)</strong>.`);
-                }
-                if (retrievalStatus !== "covered") {
-                    if (retrievalStatus === "partial") missingGaps.push(`Data Source: Describes retrieval but does not specify a <strong>knowledge base or vector database</strong>.`);
-                    else missingGaps.push(`Retrieval Mechanism: Did not explain how RAG <strong>retrieves relevant documents</strong> from external sources.`);
-                }
-                if (improvesStatus !== "covered") {
-                    missingGaps.push(`Purpose: Did not explain that RAG <strong>improves LLM accuracy</strong> or reduces hallucination.`);
-                }
-
-                let breakdownHTML = `
-                    <div class="space-y-3">
-                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${ragDefStatus === 'covered' ? 'border-green-500/30' : (ragDefStatus === 'partial' ? 'border-amber-500/30' : 'border-red-500/30')}">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold text-slate-200">1. RAG Definition & Acronym</span>
-                                <div class="flex items-center gap-2">${getBadge(ragDefStatus)} ${getScoreBadge(ragDefScore)}</div>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${ragDefEvidence}"</p>
-                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric:</span> ${ragDefReason}</p>
-                        </div>
-
-                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${retrievalStatus === 'covered' ? 'border-green-500/30' : (retrievalStatus === 'partial' ? 'border-amber-500/30' : 'border-red-500/30')}">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold text-slate-200">2. Information Retrieval & Knowledge Base</span>
-                                <div class="flex items-center gap-2">${getBadge(retrievalStatus)} ${getScoreBadge(retrievalScore)}</div>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${retrievalEvidence}"</p>
-                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric:</span> ${retrievalReason}</p>
-                        </div>
-
-                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${improvesStatus === 'covered' ? 'border-green-500/30' : 'border-red-500/30'}">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold text-slate-200">3. Improves LLM Accuracy / Grounding</span>
-                                <div class="flex items-center gap-2">${getBadge(improvesStatus)} ${getScoreBadge(improvesScore)}</div>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${improvesEvidence}"</p>
-                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric:</span> ${improvesReason}</p>
-                        </div>
-                `;
-
-                if (missingGaps.length > 0) {
-                    breakdownHTML += `
-                        <div class="p-3 rounded-xl bg-red-950/20 border border-red-500/20 text-xs">
-                            <span class="font-bold text-red-400 uppercase tracking-wide text-[11px]">Concepts Required for Full Marks:</span>
-                            <ul class="list-disc list-inside mt-1.5 space-y-1 text-slate-300">
-                                ${missingGaps.map(gap => `<li>${gap}</li>`).join("")}
-                            </ul>
-                        </div>
-                    `;
-                } else {
-                    breakdownHTML += `
-                        <div class="p-3 rounded-xl bg-green-950/20 border border-green-500/20 text-xs text-green-300">
-                            <span class="font-bold text-green-400">✨ Comprehensive Answer:</span> All core RAG concepts covered!
-                        </div>
-                    `;
-                }
-                breakdownHTML += `</div>`;
-
-                return { scoreText, benchmarkHTML, breakdownHTML };
-            }
-
-            // ========== CEDA Evaluation Engine: Q4 — Fractional Distillation (Chemistry) ==========
-            function evaluateFractionalDistillationAnswer(rawAnswer, maxMarks = 3) {
-                const text = (rawAnswer || "").trim();
-                const lower = text.toLowerCase();
-
-                // 1. Concept: Separation of miscible liquids
-                const miscibleRegex = /\b(miscible|mixable|mix\s+together|dissolve\s+in\s+each\s+other)\b/i;
-                const separationRegex = /\b(separat|isolat|purif|split|divid)\b.*\b(liquid|mixture|component|substance)/i;
-                const hasSeparation = separationRegex.test(lower);
-                const hasMiscible = miscibleRegex.test(lower);
-                let sepStatus = "missing", sepScore = 0, sepEvidence = "None found in answer", sepReason = "";
-                if (hasSeparation && hasMiscible) {
-                    sepStatus = "covered"; sepScore = 1.0;
-                    sepEvidence = extractEvidence(text, miscibleRegex) || extractEvidence(text, separationRegex);
-                    sepReason = "Correctly states that fractional distillation separates miscible liquids.";
-                } else if (hasSeparation) {
-                    sepStatus = "partial"; sepScore = 0.5;
-                    sepEvidence = extractEvidence(text, separationRegex);
-                    sepReason = "Describes separation of liquids but does not specify that they must be miscible. NCERT Class 9 Chemistry requires the term 'miscible liquids'.";
-                } else {
-                    sepReason = "Did not explain that fractional distillation is a method to separate miscible liquids.";
-                }
-
-                // 2. Concept: Boiling point difference (less than 25 K)
-                const bpRegex = /\b(boiling\s+point|bp)\b/i;
-                const bp25Regex = /(less\s+than\s+25|<\s*25|difference.*25\s*K|close\s+boiling\s+point|small\s+difference.*boiling)/i;
-                const hasBP = bpRegex.test(lower);
-                const hasBP25 = bp25Regex.test(lower);
-                let bpStatus = "missing", bpScore = 0, bpEvidence = "None found in answer", bpReason = "";
-                if (hasBP25) {
-                    bpStatus = "covered"; bpScore = 1.0;
-                    bpEvidence = extractEvidence(text, bp25Regex);
-                    bpReason = "Correctly identifies that the liquids must have boiling point differences less than 25 K.";
-                } else if (hasBP) {
-                    bpStatus = "partial"; bpScore = 0.5;
-                    bpEvidence = extractEvidence(text, bpRegex);
-                    bpReason = "Mentions boiling points but does not specify the key criterion: difference must be less than 25 K.";
-                } else {
-                    bpReason = "Did not mention boiling point differences, which is essential for distinguishing fractional distillation from simple distillation.";
-                }
-
-                // 3. Concept: Fractionating column apparatus
-                const columnRegex = /\b(fractionating\s+column|fractionation\s+column|long\s+tube|column\s+packed|glass\s+beads)\b/i;
-                const hasColumn = columnRegex.test(lower);
-                let colStatus = "missing", colScore = 0, colEvidence = "None found in answer", colReason = "";
-                if (hasColumn) {
-                    colStatus = "covered"; colScore = 1.0;
-                    colEvidence = extractEvidence(text, columnRegex);
-                    colReason = "Correctly identifies the fractionating column as the key apparatus component.";
-                } else {
-                    // Check for partial — mentioning condenser or apparatus generically
-                    const genericApparatus = /\b(condenser|apparatus|flask|distillation\s+setup)\b/i;
-                    if (genericApparatus.test(lower)) {
-                        colStatus = "partial"; colScore = 0.5;
-                        colEvidence = extractEvidence(text, genericApparatus);
-                        colReason = "Mentions distillation apparatus but does not specifically name the fractionating column, which is the distinguishing feature from simple distillation.";
-                    } else {
-                        colReason = "Did not mention the fractionating column — the key apparatus that distinguishes fractional distillation from simple distillation.";
-                    }
-                }
-
-                // Misconception check: confusing with simple distillation
-                const simpleDistillMisconception = /\b(simple\s+distillation)\b/i.test(lower) && !hasColumn && !hasMiscible;
-
-                // Calculate score
-                const rawTotal = sepScore + bpScore + colScore;
-                const scaledScore = (rawTotal / 3.0) * maxMarks;
-                const formattedScore = Number.isInteger(scaledScore) ? scaledScore.toString() : scaledScore.toFixed(1);
-                const scoreText = `${formattedScore} / ${maxMarks}`;
-
-                // Benchmark HTML
-                const sepHL = sepStatus === "covered" ? "green" : (sepStatus === "partial" ? "amber" : "red");
-                const bpHL = bpStatus === "covered" ? "green" : (bpStatus === "partial" ? "amber" : "red");
-                const colHL = colStatus === "covered" ? "green" : (colStatus === "partial" ? "amber" : "red");
-
-                const benchmarkHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Fractional distillation</span> is a process used to <span class="text-${sepHL}-400 bg-${sepHL}-500/10 px-1 rounded font-medium">separate</span> a mixture of two or more <span class="text-${sepHL}-400 bg-${sepHL}-500/10 px-1 rounded font-medium">miscible liquids</span> for which the <span class="text-${bpHL}-400 bg-${bpHL}-500/10 px-1 rounded font-medium">difference in their boiling points is less than 25 K</span>. It uses a <span class="text-${colHL}-400 bg-${colHL}-500/10 px-1 rounded font-medium">fractionating column</span> fitted between the distillation flask and the condenser, often packed with <span class="text-${colHL}-400 bg-${colHL}-500/10 px-1 rounded font-medium">glass beads</span> to provide surface for vapors to cool and condense repeatedly.`;
-
-                // CEDA Breakdown
-                const getBadge = (status) => {
-                    if (status === "covered") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-green-500/10 text-green-400 border border-green-500/20">Covered</span>`;
-                    if (status === "partial") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">Partially Covered</span>`;
-                    if (status === "misconception") return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20">Misconception</span>`;
-                    return `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20">Missing</span>`;
-                };
-                const getScoreBadge = (score) => {
-                    if (score === 1.0) return `<span class="text-xs font-bold text-green-400">+1.0 Mark</span>`;
-                    if (score === 0.5) return `<span class="text-xs font-bold text-amber-400">+0.5 Mark</span>`;
-                    return `<span class="text-xs font-bold text-red-400">0.0 Marks</span>`;
-                };
-
-                const missingGaps = [];
-                if (sepStatus !== "covered") {
-                    if (sepStatus === "partial") missingGaps.push(`Miscibility: Describes separation but does not specify <strong>miscible liquids</strong>. Correction: Fractional distillation is specifically for liquids that dissolve in each other.`);
-                    else missingGaps.push(`Separation Principle: Missing explanation that fractional distillation separates <strong>miscible liquids</strong>.`);
-                }
-                if (bpStatus !== "covered") {
-                    if (bpStatus === "partial") missingGaps.push(`Boiling Point Criterion: Mentions boiling points but omits the <strong>less than 25 K difference</strong> requirement.`);
-                    else missingGaps.push(`Boiling Point: Did not explain the <strong>close boiling point difference (&lt; 25 K)</strong> criterion.`);
-                }
-                if (colStatus !== "covered") {
-                    if (colStatus === "partial") missingGaps.push(`Apparatus: Mentions distillation equipment but does not name the <strong>fractionating column</strong> specifically.`);
-                    else missingGaps.push(`Key Apparatus: Did not mention the <strong>fractionating column</strong> — the distinguishing component.`);
-                }
-                if (simpleDistillMisconception) {
-                    missingGaps.push(`⚠️ Possible Confusion: Answer mentions "simple distillation" without differentiating it from fractional distillation. These are distinct techniques.`);
-                }
-
-                let breakdownHTML = `
-                    <div class="space-y-3">
-                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${sepStatus === 'covered' ? 'border-green-500/30' : (sepStatus === 'partial' ? 'border-amber-500/30' : 'border-red-500/30')}">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold text-slate-200">1. Separation of Miscible Liquids</span>
-                                <div class="flex items-center gap-2">${getBadge(sepStatus)} ${getScoreBadge(sepScore)}</div>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${sepEvidence}"</p>
-                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric:</span> ${sepReason}</p>
-                            <p class="text-xs text-purple-400/70 mt-1"><span class="text-slate-500 font-medium">NCERT Ref:</span> Class 9 Science, Ch. 2 — Is Matter Around Us Pure, Section 2.3.4</p>
-                        </div>
-
-                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${bpStatus === 'covered' ? 'border-green-500/30' : (bpStatus === 'partial' ? 'border-amber-500/30' : 'border-red-500/30')}">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold text-slate-200">2. Boiling Point Difference Criterion</span>
-                                <div class="flex items-center gap-2">${getBadge(bpStatus)} ${getScoreBadge(bpScore)}</div>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${bpEvidence}"</p>
-                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric:</span> ${bpReason}</p>
-                            <p class="text-xs text-purple-400/70 mt-1"><span class="text-slate-500 font-medium">NCERT Ref:</span> Class 9 Science, Ch. 2 — Is Matter Around Us Pure, Section 2.3.4</p>
-                        </div>
-
-                        <div class="p-3.5 rounded-xl bg-slate-900/80 border ${colStatus === 'covered' ? 'border-green-500/30' : (colStatus === 'partial' ? 'border-amber-500/30' : 'border-red-500/30')}">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold text-slate-200">3. Fractionating Column Apparatus</span>
-                                <div class="flex items-center gap-2">${getBadge(colStatus)} ${getScoreBadge(colScore)}</div>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2 font-mono bg-black/40 p-1.5 rounded border border-white/5"><span class="text-slate-500 font-sans font-medium">Evidence:</span> "${colEvidence}"</p>
-                            <p class="text-xs text-slate-400 mt-1.5"><span class="text-slate-500 font-medium">Rubric:</span> ${colReason}</p>
-                            <p class="text-xs text-purple-400/70 mt-1"><span class="text-slate-500 font-medium">NCERT Ref:</span> Class 9 Science, Ch. 2 — Is Matter Around Us Pure, Fig. 2.9</p>
-                        </div>
-                `;
-
-                if (missingGaps.length > 0) {
-                    breakdownHTML += `
-                        <div class="p-3 rounded-xl bg-red-950/20 border border-red-500/20 text-xs">
-                            <span class="font-bold text-red-400 uppercase tracking-wide text-[11px]">Concepts Required for Full Marks:</span>
-                            <ul class="list-disc list-inside mt-1.5 space-y-1 text-slate-300">
-                                ${missingGaps.map(gap => `<li>${gap}</li>`).join("")}
-                            </ul>
-                        </div>
-                    `;
-                } else {
-                    breakdownHTML += `
-                        <div class="p-3 rounded-xl bg-green-950/20 border border-green-500/20 text-xs text-green-300">
-                            <span class="font-bold text-green-400">✨ Outstanding Answer:</span> All key concepts for fractional distillation are covered!
-                        </div>
-                    `;
-                }
-                breakdownHTML += `</div>`;
-
-                return { scoreText, benchmarkHTML, breakdownHTML };
-            }
-            // Metadata for each sandbox question (scope, prompt, rubric)
-            const sandboxQuestionMeta = {
-                q1: {
-                    scope: "Class 9 Science · Ch. 5: The Fundamental Unit of Life",
-                    prompt: "Question: Why are mitochondria called the powerhouse of the cell?",
-                    rubric: "Marking Criteria: (1) Powerhouse designation [1 mark], (2) ATP / Adenosine Triphosphate production [1 mark], (3) Role in cellular energy / energy currency [1 mark].",
-                    rubricBadge: "3-Concept Rubric",
-                },
-                q2: {
-                    scope: "Class 9 Physics · Ch. 8: Motion",
-                    prompt: "Question: Define acceleration. What are its SI units?",
-                    rubric: "Marking Criteria: (1) Definition — rate of change of velocity [1 mark], (2) Formula — a = Δv / Δt [1 mark], (3) SI unit — m/s² [1 mark].",
-                    rubricBadge: "3-Concept Rubric",
-                },
-                q3: {
-                    scope: "AI / Computer Science · Retrieval-Augmented Generation",
-                    prompt: "Question: What is RAG (Retrieval-Augmented Generation) and why is it used?",
-                    rubric: "Marking Criteria: (1) Definition — combining retrieval with generation [1 mark], (2) Purpose — reduces hallucinations / improves accuracy [1 mark], (3) Mechanism — retrieves documents from knowledge base [1 mark].",
-                    rubricBadge: "3-Concept Rubric",
-                },
-                q4: {
-                    scope: "Class 9 Chemistry · Ch. 2: Is Matter Around Us Pure",
-                    prompt: "Question: What is the process of fractional distillation? Name the key apparatus.",
-                    rubric: "Marking Criteria: (1) Purpose — separating miscible liquids with different boiling points [1 mark], (2) Mechanism — boiling point difference / condensation [1 mark], (3) Apparatus — fractionating column [1 mark].",
-                    rubricBadge: "3-Concept Rubric",
-                },
-            };
-
+            function handleSandboxClick(event) {
                 const qid = event.currentTarget.dataset.qid;
-                currentQid = qid;
                 const data = sandboxData[qid];
                 const button = event.currentTarget;
                 sandboxButtons.forEach((btn) => {
@@ -4231,30 +3305,7 @@ import {
                     if (titleEl) currentQuestionText = titleEl.innerText;
                     curriculumDisplay.innerHTML = `Evaluating against curriculum: <span class="font-medium text-purple-400">${data.title}</span>`;
                 }
-                // Update question box metadata
-                const meta = sandboxQuestionMeta[qid];
-                if (meta) {
-                    const scopeEl = document.getElementById("evaluator-ncert-scope");
-                    const promptEl = document.getElementById("evaluator-question-prompt");
-                    const rubricEl = document.getElementById("evaluator-rubric-summary");
-                    if (scopeEl) scopeEl.textContent = meta.scope;
-                    if (promptEl) promptEl.textContent = meta.prompt;
-                    if (rubricEl) rubricEl.textContent = meta.rubric;
-                }
             }
-
-            // Sync score denominator with maxMarks input
-            const maxMarksInput = document.getElementById("maxMarksInput");
-            if (maxMarksInput) {
-                maxMarksInput.addEventListener("input", () => {
-                    const currentScore = document.getElementById("score-display");
-                    if (currentScore && currentScore.innerText.includes("--")) {
-                        const val = parseInt(maxMarksInput.value || "3", 10) || 3;
-                        currentScore.innerText = `-- / ${val}`;
-                    }
-                });
-            }
-
             evaluateButton.addEventListener("click", async (e) => {
                 e.preventDefault();
                 const studentAnswer = answerInput.value || "";
@@ -4267,73 +3318,45 @@ import {
                 const missingDisplay = document.getElementById(
                     "missing-keywords-display",
                 );
-                const breakdownTitle = document.getElementById(
-                    "evaluator-breakdown-title",
-                );
-                const maxMarks =
-                    parseInt(
-                        document.getElementById("maxMarksInput")?.value || "3",
-                        10,
-                    ) || 3;
-
-                if (scoreDisplay) scoreDisplay.innerText = `-- / ${maxMarks}`;
+                if (scoreDisplay) scoreDisplay.innerText = "-- / 3";
                 if (benchmarkDisplay)
                     benchmarkDisplay.innerHTML = "Evaluating answer matrix...";
                 if (missingDisplay)
                     missingDisplay.innerHTML = "Analyzing terminology...";
-
-                // Brief UI transition simulation
-                await new Promise((resolve) => setTimeout(resolve, 1000));
-
+                await new Promise((resolve) => setTimeout(resolve, 6000));
                 let requiredAnswerHTML = "";
                 let missingKeywordsHTML = "";
-                let scoreText = `2 / ${maxMarks}`;
-
-                const lowerAns = studentAnswer.toLowerCase();
-                const isVelocity =
+                let scoreText = "2 / 3";
+                if (
                     currentQuestionText.includes("Velocity") ||
-                    (currentQid === "q2" && !lowerAns.includes("mitochondri")) ||
-                    lowerAns.includes("acceleration");
-                const isFractional =
+                    studentAnswer.toLowerCase().includes("acceleration")
+                ) {
+                    requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Acceleration</span> is defined as the <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">rate of change of velocity</span> with respect to time. It is a vector quantity, and its mathematical expression is represented by the formula <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">a = (v - u) / t</span>, where 'v' is final velocity and 'u' is initial velocity. The standard SI unit for this measurement is <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">m/s²</span>.`;
+                    missingKeywordsHTML = `<li class="text-red-400 flex items-center gap-2">❌ Mathematical Formula: a = (v - u) / t</li><li class="text-red-400 flex items-center gap-2">❌ Standard SI Unit: m/s² (meters per second squared)</li>`;
+                } else if (
                     currentQuestionText.includes("Fractional") ||
-                    currentQid === "q4" ||
-                    lowerAns.includes("fractional distillation");
-                const isRAG =
+                    studentAnswer
+                        .toLowerCase()
+                        .includes("fractional distillation")
+                ) {
+                    scoreText = "1.5 / 3";
+                    requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Fractional distillation</span> is a process used to <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">separate</span> a mixture of two or more <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">miscible liquids</span> for which the <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">difference in their boiling points is less than 25 K</span>. It uses a <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">fractionating column</span> fitted between the distillation flask and the condenser, often packed with <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">glass beads</span> to provide surface for vapors to cool and condense repeatedly.`;
+                    missingKeywordsHTML = `<li class="text-red-400 flex items-center gap-2">❌ Miscible liquids</li><li class="text-red-400 flex items-center gap-2">❌ Difference in boiling points less than 25 K</li><li class="text-red-400 flex items-center gap-2">❌ Fractionating column (Apparatus mechanism)</li>`;
+                } else if (
                     currentQuestionText.includes("RAG") ||
-                    currentQid === "q3" ||
-                    lowerAns.includes("rag");
-
-                if (isVelocity) {
-                    if (breakdownTitle) breakdownTitle.textContent = "CEDA · Concept Extraction & Defect Analysis";
-                    const accelResult = evaluateAccelerationAnswer(studentAnswer, maxMarks);
-                    requiredAnswerHTML = accelResult.benchmarkHTML;
-                    missingKeywordsHTML = accelResult.breakdownHTML;
-                    scoreText = accelResult.scoreText;
-                } else if (isFractional) {
-                    if (breakdownTitle) breakdownTitle.textContent = "CEDA · Concept Extraction & Defect Analysis";
-                    const fdResult = evaluateFractionalDistillationAnswer(studentAnswer, maxMarks);
-                    requiredAnswerHTML = fdResult.benchmarkHTML;
-                    missingKeywordsHTML = fdResult.breakdownHTML;
-                    scoreText = fdResult.scoreText;
-                } else if (isRAG) {
-                    if (breakdownTitle) breakdownTitle.textContent = "CEDA · Concept Extraction & Defect Analysis";
-                    const ragResult = evaluateRAGAnswer(studentAnswer, maxMarks);
-                    requiredAnswerHTML = ragResult.benchmarkHTML;
-                    missingKeywordsHTML = ragResult.breakdownHTML;
-                    scoreText = ragResult.scoreText;
+                    studentAnswer.toLowerCase().includes("rag")
+                ) {
+                    requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Retrieval-Augmented Generation (RAG)</span> is an AI framework that improves Large Language Models. It works by <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">grounding the model</span> on external data sources. Before generating a response, the system <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">retrieves relevant information</span> from a specialized <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">knowledge base</span> (like a vector database), and uses that information as context to create a more accurate and factual answer.`;
+                    missingKeywordsHTML = `<li class="text-red-400 flex items-center gap-2">❌ Information Retrieval</li><li class="text-red-400 flex items-center gap-2">❌ Knowledge Base / Vector DB</li>`;
                 } else {
-                    // Mitochondria / Cellular Powerhouse evaluation
-                    if (breakdownTitle) breakdownTitle.textContent = "CEDA · Concept Extraction & Defect Analysis";
-                    const mitoResult = evaluateMitochondriaAnswer(studentAnswer, maxMarks);
-                    requiredAnswerHTML = mitoResult.benchmarkHTML;
-                    missingKeywordsHTML = mitoResult.breakdownHTML;
-                    scoreText = mitoResult.scoreText;
+                    requiredAnswerHTML = `<span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">Mitochondria</span> are specialized organelles widely known as the <span class="text-green-400 bg-green-500/10 px-1 rounded font-medium">powerhouse of the cell</span>. They are responsible for cellular respiration, where glucose is oxidized to generate energy. This energy is stored inside a crucial molecule called <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">Adenosine Triphosphate (ATP)</span>, which serves as the cellular <span class="text-red-400 bg-red-500/10 px-1 rounded font-medium">energy currency</span>.`;
+                    missingKeywordsHTML = `<li class="text-red-400 flex items-center gap-2">❌ Adenosine Triphosphate (ATP)</li><li class="text-red-400 flex items-center gap-2">❌ Energy Currency</li>`;
                 }
-
                 if (scoreDisplay) scoreDisplay.innerText = scoreText;
-                if (benchmarkDisplay) benchmarkDisplay.innerHTML = requiredAnswerHTML;
-                if (missingDisplay) missingDisplay.innerHTML = missingKeywordsHTML;
-
+                if (benchmarkDisplay)
+                    benchmarkDisplay.innerHTML = requiredAnswerHTML;
+                if (missingDisplay)
+                    missingDisplay.innerHTML = `<ul class="space-y-2 text-sm mt-2">${missingKeywordsHTML}</ul>`;
                 evaluateButton.disabled = false;
                 loader.classList.add("hidden");
                 buttonText.textContent = "Verify Answer Script";
@@ -4454,24 +3477,6 @@ import {
                 { passive: false },
             );
             mindmapSvg.style.cursor = "grab";
-
-            // --- Zoom button handlers ---
-            const applyTransform = () => {
-                const g = document.getElementById("mindmap-transform-group");
-                if (g) g.setAttribute("transform", `translate(${transformState.x}, ${transformState.y}) scale(${transformState.scale})`);
-            };
-            document.getElementById("mm-zoom-in")?.addEventListener("click", () => {
-                transformState.scale = Math.min(transformState.scale * 1.25, 3);
-                applyTransform();
-            });
-            document.getElementById("mm-zoom-out")?.addEventListener("click", () => {
-                transformState.scale = Math.max(transformState.scale / 1.25, 0.3);
-                applyTransform();
-            });
-            document.getElementById("mm-zoom-reset")?.addEventListener("click", () => {
-                transformState = { x: 0, y: 0, scale: 1 };
-                applyTransform();
-            });
 
             const mindmapData = {
                 Mitochondria: {
@@ -4786,8 +3791,8 @@ import {
                 const branches = data.branches;
                 mindmapSvg.innerHTML = "";
 
-                const cx = 640,
-                    cy = 390;
+                const cx = 500,
+                    cy = 300;
                 const branchRadius = 260;
                 const leafRadius = 180;
                 const angleStep = (2 * Math.PI) / branches.length;
@@ -4878,7 +3883,7 @@ import {
                     branchText.setAttribute("y", by + 5);
                     branchText.setAttribute("text-anchor", "middle");
                     branchText.setAttribute("fill", color.text);
-                    branchText.setAttribute("font-size", "15");
+                    branchText.setAttribute("font-size", "13");
                     branchText.setAttribute("font-weight", "600");
                     branchText.setAttribute(
                         "font-family",
@@ -4950,7 +3955,7 @@ import {
                         leafText.setAttribute("y", ly + 4);
                         leafText.setAttribute("text-anchor", "middle");
                         leafText.setAttribute("fill", color.leafText);
-                        leafText.setAttribute("font-size", "12.5");
+                        leafText.setAttribute("font-size", "11");
                         leafText.setAttribute("font-weight", "500");
                         leafText.setAttribute(
                             "font-family",
@@ -5023,7 +4028,7 @@ import {
                     centerText.setAttribute("y", startY + idx * lineHeight);
                     centerText.setAttribute("text-anchor", "middle");
                     centerText.setAttribute("fill", "#f3f3f4");
-                    centerText.setAttribute("font-size", "15");
+                    centerText.setAttribute("font-size", "13");
                     centerText.setAttribute("font-weight", "700");
                     centerText.setAttribute(
                         "font-family",
@@ -5098,23 +4103,9 @@ import {
                 });
             };
 
-            // Update the active label text for the selected topic
-            const updateMmActiveLabel = (topic) => {
-                const label = document.getElementById("mm-active-label");
-                if (!label) return;
-                const topicLabels = {
-                    "Mitochondria": "Selected Map: Mitochondria (NCERT Class 9)",
-                    "Acceleration": "Selected Map: Acceleration (NCERT Class 9)",
-                    "RAG": "Selected Map: RAG — Retrieval-Augmented Generation",
-                    "FractionalDistillation": "Selected Map: Fractional Distillation (NCERT Class 9)",
-                };
-                label.textContent = topicLabels[topic] || `Selected Map: ${topic}`;
-            };
-
             // Sandbox card click handler
             window.mmSandbox = (topic) => {
                 setActiveCard(topic);
-                updateMmActiveLabel(topic);
                 triggerMindMap(topic);
             };
 
