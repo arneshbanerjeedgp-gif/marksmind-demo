@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ConsoleSidebar from "../../../components/ConsoleSidebar.astro";
+import TestGeneratorHub from "../../../components/test-generator/TestGeneratorHub";
+import "@fontsource/plus-jakarta-sans";
+---
+
+<BaseLayout title="MarksMind AI | Test Generator">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #0b0b0c;
+        }
+    </style>
+    <div class="flex flex-col md:flex-row min-h-screen bg-[#0b0b0c] text-[#f3f3f4]">
+        <ConsoleSidebar activeTab="test-generator" />
+
+        <main class="flex-1 p-8 md:p-12 overflow-y-auto bg-[#0b0b0c]">
+            <div class="max-w-7xl mx-auto">
+                <TestGeneratorHub client:load />
+            </div>
+        </main>
+    </div>
+</BaseLayout>

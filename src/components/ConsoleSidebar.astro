@@ -1,0 +1,202 @@
+---
+import {
+    BotMessageSquare,
+    BrainCircuit,
+    ClipboardCheck,
+    GitFork,
+    Layers,
+    Menu,
+    Sparkles,
+    Target,
+    UserCircle,
+    X,
+} from "lucide-astro";
+
+type ConsoleTabId = "dashboard" | "revision" | "mistake" | "evaluator" | "quiz" | "flashcard" | "mindmap" | "test-generator";
+
+interface Props {
+    activeTab?: ConsoleTabId;
+}
+
+const { activeTab = "dashboard" } = Astro.props;
+
+const activeClasses =
+    "bg-purple-500/10 text-purple-300 border border-purple-500/20";
+const inactiveClasses = "text-slate-400 hover:bg-slate-800";
+
+const getNavClass = (tab: ConsoleTabId) =>
+    `flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md ${
+        activeTab === tab ? activeClasses : inactiveClasses
+    }`;
+---
+
+<!-- Mobile Header Bar -->
+<header
+    class="md:hidden flex items-center justify-between px-4 py-3 border-b border-white/[0.05] bg-[#0e0e10] sticky top-0 z-30"
+>
+    <div>
+        <span class="text-base font-semibold tracking-tight text-[#f3f3f4]">
+            MarksMind AI
+        </span>
+        <span class="ml-2 text-xs text-[#9aa0a6]">Console</span>
+    </div>
+    <button
+        type="button"
+        id="mobile-sidebar-toggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="console-sidebar"
+        class="p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+    >
+        <Menu class="w-5 h-5" />
+    </button>
+</header>
+
+<!-- Mobile Backdrop -->
+<div
+    id="mobile-sidebar-backdrop"
+    class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden"
+    aria-hidden="true"
+>
+</div>
+
+<aside
+    id="console-sidebar"
+    class="fixed inset-y-0 left-0 z-50 w-64 border-r border-white/[0.05] bg-[#0e0e10] p-4 flex flex-col justify-between transform -translate-x-full transition-transform duration-200 ease-out md:static md:translate-x-0 md:z-auto md:flex-shrink-0"
+>
+    <div>
+        <div class="px-2 mb-8 flex items-start justify-between">
+            <div>
+                <h1 class="text-base font-semibold tracking-tight">
+                    MarksMind AI
+                </h1>
+                <p class="text-xs text-[#9aa0a6]">Console</p>
+            </div>
+            <button
+                type="button"
+                id="mobile-sidebar-close"
+                aria-label="Close navigation menu"
+                class="md:hidden p-1.5 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            >
+                <X class="w-4 h-4" />
+            </button>
+        </div>
+        <nav class="flex flex-col gap-2" aria-label="Console modules">
+            <a
+                href="/tools/keyword-optimizer?tab=dashboard"
+                id="nav-dashboard"
+                class={getNavClass("dashboard")}
+            >
+                <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                    ></path>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a
+                href="/tools/keyword-optimizer?tab=revision"
+                id="nav-revision"
+                class={getNavClass("revision")}
+            >
+                <Sparkles class="w-5 h-5" />
+                <span>Smart Revision</span>
+            </a>
+            <a
+                href="/tools/keyword-optimizer?tab=mistake"
+                id="nav-mistake"
+                class={getNavClass("mistake")}
+            >
+                <Target class="w-5 h-5" />
+                <span>Mistake Database</span>
+            </a>
+            <a
+                href="/tools/keyword-optimizer?tab=evaluator"
+                id="nav-evaluator"
+                class={getNavClass("evaluator")}
+            >
+                <BotMessageSquare class="w-5 h-5" />
+                <span>NCERT Answer Evaluator</span>
+            </a>
+            <a
+                href="/tools/keyword-optimizer?tab=quiz"
+                id="nav-quiz"
+                class={getNavClass("quiz")}
+            >
+                <BrainCircuit class="w-5 h-5" />
+                <span>Quiz Generator</span>
+            </a>
+            <a
+                href="/tools/keyword-optimizer?tab=flashcard"
+                id="nav-flashcard"
+                class={getNavClass("flashcard")}
+            >
+                <Layers class="w-5 h-5" />
+                <span>Flashcard Generator</span>
+            </a>
+            <a
+                href="/tools/keyword-optimizer?tab=mindmap"
+                id="nav-mindmap"
+                class={getNavClass("mindmap")}
+            >
+                <GitFork class="w-5 h-5" />
+                <span>Mind Map Generator</span>
+            </a>
+            <a
+                href="/tools/keyword-optimizer/test-generator"
+                id="nav-test-generator"
+                class={getNavClass("test-generator")}
+                aria-current={activeTab === "test-generator" ? "page" : undefined}
+            >
+                <ClipboardCheck class="w-5 h-5" />
+                <span>Test Generator</span>
+            </a>
+        </nav>
+    </div>
+    <div class="border-t border-white/[0.05] pt-4 mt-auto">
+        <div class="flex items-center gap-3">
+            <UserCircle class="w-9 h-9 text-[#4e525a]" />
+            <div>
+                <p class="text-sm font-medium text-[#f3f3f4]">Arnesh</p>
+                <p class="text-xs text-[#9aa0a6]">Premium Developer Plan</p>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+        const sidebar = document.getElementById("console-sidebar");
+        const backdrop = document.getElementById("mobile-sidebar-backdrop");
+        const openBtn = document.getElementById("mobile-sidebar-toggle");
+        const closeBtn = document.getElementById("mobile-sidebar-close");
+
+        const setDrawerOpen = (isOpen) => {
+            if (!sidebar || !backdrop || !openBtn) return;
+            sidebar.classList.toggle("-translate-x-full", !isOpen);
+            sidebar.classList.toggle("translate-x-0", isOpen);
+            backdrop.classList.toggle("hidden", !isOpen);
+            openBtn.setAttribute("aria-expanded", String(isOpen));
+        };
+
+        openBtn?.addEventListener("click", () => setDrawerOpen(true));
+        closeBtn?.addEventListener("click", () => setDrawerOpen(false));
+        backdrop?.addEventListener("click", () => setDrawerOpen(false));
+
+        sidebar?.querySelectorAll("nav a").forEach((link) => {
+            link.addEventListener("click", () => setDrawerOpen(false));
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") setDrawerOpen(false);
+        });
+    });
+</script>
