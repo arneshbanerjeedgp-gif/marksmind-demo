@@ -4,6 +4,7 @@ import {
   Camera,
   FileText,
   Plus,
+  Sparkles,
   UploadCloud,
   X,
   ZoomIn,
@@ -262,6 +263,77 @@ interface HandwrittenUploadZoneProps {
   subtext?: string;
 }
 
+function validateAndCreateNotes(
+  fileList: FileList | null,
+  existingFiles: UploadedNoteFile[],
+  multiple: boolean,
+  maxFiles: number,
+  maxSizeBytes: number,
+): { nextFiles: UploadedNoteFile[] | null; error: string | null } {
+  if (!fileList || fileList.length === 0) {
+    return { nextFiles: null, error: null };
+  }
+
+  const effectiveMaxFiles = multiple ? maxFiles : 1;
+  const incoming = Array.from(fileList);
+  const errors: string[] = [];
+  const accepted: UploadedNoteFile[] = [];
+
+  let remainingSlots = multiple
+    ? Math.max(0, effectiveMaxFiles - existingFiles.length)
+    : 1;
+
+  for (const file of incoming) {
+    if (!isSupportedNoteFile(file)) {
+      errors.push(
+        `Unsupported format for "${file.name}". Use JPG, PNG, WEBP, or PDF.`,
+      );
+      continue;
+    }
+    if (file.size > maxSizeBytes) {
+      errors.push(
+        `"${file.name}" exceeds the ${formatFileSize(maxSizeBytes)} limit.`,
+      );
+      continue;
+    }
+    if (remainingSlots <= 0) {
+      errors.push(
+        `Maximum of ${effectiveMaxFiles} ${
+          effectiveMaxFiles === 1 ? 'page' : 'pages'
+        } allowed.`,
+      );
+      break;
+    }
+
+    const isPdf = isPdfNoteFile(file);
+    accepted.push({
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
+      file,
+      name: file.name,
+      sizeBytes: file.size,
+      formattedSize: formatFileSize(file.size),
+      mimeType: file.type || (isPdf ? 'application/pdf' : 'image/jpeg'),
+      isPdf,
+      previewUrl: isPdf ? null : URL.createObjectURL(file),
+    });
+    remainingSlots--;
+  }
+
+  if (accepted.length === 0) {
+    return { nextFiles: null, error: errors[0] ?? null };
+  }
+
+  if (!multiple) {
+    revokeUploadedNoteFiles(existingFiles);
+    return { nextFiles: accepted.slice(0, 1), error: errors[0] ?? null };
+  }
+
+  return {
+    nextFiles: [...existingFiles, ...accepted],
+    error: errors[0] ?? null,
+  };
+}
+
 /**
  * Shared drag-and-drop and click-to-upload handwritten notebook zone with instant thumbnails,
  * PDF cards, inline validation, and click-to-zoom lightbox support.
@@ -285,64 +357,16 @@ export default function HandwrittenUploadZone({
   const isCompact = variant === 'compact';
 
   const processIncomingFiles = (fileList: FileList | null) => {
-    if (!fileList || fileList.length === 0) return;
-    setErrorMessage(null);
-
-    const incoming = Array.from(fileList);
-    const errors: string[] = [];
-    const accepted: UploadedNoteFile[] = [];
-
-    let remainingSlots = multiple
-      ? Math.max(0, effectiveMaxFiles - files.length)
-      : 1;
-
-    for (const file of incoming) {
-      if (!isSupportedNoteFile(file)) {
-        errors.push(
-          `Unsupported format for "${file.name}". Use JPG, PNG, WEBP, or PDF.`,
-        );
-        continue;
-      }
-      if (file.size > maxSizeBytes) {
-        errors.push(
-          `"${file.name}" exceeds the ${formatFileSize(maxSizeBytes)} limit.`,
-        );
-        continue;
-      }
-      if (remainingSlots <= 0) {
-        errors.push(
-          `Maximum of ${effectiveMaxFiles} ${
-            effectiveMaxFiles === 1 ? 'page' : 'pages'
-          } allowed.`,
-        );
-        break;
-      }
-
-      const isPdf = isPdfNoteFile(file);
-      accepted.push({
-        id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
-        file,
-        name: file.name,
-        sizeBytes: file.size,
-        formattedSize: formatFileSize(file.size),
-        mimeType: file.type || (isPdf ? 'application/pdf' : 'image/jpeg'),
-        isPdf,
-        previewUrl: isPdf ? null : URL.createObjectURL(file),
-      });
-      remainingSlots--;
-    }
-
-    if (errors.length > 0) {
-      setErrorMessage(errors[0]);
-    }
-
-    if (accepted.length > 0) {
-      if (!multiple) {
-        revokeUploadedNoteFiles(files);
-        onFilesChange(accepted.slice(0, 1));
-      } else {
-        onFilesChange([...files, ...accepted]);
-      }
+    const { nextFiles, error } = validateAndCreateNotes(
+      fileList,
+      files,
+      multiple,
+      maxFiles,
+      maxSizeBytes,
+    );
+    setErrorMessage(error);
+    if (nextFiles) {
+      onFilesChange(nextFiles);
     }
   };
 
@@ -517,6 +541,272 @@ export default function HandwrittenUploadZone({
           </button>
         </div>
       )}
+    </div>
+  );
+}
+
+interface CompactHandwrittenUploadBarProps {
+  files: UploadedNoteFile[];
+  onFilesChange: (nextFiles: UploadedNoteFile[]) => void;
+  onEvaluateSheet: () => void;
+  title?: string;
+  coverageBadge?: string;
+  subtitle?: string;
+  maxFiles?: number;
+  maxSizeBytes?: number;
+}
+
+/**
+ * Sleek compact top horizontal upload bar (~64-84px tall on desktop) covering all exam sections
+ * with instant thumbnail preview, zoom lightbox, and direct Evaluate Sheet CTA.
+ */
+export function CompactHandwrittenUploadBar({
+  files,
+  onFilesChange,
+  onEvaluateSheet,
+  title = 'Upload Handwritten Answer Sheet',
+  coverageBadge = 'All Sections (A–D)',
+  subtitle = 'Wrote all answers on paper? Upload your sheet for instant CEDA OCR evaluation.',
+  maxFiles = 8,
+  maxSizeBytes = DEFAULT_MAX_BYTES,
+}: CompactHandwrittenUploadBarProps) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [zoomedFile, setZoomedFile] = useState<UploadedNoteFile | null>(null);
+  const [zoomedPage, setZoomedPage] = useState<number>(1);
+
+  const processIncomingFiles = (fileList: FileList | null) => {
+    const { nextFiles, error } = validateAndCreateNotes(
+      fileList,
+      files,
+      true,
+      maxFiles,
+      maxSizeBytes,
+    );
+    setErrorMessage(error);
+    if (nextFiles) {
+      onFilesChange(nextFiles);
+    }
+  };
+
+  const handleRemoveFile = (fileId: string) => {
+    const target = files.find((f) => f.id === fileId);
+    if (target?.previewUrl) {
+      URL.revokeObjectURL(target.previewUrl);
+    }
+    setErrorMessage(null);
+    onFilesChange(files.filter((f) => f.id !== fileId));
+  };
+
+  const primaryFile = files[0];
+
+  return (
+    <div className="space-y-2">
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,application/pdf"
+        multiple={true}
+        onChange={(e) => {
+          processIncomingFiles(e.target.files);
+          e.target.value = '';
+        }}
+        className="hidden"
+      />
+
+      <div
+        onDragOver={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (!isDragging) setIsDragging(true);
+        }}
+        onDragEnter={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsDragging(true);
+        }}
+        onDragLeave={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsDragging(false);
+        }}
+        onDrop={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsDragging(false);
+          processIncomingFiles(e.dataTransfer.files);
+        }}
+        className={`rounded-2xl border px-4 sm:px-5 py-3 transition-all duration-200 shadow-lg flex flex-col md:flex-row md:items-center md:justify-between gap-3 ${
+          isDragging
+            ? 'border-purple-500 bg-purple-500/10 shadow-[0_0_20px_rgba(139,92,246,0.2)]'
+            : 'bg-[#161618] border-purple-500/30 hover:border-purple-500/50'
+        }`}
+      >
+        {files.length === 0 ? (
+          <>
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 shrink-0">
+                <Camera className="w-5 h-5" />
+              </div>
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="text-sm font-bold text-slate-100">{title}</h3>
+                  <span className="px-2.5 py-0.5 rounded-full bg-purple-500/15 border border-purple-500/30 text-[11px] font-semibold text-purple-300">
+                    {coverageBadge}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 mt-0.5 truncate">
+                  {subtitle}
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => inputRef.current?.click()}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-dashed border-purple-500/50 hover:border-purple-400 bg-[#0e0e10] hover:bg-purple-500/10 text-xs sm:text-sm font-semibold text-purple-300 hover:text-purple-200 transition-all cursor-pointer shrink-0"
+            >
+              <UploadCloud className="w-4 h-4" />
+              <span>Upload Image / PDF</span>
+            </button>
+          </>
+        ) : (
+          <>
+            <div className="flex items-center gap-3 min-w-0 flex-1">
+              <div className="flex items-center gap-2 shrink-0">
+                {files.slice(0, 3).map((item, idx) =>
+                  item.isPdf ? (
+                    <div
+                      key={item.id}
+                      className="relative w-12 h-12 rounded-lg bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-300"
+                      title={item.name}
+                    >
+                      <FileText className="w-5 h-5" />
+                    </div>
+                  ) : (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => {
+                        setZoomedFile(item);
+                        setZoomedPage(idx + 1);
+                      }}
+                      title="Click to inspect full image"
+                      className="relative w-12 h-12 rounded-lg overflow-hidden border border-purple-500/40 bg-[#0e0e10] cursor-zoom-in group"
+                    >
+                      {item.previewUrl && (
+                        <img
+                          src={item.previewUrl}
+                          alt={item.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                        />
+                      )}
+                      <span className="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <ZoomIn className="w-3.5 h-3.5 text-white" />
+                      </span>
+                    </button>
+                  ),
+                )}
+              </div>
+
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="px-2 py-0.5 rounded-full bg-purple-500/15 border border-purple-500/30 text-[10px] font-semibold text-purple-300">
+                    {coverageBadge}
+                  </span>
+                  <span className="text-xs font-semibold text-emerald-400">
+                    {files.length} {files.length === 1 ? 'file' : 'files'}{' '}
+                    ready
+                  </span>
+                </div>
+                <p className="text-xs font-semibold text-slate-200 truncate mt-0.5">
+                  {primaryFile.name}
+                  <span className="text-slate-400 font-normal ml-1.5">
+                    ({primaryFile.formattedSize})
+                  </span>
+                  {files.length > 1 && (
+                    <span className="text-purple-300 ml-1.5">
+                      +{files.length - 1} more
+                    </span>
+                  )}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0 flex-wrap">
+              {files.length < maxFiles && (
+                <button
+                  type="button"
+                  onClick={() => inputRef.current?.click()}
+                  title="Add another page"
+                  className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg bg-[#0e0e10] border border-white/10 hover:border-purple-500/50 text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Add</span>
+                </button>
+              )}
+
+              <button
+                type="button"
+                onClick={() => {
+                  revokeUploadedNoteFiles(files);
+                  setErrorMessage(null);
+                  onFilesChange([]);
+                }}
+                aria-label="Remove uploaded sheet"
+                title="Remove uploaded sheet"
+                className="p-2 rounded-lg bg-[#0e0e10] border border-white/10 text-slate-400 hover:text-red-400 hover:border-red-500/40 transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              <button
+                type="button"
+                onClick={onEvaluateSheet}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-600 text-white text-xs sm:text-sm font-semibold shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>Evaluate Sheet</span>
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+
+      {errorMessage && (
+        <div
+          role="alert"
+          className="flex items-center justify-between gap-2 rounded-lg bg-red-500/10 border border-red-500/20 px-3.5 py-2 text-xs text-red-400"
+        >
+          <div className="flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0" />
+            <span>{errorMessage}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setErrorMessage(null)}
+            aria-label="Dismiss error"
+            className="text-red-400/80 hover:text-red-300 cursor-pointer"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
+
+      <HandwrittenLightboxModal
+        image={
+          zoomedFile?.previewUrl
+            ? {
+                url: zoomedFile.previewUrl,
+                name: zoomedFile.name,
+                pageLabel: `Page ${zoomedPage}`,
+                size: zoomedFile.formattedSize,
+              }
+            : null
+        }
+        onClose={() => setZoomedFile(null)}
+      />
     </div>
   );
 }

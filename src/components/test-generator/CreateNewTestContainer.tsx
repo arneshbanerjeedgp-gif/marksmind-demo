@@ -18,8 +18,10 @@ import {
   CELL_20_MARK_TEMPLATE,
   type McqOptionKey,
 } from './templates/cell20MarkTemplate';
+import { CELL_HANDWRITTEN_EVALUATION } from './templates/cellHandwrittenEvaluation';
 import TestPaperView, { type AnswerInputMode } from './TestPaperView';
 import TestEvaluationReview from './TestEvaluationReview';
+import HandwrittenCedaEvaluationView from './HandwrittenCedaEvaluationView';
 import {
   revokeUploadedNoteFiles,
   type UploadedNoteFile,
@@ -29,9 +31,17 @@ interface CreateNewTestContainerProps {
   onBack: () => void;
 }
 
-type BuilderStep = 'config' | 'loading' | 'submitting' | 'paper' | 'review';
+type BuilderStep =
+  | 'config'
+  | 'loading'
+  | 'submitting'
+  | 'evaluating-handwritten'
+  | 'paper'
+  | 'review'
+  | 'handwritten-review';
 
 const GENERATION_DURATION_MS = 7500;
+const HANDWRITTEN_CEDA_DURATION_MS = 6000;
 const SUBMISSION_TRANSITION_MS = 1400;
 const CIRCLE_CIRCUMFERENCE = 565.48;
 
@@ -40,7 +50,8 @@ const SELECT_CLASSES =
 
 /**
  * Four-sandbox NCERT test configuration builder with 7.5s signature loader,
- * interactive 20-mark test paper (supporting handwritten uploads), and deterministic review screen.
+ * interactive 20-mark test paper, top compact handwritten upload bar (6s CEDA OCR flow),
+ * and deterministic evaluation views.
  */
 export default function CreateNewTestContainer({
   onBack,
@@ -133,11 +144,28 @@ export default function CreateNewTestContainer({
   };
 
   useEffect(() => {
-    if (step !== 'loading' && step !== 'submitting') return;
+    if (
+      step !== 'loading' &&
+      step !== 'submitting' &&
+      step !== 'evaluating-handwritten'
+    ) {
+      return;
+    }
 
     const duration =
-      step === 'loading' ? GENERATION_DURATION_MS : SUBMISSION_TRANSITION_MS;
-    const nextStep: BuilderStep = step === 'loading' ? 'paper' : 'review';
+      step === 'loading'
+        ? GENERATION_DURATION_MS
+        : step === 'evaluating-handwritten'
+          ? HANDWRITTEN_CEDA_DURATION_MS
+          : SUBMISSION_TRANSITION_MS;
+
+    const nextStep: BuilderStep =
+      step === 'loading'
+        ? 'paper'
+        : step === 'evaluating-handwritten'
+          ? 'handwritten-review'
+          : 'review';
+
     const startTime = performance.now();
     let frameId = 0;
 
@@ -160,7 +188,7 @@ export default function CreateNewTestContainer({
     return () => cancelAnimationFrame(frameId);
   }, [step]);
 
-  const getLoaderStatus = (pct: number): string => {
+  const getGenerationLoaderStatus = (pct: number): string => {
     const cleanChapter = selectedChapter.replace(/\s*\(Cell\)\s*$/, '');
     if (pct < 25) {
       return `Parsing NCERT ${selectedClass} ${selectedSubject} curriculum context...`;
@@ -172,6 +200,19 @@ export default function CreateNewTestContainer({
       return `Structuring ${effectiveMarks}-mark CBSE blueprint (Sections A, B, C & D)...`;
     }
     return 'Calibrating step-marking rubrics & case-study sub-parts...';
+  };
+
+  const getHandwrittenCedaLoaderStatus = (pct: number): string => {
+    if (pct < 25) {
+      return 'Scanning handwritten answer script (Sections A–D)...';
+    }
+    if (pct < 52) {
+      return 'Running handwriting OCR & mapping question numbers 1–10...';
+    }
+    if (pct < 80) {
+      return 'Executing CEDA concept extraction against NCERT Class 9 rubric...';
+    }
+    return 'Computing step-marking score & missing scientific parameters...';
   };
 
   const handleSelectMcq = (questionId: string, option: McqOptionKey) => {
@@ -196,18 +237,24 @@ export default function CreateNewTestContainer({
     setQuestionModes((prev) => ({ ...prev, [questionId]: mode }));
   };
 
-  const handleSubmitPaper = () => {
-    const hasHandwrittenAttachments =
-      fullSheetFiles.length > 0 ||
-      Object.values(perQuestionFiles).some((list) => list.length > 0);
+  const handleSubmitOrEvaluate = () => {
+    if (fullSheetFiles.length > 0) {
+      setProgress(0);
+      setStep('evaluating-handwritten');
+      return;
+    }
 
-    if (hasHandwrittenAttachments) {
+    const hasPerQuestionFiles = Object.values(perQuestionFiles).some(
+      (list) => list.length > 0,
+    );
+    if (hasPerQuestionFiles) {
       setProgress(0);
       setStep('submitting');
-    } else {
-      setStep('review');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
     }
+
+    setStep('review');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleRetake = () => {
@@ -216,12 +263,18 @@ export default function CreateNewTestContainer({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (step === 'loading' || step === 'submitting') {
+  if (
+    step === 'loading' ||
+    step === 'submitting' ||
+    step === 'evaluating-handwritten'
+  ) {
     const strokeOffset = CIRCLE_CIRCUMFERENCE * (1 - progress / 100);
     const statusText =
-      step === 'submitting'
-        ? 'Processing handwritten submissions & compiling NCERT answer key...'
-        : getLoaderStatus(progress);
+      step === 'evaluating-handwritten'
+        ? getHandwrittenCedaLoaderStatus(progress)
+        : step === 'submitting'
+          ? 'Processing handwritten submissions & compiling NCERT answer key...'
+          : getGenerationLoaderStatus(progress);
 
     return (
       <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/85 backdrop-blur-sm px-6">
@@ -278,7 +331,19 @@ export default function CreateNewTestContainer({
         onPerQuestionFilesChange={handlePerQuestionFilesChange}
         onChangeQuestionMode={handleChangeQuestionMode}
         onEditConfig={() => setStep('config')}
-        onSubmit={handleSubmitPaper}
+        onSubmit={handleSubmitOrEvaluate}
+        onBackToHub={onBack}
+      />
+    );
+  }
+
+  if (step === 'handwritten-review') {
+    return (
+      <HandwrittenCedaEvaluationView
+        report={CELL_HANDWRITTEN_EVALUATION}
+        uploadedFiles={fullSheetFiles}
+        onRetake={handleRetake}
+        onEditConfig={() => setStep('config')}
         onBackToHub={onBack}
       />
     );

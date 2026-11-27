@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ArrowLeft,
   BookOpenCheck,
   Camera,
   CheckCircle2,
-  ChevronDown,
-  ChevronUp,
-  FileText,
   PenLine,
   Send,
 } from 'lucide-react';
@@ -15,6 +12,7 @@ import type {
   McqOptionKey,
 } from './templates/cell20MarkTemplate';
 import HandwrittenUploadZone, {
+  CompactHandwrittenUploadBar,
   type UploadedNoteFile,
 } from '../shared/HandwrittenUploadZone';
 
@@ -150,8 +148,8 @@ function SubjectiveQuestionBody({
 }
 
 /**
- * Interactive 4-section CBSE test paper view supporting MCQ selection,
- * typed subjective answers, full answer sheet PDF/image upload, and per-question handwritten uploads.
+ * Interactive 4-section CBSE test paper view with a compact top handwritten upload bar
+ * covering all sections (A-D), clickable MCQs, and subjective answer modes.
  */
 export default function TestPaperView({
   template,
@@ -169,17 +167,16 @@ export default function TestPaperView({
   onSubmit,
   onBackToHub,
 }: TestPaperViewProps) {
-  const [isFullSheetOpen, setIsFullSheetOpen] = useState(true);
-
   const hasFullSheet = fullSheetFiles.length > 0;
   const isSubjectiveAttempted = (id: string) =>
     Boolean(subjectiveAnswers[id]?.trim()) ||
     (perQuestionFiles[id]?.length ?? 0) > 0 ||
     hasFullSheet;
 
-  const attemptedMcqs = template.sectionA.questions.filter((q) =>
-    Boolean(mcqAnswers[q.id]),
-  ).length;
+  const attemptedMcqs = hasFullSheet
+    ? template.sectionA.questions.length
+    : template.sectionA.questions.filter((q) => Boolean(mcqAnswers[q.id]))
+        .length;
   const attemptedSectionB = template.sectionB.questions.filter((q) =>
     isSubjectiveAttempted(q.id),
   ).length;
@@ -197,7 +194,7 @@ export default function TestPaperView({
   const getMode = (id: string): AnswerInputMode => questionModes[id] ?? 'type';
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <button
         type="button"
         onClick={onBackToHub}
@@ -255,8 +252,19 @@ export default function TestPaperView({
         </div>
       </div>
 
+      {/* Compact Top Handwritten Upload Bar (All Sections A–D) */}
+      <CompactHandwrittenUploadBar
+        files={fullSheetFiles}
+        onFilesChange={onFullSheetFilesChange}
+        onEvaluateSheet={onSubmit}
+        title="Upload Handwritten Answer Sheet"
+        coverageBadge="All Sections (A–D)"
+        subtitle="Wrote all answers on paper? Upload your sheet for instant CEDA OCR evaluation."
+        maxFiles={8}
+      />
+
       {/* SECTION A — MCQs */}
-      <section className="space-y-4">
+      <section className="space-y-4 pt-2">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-800 pb-3">
           <h3 className="text-lg font-bold text-slate-100 tracking-tight">
             {template.sectionA.title}
@@ -318,58 +326,8 @@ export default function TestPaperView({
         </div>
       </section>
 
-      {/* Full Handwritten Answer Sheet Upload Banner (Above Section B) */}
-      <section className="bg-[#161618] border border-purple-500/30 rounded-2xl p-6 shadow-lg space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-          <div className="flex items-start gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 shrink-0 mt-0.5">
-              <FileText className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <h3 className="text-base sm:text-lg font-bold text-slate-100">
-                  Upload Full Handwritten Answer Sheet (Sections B, C &amp; D)
-                </h3>
-                {fullSheetFiles.length > 0 && (
-                  <span className="px-2.5 py-0.5 rounded-full bg-purple-500/15 border border-purple-500/30 text-xs font-semibold text-purple-300">
-                    {fullSheetFiles.length}{' '}
-                    {fullSheetFiles.length === 1 ? 'page' : 'pages'} attached
-                  </span>
-                )}
-              </div>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1 leading-relaxed">
-                Prefer writing your descriptive answers in a notebook? Upload photos or a single PDF of your completed subjective answer pages here, or attach photos per question below.
-              </p>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => setIsFullSheetOpen((prev) => !prev)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0e0e10] border border-white/10 hover:border-purple-500/40 text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer shrink-0 w-fit"
-          >
-            <span>{isFullSheetOpen ? 'Collapse' : 'Expand'}</span>
-            {isFullSheetOpen ? (
-              <ChevronUp className="w-3.5 h-3.5" />
-            ) : (
-              <ChevronDown className="w-3.5 h-3.5" />
-            )}
-          </button>
-        </div>
-
-        {isFullSheetOpen && (
-          <HandwrittenUploadZone
-            files={fullSheetFiles}
-            onFilesChange={onFullSheetFilesChange}
-            variant="standard"
-            multiple={true}
-            maxFiles={8}
-          />
-        )}
-      </section>
-
       {/* SECTION B — Short Answer Questions */}
-      <section className="space-y-4">
+      <section className="space-y-4 pt-2">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-800 pb-3">
           <h3 className="text-lg font-bold text-slate-100 tracking-tight">
             {template.sectionB.title}
@@ -430,7 +388,7 @@ export default function TestPaperView({
       </section>
 
       {/* SECTION C — Structured Answer Question */}
-      <section className="space-y-4">
+      <section className="space-y-4 pt-2">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-800 pb-3">
           <h3 className="text-lg font-bold text-slate-100 tracking-tight">
             {template.sectionC.title}
@@ -489,7 +447,7 @@ export default function TestPaperView({
       </section>
 
       {/* SECTION D — Case-Based Study Question */}
-      <section className="space-y-4">
+      <section className="space-y-4 pt-2">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-800 pb-3">
           <h3 className="text-lg font-bold text-slate-100 tracking-tight">
             {template.sectionD.title}
@@ -522,7 +480,7 @@ export default function TestPaperView({
             </p>
           </div>
 
-          {/* 4 Separated Sub-Parts with Per-Question Handwritten Upload Toggles */}
+          {/* 4 Separated Sub-Parts */}
           <div className="divide-y divide-slate-800/80">
             {template.sectionD.question.subParts.map((part, idx) => {
               const partFiles = perQuestionFiles[part.id] ?? [];
@@ -581,7 +539,7 @@ export default function TestPaperView({
       {/* Bottom Submit Action */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#161618] border border-white/10 rounded-2xl p-6">
         <p className="text-sm text-slate-400">
-          Review your answers or uploaded handwritten sheets before submitting for NCERT benchmark evaluation.
+          Review your answers or uploaded handwritten sheet before submitting for CEDA evaluation.
         </p>
         <button
           type="button"

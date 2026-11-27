@@ -60,11 +60,11 @@ MarksMind AI is a professional utility suite for CBSE students, featuring SEO-in
 *   5 color themes (purple, sky, emerald, amber, rose)
 *   Animated node rendering with glow filters
 
-### 10. Test Generator (Phase 1, 2 & 3 — Hub, Builder, 20-Mark Cell Master Template & Handwritten Upload)
+### 10. Test Generator (Phases 1–4 — Hub, Builder, 20-Mark Cell Exam & CEDA OCR Evaluation)
 *   Dedicated route `/tools/keyword-optimizer/test-generator` (`src/pages/tools/keyword-optimizer/test-generator.astro`) sharing the Console sidebar shell (`src/components/ConsoleSidebar.astro`).
 *   Two-way sidebar navigation between `/tools/keyword-optimizer` (`?tab=<module>`) and `/tools/keyword-optimizer/test-generator`, including identical responsive mobile drawer support.
 *   3-Sandbox Hub (`src/components/test-generator/TestGeneratorHub.tsx`) matching `Quiz Generator` and `Flashcard Generator` visual tokens:
-    *   **Create New Test:** Interactive 4-sandbox builder (`Class`, `Subject`, `Chapter` dropdowns + enterable `Total Marks` numeric input) with a 7.5-second circular purple progress ring loader leading into the 20-mark NCERT Class 9 *The Fundamental Unit of Life (Cell)* Master Template (`Section A` 5×1M MCQs, `Section B` 3×2M Short Answers, `Section C` 1×3M Structured Answer, `Section D` 1×6M Case Study with 4 sub-parts), Full Answer Sheet multi-page upload banner above Section B, per-question `Type Answer` | `Upload Handwritten` toggles across Q6–Q10(i–iv), and deterministic Submission + NCERT Benchmark Review with zoomable handwritten previews.
+    *   **Create New Test:** Interactive 4-sandbox builder (`Class`, `Subject`, `Chapter` dropdowns + enterable `Total Marks` numeric input) with a 7.5-second circular purple progress ring loader leading into the 20-mark NCERT Class 9 *The Fundamental Unit of Life (Cell)* Master Template (`Section A` 5×1M MCQs, `Section B` 3×2M Short Answers, `Section C` 1×3M Structured Answer, `Section D` 1×6M Case Study with 4 sub-parts). Includes a compact top handwritten upload bar (`CompactHandwrittenUploadBar`, `All Sections (A–D)`) with instant thumbnail preview, zoom lightbox, and direct `Evaluate Sheet` CTA triggering the 6-second CEDA OCR loader and `13 / 20` (`65%`) step-marking report (`HandwrittenCedaEvaluationView.tsx`, `cellHandwrittenEvaluation.ts`), alongside interactive on-screen MCQ/typed/per-question submissions (`TestEvaluationReview.tsx`).
     *   **Create Custom Test:** Active purple visual card (`href="#"` hash link, `PDF Upload`, `YouTube Links`, `Custom Sources`).
     *   **Track Progress:** Interactive sandbox opening `TrackProgressView` with KPI cards, Subject Performance bars, subject filter (`All Subjects`, `Physics`, `Chemistry`, `Mathematics`), and 3 organic test progress reports (`src/components/test-generator/progressReportsData.ts`).
 
@@ -72,18 +72,18 @@ MarksMind AI is a professional utility suite for CBSE students, featuring SEO-in
 *   `src/data/cbse_curriculum.ts`: Central source of truth for curriculum data.
 *   `src/config/constants.ts`: Onboarding questions and diagnostic prompts (includes Chemistry).
 *   `src/components/ConsoleSidebar.astro`: Shared Console sidebar component across `/tools/keyword-optimizer` and `/tools/keyword-optimizer/test-generator`.
-*   `src/components/shared/HandwrittenUploadZone.tsx`: Shared drag-and-drop handwritten notebook uploader, thumbnail/PDF cards, and click-to-zoom lightbox modal.
+*   `src/components/shared/HandwrittenUploadZone.tsx`: Shared drag-and-drop handwritten notebook uploader, `CompactHandwrittenUploadBar`, thumbnail/PDF cards, and click-to-zoom lightbox modal.
 *   `src/components/evaluator/EvaluatorHandwrittenPanel.tsx`: Segmented `Type Script` | `Upload Handwritten` switcher and evaluated thumbnail strip for `NCERT Answer Evaluator`.
 *   `src/pages/tools/keyword-optimizer/index.astro`: Main application page with the 7 existing console views and inline JS data.
 *   `src/pages/tools/keyword-optimizer/test-generator.astro`: Dedicated Test Generator route mounting the shared sidebar and React hub island.
-*   `src/components/test-generator/`: Modular Test Generator components (`TestGeneratorHub.tsx`, `CreateNewTestContainer.tsx`, `TestPaperView.tsx`, `TestEvaluationReview.tsx`, `TrackProgressView.tsx`, `curriculumChapters.ts`, `progressReportsData.ts`, `templates/cell20MarkTemplate.ts`).
+*   `src/components/test-generator/`: Modular Test Generator components (`TestGeneratorHub.tsx`, `CreateNewTestContainer.tsx`, `TestPaperView.tsx`, `TestEvaluationReview.tsx`, `HandwrittenCedaEvaluationView.tsx`, `TrackProgressView.tsx`, `curriculumChapters.ts`, `progressReportsData.ts`, `templates/cell20MarkTemplate.ts`, `templates/cellHandwrittenEvaluation.ts`).
 *   `src/styles/global.css`: Tailwind CSS configuration and global styles.
 
-## Current Phase Plan & Steps (Test Generator Phase 3 — Handwritten Notes Upload)
-1.  **Shared Upload Component:** Create `src/components/shared/HandwrittenUploadZone.tsx` supporting image thumbnails, PDF cards, drag-and-drop, inline size/type validation, object URL lifecycle helpers, and a zoom lightbox modal.
-2.  **NCERT Answer Evaluator Integration:** Create `src/components/evaluator/EvaluatorHandwrittenPanel.tsx` and integrate it into `src/pages/tools/keyword-optimizer/index.astro` (`Type Script` | `Upload Handwritten` toggle, non-blocking verification with uploaded files, handwriting-aware loader statuses, and evaluated thumbnail strip).
-3.  **20-Mark Cell Exam Integration:** Update `TestPaperView.tsx`, `TestEvaluationReview.tsx`, and `CreateNewTestContainer.tsx` with the Full Answer Sheet dropzone above Section B, per-question `Type Answer` | `Upload Handwritten` toggles on Q6–Q10(i–iv), live attempt counting, and review-screen zoomable handwritten previews.
-4.  **Build & Verification:** Update `blueprint.md` and run `npm run build` + `npx tsc --noEmit`.
+## Current Phase Plan & Steps (Test Generator Phase 4 — Compact Top Upload Bar & CEDA OCR Report)
+1.  **Compact Top Upload Bar:** Add `CompactHandwrittenUploadBar` to `src/components/shared/HandwrittenUploadZone.tsx` and move the full-sheet upload above Section A in `TestPaperView.tsx` covering `All Sections (A–D)` with thumbnail zoom and `Evaluate Sheet` CTA.
+2.  **CEDA OCR Data & Evaluation View:** Create `templates/cellHandwrittenEvaluation.ts` and `HandwrittenCedaEvaluationView.tsx` implementing the verbatim `13 / 20` (`65%`) transcription, section totals (`3/5`, `4/6`, `2/3`, `4/6`), emerald/amber/crimson CEDA chips, and zoomable sheet reference strip.
+3.  **6-Second Loader Integration:** Wire `Evaluate Sheet` / `Submit Test Paper` in `CreateNewTestContainer.tsx` to run the 6000ms CEDA OCR loader when a top-bar sheet is attached while preserving normal on-screen submissions.
+4.  **Build & Verification:** Update `blueprint.md` and verify `npm run build` and TypeScript checks pass with zero errors.
 
 ## Technical Standards
 *   **Framework:** Astro 4.x
