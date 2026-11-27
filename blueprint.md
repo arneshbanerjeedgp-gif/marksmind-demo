@@ -58,12 +58,12 @@ MarksMind AI is a professional utility suite for CBSE students, featuring SEO-in
 *   5 color themes (purple, sky, emerald, amber, rose)
 *   Animated node rendering with glow filters
 
-### 10. Test Generator (Phase 1 — Route, Sidebar & 3-Sandbox Architecture)
+### 10. Test Generator (Phase 1 & Phase 2 — Hub, Builder & 20-Mark Cell Master Template)
 *   Dedicated route `/tools/keyword-optimizer/test-generator` (`src/pages/tools/keyword-optimizer/test-generator.astro`) sharing the Console sidebar shell (`src/components/ConsoleSidebar.astro`).
 *   Two-way sidebar navigation between `/tools/keyword-optimizer` (`?tab=<module>`) and `/tools/keyword-optimizer/test-generator`, including identical responsive mobile drawer support.
 *   3-Sandbox Hub (`src/components/test-generator/TestGeneratorHub.tsx`) matching `Quiz Generator` and `Flashcard Generator` visual tokens:
-    *   **Create New Test:** Interactive sandbox opening a minimal, modular `CreateNewTestContainer` shell (`← Back to Test Generator`, Phase 1 stop boundary).
-    *   **Create Custom Test:** Non-openable showcase card (`PDF Upload`, `YouTube Links`, `Custom Sources`, `Locked • Coming Soon`).
+    *   **Create New Test:** Interactive 4-sandbox builder (`Class`, `Subject`, `Chapter` dropdowns + enterable `Total Marks` numeric input) with a 7.5-second circular purple progress ring loader leading into the 20-mark NCERT Class 9 *The Fundamental Unit of Life (Cell)* Master Template (`Section A` 5×1M MCQs, `Section B` 3×2M Short Answers, `Section C` 1×3M Structured Answer, `Section D` 1×6M Case Study with 4 sub-parts) and deterministic Submission + NCERT Benchmark Review.
+    *   **Create Custom Test:** Active purple visual card (`href="#"` hash link, `PDF Upload`, `YouTube Links`, `Custom Sources`).
     *   **Track Progress:** Interactive sandbox opening `TrackProgressView` with KPI cards, Subject Performance bars, subject filter (`All Subjects`, `Physics`, `Chemistry`, `Mathematics`), and 3 organic test progress reports (`src/components/test-generator/progressReportsData.ts`).
 
 ## Project Structure
@@ -72,15 +72,14 @@ MarksMind AI is a professional utility suite for CBSE students, featuring SEO-in
 *   `src/components/ConsoleSidebar.astro`: Shared Console sidebar component across `/tools/keyword-optimizer` and `/tools/keyword-optimizer/test-generator`.
 *   `src/pages/tools/keyword-optimizer/index.astro`: Main application page with the 7 existing console views and inline JS data.
 *   `src/pages/tools/keyword-optimizer/test-generator.astro`: Dedicated Test Generator route mounting the shared sidebar and React hub island.
-*   `src/components/test-generator/`: Modular Phase 1 Test Generator components (`TestGeneratorHub.tsx`, `CreateNewTestContainer.tsx`, `TrackProgressView.tsx`, `progressReportsData.ts`).
+*   `src/components/test-generator/`: Modular Test Generator components (`TestGeneratorHub.tsx`, `CreateNewTestContainer.tsx`, `TestPaperView.tsx`, `TestEvaluationReview.tsx`, `TrackProgressView.tsx`, `curriculumChapters.ts`, `progressReportsData.ts`, `templates/cell20MarkTemplate.ts`).
 *   `src/styles/global.css`: Tailwind CSS configuration and global styles.
 
-## Current Phase Plan & Steps (Test Generator Phase 1)
-1.  **Audit & Blueprint:** Verify icon exports and existing visual tokens from `Quiz Generator`, `Flashcard Generator`, `Dashboard`, and `Mistake Database`, and update `blueprint.md`.
-2.  **Shared Console Sidebar:** Extract the sidebar from `src/pages/tools/keyword-optimizer/index.astro` into `src/components/ConsoleSidebar.astro`, adding `Test Generator` immediately after `Mind Map Generator` and supporting mobile drawer navigation identically across routes.
-3.  **Test Generator Components:** Create `src/components/test-generator/progressReportsData.ts`, `CreateNewTestContainer.tsx`, `TrackProgressView.tsx`, and `TestGeneratorHub.tsx` with strict visual parity and the Phase 1 hard stop on `Create New Test` and locked `Create Custom Test`.
-4.  **Route & Two-Way Navigation:** Add `src/pages/tools/keyword-optimizer/test-generator.astro` and update `src/pages/tools/keyword-optimizer/index.astro` to read `?tab=<module>` / `#hash` on load and navigate directly to `/tools/keyword-optimizer/test-generator` when clicking `Test Generator`.
-5.  **Verification:** Run `npx astro check` (if available) and `npm run build`, fix any TypeScript/Astro/bundler issues, and verify live rendering and navigation.
+## Current Phase Plan & Steps (Test Generator Phase 2)
+1.  **Audit & Data Layer:** Create `curriculumChapters.ts` (Classes 8–12 subjects and chapters) and `templates/cell20MarkTemplate.ts` (verbatim 20-mark NCERT Cell master paper).
+2.  **Test Paper & Evaluation Review:** Build `TestPaperView.tsx` (Sections A–D interactive paper) and `TestEvaluationReview.tsx` (Section A auto-grading + Sections B–D NCERT benchmark & marking-points review).
+3.  **Hub & Builder Upgrade:** Upgrade `Create Custom Test` in `TestGeneratorHub.tsx` to active purple card styling (`href="#"`) and build the 4-sandbox `CreateNewTestContainer.tsx` with the 7.5-second signature circular loader.
+4.  **Blueprint & Build Verification:** Update `blueprint.md` and verify `npm run build` and TypeScript checks with zero errors.
 
 ## Technical Standards
 *   **Framework:** Astro 4.x

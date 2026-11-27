@@ -5,7 +5,6 @@ import {
   FileText,
   FolderPlus,
   Layers,
-  Lock,
   Youtube,
 } from 'lucide-react';
 import CreateNewTestContainer from './CreateNewTestContainer';
@@ -20,7 +19,7 @@ const CUSTOM_SOURCES = [
 ] as const;
 
 /**
- * Three-sandbox hub for Test Generator: Create New Test, locked Create Custom Test showcase, and Track Progress.
+ * Three-sandbox hub for Test Generator: Create New Test, Create Custom Test, and Track Progress.
  */
 export default function TestGeneratorHub() {
   const [activeView, setActiveView] = useState<HubView>('hub');
@@ -45,7 +44,7 @@ export default function TestGeneratorHub() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full pt-4">
-        {/* Sandbox 1: Create New Test (Openable — Phase 1 stops at container) */}
+        {/* Sandbox 1: Create New Test */}
         <div
           onClick={() => setActiveView('create-new')}
           className="p-6 rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
@@ -74,23 +73,18 @@ export default function TestGeneratorHub() {
           </button>
         </div>
 
-        {/* Sandbox 2: Create Custom Test (Locked Showcase Only — Non-Openable) */}
-        <div
-          aria-disabled="true"
-          className="p-6 rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 opacity-75 hover:opacity-80 transition-opacity duration-200 text-left shadow-lg cursor-not-allowed select-none"
+        {/* Sandbox 2: Create Custom Test (Interactive Visual Card -> # Hash Link Only) */}
+        <a
+          href="#"
+          onClick={(e) => e.preventDefault()}
+          className="p-6 rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] active:scale-[0.99] transition-all duration-200 cursor-pointer text-left shadow-lg group"
         >
           <div>
-            <div className="flex items-start justify-between gap-3 mb-5">
-              <div className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-slate-400">
-                <Layers className="w-6 h-6" />
-              </div>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-semibold text-slate-400">
-                <Lock className="w-3.5 h-3.5" />
-                <span>Coming Soon</span>
-              </span>
+            <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-5">
+              <Layers className="w-6 h-6" />
             </div>
 
-            <h3 className="text-xl font-bold tracking-tight text-slate-200">
+            <h3 className="text-xl font-bold tracking-tight text-purple-400 group-hover:text-purple-300">
               Create Custom Test
             </h3>
             <p className="text-sm text-neutral-400 font-medium mt-2 leading-relaxed">
@@ -101,25 +95,21 @@ export default function TestGeneratorHub() {
               {CUSTOM_SOURCES.map(({ label, Icon }) => (
                 <span
                   key={label}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-medium text-slate-300"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-medium text-purple-300"
                 >
-                  <Icon className="w-3.5 h-3.5 text-purple-400/80" />
+                  <Icon className="w-3.5 h-3.5 text-purple-400" />
                   <span>{label}</span>
                 </span>
               ))}
             </div>
           </div>
 
-          <div
-            aria-disabled="true"
-            className="mt-6 w-full py-3 px-4 rounded-lg bg-[#0e0e10] border border-white/[0.06] text-slate-500 font-semibold text-sm flex items-center justify-center gap-2 cursor-not-allowed"
-          >
-            <Lock className="w-4 h-4" />
-            <span>Locked • Coming Soon</span>
-          </div>
-        </div>
+          <span className="mt-6 w-full bg-purple-600 group-hover:bg-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors text-center block">
+            Create Custom Test
+          </span>
+        </a>
 
-        {/* Sandbox 3: Track Progress (Openable — 3 Organic Reports) */}
+        {/* Sandbox 3: Track Progress */}
         <div
           onClick={() => setActiveView('track-progress')}
           className="p-6 rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
