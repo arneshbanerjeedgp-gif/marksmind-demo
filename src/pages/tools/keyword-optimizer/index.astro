@@ -74,9 +74,9 @@ import {
             scrollbar-width: none;
         }
     </style>
-    <div class="flex min-h-screen bg-[#0b0b0c] text-[#f3f3f4]">
+    <div class="flex flex-col md:flex-row min-h-screen bg-[#0b0b0c] text-[#f3f3f4]">
         <aside
-            class="w-64 border-r border-white/[0.05] bg-[#0e0e10] p-4 flex flex-col justify-between"
+            class="w-full md:w-64 border-b md:border-b-0 md:border-r border-white/[0.05] bg-[#0e0e10] p-4 flex flex-col justify-between shrink-0"
         >
             <div>
                 <div class="px-2 mb-8">
@@ -159,9 +159,9 @@ import {
                 <div class="flex items-center gap-3">
                     <UserCircle class="w-9 h-9 text-[#4e525a]" />
                     <div>
-                        <p class="text-sm font-medium text-[#f3f3f4]">Arnesh (Demo)</p>
+                        <p class="text-sm font-medium text-[#f3f3f4]">Demo Student Account</p>
                         <p class="text-xs text-[#9aa0a6]">
-                            Demo Profile · Illustrative Account
+                            Illustrative Profile · Class 9 CBSE
                         </p>
                     </div>
                 </div>
@@ -370,9 +370,9 @@ import {
                                     <p
                                         class="text-sm font-medium text-slate-300"
                                     >
-                                        🟠 Demo Alert: Sample retention dropped below 60% in <span class="font-semibold"
+                                        🟠 Demo Alert: Suggested revision priority for <span class="font-semibold"
                                             >Mitochondria</span
-                                        >.
+                                        > — revisit ATP's role as energy currency.
                                     </p>
                                     <button
                                         id="btn-revise-retention"
@@ -389,54 +389,60 @@ import {
             <!-- View 0: Smart Revision Engine -->
             <div id="smart-revision-view" class="hidden">
                 <div class="max-w-7xl mx-auto">
+                    <div class="mb-6 p-4 rounded-2xl border border-purple-500/20 bg-purple-950/20 flex flex-col sm:flex-row sm:items-center gap-3">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-purple-500/15 text-purple-300 border border-purple-500/30 shrink-0">
+                            DEMO REVISION PLANNER · ILLUSTRATIVE SCHEDULE
+                        </span>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Suggested practice priorities connected to the prototype demonstration profile. Actual memory retention is not measured in this prototype.
+                        </p>
+                    </div>
+
                     <div class="mb-8">
-                        <h1
-                            class="text-xl font-medium text-[#f3f3f4] tracking-tight"
-                        >
-                            Smart Revision Engine
-                        </h1>
+                        <div class="flex items-center gap-3">
+                            <h1
+                                class="text-xl font-medium text-[#f3f3f4] tracking-tight"
+                            >
+                                Smart Revision
+                            </h1>
+                            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                                Demo Mode
+                            </span>
+                        </div>
                         <p class="mt-1 text-base text-[#9aa0a6]">
-                            Track your memory decay and optimize revision time.
+                            Suggested revision priorities and concepts to revisit in demo mode.
                         </p>
                     </div>
 
                     <div class="space-y-6">
-                        <!-- Card 1: Mitochondria (Decaying Memory) -->
+                        <!-- Card 1: Mitochondria (Priority Revision) -->
                         <div
                             class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-purple-500/50 hover:shadow-purple-900/20"
                         >
                             <p
                                 class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-1"
                             >
-                                Class 9 Science: Fundamental Unit of Life
+                                Class 9 Science: The Fundamental Unit of Life
                             </p>
-                            <div class="flex items-center">
+                            <div class="flex flex-wrap items-center gap-3">
                                 <h3 class="text-xl font-bold text-slate-200">
-                                    Mitochondria
+                                    Mitochondria — Cellular Powerhouse
                                 </h3>
                                 <span
-                                    class="ml-4 text-xs bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 rounded-full animate-pulse uppercase tracking-wider font-bold align-middle"
-                                    >🔴 Priority Action</span
+                                    class="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full uppercase tracking-wider font-bold"
+                                    >Suggested Revision · Priority: High</span
                                 >
                             </div>
 
-                            <div class="mt-6">
-                                <label
-                                    class="text-sm font-medium text-slate-300"
-                                    >Memory Health: 58%</label
-                                >
-                                <div
-                                    class="w-full bg-slate-800 h-2 rounded-full mt-2"
-                                >
-                                    <div
-                                        class="bg-amber-500 w-[58%] h-2 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]"
-                                    >
-                                    </div>
-                                </div>
+                            <div class="mt-5 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-sm font-medium text-slate-300">Revision Status</span>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                                    Concepts to Revisit (Demo Profile)
+                                </span>
                             </div>
 
                             <div
-                                class="grid grid-cols-1 md:grid-cols-3 mt-6 gap-4"
+                                class="grid grid-cols-1 md:grid-cols-3 mt-5 gap-4"
                             >
                                 <div
                                     class="flex items-center gap-2 text-sm text-slate-400"
@@ -454,9 +460,9 @@ import {
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                                         ></path></svg
                                     >
-                                    Last Studied: <span
+                                    Demo Context: <span
                                         class="font-semibold text-slate-300"
-                                        >4 Days Ago</span
+                                        >Linked to Evaluator Q1</span
                                     >
                                 </div>
                                 <div
@@ -475,9 +481,9 @@ import {
                                             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                                         ></path></svg
                                     >
-                                    Past Score: <span
+                                    Sample Evaluator Score: <span
                                         class="font-semibold text-slate-300"
-                                        >16/20</span
+                                        >2.5 / 3</span
                                     >
                                 </div>
                                 <div
@@ -496,9 +502,9 @@ import {
                                             d="M13 10V3L4 14h7v7l9-11h-7z"
                                         ></path></svg
                                     >
-                                    Weakest Concept: <span
+                                    Concepts to Revisit: <span
                                         class="font-semibold text-slate-300"
-                                        >ATP Generation</span
+                                        >Energy Currency &amp; Respiration</span
                                     >
                                 </div>
                             </div>
@@ -507,9 +513,7 @@ import {
                                 class="bg-purple-900/10 border border-purple-500/20 p-4 rounded-xl mt-6"
                             >
                                 <p class="text-sm text-purple-300/90">
-                                    <strong>AI Recommendation:</strong> Your memory
-                                    retention is decaying. A 3-minute targeted revision
-                                    will restore your memory to 95%.
+                                    <strong>Revision Status:</strong> Suggested action: Complete a short targeted revision on ATP generation, cellular respiration, and ATP's role as the energy currency of the cell.
                                 </p>
                             </div>
 
@@ -517,46 +521,38 @@ import {
                                 id="launch-revision-btn"
                                 class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg mt-6 transition-all"
                             >
-                                Launch Targeted Revision (Focus: ATP)
+                                Launch Targeted Revision (Focus: Mitochondria &amp; ATP)
                             </button>
                         </div>
 
-                        <!-- Card 2: Acceleration (Healthy Memory) -->
+                        <!-- Card 2: Acceleration (Practiced in Demo) -->
                         <div
                             class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-500/50 hover:shadow-green-900/20"
                         >
                             <p
                                 class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-1"
                             >
-                                Class 9 Physics: Kinematics
+                                Class 9 Physics: Motion &amp; Kinematics
                             </p>
-                            <div class="flex items-center">
+                            <div class="flex flex-wrap items-center gap-3">
                                 <h3 class="text-xl font-bold text-slate-200">
-                                    Acceleration
+                                    Velocity &amp; Acceleration
                                 </h3>
                                 <span
-                                    class="ml-4 text-xs bg-green-500/10 text-green-400 border border-green-500/20 px-3 py-1 rounded-full uppercase tracking-wider font-bold align-middle"
-                                    >🟢 Mastered</span
+                                    class="text-xs bg-green-500/10 text-green-400 border border-green-500/20 px-3 py-1 rounded-full uppercase tracking-wider font-bold"
+                                    >Demo Progress · Lower Priority</span
                                 >
                             </div>
 
-                            <div class="mt-6">
-                                <label
-                                    class="text-sm font-medium text-slate-300"
-                                    >Memory Health: 94%</label
-                                >
-                                <div
-                                    class="w-full bg-slate-800 h-2 rounded-full mt-2"
-                                >
-                                    <div
-                                        class="bg-green-500 w-[94%] h-2 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.5)]"
-                                    >
-                                    </div>
-                                </div>
+                            <div class="mt-5 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-sm font-medium text-slate-300">Revision Status</span>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded bg-green-500/10 text-green-400 border border-green-500/20">
+                                    Sample Concept Practiced
+                                </span>
                             </div>
 
                             <div
-                                class="grid grid-cols-1 md:grid-cols-3 mt-6 gap-4"
+                                class="grid grid-cols-1 md:grid-cols-3 mt-5 gap-4"
                             >
                                 <div
                                     class="flex items-center gap-2 text-sm text-slate-400"
@@ -574,9 +570,9 @@ import {
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                                         ></path></svg
                                     >
-                                    Last Studied: <span
+                                    Revision Priority: <span
                                         class="font-semibold text-slate-300"
-                                        >1 Day Ago</span
+                                        >Standard Review</span
                                     >
                                 </div>
                                 <div
@@ -595,9 +591,9 @@ import {
                                             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                                         ></path></svg
                                     >
-                                    Past Score: <span
+                                    Key Formula to Retain: <span
                                         class="font-semibold text-slate-300"
-                                        >19/20</span
+                                        >a = (v − u) / t</span
                                     >
                                 </div>
                                 <div
@@ -616,9 +612,9 @@ import {
                                             d="M13 10V3L4 14h7v7l9-11h-7z"
                                         ></path></svg
                                     >
-                                    Confidence: <span
+                                    Concepts to Revisit: <span
                                         class="font-semibold text-slate-300"
-                                        >High</span
+                                        >Formula &amp; SI Unit (m/s²)</span
                                     >
                                 </div>
                             </div>
@@ -627,9 +623,7 @@ import {
                                 class="bg-green-900/10 border border-green-500/20 p-4 rounded-xl mt-6 text-slate-300 text-sm"
                             >
                                 <p>
-                                    <strong>AI Recommendation:</strong> Memory is
-                                    strong. No action needed right now. Focus on your
-                                    weaker topics.
+                                    <strong>Recommended Practice:</strong> Focus first on incomplete Biology concepts above, then revisit formula derivations and SI unit (m/s²) in Q2.
                                 </p>
                             </div>
                         </div>
@@ -640,15 +634,28 @@ import {
             <!-- View X: Mistake Database -->
             <div id="mistake-database-view" class="hidden">
                 <div class="max-w-7xl mx-auto">
+                    <div class="mb-6 p-4 rounded-2xl border border-purple-500/20 bg-purple-950/20 flex flex-col sm:flex-row sm:items-center gap-3">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-purple-500/15 text-purple-300 border border-purple-500/30 shrink-0">
+                            ILLUSTRATIVE MISTAKE DATABASE · SAMPLE DATA
+                        </span>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            These sample records demonstrate how the future MARKSMIND AI system is intended to log and group recurring conceptual errors. They do not represent actual student history or live error telemetry.
+                        </p>
+                    </div>
+
                     <div class="mb-8">
-                        <h1
-                            class="text-xl font-medium text-[#f3f3f4] tracking-tight"
-                        >
-                            Personal Mistake Database
-                        </h1>
+                        <div class="flex items-center gap-3">
+                            <h1
+                                class="text-xl font-medium text-[#f3f3f4] tracking-tight"
+                            >
+                                Personal Mistake Database
+                            </h1>
+                            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                                Sample Data
+                            </span>
+                        </div>
                         <p class="mt-1 text-base text-[#9aa0a6]">
-                            AI-tracked pattern analysis of your recurring
-                            errors.
+                            Illustrative error-pattern tracking prototype showing how recurring concept gaps can be reviewed.
                         </p>
                     </div>
 
@@ -657,12 +664,12 @@ import {
                         <button
                             id="tab-personal-mistakes"
                             class="px-4 py-2 text-sm font-semibold rounded-lg bg-slate-800 text-white transition-colors"
-                            >My Personal Mistakes</button
+                            >Sample Personal Mistakes</button
                         >
                         <button
                             id="tab-common-mistakes"
                             class="px-4 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-colors"
-                            >Common Student Mistakes</button
+                            >Common NCERT Pitfalls (Demo)</button
                         >
                     </div>
 
@@ -675,32 +682,41 @@ import {
                                 class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4"
                             >
                                 <p class="text-xs text-slate-400">
-                                    Total Errors Tracked
+                                    Sample Errors Logged (Demo)
                                 </p>
                                 <p class="text-2xl text-slate-200 font-bold">
                                     142
+                                </p>
+                                <p class="text-[11px] text-slate-500 mt-1">
+                                    Illustrative count — not live tracking
                                 </p>
                             </div>
                             <div
                                 class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4"
                             >
                                 <p class="text-xs text-slate-400">
-                                    Biggest Weakness
+                                    Demo Focus Area
                                 </p>
                                 <p
                                     class="text-lg text-slate-200 font-bold mt-1"
                                 >
                                     Class 9 Biology
                                 </p>
+                                <p class="text-[11px] text-slate-500 mt-1">
+                                    Example subject concentration
+                                </p>
                             </div>
                             <div
                                 class="bg-slate-800/30 border border-slate-700/50 rounded-xl p-4"
                             >
                                 <p class="text-xs text-slate-400">
-                                    Mistakes Resolved
+                                    Sample Mistakes Resolved
                                 </p>
                                 <p class="text-2xl text-green-400 font-bold">
                                     28
+                                </p>
+                                <p class="text-[11px] text-slate-500 mt-1">
+                                    Illustrative resolved records
                                 </p>
                             </div>
                         </div>
@@ -708,13 +724,14 @@ import {
                         <button
                             id="btn-generate-remedial"
                             class="mb-6 bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-6 rounded-xl transition-all shadow-[0_0_15px_rgba(220,38,38,0.3)]"
-                            >Generate Remedial Quiz</button
+                            >Practice Mitochondria Quiz (Sample)</button
                         >
 
                         <div class="flex flex-col md:flex-row gap-3 mb-6">
                             <input
+                                id="mistake-search-input"
                                 type="text"
-                                placeholder="Search mistakes by keyword..."
+                                placeholder="Search sample records by keyword..."
                                 class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-purple-500 transition-colors"
                             />
                             <select
@@ -728,39 +745,46 @@ import {
                             <select
                                 class="bg-slate-900 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-purple-500"
                             >
-                                <option>Highest Frequency</option>
-                                <option>Recent First</option>
+                                <option>Sample Priority Order</option>
+                                <option>Topic Grouped</option>
                             </select>
                         </div>
 
                         <div id="mistake-cards-container" class="space-y-4">
-                            <!-- Card 1 (Critical Priority) -->
+                            <!-- Card 1 (Aligned with Evaluator Q1 / CEDA gap) -->
                             <div
                                 data-subject="Biology"
                                 class="bg-slate-900/50 border border-red-500/30 rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg hover:border-red-500/50 transition-all duration-300"
                             >
-                                <div class="flex justify-between items-center">
-                                    <span
-                                        class="bg-red-500/10 text-red-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-red-500/20 font-semibold"
-                                        >Missing Keyword</span
-                                    >
-                                    <span class="text-red-400 font-bold text-sm"
-                                        >Repeated 6 Times</span
+                                <div class="flex flex-wrap justify-between items-center gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="bg-red-500/10 text-red-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-red-500/20 font-semibold"
+                                            >Missing NCERT Terminology</span
+                                        >
+                                        <span
+                                            class="bg-slate-800 text-slate-400 px-2 py-0.5 rounded text-[11px] font-medium border border-slate-700"
+                                            >Sample Record</span
+                                        >
+                                    </div>
+                                    <span class="text-red-400 font-bold text-xs bg-red-500/10 px-2.5 py-1 rounded-full border border-red-500/20"
+                                        >Demo Pattern · Linked to Q1</span
                                     >
                                 </div>
                                 <p class="text-slate-300 mt-3 font-medium">
-                                    Forgot to include 'ATP' (Adenosine
-                                    Triphosphate) when explaining energy
-                                    currency.
+                                    Explained ATP generation for energy, but omitted the NCERT terms 'energy currency of the cell' and 'cellular respiration'.
                                 </p>
                                 <p class="text-slate-500 text-xs mt-2">
-                                    Topic: Class 9 Biology - Mitochondria
+                                    Topic: Class 9 Biology — Mitochondria (Matches NCERT Evaluator Demo Answer)
                                 </p>
                                 <div
-                                    class="mt-4 pt-4 border-t border-slate-700/50 flex gap-4"
+                                    class="mt-4 pt-4 border-t border-slate-700/50 flex flex-wrap gap-4"
                                 >
                                     <button
-                                        class="text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5"
+                                        type="button"
+                                        data-action="open-question"
+                                        data-qid="q1"
+                                        class="mistake-view-question-btn text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5"
                                     >
                                         <svg
                                             class="w-4 h-4"
@@ -779,10 +803,11 @@ import {
                                                 d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                                             ></path></svg
                                         >
-                                        View Original Question
+                                        Open in Evaluator
                                     </button>
                                     <button
-                                        class="text-xs font-medium text-slate-400 hover:text-green-400 transition-colors flex items-center gap-1.5"
+                                        type="button"
+                                        class="mistake-resolve-btn text-xs font-medium text-slate-400 hover:text-green-400 transition-colors flex items-center gap-1.5"
                                     >
                                         <svg
                                             class="w-4 h-4"
@@ -795,7 +820,7 @@ import {
                                                 stroke-width="2"
                                                 d="M5 13l4 4L19 7"></path></svg
                                         >
-                                        Mark as Resolved
+                                        Mark as Resolved (Demo)
                                     </button>
                                 </div>
                             </div>
@@ -804,28 +829,36 @@ import {
                                 data-subject="Biology"
                                 class="bg-slate-900/50 border border-amber-500/30 rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg hover:border-amber-500/50 transition-all duration-300"
                             >
-                                <div class="flex justify-between items-center">
+                                <div class="flex flex-wrap justify-between items-center gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="bg-amber-500/10 text-amber-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-amber-500/20 font-semibold"
+                                            >Conceptual Mix-up</span
+                                        >
+                                        <span
+                                            class="bg-slate-800 text-slate-400 px-2 py-0.5 rounded text-[11px] font-medium border border-slate-700"
+                                            >Sample Record</span
+                                        >
+                                    </div>
                                     <span
-                                        class="bg-amber-500/10 text-amber-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-amber-500/20 font-semibold"
-                                        >Conceptual Mix-up</span
-                                    >
-                                    <span
-                                        class="text-amber-400 font-bold text-sm"
-                                        >Repeated 3 Times</span
+                                        class="text-amber-400 font-bold text-xs bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20"
+                                        >Illustrative Example</span
                                     >
                                 </div>
                                 <p class="text-slate-300 mt-3 font-medium">
-                                    Confused the folded inner membrane (cristae)
-                                    with the porous outer membrane.
+                                    Confused the folded inner membrane (cristae) with the porous outer membrane of mitochondria.
                                 </p>
                                 <p class="text-slate-500 text-xs mt-2">
-                                    Topic: Class 9 Biology - Mitochondria
+                                    Topic: Class 9 Biology — Mitochondria Structure (NCERT Ch. 5)
                                 </p>
                                 <div
-                                    class="mt-4 pt-4 border-t border-slate-700/50 flex gap-4"
+                                    class="mt-4 pt-4 border-t border-slate-700/50 flex flex-wrap gap-4"
                                 >
                                     <button
-                                        class="text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5"
+                                        type="button"
+                                        data-action="open-question"
+                                        data-qid="q1"
+                                        class="mistake-view-question-btn text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5"
                                     >
                                         <svg
                                             class="w-4 h-4"
@@ -844,10 +877,11 @@ import {
                                                 d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                                             ></path></svg
                                         >
-                                        View Original Question
+                                        Open in Evaluator
                                     </button>
                                     <button
-                                        class="text-xs font-medium text-slate-400 hover:text-green-400 transition-colors flex items-center gap-1.5"
+                                        type="button"
+                                        class="mistake-resolve-btn text-xs font-medium text-slate-400 hover:text-green-400 transition-colors flex items-center gap-1.5"
                                     >
                                         <svg
                                             class="w-4 h-4"
@@ -860,7 +894,81 @@ import {
                                                 stroke-width="2"
                                                 d="M5 13l4 4L19 7"></path></svg
                                         >
-                                        Mark as Resolved
+                                        Mark as Resolved (Demo)
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Card 3 (Physics Sample Record so Physics filter works!) -->
+                            <div
+                                data-subject="Physics"
+                                class="bg-slate-900/50 border border-amber-500/30 rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg hover:border-amber-500/50 transition-all duration-300"
+                            >
+                                <div class="flex flex-wrap justify-between items-center gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="bg-amber-500/10 text-amber-400 px-2 py-1 rounded text-xs uppercase tracking-wide border border-amber-500/20 font-semibold"
+                                            >Incomplete Formula &amp; SI Unit</span
+                                        >
+                                        <span
+                                            class="bg-slate-800 text-slate-400 px-2 py-0.5 rounded text-[11px] font-medium border border-slate-700"
+                                            >Sample Record</span
+                                        >
+                                    </div>
+                                    <span
+                                        class="text-amber-400 font-bold text-xs bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20"
+                                        >Demo Pattern · Linked to Q2</span
+                                    >
+                                </div>
+                                <p class="text-slate-300 mt-3 font-medium">
+                                    Described acceleration qualitatively but omitted the formula a = (v − u) / t and SI unit m/s².
+                                </p>
+                                <p class="text-slate-500 text-xs mt-2">
+                                    Topic: Class 9 Physics — Velocity &amp; Acceleration (NCERT Ch. 8)
+                                </p>
+                                <div
+                                    class="mt-4 pt-4 border-t border-slate-700/50 flex flex-wrap gap-4"
+                                >
+                                    <button
+                                        type="button"
+                                        data-action="open-question"
+                                        data-qid="q2"
+                                        class="mistake-view-question-btn text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5"
+                                    >
+                                        <svg
+                                            class="w-4 h-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            ><path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                            ></path><path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                            ></path></svg
+                                        >
+                                        Open in Evaluator
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="mistake-resolve-btn text-xs font-medium text-slate-400 hover:text-green-400 transition-colors flex items-center gap-1.5"
+                                    >
+                                        <svg
+                                            class="w-4 h-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            ><path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M5 13l4 4L19 7"></path></svg
+                                        >
+                                        Mark as Resolved (Demo)
                                     </button>
                                 </div>
                             </div>
@@ -870,6 +978,9 @@ import {
 
                     <!-- Common Mistakes Content -->
                     <div id="common-mistakes-content" class="hidden">
+                        <p class="text-xs text-slate-400 bg-slate-900/60 border border-slate-800 rounded-xl px-4 py-2.5 mt-3 mb-4">
+                            Illustrative NCERT error patterns curated for student revision (demonstration data — not derived from live cohort analytics).
+                        </p>
                         <div class="flex flex-wrap gap-3 mb-6 mt-4">
                             <button
                                 class="cm-filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-slate-800 text-white border border-slate-700 transition-colors"
@@ -907,24 +1018,23 @@ import {
             <!-- View 1: Answer Evaluator -->
             <div id="answer-evaluator-view" class="hidden">
                 <div class="max-w-7xl mx-auto">
-                    <div class="mb-8">
+                    <div class="mb-6">
                         <h1
-                            class="text-xl font-medium text-[#f3f3f4] tracking-tight flex items-center gap-2"
+                            class="text-xl font-medium text-[#f3f3f4] tracking-tight flex flex-wrap items-center gap-2"
                         >
                             NCERT Answer Evaluator <span
                                 class="bg-[#1e1f22] text-[#c4c7c5] px-2 py-0.5 rounded text-xs font-mono"
-                                >BETA</span
+                                >PROTOTYPE · RULE-BASED</span
                             >
                         </h1>
                         <p
                             id="curriculum-display"
                             class="mt-1 text-base text-[#9aa0a6]"
                         >
-                            Select a sandbox question or enter your own answer
-                            to begin.
+                            Select a sandbox question or test your own wording against predefined NCERT rubrics.
                         </p>
                     </div>
-                    <div class="mb-8 flex flex-wrap items-center gap-4">
+                    <div class="mb-6 flex flex-wrap items-center gap-4">
                         <div
                             class="flex flex-row items-center gap-2.5 overflow-x-auto no-scrollbar py-1 w-full"
                         >
@@ -936,7 +1046,7 @@ import {
                                     Q1: Cellular Powerhouse
                                 </div>
                                 <div class="text-xs text-neutral-400 mt-1">
-                                    Science
+                                    Class 9 Biology
                                 </div>
                             </button>
                             <button
@@ -969,7 +1079,7 @@ import {
                                     Q4: Fractional Distillation
                                 </div>
                                 <div class="text-xs text-neutral-400 mt-1">
-                                    Chemistry
+                                    Class 9 Chemistry
                                 </div>
                             </button>
                         </div>
@@ -994,14 +1104,30 @@ import {
                         <div
                             class="lg:col-span-3 bg-[#161618] border border-white/[0.05] rounded-xl p-6 space-y-4"
                         >
+                            <div id="evaluator-question-box" class="bg-[#0e0e10] border border-white/[0.08] rounded-lg p-4 space-y-2">
+                                <div class="flex flex-wrap items-center justify-between gap-2">
+                                    <span id="evaluator-ncert-scope" class="text-[11px] font-bold uppercase tracking-wider text-purple-400">
+                                        Class 9 Science · Ch. 5: The Fundamental Unit of Life
+                                    </span>
+                                    <span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                                        3-Concept Rubric
+                                    </span>
+                                </div>
+                                <p id="evaluator-question-prompt" class="text-sm font-semibold text-white leading-snug">
+                                    Question: Why are mitochondria called the powerhouse of the cell?
+                                </p>
+                                <p id="evaluator-rubric-summary" class="text-xs text-slate-400 leading-relaxed">
+                                    Marking Criteria: (1) Powerhouse designation [1 mark], (2) ATP / Adenosine Triphosphate production [1 mark], (3) Role in cellular energy / energy currency [1 mark].
+                                </p>
+                            </div>
                             <label
                                 for="answerInput"
-                                class="text-sm font-medium text-[#c4c7c5]"
-                                >Your Answer Script</label
+                                class="block text-sm font-medium text-[#c4c7c5]"
+                                >Sample / Student Answer Script</label
                             >
                             <textarea
                                 id="answerInput"
-                                rows="12"
+                                rows="10"
                                 class="w-full bg-[#0e0e10] border border-white/[0.08] rounded-lg p-4 focus:outline-none focus:border-purple-500/50 transition-colors placeholder:text-[#6a6f78] text-[15px] text-[#e3e3e4] font-normal leading-relaxed tracking-[0.01em]"
                                 placeholder="Enter your answer here or select a sandbox question..."
                             ></textarea>
@@ -1023,11 +1149,14 @@ import {
                             <div
                                 class="bg-slate-900 border border-slate-800 p-6 rounded-xl"
                             >
-                                <h3
-                                    class="text-xs font-semibold uppercase tracking-wider text-slate-400"
-                                >
-                                    Step-Marking Score
-                                </h3>
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3
+                                        class="text-xs font-semibold uppercase tracking-wider text-slate-400"
+                                    >
+                                        Step-Marking Score
+                                    </h3>
+                                    <span class="text-[11px] text-slate-500 font-medium">Rubric Prototype</span>
+                                </div>
                                 <div
                                     id="score-display"
                                     class="text-4xl font-bold text-purple-400 mt-2"
@@ -1041,32 +1170,35 @@ import {
                                 <h3
                                     class="text-xs font-semibold uppercase tracking-wider text-slate-400"
                                 >
-                                    Required Benchmark Answer (Highlight
-                                    Analysis)
+                                    Reference Answer &amp; Concept Analysis
                                 </h3>
                                 <p
                                     id="benchmark-display"
                                     class="text-slate-300 text-sm leading-relaxed mt-3"
                                 >
-                                    Click verify to perform keyword evaluation
-                                    matching.
+                                    Click 'Verify Answer Script' to compare the answer against the selected question's reference criteria.
                                 </p>
                             </div>
                             <div
                                 class="bg-slate-900 border border-slate-800 p-6 rounded-xl"
                             >
-                                <h3
-                                    id="evaluator-breakdown-title"
-                                    class="text-xs font-semibold uppercase tracking-wider text-slate-400"
-                                >
-                                    CEDA · Concept Extraction & Defect Analysis
-                                </h3>
+                                <div class="flex flex-wrap items-center justify-between gap-2">
+                                    <h3
+                                        id="evaluator-breakdown-title"
+                                        class="text-xs font-semibold uppercase tracking-wider text-slate-400"
+                                    >
+                                        CEDA · Concept Extraction &amp; Defect Analysis
+                                    </h3>
+                                </div>
                                 <div
                                     id="missing-keywords-display"
-                                    class="mt-2 text-slate-400 text-sm"
+                                    class="mt-3 text-slate-400 text-sm"
                                 >
                                     No analysis performed yet.
                                 </div>
+                                <p class="text-[11px] text-slate-500 mt-4 pt-3 border-t border-slate-800">
+                                    Rule-based CEDA prototype using local NCERT concept rubrics (no external AI API connected).
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -1077,11 +1209,16 @@ import {
             <div id="quiz-generator-view" class="hidden">
                 <div id="quiz-app" class="max-w-7xl mx-auto">
                     <div id="step-topic" class="space-y-6">
-                        <h2 class="text-2xl text-slate-100 font-bold mb-6">
-                            Quiz Generator
-                        </h2>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <h2 class="text-2xl text-slate-100 font-bold">
+                                Quiz Generator
+                            </h2>
+                            <span class="text-xs font-semibold px-2.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                                Curated NCERT Practice Decks
+                            </span>
+                        </div>
                         <p class="text-slate-400">
-                            Choose a topic to start a quiz.
+                            Choose a topic to practice predefined NCERT review questions (demo set).
                         </p>
                         <div
                             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 w-full pt-4"
@@ -1290,11 +1427,16 @@ import {
             <div id="flashcard-generator-view" class="hidden">
                 <div id="flashcard-app" class="max-w-7xl mx-auto">
                     <div id="fg-step-topic" class="space-y-6">
-                        <h2 class="text-2xl text-slate-100 font-bold mb-6">
-                            Flashcard Generator
-                        </h2>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <h2 class="text-2xl text-slate-100 font-bold">
+                                Flashcard Generator
+                            </h2>
+                            <span class="text-xs font-semibold px-2.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                                Curated NCERT Flashcard Decks
+                            </span>
+                        </div>
                         <p class="text-slate-400">
-                            Select a topic to begin a self-paced review session.
+                            Select a topic to begin a self-paced review session using curated study cards.
                         </p>
                         <div
                             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 w-full pt-4"
@@ -1527,39 +1669,43 @@ import {
             <!-- View 4: Mind Map Generator -->
             <div id="mindmap-generator-view" class="hidden">
                 <div class="max-w-7xl mx-auto">
-                    <div class="mb-8">
-                        <h1
-                            class="text-xl font-medium text-[#f3f3f4] tracking-tight"
-                        >
-                            Mind Map Generator
-                        </h1>
+                    <div class="mb-6">
+                        <div class="flex flex-wrap items-center gap-3">
+                            <h1
+                                class="text-xl font-medium text-[#f3f3f4] tracking-tight"
+                            >
+                                Mind Map Generator
+                            </h1>
+                            <span class="text-xs font-semibold px-2.5 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                                Illustrative NCERT Structure · Predefined Concept Maps
+                            </span>
+                        </div>
                         <p class="mt-1 text-base text-[#9aa0a6]">
-                            Visually map out NCERT concepts into interactive
-                            visual nodes.
+                            Explore structured, predefined NCERT concept hierarchies (static demonstration maps — not generated by a live RAG model).
                         </p>
                     </div>
 
                     <!-- Sandbox Example Cards -->
                     <div class="mb-6">
                         <div
-                            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 w-full pt-4"
+                            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 w-full pt-2"
                         >
                             <button
                                 id="mm-card-mitochondria"
                                 data-topic="Mitochondria"
                                 onclick="mmSandbox('Mitochondria')"
-                                class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                                class="mm-sandbox-card w-full p-5 min-h-[120px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
                             >
                                 <div>
                                     <h3
-                                        class="text-xl font-bold tracking-tight text-purple-400 group-hover:text-purple-300"
+                                        class="text-lg font-bold tracking-tight text-purple-400 group-hover:text-purple-300"
                                     >
                                         Mitochondria
                                     </h3>
                                     <p
-                                        class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed"
+                                        class="text-xs text-neutral-400 font-medium mt-1.5 leading-relaxed"
                                     >
-                                        Biology · Cell Structure
+                                        Class 9 Biology · Connected Demo Topic
                                     </p>
                                 </div>
                             </button>
@@ -1567,18 +1713,18 @@ import {
                                 id="mm-card-acceleration"
                                 data-topic="Acceleration"
                                 onclick="mmSandbox('Acceleration')"
-                                class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                                class="mm-sandbox-card w-full p-5 min-h-[120px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
                             >
                                 <div>
                                     <h3
-                                        class="text-xl font-bold tracking-tight text-emerald-400 group-hover:text-emerald-300"
+                                        class="text-lg font-bold tracking-tight text-emerald-400 group-hover:text-emerald-300"
                                     >
                                         Acceleration
                                     </h3>
                                     <p
-                                        class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed"
+                                        class="text-xs text-neutral-400 font-medium mt-1.5 leading-relaxed"
                                     >
-                                        Physics · Kinematics
+                                        Class 9 Physics · Kinematics
                                     </p>
                                 </div>
                             </button>
@@ -1586,18 +1732,18 @@ import {
                                 id="mm-card-rag"
                                 data-topic="RAG AI"
                                 onclick="mmSandbox('RAG AI')"
-                                class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                                class="mm-sandbox-card w-full p-5 min-h-[120px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
                             >
                                 <div>
                                     <h3
-                                        class="text-xl font-bold tracking-tight text-sky-400 group-hover:text-sky-300"
+                                        class="text-lg font-bold tracking-tight text-sky-400 group-hover:text-sky-300"
                                     >
-                                        RAG AI
+                                        RAG Pipeline
                                     </h3>
                                     <p
-                                        class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed"
+                                        class="text-xs text-neutral-400 font-medium mt-1.5 leading-relaxed"
                                     >
-                                        Computer Science · AI
+                                        Computer Science · Predefined Example
                                     </p>
                                 </div>
                             </button>
@@ -1605,16 +1751,16 @@ import {
                                 id="mm-card-iks"
                                 data-topic="IKS"
                                 onclick="mmSandbox('IKS')"
-                                class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                                class="mm-sandbox-card w-full p-5 min-h-[120px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
                             >
                                 <div>
                                     <h3
-                                        class="text-xl font-bold tracking-tight text-amber-400 group-hover:text-amber-300"
+                                        class="text-lg font-bold tracking-tight text-amber-400 group-hover:text-amber-300"
                                     >
                                         IKS Sustainability
                                     </h3>
                                     <p
-                                        class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed"
+                                        class="text-xs text-neutral-400 font-medium mt-1.5 leading-relaxed"
                                     >
                                         Environment · Heritage
                                     </p>
@@ -1624,21 +1770,34 @@ import {
                                 id="mm-card-chemistry"
                                 data-topic="Fractional Distillation"
                                 onclick="mmSandbox('Fractional Distillation')"
-                                class="w-full p-6 min-h-[150px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
+                                class="mm-sandbox-card w-full p-5 min-h-[120px] rounded-2xl flex flex-col justify-between bg-[#161618] border border-white/10 hover:border-purple-500/80 hover:bg-[#1e1e24] transition-all duration-200 cursor-pointer text-left shadow-lg group"
                             >
                                 <div>
                                     <h3
-                                        class="text-xl font-bold tracking-tight text-rose-400 group-hover:text-rose-300"
+                                        class="text-lg font-bold tracking-tight text-rose-400 group-hover:text-rose-300"
                                     >
                                         Fractional Distillation
                                     </h3>
                                     <p
-                                        class="text-sm text-neutral-400 font-medium mt-2 leading-relaxed"
+                                        class="text-xs text-neutral-400 font-medium mt-1.5 leading-relaxed"
                                     >
-                                        Chemistry · Separation
+                                        Class 9 Chemistry · Separation
                                     </p>
                                 </div>
                             </button>
+                        </div>
+                    </div>
+
+                    <!-- Mind Map Controls Bar -->
+                    <div class="mb-3 flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+                        <div class="flex items-center gap-2 text-slate-300">
+                            <span class="font-semibold text-purple-300" id="mm-active-label">Selected Map: Mitochondria (NCERT Class 9)</span>
+                            <span class="text-slate-500 hidden sm:inline">· Drag to pan · Scroll or use buttons to zoom</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button type="button" id="mm-zoom-out" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold">−</button>
+                            <button type="button" id="mm-zoom-reset" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium">Reset View</button>
+                            <button type="button" id="mm-zoom-in" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold">+</button>
                         </div>
                     </div>
 
@@ -1646,7 +1805,7 @@ import {
                     <div
                         id="mindmap-canvas-container"
                         class="bg-[#0e0e10] border border-[#2a2a2c] rounded-2xl relative overflow-hidden"
-                        style="min-height: 520px;"
+                        style="min-height: 580px;"
                     >
                         <!-- Empty state -->
                         <div
@@ -1674,11 +1833,10 @@ import {
                                     stroke-width="1.5"></path>
                             </svg>
                             <p class="text-[#4e525a] text-sm font-medium">
-                                Select a subject above to generate a mind map
+                                Select a subject above to display its predefined concept map
                             </p>
                             <p class="text-[#3a3a3c] text-xs mt-1">
-                                Click any sandbox card to explore its concept
-                                map
+                                Click any topic card to inspect its concept hierarchy
                             </p>
                         </div>
                         <!-- Loading state -->
@@ -1694,15 +1852,16 @@ import {
                                 id="mindmap-loading-text"
                                 class="text-[#9aa0a6] text-sm mt-4 animate-pulse"
                             >
-                                Analyzing concept structure...
+                                Loading structured concept map...
                             </p>
                         </div>
                         <!-- SVG Canvas -->
                         <svg
                             id="mindmap-svg"
-                            class="w-full hidden"
-                            viewBox="0 0 1000 600"
-                            style="min-height: 520px;"></svg>
+                            class="w-full h-auto hidden"
+                            viewBox="0 0 1280 780"
+                            preserveAspectRatio="xMidYMid meet"
+                            style="min-height: 580px;"></svg>
                     </div>
                 </div>
             </div>
@@ -1745,7 +1904,7 @@ import {
                     id="buffer-status"
                     class="text-slate-400 text-sm tracking-wide mt-6 animate-pulse"
                 >
-                    Initializing AI Engine...
+                    Preparing Practice Session...
                 </p>
             </div>
         </main>
@@ -3064,7 +3223,7 @@ import {
                                 "Extracting mandatory CBSE terminology...";
                         else
                             statusEl.textContent =
-                                "Compiling adaptive NotebookLM flashcards...";
+                                "Compiling NCERT flashcard deck...";
                     }
 
                     if (progress >= 100) {
@@ -4030,6 +4189,34 @@ import {
 
                 return { scoreText, benchmarkHTML, breakdownHTML };
             }
+            // Metadata for each sandbox question (scope, prompt, rubric)
+            const sandboxQuestionMeta = {
+                q1: {
+                    scope: "Class 9 Science · Ch. 5: The Fundamental Unit of Life",
+                    prompt: "Question: Why are mitochondria called the powerhouse of the cell?",
+                    rubric: "Marking Criteria: (1) Powerhouse designation [1 mark], (2) ATP / Adenosine Triphosphate production [1 mark], (3) Role in cellular energy / energy currency [1 mark].",
+                    rubricBadge: "3-Concept Rubric",
+                },
+                q2: {
+                    scope: "Class 9 Physics · Ch. 8: Motion",
+                    prompt: "Question: Define acceleration. What are its SI units?",
+                    rubric: "Marking Criteria: (1) Definition — rate of change of velocity [1 mark], (2) Formula — a = Δv / Δt [1 mark], (3) SI unit — m/s² [1 mark].",
+                    rubricBadge: "3-Concept Rubric",
+                },
+                q3: {
+                    scope: "AI / Computer Science · Retrieval-Augmented Generation",
+                    prompt: "Question: What is RAG (Retrieval-Augmented Generation) and why is it used?",
+                    rubric: "Marking Criteria: (1) Definition — combining retrieval with generation [1 mark], (2) Purpose — reduces hallucinations / improves accuracy [1 mark], (3) Mechanism — retrieves documents from knowledge base [1 mark].",
+                    rubricBadge: "3-Concept Rubric",
+                },
+                q4: {
+                    scope: "Class 9 Chemistry · Ch. 2: Is Matter Around Us Pure",
+                    prompt: "Question: What is the process of fractional distillation? Name the key apparatus.",
+                    rubric: "Marking Criteria: (1) Purpose — separating miscible liquids with different boiling points [1 mark], (2) Mechanism — boiling point difference / condensation [1 mark], (3) Apparatus — fractionating column [1 mark].",
+                    rubricBadge: "3-Concept Rubric",
+                },
+            };
+
                 const qid = event.currentTarget.dataset.qid;
                 currentQid = qid;
                 const data = sandboxData[qid];
@@ -4043,6 +4230,16 @@ import {
                     const titleEl = button.querySelector(".question-title");
                     if (titleEl) currentQuestionText = titleEl.innerText;
                     curriculumDisplay.innerHTML = `Evaluating against curriculum: <span class="font-medium text-purple-400">${data.title}</span>`;
+                }
+                // Update question box metadata
+                const meta = sandboxQuestionMeta[qid];
+                if (meta) {
+                    const scopeEl = document.getElementById("evaluator-ncert-scope");
+                    const promptEl = document.getElementById("evaluator-question-prompt");
+                    const rubricEl = document.getElementById("evaluator-rubric-summary");
+                    if (scopeEl) scopeEl.textContent = meta.scope;
+                    if (promptEl) promptEl.textContent = meta.prompt;
+                    if (rubricEl) rubricEl.textContent = meta.rubric;
                 }
             }
 
@@ -4257,6 +4454,24 @@ import {
                 { passive: false },
             );
             mindmapSvg.style.cursor = "grab";
+
+            // --- Zoom button handlers ---
+            const applyTransform = () => {
+                const g = document.getElementById("mindmap-transform-group");
+                if (g) g.setAttribute("transform", `translate(${transformState.x}, ${transformState.y}) scale(${transformState.scale})`);
+            };
+            document.getElementById("mm-zoom-in")?.addEventListener("click", () => {
+                transformState.scale = Math.min(transformState.scale * 1.25, 3);
+                applyTransform();
+            });
+            document.getElementById("mm-zoom-out")?.addEventListener("click", () => {
+                transformState.scale = Math.max(transformState.scale / 1.25, 0.3);
+                applyTransform();
+            });
+            document.getElementById("mm-zoom-reset")?.addEventListener("click", () => {
+                transformState = { x: 0, y: 0, scale: 1 };
+                applyTransform();
+            });
 
             const mindmapData = {
                 Mitochondria: {
@@ -4571,8 +4786,8 @@ import {
                 const branches = data.branches;
                 mindmapSvg.innerHTML = "";
 
-                const cx = 500,
-                    cy = 300;
+                const cx = 640,
+                    cy = 390;
                 const branchRadius = 260;
                 const leafRadius = 180;
                 const angleStep = (2 * Math.PI) / branches.length;
@@ -4663,7 +4878,7 @@ import {
                     branchText.setAttribute("y", by + 5);
                     branchText.setAttribute("text-anchor", "middle");
                     branchText.setAttribute("fill", color.text);
-                    branchText.setAttribute("font-size", "13");
+                    branchText.setAttribute("font-size", "15");
                     branchText.setAttribute("font-weight", "600");
                     branchText.setAttribute(
                         "font-family",
@@ -4735,7 +4950,7 @@ import {
                         leafText.setAttribute("y", ly + 4);
                         leafText.setAttribute("text-anchor", "middle");
                         leafText.setAttribute("fill", color.leafText);
-                        leafText.setAttribute("font-size", "11");
+                        leafText.setAttribute("font-size", "12.5");
                         leafText.setAttribute("font-weight", "500");
                         leafText.setAttribute(
                             "font-family",
@@ -4808,7 +5023,7 @@ import {
                     centerText.setAttribute("y", startY + idx * lineHeight);
                     centerText.setAttribute("text-anchor", "middle");
                     centerText.setAttribute("fill", "#f3f3f4");
-                    centerText.setAttribute("font-size", "13");
+                    centerText.setAttribute("font-size", "15");
                     centerText.setAttribute("font-weight", "700");
                     centerText.setAttribute(
                         "font-family",
@@ -4883,9 +5098,23 @@ import {
                 });
             };
 
+            // Update the active label text for the selected topic
+            const updateMmActiveLabel = (topic) => {
+                const label = document.getElementById("mm-active-label");
+                if (!label) return;
+                const topicLabels = {
+                    "Mitochondria": "Selected Map: Mitochondria (NCERT Class 9)",
+                    "Acceleration": "Selected Map: Acceleration (NCERT Class 9)",
+                    "RAG": "Selected Map: RAG — Retrieval-Augmented Generation",
+                    "FractionalDistillation": "Selected Map: Fractional Distillation (NCERT Class 9)",
+                };
+                label.textContent = topicLabels[topic] || `Selected Map: ${topic}`;
+            };
+
             // Sandbox card click handler
             window.mmSandbox = (topic) => {
                 setActiveCard(topic);
+                updateMmActiveLabel(topic);
                 triggerMindMap(topic);
             };
 
