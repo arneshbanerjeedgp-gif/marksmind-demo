@@ -1,16 +1,40 @@
-import React from 'react';
-import { ArrowLeft, BookOpenCheck, CheckCircle2, Send } from 'lucide-react';
+import React, { useState } from 'react';
+import {
+  ArrowLeft,
+  BookOpenCheck,
+  Camera,
+  CheckCircle2,
+  ChevronDown,
+  ChevronUp,
+  FileText,
+  PenLine,
+  Send,
+} from 'lucide-react';
 import type {
   MasterTestTemplate,
   McqOptionKey,
 } from './templates/cell20MarkTemplate';
+import HandwrittenUploadZone, {
+  type UploadedNoteFile,
+} from '../shared/HandwrittenUploadZone';
+
+export type AnswerInputMode = 'type' | 'upload';
 
 interface TestPaperViewProps {
   template: MasterTestTemplate;
   mcqAnswers: Record<string, McqOptionKey | undefined>;
   subjectiveAnswers: Record<string, string>;
+  fullSheetFiles: UploadedNoteFile[];
+  perQuestionFiles: Record<string, UploadedNoteFile[]>;
+  questionModes: Record<string, AnswerInputMode>;
   onSelectMcq: (questionId: string, option: McqOptionKey) => void;
   onChangeSubjective: (questionId: string, value: string) => void;
+  onFullSheetFilesChange: (nextFiles: UploadedNoteFile[]) => void;
+  onPerQuestionFilesChange: (
+    questionId: string,
+    nextFiles: UploadedNoteFile[],
+  ) => void;
+  onChangeQuestionMode: (questionId: string, mode: AnswerInputMode) => void;
   onEditConfig: () => void;
   onSubmit: () => void;
   onBackToHub: () => void;
@@ -19,19 +43,159 @@ interface TestPaperViewProps {
 const TEXTAREA_CLASSES =
   'w-full bg-[#0e0e10] border border-white/[0.08] rounded-lg p-4 focus:outline-none focus:border-purple-500/50 transition-colors placeholder:text-[#6a6f78] text-[15px] text-[#e3e3e4] font-normal leading-relaxed tracking-[0.01em]';
 
+interface SubjectiveModeToggleProps {
+  mode: AnswerInputMode;
+  fileCount: number;
+  onChangeMode: (mode: AnswerInputMode) => void;
+}
+
+function SubjectiveModeToggle({
+  mode,
+  fileCount,
+  onChangeMode,
+}: SubjectiveModeToggleProps) {
+  return (
+    <div
+      role="tablist"
+      aria-label="Question answer input mode"
+      className="inline-flex items-center p-0.5 rounded-lg bg-[#0e0e10] border border-white/[0.08]"
+    >
+      <button
+        type="button"
+        role="tab"
+        aria-selected={mode === 'type'}
+        onClick={() => onChangeMode('type')}
+        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+          mode === 'type'
+            ? 'bg-purple-600 text-white'
+            : 'text-slate-400 hover:text-slate-200'
+        }`}
+      >
+        <PenLine className="w-3 h-3" />
+        <span>Type Answer</span>
+      </button>
+
+      <button
+        type="button"
+        role="tab"
+        aria-selected={mode === 'upload'}
+        onClick={() => onChangeMode('upload')}
+        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+          mode === 'upload'
+            ? 'bg-purple-600 text-white'
+            : 'text-slate-400 hover:text-slate-200'
+        }`}
+      >
+        <Camera className="w-3 h-3" />
+        <span>Upload Handwritten</span>
+        {fileCount > 0 && (
+          <span
+            className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
+              mode === 'upload'
+                ? 'bg-white/20 text-white'
+                : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+            }`}
+          >
+            {fileCount}
+          </span>
+        )}
+      </button>
+    </div>
+  );
+}
+
+interface SubjectiveQuestionBodyProps {
+  questionId: string;
+  mode: AnswerInputMode;
+  typedValue: string;
+  files: UploadedNoteFile[];
+  rows: number;
+  placeholder: string;
+  onChangeTyped: (val: string) => void;
+  onFilesChange: (nextFiles: UploadedNoteFile[]) => void;
+}
+
+function SubjectiveQuestionBody({
+  questionId,
+  mode,
+  typedValue,
+  files,
+  rows,
+  placeholder,
+  onChangeTyped,
+  onFilesChange,
+}: SubjectiveQuestionBodyProps) {
+  if (mode === 'upload') {
+    return (
+      <HandwrittenUploadZone
+        files={files}
+        onFilesChange={onFilesChange}
+        variant="compact"
+        multiple={true}
+        maxFiles={3}
+      />
+    );
+  }
+
+  return (
+    <textarea
+      id={`answer-${questionId}`}
+      rows={rows}
+      value={typedValue}
+      onChange={(e) => onChangeTyped(e.target.value)}
+      placeholder={placeholder}
+      className={TEXTAREA_CLASSES}
+    />
+  );
+}
+
 /**
- * Interactive 4-section CBSE test paper view supporting MCQ selection and subjective answer entry.
+ * Interactive 4-section CBSE test paper view supporting MCQ selection,
+ * typed subjective answers, full answer sheet PDF/image upload, and per-question handwritten uploads.
  */
 export default function TestPaperView({
   template,
   mcqAnswers,
   subjectiveAnswers,
+  fullSheetFiles,
+  perQuestionFiles,
+  questionModes,
   onSelectMcq,
   onChangeSubjective,
+  onFullSheetFilesChange,
+  onPerQuestionFilesChange,
+  onChangeQuestionMode,
   onEditConfig,
   onSubmit,
   onBackToHub,
 }: TestPaperViewProps) {
+  const [isFullSheetOpen, setIsFullSheetOpen] = useState(true);
+
+  const hasFullSheet = fullSheetFiles.length > 0;
+  const isSubjectiveAttempted = (id: string) =>
+    Boolean(subjectiveAnswers[id]?.trim()) ||
+    (perQuestionFiles[id]?.length ?? 0) > 0 ||
+    hasFullSheet;
+
+  const attemptedMcqs = template.sectionA.questions.filter((q) =>
+    Boolean(mcqAnswers[q.id]),
+  ).length;
+  const attemptedSectionB = template.sectionB.questions.filter((q) =>
+    isSubjectiveAttempted(q.id),
+  ).length;
+  const attemptedSectionC = template.sectionC.questions.filter((q) =>
+    isSubjectiveAttempted(q.id),
+  ).length;
+  const attemptedSectionD = template.sectionD.question.subParts.some((sp) =>
+    isSubjectiveAttempted(sp.id),
+  )
+    ? 1
+    : 0;
+  const totalAttemptedQuestions =
+    attemptedMcqs + attemptedSectionB + attemptedSectionC + attemptedSectionD;
+
+  const getMode = (id: string): AnswerInputMode => questionModes[id] ?? 'type';
+
   return (
     <div className="space-y-8">
       <button
@@ -58,8 +222,8 @@ export default function TestPaperView({
               <span className="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300 text-xs font-semibold">
                 {template.totalSections} Sections
               </span>
-              <span className="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300 text-xs font-semibold">
-                {template.totalQuestions} Questions
+              <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold">
+                Attempted: {totalAttemptedQuestions} / {template.totalQuestions}
               </span>
             </div>
 
@@ -154,6 +318,56 @@ export default function TestPaperView({
         </div>
       </section>
 
+      {/* Full Handwritten Answer Sheet Upload Banner (Above Section B) */}
+      <section className="bg-[#161618] border border-purple-500/30 rounded-2xl p-6 shadow-lg space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+          <div className="flex items-start gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 shrink-0 mt-0.5">
+              <FileText className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="text-base sm:text-lg font-bold text-slate-100">
+                  Upload Full Handwritten Answer Sheet (Sections B, C &amp; D)
+                </h3>
+                {fullSheetFiles.length > 0 && (
+                  <span className="px-2.5 py-0.5 rounded-full bg-purple-500/15 border border-purple-500/30 text-xs font-semibold text-purple-300">
+                    {fullSheetFiles.length}{' '}
+                    {fullSheetFiles.length === 1 ? 'page' : 'pages'} attached
+                  </span>
+                )}
+              </div>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1 leading-relaxed">
+                Prefer writing your descriptive answers in a notebook? Upload photos or a single PDF of your completed subjective answer pages here, or attach photos per question below.
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIsFullSheetOpen((prev) => !prev)}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0e0e10] border border-white/10 hover:border-purple-500/40 text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer shrink-0 w-fit"
+          >
+            <span>{isFullSheetOpen ? 'Collapse' : 'Expand'}</span>
+            {isFullSheetOpen ? (
+              <ChevronUp className="w-3.5 h-3.5" />
+            ) : (
+              <ChevronDown className="w-3.5 h-3.5" />
+            )}
+          </button>
+        </div>
+
+        {isFullSheetOpen && (
+          <HandwrittenUploadZone
+            files={fullSheetFiles}
+            onFilesChange={onFullSheetFilesChange}
+            variant="standard"
+            multiple={true}
+            maxFiles={8}
+          />
+        )}
+      </section>
+
       {/* SECTION B — Short Answer Questions */}
       <section className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-800 pb-3">
@@ -166,34 +380,52 @@ export default function TestPaperView({
         </div>
 
         <div className="space-y-4">
-          {template.sectionB.questions.map((q) => (
-            <div
-              key={q.id}
-              className="bg-[#161618] border border-white/10 rounded-2xl p-6 space-y-4 shadow-lg"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <label
-                  htmlFor={`answer-${q.id}`}
-                  className="text-base font-semibold text-slate-100 leading-relaxed"
-                >
-                  <span className="text-purple-400 mr-2">Q{q.number}.</span>
-                  {q.question}
-                </label>
-                <span className="shrink-0 bg-purple-500/10 text-purple-300 border border-purple-500/20 px-2.5 py-1 rounded-md text-xs font-semibold">
-                  {q.marks} Marks
-                </span>
-              </div>
+          {template.sectionB.questions.map((q) => {
+            const qFiles = perQuestionFiles[q.id] ?? [];
+            const qMode = getMode(q.id);
+            return (
+              <div
+                key={q.id}
+                className="bg-[#161618] border border-white/10 rounded-2xl p-6 space-y-4 shadow-lg"
+              >
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+                  <label
+                    htmlFor={`answer-${q.id}`}
+                    className="text-base font-semibold text-slate-100 leading-relaxed"
+                  >
+                    <span className="text-purple-400 mr-2">Q{q.number}.</span>
+                    {q.question}
+                  </label>
 
-              <textarea
-                id={`answer-${q.id}`}
-                rows={4}
-                value={subjectiveAnswers[q.id] ?? ''}
-                onChange={(e) => onChangeSubjective(q.id, e.target.value)}
-                placeholder="Write your concise NCERT answer here..."
-                className={TEXTAREA_CLASSES}
-              />
-            </div>
-          ))}
+                  <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                    <SubjectiveModeToggle
+                      mode={qMode}
+                      fileCount={qFiles.length}
+                      onChangeMode={(nextMode) =>
+                        onChangeQuestionMode(q.id, nextMode)
+                      }
+                    />
+                    <span className="bg-purple-500/10 text-purple-300 border border-purple-500/20 px-2.5 py-1 rounded-md text-xs font-semibold">
+                      {q.marks} Marks
+                    </span>
+                  </div>
+                </div>
+
+                <SubjectiveQuestionBody
+                  questionId={q.id}
+                  mode={qMode}
+                  typedValue={subjectiveAnswers[q.id] ?? ''}
+                  files={qFiles}
+                  rows={4}
+                  placeholder="Write your concise NCERT answer here..."
+                  onChangeTyped={(val) => onChangeSubjective(q.id, val)}
+                  onFilesChange={(nextFiles) =>
+                    onPerQuestionFilesChange(q.id, nextFiles)
+                  }
+                />
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -208,34 +440,52 @@ export default function TestPaperView({
           </span>
         </div>
 
-        {template.sectionC.questions.map((q) => (
-          <div
-            key={q.id}
-            className="bg-[#161618] border border-white/10 rounded-2xl p-6 space-y-4 shadow-lg"
-          >
-            <div className="flex items-start justify-between gap-4">
-              <label
-                htmlFor={`answer-${q.id}`}
-                className="text-base font-semibold text-slate-100 leading-relaxed"
-              >
-                <span className="text-purple-400 mr-2">Q{q.number}.</span>
-                {q.question}
-              </label>
-              <span className="shrink-0 bg-purple-500/10 text-purple-300 border border-purple-500/20 px-2.5 py-1 rounded-md text-xs font-semibold">
-                {q.marks} Marks
-              </span>
-            </div>
+        {template.sectionC.questions.map((q) => {
+          const qFiles = perQuestionFiles[q.id] ?? [];
+          const qMode = getMode(q.id);
+          return (
+            <div
+              key={q.id}
+              className="bg-[#161618] border border-white/10 rounded-2xl p-6 space-y-4 shadow-lg"
+            >
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+                <label
+                  htmlFor={`answer-${q.id}`}
+                  className="text-base font-semibold text-slate-100 leading-relaxed"
+                >
+                  <span className="text-purple-400 mr-2">Q{q.number}.</span>
+                  {q.question}
+                </label>
 
-            <textarea
-              id={`answer-${q.id}`}
-              rows={6}
-              value={subjectiveAnswers[q.id] ?? ''}
-              onChange={(e) => onChangeSubjective(q.id, e.target.value)}
-              placeholder="Write 3 structured points clearly comparing prokaryotic and eukaryotic cells..."
-              className={TEXTAREA_CLASSES}
-            />
-          </div>
-        ))}
+                <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                  <SubjectiveModeToggle
+                    mode={qMode}
+                    fileCount={qFiles.length}
+                    onChangeMode={(nextMode) =>
+                      onChangeQuestionMode(q.id, nextMode)
+                    }
+                  />
+                  <span className="bg-purple-500/10 text-purple-300 border border-purple-500/20 px-2.5 py-1 rounded-md text-xs font-semibold">
+                    {q.marks} Marks
+                  </span>
+                </div>
+              </div>
+
+              <SubjectiveQuestionBody
+                questionId={q.id}
+                mode={qMode}
+                typedValue={subjectiveAnswers[q.id] ?? ''}
+                files={qFiles}
+                rows={6}
+                placeholder="Write 3 structured points clearly comparing prokaryotic and eukaryotic cells..."
+                onChangeTyped={(val) => onChangeSubjective(q.id, val)}
+                onFilesChange={(nextFiles) =>
+                  onPerQuestionFilesChange(q.id, nextFiles)
+                }
+              />
+            </div>
+          );
+        })}
       </section>
 
       {/* SECTION D — Case-Based Study Question */}
@@ -272,38 +522,58 @@ export default function TestPaperView({
             </p>
           </div>
 
-          {/* 4 Separated Sub-Parts */}
+          {/* 4 Separated Sub-Parts with Per-Question Handwritten Upload Toggles */}
           <div className="divide-y divide-slate-800/80">
-            {template.sectionD.question.subParts.map((part, idx) => (
-              <div
-                key={part.id}
-                className={idx === 0 ? 'pb-6 space-y-3' : 'py-6 last:pb-0 space-y-3'}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <label
-                    htmlFor={`answer-${part.id}`}
-                    className="text-sm sm:text-base font-medium text-slate-100 leading-relaxed"
-                  >
-                    <span className="font-bold text-purple-400 mr-2">
-                      {part.label}
-                    </span>
-                    {part.prompt}
-                  </label>
-                  <span className="shrink-0 bg-slate-800 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-md text-xs font-semibold">
-                    {part.marks} {part.marks === 1 ? 'Mark' : 'Marks'}
-                  </span>
-                </div>
+            {template.sectionD.question.subParts.map((part, idx) => {
+              const partFiles = perQuestionFiles[part.id] ?? [];
+              const partMode = getMode(part.id);
+              return (
+                <div
+                  key={part.id}
+                  className={
+                    idx === 0 ? 'pb-6 space-y-3' : 'py-6 last:pb-0 space-y-3'
+                  }
+                >
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+                    <label
+                      htmlFor={`answer-${part.id}`}
+                      className="text-sm sm:text-base font-medium text-slate-100 leading-relaxed"
+                    >
+                      <span className="font-bold text-purple-400 mr-2">
+                        {part.label}
+                      </span>
+                      {part.prompt}
+                    </label>
 
-                <textarea
-                  id={`answer-${part.id}`}
-                  rows={part.marks === 1 ? 2 : 3}
-                  value={subjectiveAnswers[part.id] ?? ''}
-                  onChange={(e) => onChangeSubjective(part.id, e.target.value)}
-                  placeholder={`Write your answer for sub-part ${part.label}...`}
-                  className={TEXTAREA_CLASSES}
-                />
-              </div>
-            ))}
+                    <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                      <SubjectiveModeToggle
+                        mode={partMode}
+                        fileCount={partFiles.length}
+                        onChangeMode={(nextMode) =>
+                          onChangeQuestionMode(part.id, nextMode)
+                        }
+                      />
+                      <span className="bg-slate-800 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-md text-xs font-semibold">
+                        {part.marks} {part.marks === 1 ? 'Mark' : 'Marks'}
+                      </span>
+                    </div>
+                  </div>
+
+                  <SubjectiveQuestionBody
+                    questionId={part.id}
+                    mode={partMode}
+                    typedValue={subjectiveAnswers[part.id] ?? ''}
+                    files={partFiles}
+                    rows={part.marks === 1 ? 2 : 3}
+                    placeholder={`Write your answer for sub-part ${part.label}...`}
+                    onChangeTyped={(val) => onChangeSubjective(part.id, val)}
+                    onFilesChange={(nextFiles) =>
+                      onPerQuestionFilesChange(part.id, nextFiles)
+                    }
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -311,7 +581,7 @@ export default function TestPaperView({
       {/* Bottom Submit Action */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#161618] border border-white/10 rounded-2xl p-6">
         <p className="text-sm text-slate-400">
-          Review your answers before submitting to view auto-graded Section A results and NCERT marking rubrics.
+          Review your answers or uploaded handwritten sheets before submitting for NCERT benchmark evaluation.
         </p>
         <button
           type="button"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ArrowLeft,
   Award,
@@ -18,16 +18,21 @@ import {
   CELL_20_MARK_TEMPLATE,
   type McqOptionKey,
 } from './templates/cell20MarkTemplate';
-import TestPaperView from './TestPaperView';
+import TestPaperView, { type AnswerInputMode } from './TestPaperView';
 import TestEvaluationReview from './TestEvaluationReview';
+import {
+  revokeUploadedNoteFiles,
+  type UploadedNoteFile,
+} from '../shared/HandwrittenUploadZone';
 
 interface CreateNewTestContainerProps {
   onBack: () => void;
 }
 
-type BuilderStep = 'config' | 'loading' | 'paper' | 'review';
+type BuilderStep = 'config' | 'loading' | 'submitting' | 'paper' | 'review';
 
 const GENERATION_DURATION_MS = 7500;
+const SUBMISSION_TRANSITION_MS = 1400;
 const CIRCLE_CIRCUMFERENCE = 565.48;
 
 const SELECT_CLASSES =
@@ -35,7 +40,7 @@ const SELECT_CLASSES =
 
 /**
  * Four-sandbox NCERT test configuration builder with 7.5s signature loader,
- * interactive 20-mark test paper, and deterministic review screen.
+ * interactive 20-mark test paper (supporting handwritten uploads), and deterministic review screen.
  */
 export default function CreateNewTestContainer({
   onBack,
@@ -55,6 +60,31 @@ export default function CreateNewTestContainer({
   const [subjectiveAnswers, setSubjectiveAnswers] = useState<
     Record<string, string>
   >({});
+  const [fullSheetFiles, setFullSheetFiles] = useState<UploadedNoteFile[]>([]);
+  const [perQuestionFiles, setPerQuestionFiles] = useState<
+    Record<string, UploadedNoteFile[]>
+  >({});
+  const [questionModes, setQuestionModes] = useState<
+    Record<string, AnswerInputMode>
+  >({});
+
+  const fullSheetRef = useRef<UploadedNoteFile[]>([]);
+  const perQuestionRef = useRef<Record<string, UploadedNoteFile[]>>({});
+  fullSheetRef.current = fullSheetFiles;
+  perQuestionRef.current = perQuestionFiles;
+
+  const revokeAllAttachedFiles = () => {
+    revokeUploadedNoteFiles(fullSheetRef.current);
+    Object.values(perQuestionRef.current).forEach((list) => {
+      revokeUploadedNoteFiles(list);
+    });
+  };
+
+  useEffect(() => {
+    return () => {
+      revokeAllAttachedFiles();
+    };
+  }, []);
 
   const availableSubjects = getSubjectsForClass(selectedClass);
   const availableChapters = getChaptersFor(selectedClass, selectedSubject);
@@ -62,6 +92,15 @@ export default function CreateNewTestContainer({
   const parsedMarks = Number.parseInt(totalMarksInput, 10);
   const effectiveMarks =
     Number.isFinite(parsedMarks) && parsedMarks > 0 ? parsedMarks : 20;
+
+  const resetAttemptState = () => {
+    revokeAllAttachedFiles();
+    setMcqAnswers({});
+    setSubjectiveAnswers({});
+    setFullSheetFiles([]);
+    setPerQuestionFiles({});
+    setQuestionModes({});
+  };
 
   const handleClassChange = (nextClass: ClassLevel) => {
     setSelectedClass(nextClass);
@@ -81,24 +120,30 @@ export default function CreateNewTestContainer({
   };
 
   const handleGenerate = () => {
-    if (!totalMarksInput.trim() || !Number.isFinite(parsedMarks) || parsedMarks < 1) {
+    if (
+      !totalMarksInput.trim() ||
+      !Number.isFinite(parsedMarks) ||
+      parsedMarks < 1
+    ) {
       setTotalMarksInput('20');
     }
-    setMcqAnswers({});
-    setSubjectiveAnswers({});
+    resetAttemptState();
     setProgress(0);
     setStep('loading');
   };
 
   useEffect(() => {
-    if (step !== 'loading') return;
+    if (step !== 'loading' && step !== 'submitting') return;
 
+    const duration =
+      step === 'loading' ? GENERATION_DURATION_MS : SUBMISSION_TRANSITION_MS;
+    const nextStep: BuilderStep = step === 'loading' ? 'paper' : 'review';
     const startTime = performance.now();
     let frameId = 0;
 
     const tick = (now: number) => {
       const elapsed = now - startTime;
-      const ratio = Math.min(elapsed / GENERATION_DURATION_MS, 1);
+      const ratio = Math.min(elapsed / duration, 1);
       const nextProgress = Math.floor(ratio * 100);
       setProgress(nextProgress);
 
@@ -106,7 +151,7 @@ export default function CreateNewTestContainer({
         frameId = requestAnimationFrame(tick);
       } else {
         setProgress(100);
-        setStep('paper');
+        setStep(nextStep);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     };
@@ -137,20 +182,47 @@ export default function CreateNewTestContainer({
     setSubjectiveAnswers((prev) => ({ ...prev, [questionId]: value }));
   };
 
+  const handlePerQuestionFilesChange = (
+    questionId: string,
+    nextFiles: UploadedNoteFile[],
+  ) => {
+    setPerQuestionFiles((prev) => ({ ...prev, [questionId]: nextFiles }));
+  };
+
+  const handleChangeQuestionMode = (
+    questionId: string,
+    mode: AnswerInputMode,
+  ) => {
+    setQuestionModes((prev) => ({ ...prev, [questionId]: mode }));
+  };
+
   const handleSubmitPaper = () => {
-    setStep('review');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const hasHandwrittenAttachments =
+      fullSheetFiles.length > 0 ||
+      Object.values(perQuestionFiles).some((list) => list.length > 0);
+
+    if (hasHandwrittenAttachments) {
+      setProgress(0);
+      setStep('submitting');
+    } else {
+      setStep('review');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const handleRetake = () => {
-    setMcqAnswers({});
-    setSubjectiveAnswers({});
+    resetAttemptState();
     setStep('paper');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (step === 'loading') {
+  if (step === 'loading' || step === 'submitting') {
     const strokeOffset = CIRCLE_CIRCUMFERENCE * (1 - progress / 100);
+    const statusText =
+      step === 'submitting'
+        ? 'Processing handwritten submissions & compiling NCERT answer key...'
+        : getLoaderStatus(progress);
+
     return (
       <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/85 backdrop-blur-sm px-6">
         <div className="relative w-48 h-48">
@@ -185,7 +257,7 @@ export default function CreateNewTestContainer({
         </div>
 
         <p className="text-slate-300 text-sm sm:text-base tracking-wide mt-6 animate-pulse text-center max-w-md">
-          {getLoaderStatus(progress)}
+          {statusText}
         </p>
       </div>
     );
@@ -197,8 +269,14 @@ export default function CreateNewTestContainer({
         template={CELL_20_MARK_TEMPLATE}
         mcqAnswers={mcqAnswers}
         subjectiveAnswers={subjectiveAnswers}
+        fullSheetFiles={fullSheetFiles}
+        perQuestionFiles={perQuestionFiles}
+        questionModes={questionModes}
         onSelectMcq={handleSelectMcq}
         onChangeSubjective={handleChangeSubjective}
+        onFullSheetFilesChange={setFullSheetFiles}
+        onPerQuestionFilesChange={handlePerQuestionFilesChange}
+        onChangeQuestionMode={handleChangeQuestionMode}
         onEditConfig={() => setStep('config')}
         onSubmit={handleSubmitPaper}
         onBackToHub={onBack}
@@ -212,6 +290,8 @@ export default function CreateNewTestContainer({
         template={CELL_20_MARK_TEMPLATE}
         mcqAnswers={mcqAnswers}
         subjectiveAnswers={subjectiveAnswers}
+        fullSheetFiles={fullSheetFiles}
+        perQuestionFiles={perQuestionFiles}
         onRetake={handleRetake}
         onEditConfig={() => setStep('config')}
         onBackToHub={onBack}

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ConsoleSidebar from "../../../components/ConsoleSidebar.astro";
+import EvaluatorHandwrittenPanel from "../../../components/evaluator/EvaluatorHandwrittenPanel";
 import "@fontsource/plus-jakarta-sans";
 ---
 
@@ -861,11 +862,7 @@ import "@fontsource/plus-jakarta-sans";
                         <div
                             class="lg:col-span-3 bg-[#161618] border border-white/[0.05] rounded-xl p-6 space-y-4"
                         >
-                            <label
-                                for="answerInput"
-                                class="text-sm font-medium text-[#c4c7c5]"
-                                >Your Answer Script</label
-                            >
+                            <EvaluatorHandwrittenPanel client:load />
                             <textarea
                                 id="answerInput"
                                 rows="12"
@@ -887,6 +884,7 @@ import "@fontsource/plus-jakarta-sans";
                             </button>
                         </div>
                         <div class="lg:col-span-2 space-y-4">
+                            <div id="evaluator-handwritten-result-slot"></div>
                             <div
                                 class="bg-slate-900 border border-slate-800 p-6 rounded-xl"
                             >
@@ -3214,7 +3212,32 @@ import "@fontsource/plus-jakarta-sans";
             }
             evaluateButton.addEventListener("click", async (e) => {
                 e.preventDefault();
+                const hwState = window.__marksmindEvaluatorState || {
+                    mode: "type",
+                    files: [],
+                };
+                const hasHandwritten =
+                    Array.isArray(hwState.files) && hwState.files.length > 0;
                 const studentAnswer = answerInput.value || "";
+
+                if (hwState.mode === "upload" && !hasHandwritten) {
+                    window.dispatchEvent(
+                        new CustomEvent("marksmind:evaluator-validation", {
+                            detail: {
+                                message:
+                                    "Please upload at least one handwritten answer sheet or switch to Type Script.",
+                            },
+                        }),
+                    );
+                    return;
+                }
+
+                window.dispatchEvent(
+                    new CustomEvent("marksmind:evaluator-validation", {
+                        detail: { message: null },
+                    }),
+                );
+
                 evaluateButton.disabled = true;
                 loader.classList.remove("hidden");
                 buttonText.textContent = "Evaluating...";
@@ -3229,7 +3252,65 @@ import "@fontsource/plus-jakarta-sans";
                     benchmarkDisplay.innerHTML = "Evaluating answer matrix...";
                 if (missingDisplay)
                     missingDisplay.innerHTML = "Analyzing terminology...";
-                await new Promise((resolve) => setTimeout(resolve, 6000));
+
+                if (hasHandwritten) {
+                    const stepGen = document.getElementById("step-generating");
+                    const percentageEl =
+                        document.getElementById("buffer-percentage");
+                    const statusEl = document.getElementById("buffer-status");
+                    const progressCircle =
+                        document.getElementById("buffer-progress");
+                    const circleCircumference = 565.48;
+
+                    if (stepGen && percentageEl && statusEl && progressCircle) {
+                        progressCircle.style.strokeDashoffset = String(
+                            circleCircumference,
+                        );
+                        percentageEl.textContent = "0%";
+                        statusEl.textContent =
+                            "Scanning handwritten answer sheet...";
+                        stepGen.classList.remove("hidden");
+
+                        await new Promise((resolve) => {
+                            let progress = 0;
+                            const timer = setInterval(() => {
+                                progress++;
+                                const pct = Math.min(100, progress);
+                                percentageEl.textContent = `${pct}%`;
+                                progressCircle.style.strokeDashoffset = String(
+                                    circleCircumference * (1 - pct / 100),
+                                );
+
+                                if (pct < 25) {
+                                    statusEl.textContent =
+                                        "Scanning handwritten answer sheet...";
+                                } else if (pct < 55) {
+                                    statusEl.textContent =
+                                        "Extracting scientific keywords & equation steps...";
+                                } else if (pct < 82) {
+                                    statusEl.textContent =
+                                        "Cross-checking against NCERT benchmark rubric...";
+                                } else {
+                                    statusEl.textContent =
+                                        "Generating CEDA step-marking breakdown...";
+                                }
+
+                                if (pct >= 100) {
+                                    clearInterval(timer);
+                                    stepGen.classList.add("hidden");
+                                    resolve();
+                                }
+                            }, 35);
+                        });
+                    } else {
+                        await new Promise((resolve) =>
+                            setTimeout(resolve, 3500),
+                        );
+                    }
+                } else {
+                    await new Promise((resolve) => setTimeout(resolve, 6000));
+                }
+
                 let requiredAnswerHTML = "";
                 let missingKeywordsHTML = "";
                 let scoreText = "2 / 3";
@@ -3263,6 +3344,11 @@ import "@fontsource/plus-jakarta-sans";
                     benchmarkDisplay.innerHTML = requiredAnswerHTML;
                 if (missingDisplay)
                     missingDisplay.innerHTML = `<ul class="space-y-2 text-sm mt-2">${missingKeywordsHTML}</ul>`;
+                window.dispatchEvent(
+                    new CustomEvent("marksmind:evaluator-result", {
+                        detail: { evaluatedFromHandwritten: hasHandwritten },
+                    }),
+                );
                 evaluateButton.disabled = false;
                 loader.classList.add("hidden");
                 buttonText.textContent = "Verify Answer Script";

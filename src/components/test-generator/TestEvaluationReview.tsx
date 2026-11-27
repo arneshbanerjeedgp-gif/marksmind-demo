@@ -1,14 +1,26 @@
 import React from 'react';
-import { ArrowLeft, CheckCircle2, RotateCcw, XCircle } from 'lucide-react';
+import {
+  ArrowLeft,
+  CheckCircle2,
+  FileText,
+  RotateCcw,
+  XCircle,
+} from 'lucide-react';
 import type {
   MasterTestTemplate,
   McqOptionKey,
 } from './templates/cell20MarkTemplate';
+import {
+  UploadedNotesPreviewGrid,
+  type UploadedNoteFile,
+} from '../shared/HandwrittenUploadZone';
 
 interface TestEvaluationReviewProps {
   template: MasterTestTemplate;
   mcqAnswers: Record<string, McqOptionKey | undefined>;
   subjectiveAnswers: Record<string, string>;
+  fullSheetFiles: UploadedNoteFile[];
+  perQuestionFiles: Record<string, UploadedNoteFile[]>;
   onRetake: () => void;
   onEditConfig: () => void;
   onBackToHub: () => void;
@@ -19,6 +31,8 @@ interface SubjectiveReviewCardProps {
   prompt: string;
   marks: number;
   studentResponse: string;
+  uploadedFiles: UploadedNoteFile[];
+  hasFullSheet: boolean;
   benchmarkAnswer: string;
   markingPoints?: string[];
   keywordBadges: string[];
@@ -29,12 +43,15 @@ function SubjectiveReviewCard({
   prompt,
   marks,
   studentResponse,
+  uploadedFiles,
+  hasFullSheet,
   benchmarkAnswer,
   markingPoints,
   keywordBadges,
 }: SubjectiveReviewCardProps) {
   const trimmed = studentResponse.trim();
   const normalized = trimmed.toLowerCase();
+  const hasPerQuestionFiles = uploadedFiles.length > 0;
 
   return (
     <div className="bg-[#161618] border border-white/10 rounded-2xl p-6 space-y-5 shadow-lg">
@@ -53,18 +70,35 @@ function SubjectiveReviewCard({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* Student Response */}
-        <div className="bg-[#0e0e10] border border-white/[0.06] rounded-xl p-4 space-y-2">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-            Your Submitted Answer
-          </h4>
-          {trimmed ? (
+        {/* Student Response (Typed + Handwritten Uploads) */}
+        <div className="bg-[#0e0e10] border border-white/[0.06] rounded-xl p-4 space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+              Your Submitted Answer
+            </h4>
+            {hasPerQuestionFiles && (
+              <span className="px-2 py-0.5 rounded-full bg-purple-500/15 border border-purple-500/30 text-[10px] font-semibold text-purple-300">
+                {uploadedFiles.length} handwritten{' '}
+                {uploadedFiles.length === 1 ? 'file' : 'files'}
+              </span>
+            )}
+          </div>
+
+          {trimmed && (
             <p className="text-sm text-slate-200 whitespace-pre-line leading-relaxed">
               {trimmed}
             </p>
-          ) : (
-            <p className="text-sm text-slate-500 italic">
-              No response entered.
+          )}
+
+          {hasPerQuestionFiles && (
+            <UploadedNotesPreviewGrid files={uploadedFiles} compact={true} />
+          )}
+
+          {!trimmed && !hasPerQuestionFiles && (
+            <p className="text-sm text-slate-400 italic">
+              {hasFullSheet
+                ? 'Covered via your uploaded Full Handwritten Answer Sheet above.'
+                : 'No response entered.'}
             </p>
           )}
         </div>
@@ -101,7 +135,9 @@ function SubjectiveReviewCard({
               </p>
               <div className="flex flex-wrap gap-2">
                 {keywordBadges.map((kw) => {
-                  const matched = trimmed.length > 0 && normalized.includes(kw.toLowerCase());
+                  const matched =
+                    trimmed.length > 0 &&
+                    normalized.includes(kw.toLowerCase());
                   return (
                     <span
                       key={kw}
@@ -126,12 +162,15 @@ function SubjectiveReviewCard({
 }
 
 /**
- * Displays deterministic auto-grading for Section A MCQs and NCERT benchmark rubrics for Sections B–D.
+ * Displays deterministic auto-grading for Section A MCQs and NCERT benchmark rubrics for Sections B–D,
+ * including side-by-side zoomable previews of full and per-question handwritten submissions.
  */
 export default function TestEvaluationReview({
   template,
   mcqAnswers,
   subjectiveAnswers,
+  fullSheetFiles,
+  perQuestionFiles,
   onRetake,
   onEditConfig,
   onBackToHub,
@@ -140,12 +179,15 @@ export default function TestEvaluationReview({
   const correctCount = mcqQuestions.filter(
     (q) => mcqAnswers[q.id] === q.answerKey,
   ).length;
-  const attemptedCount = mcqQuestions.filter((q) => Boolean(mcqAnswers[q.id])).length;
+  const attemptedCount = mcqQuestions.filter((q) =>
+    Boolean(mcqAnswers[q.id]),
+  ).length;
   const wrongCount = attemptedCount - correctCount;
   const unansweredCount = mcqQuestions.length - attemptedCount;
   const sectionAPercent = Math.round(
     (correctCount / template.sectionA.totalMarks) * 100,
   );
+  const hasFullSheet = fullSheetFiles.length > 0;
 
   return (
     <div className="space-y-8">
@@ -182,7 +224,7 @@ export default function TestEvaluationReview({
       {/* Header */}
       <div>
         <h2 className="text-2xl text-slate-100 font-bold tracking-tight">
-          Evaluation & Answer Key Review
+          Evaluation &amp; Answer Key Review
         </h2>
         <p className="text-slate-400 mt-1">{template.title}</p>
       </div>
@@ -209,11 +251,9 @@ export default function TestEvaluationReview({
 
         <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
           <p className="text-xs font-bold tracking-widest text-slate-500 uppercase mb-2">
-            Subjective & Case-Study Rubrics
+            Subjective &amp; Case-Study Rubrics
           </p>
-          <p className="text-3xl font-extrabold text-purple-400">
-            15 Marks
-          </p>
+          <p className="text-3xl font-extrabold text-purple-400">15 Marks</p>
           <p className="text-xs text-slate-400 mt-2">
             Sections B (6M) + C (3M) + D (6M) benchmarked below
           </p>
@@ -320,6 +360,33 @@ export default function TestEvaluationReview({
         </div>
       </section>
 
+      {/* Uploaded Full Handwritten Answer Sheet Gallery */}
+      {hasFullSheet && (
+        <section className="bg-[#161618] border border-purple-500/30 rounded-2xl p-6 space-y-4 shadow-lg">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-lg bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                <FileText className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-slate-100">
+                  Your Uploaded Handwritten Answer Sheet
+                </h3>
+                <p className="text-xs text-slate-400">
+                  Click any image thumbnail to inspect your written answers alongside the rubrics below.
+                </p>
+              </div>
+            </div>
+            <span className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-semibold text-purple-300">
+              {fullSheetFiles.length}{' '}
+              {fullSheetFiles.length === 1 ? 'page' : 'pages'}
+            </span>
+          </div>
+
+          <UploadedNotesPreviewGrid files={fullSheetFiles} />
+        </section>
+      )}
+
       {/* Section B Review */}
       <section className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-800 pb-3">
@@ -339,6 +406,8 @@ export default function TestEvaluationReview({
               prompt={q.question}
               marks={q.marks}
               studentResponse={subjectiveAnswers[q.id] ?? ''}
+              uploadedFiles={perQuestionFiles[q.id] ?? []}
+              hasFullSheet={hasFullSheet}
               benchmarkAnswer={q.benchmarkAnswer}
               markingPoints={q.markingPoints}
               keywordBadges={q.keywordBadges}
@@ -366,6 +435,8 @@ export default function TestEvaluationReview({
               prompt={q.question}
               marks={q.marks}
               studentResponse={subjectiveAnswers[q.id] ?? ''}
+              uploadedFiles={perQuestionFiles[q.id] ?? []}
+              hasFullSheet={hasFullSheet}
               benchmarkAnswer={q.benchmarkAnswer}
               markingPoints={q.markingPoints}
               keywordBadges={q.keywordBadges}
@@ -402,6 +473,8 @@ export default function TestEvaluationReview({
               prompt={part.prompt}
               marks={part.marks}
               studentResponse={subjectiveAnswers[part.id] ?? ''}
+              uploadedFiles={perQuestionFiles[part.id] ?? []}
+              hasFullSheet={hasFullSheet}
               benchmarkAnswer={part.benchmarkAnswer}
               keywordBadges={part.keywordBadges}
             />
